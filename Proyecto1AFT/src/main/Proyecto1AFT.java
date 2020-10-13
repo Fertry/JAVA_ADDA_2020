@@ -21,14 +21,14 @@ public class Proyecto1AFT {
 		
 		// Variables:
 		List <Integer> listaEnteros = leeDatosEjercicio1("Tests/PI1Ej1DatosEntrada.txt");
-		List <Integer> resultadoEjercicio1 = compruebaSiEsPrimo(listaEnteros);
+		//List <Integer> resultadoEjercicio1 = compruebaSiEsPrimo(listaEnteros);
 		
 		System.out.println("###################################################");
 		System.out.println("################## Test de Ejercicio 1 ############");
 		System.out.println("Datos de entrada --> Lista de enteros: ");
 		System.out.println(listaEnteros);
 		System.out.println("Resultado del ejercicio 1 --> Lista de primos: ");
-		System.out.println(resultadoEjercicio1);
+		//System.out.println(resultadoEjercicio1);
 		System.out.println("###################################################");
 		System.out.println("###################################################");
 		System.out.println("");
@@ -57,23 +57,17 @@ public class Proyecto1AFT {
 	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
 	// y en cada linea numeros enteros separados por comas, devuelve una lista
 	// formada por todos los numeros del fichero:
-	public static List <Integer> leeDatosEjercicio1 (String fichero) {
+	public static List <List <Integer> > leeDatosEjercicio1 (String fichero) {
 		
 		int i = 0;
 		List <String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-		List <Integer> resultado = new ArrayList <Integer>();
+		List <List <Integer> > resultado = new ArrayList <List <Integer> >();
 		while (i < lista.size()) {
 		    
 			String fila = lista.get(i);
 			String[] numeros = fila.split(",");
-			
-			//resultado.add(Integer.parseInt(numero));
-			for (String numero : numeros) {
-				
-				resultado.add(Integer.parseInt(numero));
-				
-			}
-			
+			resultado.add(numeros);
+			//resultado.add(Integer.parseInt(numero));			
 			i++;
 					    	
 		}
