@@ -22,6 +22,7 @@ public class Proyecto1AFT {
 		// Variables:
 		List <List <Integer> > listaEnteros = leeDatosEjercicio1("Tests/PI1Ej1DatosEntrada.txt");
 		List <Integer> resultadoEjercicio1 = compruebaSiEsPrimo(listaEnteros);
+		List <Integer> listaLimites = leeDatosEjercicio2("Tests/PI1Ej2DatosEntrada.txt");
 		String resultadoEjercicio2 = primosHastaLimite(18);
 		
 		System.out.println("###################################################");
@@ -36,6 +37,9 @@ public class Proyecto1AFT {
 		
 		System.out.println("###################################################");
 		System.out.println("################## Test de Ejercicio 2 ############");
+		System.out.println("Datos de entrada --> Lista de limites: ");
+		System.out.println(listaLimites);
+		System.out.println("Resultado del ejercicio 2 --> Cuadrado de primos: ");
 		System.out.println(resultadoEjercicio2);
 		System.out.println("###################################################");
 		System.out.println("###################################################");
@@ -64,13 +68,12 @@ public class Proyecto1AFT {
 		int j = 0;
         List <String> lista = StreamsS.file(fichero).collect(Collectors.toList());
         List <List <Integer> > resultado = new ArrayList<>();
-        List<Integer> miniLista = new ArrayList<>();
        
         while (i < lista.size()) {
         	
             String fila = lista.get(i);
             String[] numeros = fila.split(", ");
-            miniLista = new ArrayList<>();
+            List <Integer> miniLista = new ArrayList<>();
             
             while (j < numeros.length) {
             	
@@ -128,10 +131,20 @@ public class Proyecto1AFT {
 	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
 	// y en cada linea un concepto "Limite: numero", toma ese numero para pasarlo como
 	// parametro a la funcion del ejercicio 2:
-	public static Integer leeDatosEjercicio2 (String fichero) {
+	public static List <Integer> leeDatosEjercicio2 (String fichero) {
 		
-		Integer resultado = 0;
+		int i = 0;
+		List <Integer> resultado = new ArrayList <Integer>();
+		List <String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		
+		while (i < lista.size()) {
+			
+            String fila = lista.get(i);
+            String[] numero = fila.split(" ");
+            //resultado.add(Integer.parseInt(numero[i]));
+            i++;
+			
+		}
 		
 		return resultado;
 				
@@ -166,6 +179,11 @@ public class Proyecto1AFT {
 	//###################################################################################
 	
 	// Funcion que lee una lista de puntos y....
+	public static void leeDatosEjercicio3 () {
+		
+		
+		
+	}
 	
 	// Dado un punto...
 			
