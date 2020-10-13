@@ -23,7 +23,7 @@ public class Proyecto1AFT {
 		List <List <Integer> > listaEnteros = leeDatosEjercicio1("Tests/PI1Ej1DatosEntrada.txt");
 		List <Integer> resultadoEjercicio1 = compruebaSiEsPrimo(listaEnteros);
 		List <Integer> listaLimites = leeDatosEjercicio2("Tests/PI1Ej2DatosEntrada.txt");
-		String resultadoEjercicio2 = primosHastaLimite(18);
+		//String resultadoEjercicio2 = primosHastaLimite(numeroDeMierda);
 		
 		System.out.println("###################################################");
 		System.out.println("################## Test de Ejercicio 1 ############");
@@ -40,7 +40,7 @@ public class Proyecto1AFT {
 		System.out.println("Datos de entrada --> Lista de limites: ");
 		System.out.println(listaLimites);
 		System.out.println("Resultado del ejercicio 2 --> Cuadrado de primos: ");
-		System.out.println(resultadoEjercicio2);
+		//System.out.println(resultadoEjercicio2.toString());
 		System.out.println("###################################################");
 		System.out.println("###################################################");
 		System.out.println("");
@@ -140,8 +140,8 @@ public class Proyecto1AFT {
 		while (i < lista.size()) {
 			
             String fila = lista.get(i);
-            String[] numero = fila.split(" ");
-            //resultado.add(Integer.parseInt(numero[i]));
+            String numero = fila.replace("Limite:", "");
+            resultado.add(Integer.parseInt(numero));
             i++;
 			
 		}
@@ -155,16 +155,20 @@ public class Proyecto1AFT {
 	public static String primosHastaLimite (Integer limite) {
 		
 		int i = 0;
-		int primo = 0;
 		Integer cuadrado = 0;
-		String resultado = "";
+		String resultado = new String();
 		
-		while (i < limite) {
+		while (i < limite + 1) {
 			
-			primo = Math2.siguientePrimo(i);
-			cuadrado = primo * primo;
-			resultado = resultado + cuadrado.toString() + "\n";
-			i++;
+			if (Math2.siguientePrimo(i) < limite + 1) {
+				
+				//cuadrado = (int) Math.pow(Math2.siguientePrimo(i), 2);
+				resultado = resultado + cuadrado.toString() + "\n";
+				
+			}
+			
+			// El iterador pasa al siguiente primo
+			i = Math2.siguientePrimo(i);
 			
 		}
 		
@@ -179,11 +183,6 @@ public class Proyecto1AFT {
 	//###################################################################################
 	
 	// Funcion que lee una lista de puntos y....
-	public static void leeDatosEjercicio3 () {
-		
-		
-		
-	}
 	
 	// Dado un punto...
 			
