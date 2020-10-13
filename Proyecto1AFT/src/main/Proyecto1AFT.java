@@ -1,10 +1,100 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 1
+ */
+
 package main;
 
+// Librerias:
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import us.lsi.flujossecuenciales.StreamsS;
+
 public class Proyecto1AFT {
-
+	
+	// Funcion principal:
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		
+		// Variables:
+		List <Integer> listaEnteros = leeFichero("Tests/PI1Ej1DatosEntrada.txt");
+		List <Integer> resultadoEjercicio1 = compruebaSiEsPrimo(listaEnteros);
+		
+		System.out.println("###################################################");
+		System.out.println("################## Test de Ejercicio 1 ############");
+		System.out.println("Datos de entrada --> Lista de enteros: ");
+		System.out.println(listaEnteros);
+		System.out.println("Resultado del ejercicio 1 --> Lista de primos: ");
+		System.out.println(resultadoEjercicio1);
+		System.out.println("###################################################");
+		System.out.println("###################################################");
+		System.out.println("");
+		
+		System.out.println("###################################################");
+		System.out.println("################## Test de Ejercicio 2 ############");
+		//System.out.println("Datos de entrada --> Limite: ");
+		System.out.println("###################################################");
+		System.out.println("###################################################");
+		System.out.println("");
+		
+		System.out.println("###################################################");
+		System.out.println("################## Test de Ejercicio 3 ############");
+		//System.out.println("Datos de entrada --> Lista de puntos: ");
+		System.out.println("###################################################");
+		System.out.println("###################################################");
+		
 	}
+	
+	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
+	// y en cada linea numeros enteros separados por comas, devuelve una lista
+	// formada por todos los numeros del fichero:
+	public static List <Integer> leeFichero (String fichero) {
+		
+		int i = 0;
+		List <String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		List <Integer> numeros = new ArrayList<>();
+		while (i<lista.size()) {
+		    
+			String fila = lista.get(i);
+			String[] numero = fila.split(",");
+			//numeros.add(Integer.parseInt(numero));	
+			i++;
+					    	
+		}
+			
+		return numeros;
+		  					
+	}
+	
+	// Dada una lista, comprueba que elementos son primos y los
+	// devuelve, todos, en una lista nueva como resultado:
+	public static List <Integer> compruebaSiEsPrimo (List <Integer> lista) {
+		
+		List <Integer> resultado = new ArrayList<Integer>();
+		
+		for (Integer numero : lista) {
+			
+			if (esPrimo(numero)) {
+				
+				resultado.add(numero);
+				
+			}
+			
+		}
 
+		return resultado;
+		
+	}
+	
+	// Funcion auxiliar que comprueba si un numero dado es
+	// primo o no y devuelve el resultado en forma de una
+	// variable logica:
+	public static boolean esPrimo (Integer numero) {
+		
+		return true;
+		
+	}
+	
 }
