@@ -246,7 +246,15 @@ public class Proyecto1AFT {
 		
 		while (i < lista.size()) {
 			
-			resultado.put(lista.get(i).getCuadrante(), lista.get(i).getX());
+			Double valorPunto = 0.0;
+			if (resultado.get(lista.get(i).getCuadrante()) != null) {
+				
+				valorPunto = resultado.get(lista.get(i).getCuadrante());
+				
+			}
+			
+			Double suma = valorPunto + lista.get(i).getX(); 
+			resultado.put(lista.get(i).getCuadrante(), suma);
 			i++;
 			
 		}
