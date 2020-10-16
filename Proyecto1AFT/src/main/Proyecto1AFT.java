@@ -169,9 +169,9 @@ public class Proyecto1AFT {
 		Integer cuadrado = 0;
 		String resultado = new String();
 		
-		while (i < limite + 1) {
+		while (i <= limite) {
 			
-			if (Math2.siguientePrimo(i) < limite + 1) {
+			if (Math2.siguientePrimo(i) <= limite) {
 				
 				cuadrado = (int) Math.pow(Math2.siguientePrimo(i), 2);
 				resultado = resultado + cuadrado.toString() + "\n";
