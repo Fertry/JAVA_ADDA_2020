@@ -103,8 +103,8 @@ public class Proyecto1AFT {
 		  					
 	}
 	
-	// Dada una lista, comprueba que elementos son primos y los
-	// devuelve, todos, en una lista nueva como resultado:
+	// Dada una lista de listas de enteros, comprueba que elementos son primos 
+	// y los devuelve, todos, en una lista nueva como resultado:
 	public static List <Integer> compruebaSiEsPrimo (List <List <Integer> > lista) {
 		
 		int i = 0;
