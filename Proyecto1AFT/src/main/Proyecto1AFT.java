@@ -238,7 +238,7 @@ public class Proyecto1AFT {
 	}
 	
 	// Dado una lista de puntos, devuelve una colección de tipo Map con la suma de sus
-	// coordenadas X e Y por cuadrantes:
+	// coordenadas X por cada cuadrante:
 	public static Map <Punto2D.Cuadrante, Double> sumaPorCuadrantes (List <Punto2D> lista) {
 		
 		int i = 0;
