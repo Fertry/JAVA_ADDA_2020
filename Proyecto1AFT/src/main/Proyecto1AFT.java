@@ -165,19 +165,28 @@ public class Proyecto1AFT {
 	// todos los nº primos (al cuadrado) desde el 1 hasta el limite (numero introducido como parametro):
 	public static String primosHastaLimite (Integer limite) {
 		
-		int i = 1;
+		int i = 0;
 		Integer cuadrado = 0;
 		String resultado = new String();
 		
 		while (i <= limite) {
 			
-			if (Math2.siguientePrimo(i) <= limite) {
+			if (i == 0) {
 				
-				cuadrado = (int) Math.pow(Math2.siguientePrimo(i), 2);
+				cuadrado = 4;
 				resultado = resultado + cuadrado.toString() + "\n";
 				
+			} else {
+				
+				if (Math2.siguientePrimo(i) <= limite) {
+					
+					cuadrado = (int) Math.pow(Math2.siguientePrimo(i), 2);
+					resultado = resultado + cuadrado.toString() + "\n";
+					
+				}
+				
 			}
-			
+						
 			// El iterador pasa al siguiente primo
 			i = Math2.siguientePrimo(i);
 			
