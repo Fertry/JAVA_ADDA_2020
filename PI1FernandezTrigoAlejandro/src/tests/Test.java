@@ -26,9 +26,6 @@ public class Test {
 		List <Punto2D> listaPuntos = Ejercicio3.leeDatosEjercicio3("ficheros/PI1Ej3DatosEntrada.txt");
 		Map <Punto2D.Cuadrante, Double> resultadoEjercicio3 = Ejercicio3.sumaPorCuadrantes(listaPuntos);
 		
-		// Debug:
-		//String resultadoEjercicio2 = primosHastaLimite(6);
-		
 		// Salida por consola:
 		System.out.println("##################################################################");
 		System.out.println("######################## Test de Ejercicio 1 #####################");
@@ -42,7 +39,7 @@ public class Test {
 		
 		System.out.println("##################################################################");
 		System.out.println("######################## Test de Ejercicio 2 #####################");
-		System.out.println("Datos de entrada --> Lista de limites: ");
+		System.out.println("Datos de entrada --> Limites: ");
 		System.out.println(listaLimites);
 		System.out.println("Resultado del ejercicio 2 --> Cuadrado de los siguientes primos: ");
 		Ejercicio2.funcionAuxiliarEjercicio2(listaLimites);
@@ -54,7 +51,7 @@ public class Test {
 		System.out.println("######################## Test de Ejercicio 3 #####################");
 		System.out.println("Datos de entrada --> Lista de puntos: ");
 		System.out.println(listaPuntos);
-		System.out.println("Resultado del ejercicio 3 --> Cuadrantes con sus sumas: ");
+		System.out.println("Resultado del ejercicio 3 --> Cuadrantes con sus sumas por coordenada X: ");
 		System.out.println(resultadoEjercicio3);
 		System.out.println("##################################################################");
 		System.out.println("##################################################################");
