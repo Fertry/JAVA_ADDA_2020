@@ -1,0 +1,36 @@
+8,2
+1. Iterativa (while): true
+2. Recursiva final: true
+3. Funcional: true
+
+
+13,4
+1. Iterativa (while): false
+2. Recursiva final: false
+3. Funcional: false
+
+
+256,14
+1. Iterativa (while): false
+2. Recursiva final: false
+3. Funcional: false
+
+
+1234567,9753
+1. Iterativa (while): false
+2. Recursiva final: false
+3. Funcional: false
+
+
+420,23
+1. Iterativa (while): false
+2. Recursiva final: false
+3. Funcional: false
+
+
+88,17
+1. Iterativa (while): false
+2. Recursiva final: false
+3. Funcional: false
+
+

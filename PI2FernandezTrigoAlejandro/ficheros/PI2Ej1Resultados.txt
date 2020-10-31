@@ -1,0 +1,36 @@
+buenosdiaspepe, buenosdiasjuan
+1. iterativa (while): 10
+2. Recursiva final: 10
+3. Funcional: 10
+
+
+cadenadecaracteresA, cadenadecaracteresB
+1. iterativa (while): 18
+2. Recursiva final: 18
+3. Funcional: 18
+
+
+Lorem ipsum dolor sit here!, Lorem ipsum dolor sit aqui?
+1. iterativa (while): 22
+2. Recursiva final: 22
+3. Funcional: 22
+
+
+unafrasecorta, unalargafrase
+1. iterativa (while): 3
+2. Recursiva final: 3
+3. Funcional: 3
+
+
+Hay un impostor, Hay una intrusa
+1. iterativa (while): 6
+2. Recursiva final: 6
+3. Funcional: 6
+
+
+He conseguido el ejercicio uno sin problemas, He conseguido EL_EJERCICIO_UNO_SIN_PROBLEMAS
+1. iterativa (while): 14
+2. Recursiva final: 14
+3. Funcional: 14
+
+

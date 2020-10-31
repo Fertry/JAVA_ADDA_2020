@@ -1,0 +1,42 @@
+10,2
+1. Iterativa (while): 100
+2. Recursiva no final: 100
+3. Recursiva final: 100
+4. Funcional: 100
+
+
+-2,3
+1. Iterativa (while): -8
+2. Recursiva no final: -8
+3. Recursiva final: -8
+4. Funcional: -8
+
+
+2,30
+1. Iterativa (while): 1073741824
+2. Recursiva no final: 1073741824
+3. Recursiva final: 1073741824
+4. Funcional: 1073741824
+
+
+7,7
+1. Iterativa (while): 823543
+2. Recursiva no final: 823543
+3. Recursiva final: 823543
+4. Funcional: 823543
+
+
+-7,7
+1. Iterativa (while): -823543
+2. Recursiva no final: -823543
+3. Recursiva final: -823543
+4. Funcional: -823543
+
+
+5,8
+1. Iterativa (while): 390625
+2. Recursiva no final: 390625
+3. Recursiva final: 390625
+4. Funcional: 390625
+
+
