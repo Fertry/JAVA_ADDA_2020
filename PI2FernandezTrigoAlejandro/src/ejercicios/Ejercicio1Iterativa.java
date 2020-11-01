@@ -49,7 +49,6 @@ public class Ejercicio1Iterativa {
 			
 		}
 		
-		
 		return resultado;
 		
 	}
