@@ -11,7 +11,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 
 public class Ejercicio1Funcional {
 
-	public static List<List<String>> leeDatosEjercicio1Funcional(String fichero) {
+	/*public static List<List<String>> leeDatosEjercicio1Funcional(String fichero) {
 		
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 			
@@ -21,7 +21,7 @@ public class Ejercicio1Funcional {
 	
 		return null;
 		
-	}
+	}*/
 	
 	
 }
