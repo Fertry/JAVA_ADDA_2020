@@ -1,3 +1,9 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 2
+ */
+
 package ejercicios;
 
 import java.util.ArrayList;
@@ -49,10 +55,10 @@ public class Ejercicio1 {
 		int i = 0;
 		String frase1;
 		String frase2;
-		Integer posicionIterativo = 0;
-		Integer posicionRecursivoFinal = 0;
-		//Integer posicionFuncional = 0;
-			
+		Integer posicionIterativo;
+		Integer posicionRecursivoFinal;
+		Integer posicionFuncional;
+
 		while (i < lista.size()) {
 				
 			List<String> frases = new ArrayList<String>();
@@ -62,11 +68,11 @@ public class Ejercicio1 {
 			frases.add(frase2);
 			posicionIterativo = Ejercicio1Iterativa.hastaDondeSonIgualesIterativo(frases);
 			posicionRecursivoFinal = Ejercicio1RecursivaFinal.hastaDondeSonIgualesRecursivo(frases);
-			//posicionFuncional = Ejercicio1Funcional.hastaDondeSonIgualesFuncional(frases);
+			posicionFuncional = Ejercicio1Funcional.hastaDondeSonIgualesFuncional(frases);
 			System.out.println(frase1 +  " # " + frase2);
 			System.out.println("1. Iterativo: " + posicionIterativo);		
 			System.out.println("2. Recursivo final: " + posicionRecursivoFinal);	
-			//System.out.println("3. Funcional: " + posicionFuncional);	
+			System.out.println("3. Funcional: " + posicionFuncional);	
 			System.out.println("\n");
 			i++;
 			

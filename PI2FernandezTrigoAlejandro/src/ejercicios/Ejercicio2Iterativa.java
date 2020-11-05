@@ -1,3 +1,9 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 2
+ */
+
 package ejercicios;
 
 public class Ejercicio2Iterativa {
@@ -12,31 +18,37 @@ public class Ejercicio2Iterativa {
 	public static boolean esMultiploIterativo(Integer a, Integer b) {
 		
 		boolean resultado = true;
-		boolean verdadero = true;
-		
-		while (a > 0) {
 			
-			if (a == 0 && verdadero) {
+		if (a == 0) {
 				
-				resultado = true;
-				verdadero = false;
+			return true;
 				
-			} else if (a > 0 && b > a) {
+		} else if (a > 0 && b > a) {
 				
-				resultado = false;
-				verdadero = false;
+			return false;
 				
-			} else if (a >= b) {
+		} else if (a >= b) {
 				
+			while (a >= b) {
+					
 				a = a - b;
-				verdadero = false;
 				
+				if (a == 0) {
+						
+					return true;
+						
+				} else if (a > 0 && b > a) {
+						
+					return false;
+						
+				}
+					
 			}
-			
+				
 		}
-		
-		return resultado;
 
+		return resultado;
+		
 	}
 
 }

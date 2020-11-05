@@ -1,3 +1,9 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 2
+ */
+
 package ejercicios;
 
 import java.util.List;
@@ -19,26 +25,28 @@ public class Ejercicio1RecursivaFinal {
 		
 	}
 	
+	//
 	private static Integer hastaDondeSonIgualesRecursivoInterno(int i, List<String> lista) {
-		// TO-DO
-		Integer resultado = 0;
-		Boolean verdadero = true;		
+	
 		String frase1 = lista.get(0);
 		String frase2 = lista.get(1);
+		while (i < frase1.length()) {
 			
-		if (frase1.charAt(i) == frase2.charAt(i)) {
-
-			resultado = hastaDondeSonIgualesRecursivoInterno(i, lista);
-			i++;
-			
-		} else {
-			
-			verdadero = false;
-			
+			if (frase1.charAt(i) == frase2.charAt(i)) {
+				
+				i++;
+				return hastaDondeSonIgualesRecursivoInterno(i, lista);
+				
+			} else {
+				
+				return i;
+				
+			}
+	
 		}
 		
-		return resultado;
-
+		return i;
+		
 	}
-	
+			
 }

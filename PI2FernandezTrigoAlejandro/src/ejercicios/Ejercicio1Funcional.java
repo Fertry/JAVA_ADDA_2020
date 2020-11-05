@@ -1,27 +1,29 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 2
+ */
+
 package ejercicios;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import us.lsi.flujossecuenciales.StreamsS;
+import java.util.stream.IntStream;
 
 public class Ejercicio1Funcional {
 
-	/*public static List<List<String>> leeDatosEjercicio1Funcional(String fichero) {
+	// ###################################################################################
+	// ###################################################################################
+	// ####################### 		EJERCICIO 1 - FUNCIONAL				##################
+	// ###################################################################################
+	// ###################################################################################
 		
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-			
-		return Stream.of(lista.spliterator("#"))
-			
+	// Dada una lista de listas de strings, donde cada lista contiene dos frases,
+	// itera sobre ambas frases de cada lista. Determina en que punto de ambas frases
+	// dejan de ser iguales y devuelve esa posición numérica:
+	public static Integer hastaDondeSonIgualesFuncional(List<String> lista) {
+		
+		return (int) IntStream.range(0, lista.get(0).length()).takeWhile(i -> lista.get(0).charAt(i) == lista.get(1).charAt(i)).count();
+		
+	}
 
-	
-		return null;
-		
-	}*/
-	
-	
 }
