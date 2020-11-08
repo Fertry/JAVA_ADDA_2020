@@ -47,7 +47,7 @@ public class Ejercicio3 {
 				
 	}
 		
-	// Función auxiliar para, dado una lista de listas de integers devuelta por
+	// Funcion auxiliar para, dado una lista de listas de integers devuelta por
 	// la función de lectura, invocar a la función elevaA() tantas veces
 	// como pares de integers recibamos por fichero:
 	public static void funcionAuxiliarEjercicio3(List<List<Integer>> lista) {
@@ -56,9 +56,9 @@ public class Ejercicio3 {
 		Integer numero1;
 		Integer numero2;
 		Long resultadoIterativo;
-		//Integer resultadoRecursivoFinal;
-		//Integer resultadoFuncional;
-		//Integer resultadoRecursivoNoFinal;
+		//Long resultadoRecursivoFinal;
+		//Long resultadoRecursivoNoFinal;
+		//Long resultadoFuncional;
 					
 		while (i < lista.size()) {
 						
@@ -67,10 +67,11 @@ public class Ejercicio3 {
 			resultadoIterativo = Ejercicio3Iterativa.elevaAIterativo(numero1, numero2);
 			//resultadoRecursivoFinal = Ejercicio3RecursivaFinal.elevaARecursivoFinal(numero1, numero2);
 			//resultadoRecursivoNoFinal = Ejercicio3RecursivaNoFinal.elevaARecursivoNoFinal(numero1, numero2);
-			//resultadoFuncional = Ejercicio2Funcional.elevaAIterativo(numero1, numero2);
+			//resultadoFuncional = Ejercicio3Funcional.elevaAFuncional(numero1, numero2);
 			System.out.println(numero1 + " elevado a " + numero2 + " : ");
 			System.out.println("1. Iterativo: " + resultadoIterativo);		
 			//System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);	
+			//System.out.println("2. Recursivo no final: " + resultadoRecursivoNoFinal);	
 			//System.out.println("3. Funcional: " + resultadoFuncional);	
 			System.out.println("\n");
 			i++;

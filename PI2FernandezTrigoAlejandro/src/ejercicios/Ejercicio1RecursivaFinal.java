@@ -18,14 +18,15 @@ public class Ejercicio1RecursivaFinal {
 	
 	// Dada una lista de listas de strings, donde cada lista contiene dos frases,
 	// itera sobre ambas frases de cada lista. Determina en que punto de ambas frases
-	// dejan de ser iguales y devuelve esa posición numérica:
+	// dejan de ser iguales y devuelve esa posición numerica:
 	public static Integer hastaDondeSonIgualesRecursivo(List<String> lista) {
 		
 		return hastaDondeSonIgualesRecursivoInterno(0, lista);
 		
 	}
 	
-	//
+	// Funcion interna (privada) para ser llamada por la de arriba (publica) con 
+	// parametros ya establecidos:
 	private static Integer hastaDondeSonIgualesRecursivoInterno(int i, List<String> lista) {
 	
 		String frase1 = lista.get(0);

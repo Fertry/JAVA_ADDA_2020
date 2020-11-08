@@ -14,14 +14,33 @@ public class Ejercicio3Iterativa {
 	// ###################################################################################
 	// ###################################################################################
 			
-	//
-	public static Long elevaAIterativo(Integer n1, Integer numero2) {
+	// Dados dos numeros 1 y 2, que son respectivamente, la base (Long) y el exponente (Integer)
+	// se calcula a^n en base a las siguientes condiciones
+	// Si exponente=0 --> 0, si exponente>0 --> en funcion del modulo:
+	public static Long elevaAIterativo(Integer numero1, Integer numero2) {
 		
-		Long resultado = (long) 0;
-		Long numero1 = (long) n1;
+		Long resultado = (long) 1;
+		Long base = (long) numero1;
+		Integer exponente = numero2;
 		
-		resultado = numero1 * numero2;
-		
+		while (exponente > 0) {
+				
+			if (exponente % 2 == 1) {
+					
+				//Si modulo == 1 ----> (a^(n/2))^2 * a
+				resultado = (long) (base * (Math.pow((Math.pow(base, (exponente / 2))), 2)));
+				return resultado;
+										
+			} else {
+					
+				//Si modulo == 0 ----> (a^(n/2))^2
+				resultado = (long) (Math.pow((Math.pow(base, (exponente / 2))), 2));
+				return resultado;
+					
+			}
+				
+		}
+			
 		return resultado;
 		
 	}

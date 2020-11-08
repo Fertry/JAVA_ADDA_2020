@@ -47,7 +47,7 @@ public class Ejercicio1 {
 		
 	}	
 	
-	// Función auxiliar para, dado una lista de listas de strings devuelta por
+	// Funcion auxiliar para, dado una lista de listas de strings devuelta por
 	// la función de lectura, invocar a la función hastaDondeSonIguales()
 	// tantas veces como pares de frases recibamos por fichero:
 	public static void funcionAuxiliarEjercicio1(List<List<String>> lista) {
