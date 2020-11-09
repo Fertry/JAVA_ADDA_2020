@@ -14,6 +14,12 @@ import us.lsi.flujossecuenciales.StreamsS;
 
 public class Ejercicio1 {
 	
+	//###################################################################################
+	//###################################################################################
+	//#######################		EJERCICIO 1                         #################
+	//###################################################################################
+	//###################################################################################
+	
 	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
 	// y en cada linea dos frases separadas por un "#", devuelve una lista de listas de strings,
 	// donde cada lista contiene cada par de frases:
