@@ -22,24 +22,23 @@ public class Ejercicio2Funcional {
 		
 	// Dado dos numeros a,b se calcula si a es múltiplo de b en base a las siguientes condiciones
 	// Si a==0 --> true, si 0<a<b --> false y si a>=b --> a=a-b:
-	public static boolean esMultiploFuncional(Integer a, Integer b) {
+	public static boolean esMultiploFuncional(Integer numero1, Integer numero2) {
 		
 		/*
 		boolean resultado = true;
 
-		if (a == 0) {
+		if (numero1 == 0) {
 			
 			return true;
 			 
-		} else if (0 < a && b > a) {
+		} else if (0 < numero1 && numero2 > numero1) {
 			
 			return false;
 			
-		} else if (a >= b) {
+		} else if (numero1 >= numero2) {
 
-			return IntStream.iterate(a, b -> a >= b, a -> a - b).;
+			return IntStream.iterate(numero1, numero2 -> numero1 >= numero2, numero1 -> numero1 - numero2).;
 
-			
 		}
 		
 		return resultado;

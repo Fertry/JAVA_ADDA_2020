@@ -16,18 +16,18 @@ public class Ejercicio2Iterativa {
 		
 	// Dado dos numeros a,b se calcula si a es múltiplo de b en base a las siguientes condiciones
 	// Si a==0 --> true, si 0<a<b --> false y si a>=b --> a=a-b:
-	public static boolean esMultiploIterativo(Integer a, Integer b) {
+	public static boolean esMultiploIterativo(Integer numero1, Integer numero2) {
 		
 		boolean resultado = false;
 	
-		while (a > 0) {
+		while (numero1 > 0) {
 				
-				a = a - b;
-				if (a == 0) {
+				numero1 = numero1 - numero2;
+				if (numero1 == 0) {
 					
 					return true;
 					
-				} else if (a < 0) {
+				} else if (numero1 < 0) {
 					
 					return false;
 					
@@ -40,28 +40,3 @@ public class Ejercicio2Iterativa {
 	}
 		
 }
-
-/*
-boolean resultado = false;
-		
-		if (a == 0) {
-			
-			return true;
-			
-		} else {
-			
-			while (a > 0) {
-				
-				a = a - b;
-				if (a == 0) {
-					
-					return true;
-					
-				}
-				
-			}
-			
-		}
-		
-return resultado;
-*/

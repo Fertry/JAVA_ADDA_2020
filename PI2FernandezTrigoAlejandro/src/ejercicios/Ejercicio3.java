@@ -53,8 +53,8 @@ public class Ejercicio3 {
 	public static void funcionAuxiliarEjercicio3(List<List<Integer>> lista) {
 					
 		int i = 0;
-		Integer numero1;
-		Integer numero2;
+		Integer base;
+		Integer exponente;
 		Long resultadoIterativo;
 		//Long resultadoRecursivoFinal;
 		//Long resultadoRecursivoNoFinal;
@@ -62,13 +62,13 @@ public class Ejercicio3 {
 					
 		while (i < lista.size()) {
 						
-			numero1 = lista.get(i).get(0);
-			numero2 = lista.get(i).get(1);
-			resultadoIterativo = Ejercicio3Iterativa.elevaAIterativo(numero1, numero2);
-			//resultadoRecursivoFinal = Ejercicio3RecursivaFinal.elevaARecursivoFinal(numero1, numero2);
-			//resultadoRecursivoNoFinal = Ejercicio3RecursivaNoFinal.elevaARecursivoNoFinal(numero1, numero2);
-			//resultadoFuncional = Ejercicio3Funcional.elevaAFuncional(numero1, numero2);
-			System.out.println(numero1 + " elevado a " + numero2 + " : ");
+			base = lista.get(i).get(0);
+			exponente = lista.get(i).get(1);
+			resultadoIterativo = Ejercicio3Iterativa.elevaAIterativo(base, exponente);
+			//resultadoRecursivoFinal = Ejercicio3RecursivaFinal.elevaARecursivoFinal(base, exponente);
+			//resultadoRecursivoNoFinal = Ejercicio3RecursivaNoFinal.elevaARecursivoNoFinal(base, exponente);
+			//resultadoFuncional = Ejercicio3Funcional.elevaAFuncional(base, exponente);
+			System.out.println(base + " elevado a " + exponente + " : ");
 			System.out.println("1. Iterativo: " + resultadoIterativo);		
 			//System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);	
 			//System.out.println("2. Recursivo no final: " + resultadoRecursivoNoFinal);	

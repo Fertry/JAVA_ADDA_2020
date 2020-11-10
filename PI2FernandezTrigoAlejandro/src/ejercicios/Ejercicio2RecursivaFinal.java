@@ -16,24 +16,25 @@ public class Ejercicio2RecursivaFinal {
 		
 	// Dado dos numeros a,b se calcula si a es múltiplo de b en base a las siguientes condiciones
 	// Si a==0 --> true, si 0<a<b --> false y si a>=b --> a=a-b:
-	public static boolean esMultiploRecursivoFinal(Integer a, Integer b) {
+	public static boolean esMultiploRecursivoFinal(Integer numero1, Integer numero2) {
 		
-		return esMultiploRecursivoFinalInterno(false, a, b);
+		return esMultiploRecursivoFinalInterno(false, numero1, numero2);
+		
 	}
 	
 	// Funcion interna (privada) para ser llamada por la de arriba (publica) con 
 	// parametros ya establecidos:
-	private static boolean esMultiploRecursivoFinalInterno(boolean verdadero, Integer a, Integer b) {
+	private static boolean esMultiploRecursivoFinalInterno(boolean verdadero, Integer numero1, Integer numero2) {
 		
 		boolean resultado;
 		
-		if (a == 0) {
+		if (numero1 == 0) {
 			
 			return true;
 			
-		} else if (a > 0) {
+		} else if (numero1 > 0) {
 			
-			return esMultiploRecursivoFinalInterno(verdadero, a - b, b);
+			return esMultiploRecursivoFinalInterno(verdadero, numero1 - numero2, numero2);
 			
 		} else {
 			
