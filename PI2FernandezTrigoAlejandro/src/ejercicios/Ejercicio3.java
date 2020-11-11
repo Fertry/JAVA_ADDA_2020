@@ -59,15 +59,18 @@ public class Ejercicio3 {
 		//Long resultadoRecursivoFinal;
 		//Long resultadoRecursivoNoFinal;
 		//Long resultadoFuncional;
+		Long ejemploDeMierda;
 					
 		while (i < lista.size()) {
 						
 			base = lista.get(i).get(0);
 			exponente = lista.get(i).get(1);
 			resultadoIterativo = Ejercicio3Iterativa.elevaAIterativo(base, exponente);
+			ejemploDeMierda = Ejercicio3Iterativa.elevaAIterativo(5, 0);
 			//resultadoRecursivoFinal = Ejercicio3RecursivaFinal.elevaARecursivoFinal(base, exponente);
 			//resultadoRecursivoNoFinal = Ejercicio3RecursivaNoFinal.elevaARecursivoNoFinal(base, exponente);
 			//resultadoFuncional = Ejercicio3Funcional.elevaAFuncional(base, exponente);
+			System.out.println("1. Ejemplo: " + ejemploDeMierda);	
 			System.out.println(base + " elevado a " + exponente + " : ");
 			System.out.println("1. Iterativo: " + resultadoIterativo);		
 			//System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);	

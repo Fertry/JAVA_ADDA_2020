@@ -76,7 +76,7 @@ public class Ejercicio1 {
 			posicionRecursivoFinal = Ejercicio1RecursivaFinal.hastaDondeSonIgualesRecursivo(frases);
 			posicionFuncional = Ejercicio1Funcional.hastaDondeSonIgualesFuncional(frases);
 			System.out.println(frase1 +  " # " + frase2);
-			System.out.println("1. Iterativo: " + posicionIterativo);		
+			System.out.println("1. Iterativo: " + posicionIterativo);	
 			System.out.println("2. Recursivo final: " + posicionRecursivoFinal);	
 			System.out.println("3. Funcional: " + posicionFuncional);	
 			System.out.println("\n");

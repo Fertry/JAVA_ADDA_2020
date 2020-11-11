@@ -18,7 +18,8 @@ public class Ejercicio1Iterativa {
 
 	// Dada una lista de listas de strings, donde cada lista contiene dos frases,
 	// itera sobre ambas frases de cada lista. Determina en que punto de ambas frases
-	// dejan de ser iguales y devuelve esa posición numérica:
+	// dejan de ser iguales y devuelve esa posición numérica, para ello se emplea el 
+	// algoritmo de búsqueda binaria:
 	public static Integer hastaDondeSonIgualesIterativo(List<String> lista) {
 		
 		int i = 0;

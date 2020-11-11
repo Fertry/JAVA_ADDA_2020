@@ -45,18 +45,32 @@ public class Ejercicio3RecursivaFinal {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*
-	while (exponente > 0) {
+	public static Long elevaAIterativo(Integer numero1, Integer numero2) {
 		
-		if (exponente % 2 == 1) {
+		Long resultado = (long) 1;
+		Long base = (long) numero1;
+		Integer exponente = numero2;
+		
+		while (exponente > 0) {
+				
+			if (exponente % 2 == 1) {
+					
+				//Si modulo == 1 ----> (a^(n/2))^2 * a
+				resultado = (long) (base * (Math.pow((Math.pow(base, (exponente / 2))), 2)));
+				return resultado;
+										
+			} else {
+					
+				//Si modulo == 0 ----> (a^(n/2))^2
+				resultado = (long) (Math.pow((Math.pow(base, (exponente / 2))), 2));
+				return resultado;
+					
+			}
+				
+		}
 			
-			//Si modulo == 1 ----> (a^(n/2))^2 * a
-			resultado = (long) (base * (Math.pow((Math.pow(base, (exponente / 2))), 2)));
-			return resultado;
-								
-		} else {
-			
-			//Si modulo == 0 ----> (a^(n/2))^2
-			resultado = (long) (Math.pow((Math.pow(base, (exponente / 2))), 2));
-			return resultado;
+		return resultado;
+		
+	}
 */
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

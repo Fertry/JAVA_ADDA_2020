@@ -69,11 +69,6 @@ public class Ejercicio2 {
 			System.out.println("¿Es el Nº " + numero1 + " multiplo del " + " nº " + numero2 + "?");
 			System.out.println("1. Iterativo: " + resultadoIterativo);		
 			System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);
-			//######################################DEBUGGGGGGGGGGGGGGGGGGGGGGG#####################################################
-			System.out.println("A: 5 y B: 10 " + Ejercicio2RecursivaFinal.esMultiploRecursivoFinal(5, 10));
-			System.out.println("A: 10 y B: 5 " + Ejercicio2RecursivaFinal.esMultiploRecursivoFinal(10, 5));
-			System.out.println("A: 10 y B: 10 " + Ejercicio2RecursivaFinal.esMultiploRecursivoFinal(10, 10));
-			System.out.println("A: 0 y B: 10 " + Ejercicio2RecursivaFinal.esMultiploRecursivoFinal(0, 10));
 			//System.out.println("3. Funcional: " + resultadoFuncional);	
 			System.out.println("\n");
 			i++;
