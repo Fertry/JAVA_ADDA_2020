@@ -23,26 +23,79 @@ public class Ejercicio3Iterativa {
 		Long base = (long) numero1;
 		Integer exponente = numero2;
 		
-		while (exponente > 0) {
-				
-			if (exponente % 2 == 1) {
-					
-				//Si modulo == 1 ----> (a^(n/2))^2 * a
-				resultado = (long) (base * (Math.pow((Math.pow(base, (exponente / 2))), 2)));
-				return resultado;
-										
-			} else {
-					
-				//Si modulo == 0 ----> (a^(n/2))^2
-				resultado = (long) (Math.pow((Math.pow(base, (exponente / 2))), 2));
-				return resultado;
-					
-			}
-				
-		}
+		/*
+		if (exponente == 0) {
 			
-		return resultado;
+			return resultado;
+			
+		} else {
+			
+			while () {
+				
+				
+			}
+			
+		}
+		*/
+			
+		return 1L;
 		
 	}
 
 }
+
+
+/*
+public static Integer IterativoEj1(String cadena1, String cadena2) {
+        int i = 0;
+        int n = cadena1.length();
+        int j = n;
+        int k = cadena1.length()/2;
+        while(j-i > 0 && !(cadena1.charAt(k)==cadena2.charAt(k))) {
+            if(cadena1.charAt(k)==cadena2.charAt(k)) {
+               j = k;
+               k = (i + k) / 2;
+            }else {
+                i = k + 1;
+                k = (k + 1 + j) / 2;
+            }
+        }
+        if(j-i>0) {
+            return k;
+        }
+        else {
+            return -1;
+        }
+    }
+ */
+
+
+/*
+public static Long elevaAIterativo(Integer numero1, Integer numero2) {
+
+Long resultado = (long) 1;
+Long base = (long) numero1;
+Integer exponente = numero2;
+
+while (exponente > 0) {
+		
+	if (exponente % 2 == 1) {
+			
+		//Si modulo == 1 ----> (a^(n/2))^2 * a
+		resultado = (long) (base * (Math.pow((Math.pow(base, (exponente / 2))), 2)));
+		return resultado;
+								
+	} else {
+			
+		//Si modulo == 0 ----> (a^(n/2))^2
+		resultado = (long) (Math.pow((Math.pow(base, (exponente / 2))), 2));
+		return resultado;
+			
+	}
+		
+}
+	
+return resultado;
+
+}
+*/

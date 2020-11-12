@@ -6,11 +6,7 @@
 
 package ejercicios;
 
-import java.util.List;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
-
-import us.lsi.common.Streams2;
 
 public class Ejercicio2Funcional {
 
@@ -30,16 +26,10 @@ public class Ejercicio2Funcional {
 			
 			return true;
 			 
-		} else if (0 < numero1 && numero2 > numero1) {
-			
-			return false;
-			
-		} else if (numero1 >= numero2) {
-	
-			return (boolean) IntStream.range(numero1, numero2).filter(e->e>b).;
-			//return IntStream.iterate(numero1, numero2 -> numero1 >= numero2, numero1 -> numero1 - numero2);
-			return false;
+		} else {
 
+			resultado = Stream.iterate(numero1, x -> x - numero2).limit(numero1).anyMatch(x -> x == 0);
+			
 		}
 		
 		return resultado;
@@ -47,14 +37,3 @@ public class Ejercicio2Funcional {
 	}
 	
 }
-
-/*
-List<User> users = userDao.getAllByCompanyId(companyId);
-users.stream().filter(Objects::nonNull).forEach(user -> {
-    if (user.isPresent()) {
-        user.setRole("ABC");
-    } else {
-        user.setRole("XYZ");
-    }
-});
-*/

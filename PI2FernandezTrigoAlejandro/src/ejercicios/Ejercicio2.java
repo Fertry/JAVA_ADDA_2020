@@ -57,7 +57,7 @@ public class Ejercicio2 {
 		Integer numero2;
 		boolean resultadoIterativo;
 		boolean resultadoRecursivoFinal;
-		//boolean resultadoFuncional;
+		boolean resultadoFuncional;
 				
 		while (i < lista.size()) {
 					
@@ -65,11 +65,11 @@ public class Ejercicio2 {
 			numero2 = lista.get(i).get(1);
 			resultadoIterativo = Ejercicio2Iterativa.esMultiploIterativo(numero1, numero2);
 			resultadoRecursivoFinal = Ejercicio2RecursivaFinal.esMultiploRecursivoFinal(numero1, numero2);
-			//resultadoFuncional = Ejercicio2Funcional.esMultiploFuncional(numero1, numero2);
+			resultadoFuncional = Ejercicio2Funcional.esMultiploFuncional(numero1, numero2);
 			System.out.println("¿Es el Nº " + numero1 + " multiplo del " + " nº " + numero2 + "?");
 			System.out.println("1. Iterativo: " + resultadoIterativo);		
 			System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);
-			//System.out.println("3. Funcional: " + resultadoFuncional);	
+			System.out.println("3. Funcional: " + resultadoFuncional);	
 			System.out.println("\n");
 			i++;
 				

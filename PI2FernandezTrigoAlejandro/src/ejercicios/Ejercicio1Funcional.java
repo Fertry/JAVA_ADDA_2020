@@ -6,8 +6,6 @@
 
 package ejercicios;
 
-import java.util.List;
-
 import us.lsi.common.Streams2;
 
 public class Ejercicio1Funcional {
@@ -18,12 +16,13 @@ public class Ejercicio1Funcional {
 	// ###################################################################################
 	// ###################################################################################
 		
-	// Dada una lista de listas de strings, donde cada lista contiene dos frases,
-	// itera sobre ambas frases de cada lista. Determina en que punto de ambas frases
-	// dejan de ser iguales y devuelve esa posición numerica:
-	public static Integer hastaDondeSonIgualesFuncional(List<String> lista) {
+	// Dados dos strings, donde cada uno representa una frase,
+	// itera sobre ambos. Determina en que punto de ambas frases
+	// dejan de ser iguales y devuelve esa posición numérica, para ello se emplea el 
+	// algoritmo de búsqueda binaria:
+	public static Integer hastaDondeSonIgualesFuncional(String frase1, String frase2) {
 		
-		return (int) Streams2.range(0, lista.get(0).length(), 1).takeWhile(i -> lista.get(0).charAt(i) == lista.get(1).charAt(i)).count();
+		return (int) Streams2.range(0, frase1.length(), 1).takeWhile(i -> frase1.charAt(i) == frase2.charAt(i)).count();
 		
 	}
 

@@ -6,8 +6,6 @@
 
 package ejercicios;
 
-import java.util.List;
-
 public class Ejercicio1Iterativa {
 	
 	// ###################################################################################
@@ -16,34 +14,71 @@ public class Ejercicio1Iterativa {
 	// ###################################################################################
 	// ###################################################################################
 
-	// Dada una lista de listas de strings, donde cada lista contiene dos frases,
-	// itera sobre ambas frases de cada lista. Determina en que punto de ambas frases
+	// Dados dos strings, donde cada uno representa una frase,
+	// itera sobre ambos. Determina en que punto de ambas frases
 	// dejan de ser iguales y devuelve esa posición numérica, para ello se emplea el 
 	// algoritmo de búsqueda binaria:
-	public static Integer hastaDondeSonIgualesIterativo(List<String> lista) {
+	public static Integer hastaDondeSonIgualesIterativo(String frase1, String frase2) {
+		 
+		Integer i = 0;
+		Integer k = 0;
+		Integer resultado = -1;
+		Integer j = frase1.length();
 		
-		int i = 0;
-		Boolean verdadero = true;
-		String frase1 = lista.get(0);
-		String frase2 = lista.get(1);
-
-		while (i < frase1.length() && verdadero) {
+		while (j - i > 0 && resultado == -1) {
 			
-			if (frase1.charAt(i) == frase2.charAt(i)) {
+			// Posición: la mitad
+			k = ((i + j) / 2);
+			if (frase1.charAt(k) == frase2.charAt(k)) {
 				
-				i++;
+				i = k + 1;
 				
 			} else {
 				
-				verdadero = false;
+				// Hacia la izquierda
+				if (frase1.charAt(k - 1) == frase2.charAt(k - 1)) {
+					
+					resultado = k;
+					
+				} else {
+					
+					j = k;
+					
+				}
 				
 			}
-				
+			
 		}
 		
-		return i;
-		
+		return resultado;
+	    
 	}
-
+	
 }
 	
+
+// Versión "simple" usando while no óptima:
+/*
+public static Integer ejemplo(String frase1, String frase2) {
+		
+	int i = 0;
+	Boolean verdadero = true;
+
+	while (i < frase1.length() && verdadero) {
+			
+		if (frase1.charAt(i) == frase2.charAt(i)) {
+				
+			i++;
+				
+		} else {
+				
+			verdadero = false;
+				
+		}
+				
+	}
+		
+	return i;
+		
+}	
+*/

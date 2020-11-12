@@ -67,14 +67,11 @@ public class Ejercicio1 {
 
 		while (i < lista.size()) {
 				
-			List<String> frases = new ArrayList<String>();
 			frase1 = lista.get(i).get(0);
 			frase2 = lista.get(i).get(1);
-			frases.add(frase1);
-			frases.add(frase2);
-			posicionIterativo = Ejercicio1Iterativa.hastaDondeSonIgualesIterativo(frases);
-			posicionRecursivoFinal = Ejercicio1RecursivaFinal.hastaDondeSonIgualesRecursivo(frases);
-			posicionFuncional = Ejercicio1Funcional.hastaDondeSonIgualesFuncional(frases);
+			posicionIterativo = Ejercicio1Iterativa.hastaDondeSonIgualesIterativo(frase1, frase2);
+			posicionRecursivoFinal = Ejercicio1RecursivaFinal.hastaDondeSonIgualesRecursivo(frase1, frase2);
+			posicionFuncional = Ejercicio1Funcional.hastaDondeSonIgualesFuncional(frase1, frase2);
 			System.out.println(frase1 +  " # " + frase2);
 			System.out.println("1. Iterativo: " + posicionIterativo);	
 			System.out.println("2. Recursivo final: " + posicionRecursivoFinal);	
