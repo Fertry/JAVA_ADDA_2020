@@ -14,63 +14,32 @@ public class Ejercicio3RecursivaFinal {
 	// ###################################################################################
 	// ###################################################################################	
 	
-	// Dados dos numeros 1 y 2, que son respectivamente, la base (Long) y el exponente (Integer)
-	// se calcula a^n en base a las siguientes condiciones
-	// Si exponente=0 --> 0, si exponente>0 --> en funcion del modulo:
-	public static Long elevaARecursivoFinal(Integer numero1, Integer numero2) {
+	// Dados dos numeros 1 y 2, se calcula a^expo en base a las siguientes condiciones
+	// Si n=0 --> 1, si n>0 --> en funcion del modulo, usamos divide y venceras para obtener
+	// una complejidad logaritmica:
+	public static Long elevaARecursivoFinal(Integer exponente, Integer n) {
 		
-		return elevaARecursivoFinalInterno(1L, numero1, numero2);
+		return elevaARecursivoFinalInterno(1L, exponente, n);
 	}
 	
 	// Funcion interna (privada) para ser llamada por la de arriba (publica) con 
 	// parametros ya establecidos:
-	public static Long elevaARecursivoFinalInterno(Long resultado, Integer numero1, Integer numero2) {
+	public static Long elevaARecursivoFinalInterno(Long base, Integer exponente, Integer n) {
 		
-		Long base = (long) numero1;
-		Integer exponente = numero2;
-		
-		if (exponente > 0) {
+		if (n > 0) {
 			
-			return elevaARecursivoFinalInterno(resultado, numero1, numero2);
+			if (n % 2 == 1) {
+				
+				base = base * exponente;
+					
+			} 
 			
-		} else {
-			
-			return resultado;
+			return elevaARecursivoFinalInterno(base, (exponente *= exponente), (n / 2));
 			
 		}
-			
+		
+		return base;
+		
 	}
 
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/*
-	public static Long elevaAIterativo(Integer numero1, Integer numero2) {
-		
-		Long resultado = (long) 1;
-		Long base = (long) numero1;
-		Integer exponente = numero2;
-		
-		while (exponente > 0) {
-				
-			if (exponente % 2 == 1) {
-					
-				//Si modulo == 1 ----> (a^(n/2))^2 * a
-				resultado = (long) (base * (Math.pow((Math.pow(base, (exponente / 2))), 2)));
-				return resultado;
-										
-			} else {
-					
-				//Si modulo == 0 ----> (a^(n/2))^2
-				resultado = (long) (Math.pow((Math.pow(base, (exponente / 2))), 2));
-				return resultado;
-					
-			}
-				
-		}
-			
-		return resultado;
-		
-	}
-*/
-////////////////////////////////////////////////////////////////////////////////////////////////////////////

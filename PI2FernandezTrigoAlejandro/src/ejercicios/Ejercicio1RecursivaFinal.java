@@ -16,8 +16,8 @@ public class Ejercicio1RecursivaFinal {
 	
 	// Dados dos strings, donde cada uno representa una frase,
 	// itera sobre ambos. Determina en que punto de ambas frases
-	// dejan de ser iguales y devuelve esa posición numérica, para ello se emplea el 
-	// algoritmo de búsqueda binaria:
+	// dejan de ser iguales y devuelve esa posicion numerica, para ello se emplea el 
+	// algoritmo de búsqueda binaria para obtener una complejidad de orden logaritmico:
 	public static Integer hastaDondeSonIgualesRecursivo(String frase1, String frase2) {
 		
 		Integer i = 0;
@@ -34,7 +34,7 @@ public class Ejercicio1RecursivaFinal {
 		Integer k = 0;
 		Integer resultado = -1;
 		
-		while (j - i > 0 && resultado == -1) {
+		if (j - i > 0 && resultado == -1) {
 			
 			// Posición: la mitad
 			k = ((i + j) / 2);
@@ -59,41 +59,14 @@ public class Ejercicio1RecursivaFinal {
 				
 			}
 			
-		}
-		
-		return resultado;		
-
-	}
-			
-}
-
-
-//Versión "simple" usando while no óptima:
-/*
-public static Integer hastaDondeSonIgualesRecursivo(String frase1, String frase2) {
-		
-	return hastaDondeSonIgualesRecursivoInterno(0, frase1, frase2);
-		
-}
-
-private static Integer hastaDondeSonIgualesRecursivoInterno(int i, String frase1, String frase2) {
-	
-	while (i < frase1.length()) {
-			
-		if (frase1.charAt(i) == frase2.charAt(i)) {
-				
-			i++;
-			return hastaDondeSonIgualesRecursivoInterno(i, frase1, frase2);
-				
 		} else {
-				
-			return i;
-				
+			
+			return resultado;
+			
 		}
-	
+		
+		return resultado;
+		
 	}
-		
-	return i;
-		
+			
 }
-*/

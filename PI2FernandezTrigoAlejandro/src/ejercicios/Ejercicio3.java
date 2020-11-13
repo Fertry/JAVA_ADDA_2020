@@ -53,29 +53,26 @@ public class Ejercicio3 {
 	public static void funcionAuxiliarEjercicio3(List<List<Integer>> lista) {
 					
 		int i = 0;
-		Integer base;
+		Integer n;
 		Integer exponente;
 		Long resultadoIterativo;
-		//Long resultadoRecursivoFinal;
-		//Long resultadoRecursivoNoFinal;
+		Long resultadoRecursivoFinal;
+		Long resultadoRecursivoNoFinal;
 		//Long resultadoFuncional;
-		Long ejemploDeMierda;
 					
 		while (i < lista.size()) {
 						
-			base = lista.get(i).get(0);
-			exponente = lista.get(i).get(1);
-			resultadoIterativo = Ejercicio3Iterativa.elevaAIterativo(base, exponente);
-			ejemploDeMierda = Ejercicio3Iterativa.elevaAIterativo(5, 0);
-			//resultadoRecursivoFinal = Ejercicio3RecursivaFinal.elevaARecursivoFinal(base, exponente);
-			//resultadoRecursivoNoFinal = Ejercicio3RecursivaNoFinal.elevaARecursivoNoFinal(base, exponente);
-			//resultadoFuncional = Ejercicio3Funcional.elevaAFuncional(base, exponente);
-			System.out.println("1. Ejemplo: " + ejemploDeMierda);	
-			System.out.println(base + " elevado a " + exponente + " : ");
+			exponente = lista.get(i).get(0);
+			n = lista.get(i).get(1);
+			resultadoIterativo = Ejercicio3Iterativa.elevaAIterativo((long) exponente, n);
+			resultadoRecursivoFinal = Ejercicio3RecursivaFinal.elevaARecursivoFinal(exponente, n);
+			resultadoRecursivoNoFinal = Ejercicio3RecursivaNoFinal.elevaARecursivoNoFinal(exponente, n);
+			//resultadoFuncional = Ejercicio3Funcional.elevaAFuncional(exponente, n);
+			System.out.println("Exponente: " + exponente + " n: " + n);
 			System.out.println("1. Iterativo: " + resultadoIterativo);		
-			//System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);	
-			//System.out.println("2. Recursivo no final: " + resultadoRecursivoNoFinal);	
-			//System.out.println("3. Funcional: " + resultadoFuncional);	
+			System.out.println("2. Recursivo final: " + resultadoRecursivoFinal);	
+			System.out.println("3. Recursivo no final: " + resultadoRecursivoNoFinal);	
+			//System.out.println("4. Funcional: " + resultadoFuncional);	
 			System.out.println("\n");
 			i++;
 					

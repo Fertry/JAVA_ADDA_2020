@@ -14,9 +14,9 @@ public class Ejercicio3Funcional {
 	// ###################################################################################
 	// ###################################################################################
 		
-	// Dados dos numeros 1 y 2, que son respectivamente, la base (Long) y el exponente (Integer)
-	// se calcula a^n en base a las siguientes condiciones
-	// Si exponente=0 --> 0, si exponente>0 --> en funcion del modulo:
+	// Dados dos numeros 1 y 2, se calcula a^expo en base a las siguientes condiciones
+	// Si n=0 --> 1, si n>0 --> en funcion del modulo, usamos divide y venceras para obtener
+	// una complejidad logaritmica:
 	public static Long elevaAFuncional(Integer numero1, Integer numero2) {
 		
 		return null;

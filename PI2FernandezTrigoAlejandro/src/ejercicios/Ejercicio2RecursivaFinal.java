@@ -15,7 +15,7 @@ public class Ejercicio2RecursivaFinal {
 	// ###################################################################################
 		
 	// Dado dos numeros a,b se calcula si a es múltiplo de b en base a las siguientes condiciones
-	// Si a==0 --> true, si 0<a<b --> false y si a>=b --> a=a-b:
+	// Si a==0 --> true, si 0<a<b --> false y si a>=b --> a=a-b lo que supone una complejidad lineal:
 	public static boolean esMultiploRecursivoFinal(Integer numero1, Integer numero2) {
 		
 		return esMultiploRecursivoFinalInterno(false, numero1, numero2);

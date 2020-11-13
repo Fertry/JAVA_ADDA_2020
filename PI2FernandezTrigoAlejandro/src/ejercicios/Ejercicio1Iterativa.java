@@ -16,8 +16,8 @@ public class Ejercicio1Iterativa {
 
 	// Dados dos strings, donde cada uno representa una frase,
 	// itera sobre ambos. Determina en que punto de ambas frases
-	// dejan de ser iguales y devuelve esa posición numérica, para ello se emplea el 
-	// algoritmo de búsqueda binaria:
+	// dejan de ser iguales y devuelve esa posicion numerica, para ello se emplea el 
+	// algoritmo de búsqueda binaria para obtener una complejidad de orden logaritmico:
 	public static Integer hastaDondeSonIgualesIterativo(String frase1, String frase2) {
 		 
 		Integer i = 0;
@@ -56,29 +56,3 @@ public class Ejercicio1Iterativa {
 	
 }
 	
-
-// Versión "simple" usando while no óptima:
-/*
-public static Integer ejemplo(String frase1, String frase2) {
-		
-	int i = 0;
-	Boolean verdadero = true;
-
-	while (i < frase1.length() && verdadero) {
-			
-		if (frase1.charAt(i) == frase2.charAt(i)) {
-				
-			i++;
-				
-		} else {
-				
-			verdadero = false;
-				
-		}
-				
-	}
-		
-	return i;
-		
-}	
-*/

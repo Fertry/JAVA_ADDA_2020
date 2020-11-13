@@ -14,22 +14,35 @@ public class Ejercicio3RecursivaNoFinal {
 	// ###################################################################################
 	// ###################################################################################	
 		
-	// Dados dos numeros 1 y 2, que son respectivamente, la base (Long) y el exponente (Integer)
-	// se calcula a^n en base a las siguientes condiciones
-	// Si exponente=0 --> 0, si exponente>0 --> en funcion del modulo:
-	public static Long elevaARecursivoNoFinal(Integer numero1, Integer numero2) {
+	// Dados dos numeros 1 y 2, se calcula a^expo en base a las siguientes condiciones
+	// Si n=0 --> 1, si n>0 --> en funcion del modulo, usamos divide y venceras para obtener
+	// una complejidad logaritmica:
+	public static Long elevaARecursivoNoFinal(Integer exponente, Integer n) {
 		
-		//return elevaARecursivoFinalInterno(1L, numero1, numero2);
-		return null;
+		Long resultado;
+		
+		if (n > 0) {
+			
+			resultado = elevaARecursivoNoFinal(exponente, (n / 2));
+			
+			if (n % 2 == 1) {
+				
+				resultado = ((resultado * resultado) * exponente);
+				
+			} else {
+				
+				resultado *= resultado;
+				
+			}
+			
+		} else {
+			
+			resultado = 1L;
+			
+		}
+		
+		return resultado;
 		
 	}
 	
-	// Funcion interna (privada) para ser llamada por la de arriba (publica) con 
-	// parametros ya establecidos:
-	public static Long elevaARecursivoNoFinalInterno(Long resultado, Integer numero1, Integer numero2) {
-		
-		return null;
-		
-	}
-
 }

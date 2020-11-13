@@ -14,60 +14,31 @@ public class Ejercicio3Iterativa {
 	// ###################################################################################
 	// ###################################################################################
 			
-	// Dados dos numeros 1 y 2, que son respectivamente, la base (Long) y el exponente (Integer)
-	// se calcula a^n en base a las siguientes condiciones
-	// Si exponente=0 --> 0, si exponente>0 --> en funcion del modulo:
-	public static Long elevaAIterativo(Integer numero1, Integer numero2) {
+	// Dados dos numeros 1 y 2, se calcula a^expo en base a las siguientes condiciones
+	// Si n=0 --> 1, si n>0 --> en funcion del modulo, usamos divide y venceras para obtener
+	// una complejidad logaritmica:
+	public static Long elevaAIterativo(Long exponente, Integer n) {
 		
-		Long resultado = (long) 1;
-		Long base = (long) numero1;
-		Integer exponente = numero2;
-		
-		/*
-		if (exponente == 0) {
+		Long base = 1L;
+
+		while (n > 0) {
 			
-			return resultado;
-			
-		} else {
-			
-			while () {
+			if (n % 2 == 1) {
 				
+				base = base * exponente;
 				
 			}
-			
+				
+			exponente *= exponente; 
+			n = n / 2;
+					
 		}
-		*/
-			
-		return 1L;
+		
+		return base;
 		
 	}
 
 }
-
-
-/*
-public static Integer IterativoEj1(String cadena1, String cadena2) {
-        int i = 0;
-        int n = cadena1.length();
-        int j = n;
-        int k = cadena1.length()/2;
-        while(j-i > 0 && !(cadena1.charAt(k)==cadena2.charAt(k))) {
-            if(cadena1.charAt(k)==cadena2.charAt(k)) {
-               j = k;
-               k = (i + k) / 2;
-            }else {
-                i = k + 1;
-                k = (k + 1 + j) / 2;
-            }
-        }
-        if(j-i>0) {
-            return k;
-        }
-        else {
-            return -1;
-        }
-    }
- */
 
 
 /*
