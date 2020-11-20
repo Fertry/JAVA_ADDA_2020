@@ -24,17 +24,20 @@ public class Test {
 		System.out.println("######################### TEST EJERCICIO 1 ############################");
 		Ejercicio1.funcionAuxiliarEjercicio1(listaFrases);
 		System.out.println("#######################################################################");
+		System.out.println("#######################################################################");
 		System.out.println("\n");
 		
 		System.out.println("#######################################################################");
 		System.out.println("######################### TEST EJERCICIO 2 ############################");		
 		Ejercicio2.funcionAuxiliarEjercicio2(listaEnteros);
 		System.out.println("#######################################################################");
+		System.out.println("#######################################################################");
 		System.out.println("\n");
 		
 		System.out.println("#######################################################################");
 		System.out.println("######################### TEST EJERCICIO 3 ############################");
 		Ejercicio3.funcionAuxiliarEjercicio3(listaElevados);
+		System.out.println("#######################################################################");
 		System.out.println("#######################################################################");
 		System.out.println("\n");
 		
