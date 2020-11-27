@@ -1,0 +1,24 @@
+Lista de entrada: [1, -2, 11, -4, 13, -5, 2, 1]
+Secuencia de suma mayor en intervalo [2, 5): 
+Subsecuencia = [11, -4, 13]; Suma obtenida = 20
+===============================================================
+Lista de entrada: [1, 2, -11, 4, 13, -5, 2, 1]
+Secuencia de suma mayor en intervalo [3, 5): 
+Subsecuencia = [4, 13]; Suma obtenida = 17
+===============================================================
+Lista de entrada: [1, 2, 11, 4, 13, -5, 2, 1]
+Secuencia de suma mayor en intervalo [0, 5): 
+Subsecuencia = [1, 2, 11, 4, 13]; Suma obtenida = 31
+===============================================================
+Lista de entrada: [-1, 2, 11, -4, 13, 5, 2, 1]
+Secuencia de suma mayor en intervalo [1, 8): 
+Subsecuencia = [2, 11, -4, 13, 5, 2, 1]; Suma obtenida = 30
+===============================================================
+Lista de entrada: [1, -2, 11, 4, 13, -5, 2, 1]
+Secuencia de suma mayor en intervalo [2, 5): 
+Subsecuencia = [11, 4, 13]; Suma obtenida = 28
+===============================================================
+Lista de entrada: [-1, -2, -11, -4, -13, -5, 2, -1]
+Secuencia de suma mayor en intervalo [6, 7): 
+Subsecuencia = [2]; Suma obtenida = 2
+===============================================================

@@ -1,0 +1,31 @@
+Pares de entrada:
+(a, b) = (10, 5)
+F. Recursiva sin memoria: 88
+F. Recursiva con memoria: 88
+F. Iterativa:		  88
+===============================================================
+(a, b) = (20, 10)
+F. Recursiva sin memoria: 506
+F. Recursiva con memoria: 506
+F. Iterativa:		  506
+===============================================================
+(a, b) = (40, 20)
+F. Recursiva sin memoria: 2641
+F. Recursiva con memoria: 2641
+F. Iterativa:		  2641
+===============================================================
+(a, b) = (60, 30)
+F. Recursiva sin memoria: 6740
+F. Recursiva con memoria: 6740
+F. Iterativa:		  6740
+===============================================================
+(a, b) = (80, 40)
+F. Recursiva sin memoria: 15691
+F. Recursiva con memoria: 15691
+F. Iterativa:		  15691
+===============================================================
+(a, b) = (100, 50)
+F. Recursiva sin memoria: 26696
+F. Recursiva con memoria: 26696
+F. Iterativa:		  26696
+===============================================================

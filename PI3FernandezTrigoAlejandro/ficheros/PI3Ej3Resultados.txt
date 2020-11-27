@@ -1,0 +1,30 @@
+Entero de entrada: 5
+F. Recursiva sin memoria: 128
+F. Recursiva con memoria: 128
+F. Iterativa:		  128
+===============================================================
+Entero de entrada: 10
+F. Recursiva sin memoria: 185547
+F. Recursiva con memoria: 185547
+F. Iterativa:		  185547
+===============================================================
+Entero de entrada: 15
+F. Recursiva sin memoria: 268867333
+F. Recursiva con memoria: 268867333
+F. Iterativa:		  268867333
+===============================================================
+Entero de entrada: 20
+F. Recursiva sin memoria: 389602867217
+F. Recursiva con memoria: 389602867217
+F. Iterativa:		  389602867217
+===============================================================
+Entero de entrada: 25
+F. Recursiva sin memoria: 564554988700288
+F. Recursiva con memoria: 564554988700288
+F. Iterativa:		  564554988700288
+===============================================================
+Entero de entrada: 30
+F. Recursiva sin memoria: 818069788713493137
+F. Recursiva con memoria: 818069788713493137
+F. Iterativa:		  818069788713493137
+===============================================================
