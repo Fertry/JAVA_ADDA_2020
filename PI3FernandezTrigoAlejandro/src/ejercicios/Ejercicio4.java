@@ -53,7 +53,7 @@ public class Ejercicio4 {
 			
 	}
 	
-	// Funcion auxiliar para, dado una lista de integers devuelta por
+	// Funcion auxiliar para, dado una lista de listas de integers devuelta por
 	// la funcion de lectura, invocar a las funciones que resuelven el 
 	// ejercicio tantas veces como pares de numeros tenga la lista de entrada:
 	public static void funcionAuxiliarEjercicio4(List<List<Integer>> lista) {
