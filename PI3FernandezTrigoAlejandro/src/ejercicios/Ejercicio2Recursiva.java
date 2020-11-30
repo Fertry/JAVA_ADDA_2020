@@ -16,6 +16,8 @@ public class Ejercicio2Recursiva {
 	// ####################### 				EJERCICIO 2 				 #################
 	// ###################################################################################
 	// ###################################################################################
+
+	//
 	public static List<Integer> ejercicio1Recursivo(List<Integer> lista) {
 		
 		Integer i = 0;
@@ -31,6 +33,7 @@ public class Ejercicio2Recursiva {
 		Integer k = 0;
 		List<Integer> resultado = new ArrayList<Integer>();
 		
+		/*
 		if (j - i > 0 && resultado.isEmpty()) {
 			
 			// Posición: la mitad
@@ -61,6 +64,7 @@ public class Ejercicio2Recursiva {
 			return resultado;
 			
 		}
+		*/
 		
 		return resultado;
 		

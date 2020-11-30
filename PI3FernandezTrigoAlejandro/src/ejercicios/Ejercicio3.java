@@ -47,9 +47,9 @@ public class Ejercicio3 {
 	// ejercicio tantas veces como numeros tenga la lista de entrada:
 	public static void funcionAuxiliarEjercicio3(List<Integer> lista) {
 				
-		List <Integer> resultadoIterativo = new ArrayList<Integer>();
-		List <Integer> resultadoRecursivoConMemoria = new ArrayList<Integer>();
-		List <Integer> resultadoRecursivoSinMemoria = new ArrayList<Integer>();
+		Integer resultadoIterativo;
+		Integer resultadoRecursivoConMemoria;
+		Integer resultadoRecursivoSinMemoria;
 		
 		for (Integer numero : lista) {
 			
@@ -57,11 +57,14 @@ public class Ejercicio3 {
 			resultadoRecursivoConMemoria = Ejercicio3RecursivaConMemoria.ejercicio3RecursivoConMemoria(numero);
 			resultadoRecursivoSinMemoria = Ejercicio3RecursivaSinMemoria.ejercicio3RecursivoSinMemoria(numero);
 			
+			System.out.println("Entero de entrada: " + numero);
+			System.out.println("1. Resultado iterativo: " + resultadoIterativo);
+			System.out.println("2. Resultado recursivo con memoria: " + resultadoRecursivoConMemoria);
+			System.out.println("3. Resultado recursivo sin memoria: " + resultadoRecursivoSinMemoria);
 			System.out.println("\n");
 			
 		}
 			
 	}
-	
 	
 }

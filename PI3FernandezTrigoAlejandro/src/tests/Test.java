@@ -25,6 +25,8 @@ public class Test {
 		Integer [][] matriz5 = Ejercicio1.leeDatosEjercicio1("ficheros/PI3Ej1DatosEntrada5.txt");
 		Integer [][] matriz6 = Ejercicio1.leeDatosEjercicio1("ficheros/PI3Ej1DatosEntrada6.txt");
 		List <List<Integer>> listaNumeros2 = Ejercicio2.leeDatosEjercicio2("ficheros/PI3Ej2DatosEntrada.txt");
+		List <Integer> listaNumeros3 = Ejercicio3.leeDatosEjercicio3("ficheros/PI3Ej3DatosEntrada.txt");
+		List <List<Integer>> listaNumeros4 = Ejercicio4.leeDatosEjercicio4("ficheros/PI3Ej4DatosEntrada.txt");
 		
 		// Salida por consola:
 		System.out.println("#######################################################################");
@@ -48,14 +50,14 @@ public class Test {
 		
 		System.out.println("#######################################################################");
 		System.out.println("######################### TEST EJERCICIO 3 ############################");
-
+		Ejercicio3.funcionAuxiliarEjercicio3(listaNumeros3);
 		System.out.println("#######################################################################");
 		System.out.println("#######################################################################");
 		System.out.println("\n");
 		
 		System.out.println("#######################################################################");
 		System.out.println("######################### TEST EJERCICIO 4 ############################");
-
+		Ejercicio4.funcionAuxiliarEjercicio4(listaNumeros4);
 		System.out.println("#######################################################################");
 		System.out.println("#######################################################################");
 		System.out.println("\n");

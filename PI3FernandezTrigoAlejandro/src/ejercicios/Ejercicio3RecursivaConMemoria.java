@@ -6,8 +6,6 @@
 
 package ejercicios;
 
-import java.util.List;
-
 public class Ejercicio3RecursivaConMemoria {
 	
 	// ###################################################################################
@@ -17,7 +15,7 @@ public class Ejercicio3RecursivaConMemoria {
 	// ###################################################################################
 	
 	//
-	public static List<Integer> ejercicio3RecursivoConMemoria(Integer numero) {
+	public static Integer ejercicio3RecursivoConMemoria(Integer numero) {
 		
 		return null;
 		

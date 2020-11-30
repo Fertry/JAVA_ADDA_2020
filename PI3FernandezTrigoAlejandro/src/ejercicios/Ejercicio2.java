@@ -58,16 +58,16 @@ public class Ejercicio2 {
 	// ejercicio tantas veces como filas tenga el fichero de entrada:
 	public static void funcionAuxiliarEjercicio2(List<List<Integer>> lista) {
 				
-		List <Integer> resultado = new ArrayList <Integer>();
+		//List <Integer> resultado = new ArrayList <Integer>();
 		int numero = 0;
 				
 		for (List<Integer> miniLista : lista) {
 		
-			resultado = Ejercicio2Recursiva.ejercicio1Recursivo(miniLista);
+			//resultado = Ejercicio2Recursiva.ejercicio1Recursivo(miniLista);
 			
 			System.out.println("Lista de entrada: " + miniLista);
 			System.out.println("Secuencia de suma mayor en intervalo: [" + numero + "," + numero +")");
-			System.out.println("Subsecuencia: " + resultado + " Suma obtenida: " + sumatorio(resultado));
+			//System.out.println("Subsecuencia: " + resultado + " Suma obtenida: " + sumatorio(resultado));
 			System.out.println("\n");
 			
 		}
