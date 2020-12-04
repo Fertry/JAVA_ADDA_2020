@@ -38,12 +38,15 @@ public class Ejercicio1Recursiva {
 	// extremosDistintosONo() y calculaMatrizPartidaEnCuatro() tantas veces como sea 
 	// necesario hasta que la matriz sea 2x2 o no se cumpla el requerimiento de que 
 	// sus cuatro esquinas difieran:
+	/*
+	 * Recursividad: 2 casos base + 1 caso recursivo multiple
+	 * Complejidad: ????????????????????????
+	 */
 	private static Boolean ejercicio1RecursivoPrivado(Integer [][] matriz) {
 		
 		Boolean resultado = false;
 		
-		// Condicion de parada para una matriz cuadrada
-		// de dimension 2x2:
+		// Condicion de parada para una matriz cuadrada de dimension 2x2:
 		if (matriz.length == 2) {
 			
 			resultado = extremosDistintosONo(matriz);
@@ -52,6 +55,7 @@ public class Ejercicio1Recursiva {
 			
 			if (extremosDistintosONo(matriz) == true) {
 			
+				// Llamada recursiva múltiple:
 				Boolean primerCuadrante = ejercicio1RecursivoPrivado(calculaMatrizPartidaEnCuatro(matriz, 0, 0));
 				Boolean segundoCuadrante = ejercicio1RecursivoPrivado(calculaMatrizPartidaEnCuatro(matriz, 0, matriz.length));
 				Boolean tercerCuadrante = ejercicio1RecursivoPrivado(calculaMatrizPartidaEnCuatro(matriz, matriz.length, 0));
@@ -82,7 +86,8 @@ public class Ejercicio1Recursiva {
         int ultimaColumna = 0;
         int primeraColumna = 0;        
         Integer[][] resultado = new Integer [matriz.length / 2][matriz.length / 2];
-
+        
+        // Fila desde la que partimos:
         if (filaDePartida < matriz.length) {
         	
         	primeraFila = 0;
@@ -95,6 +100,7 @@ public class Ejercicio1Recursiva {
             
         }
         
+        // Columna desde la que partimos:
         if (columnaDePartida < matriz.length) {
         	
         	primeraColumna = 0;
@@ -107,6 +113,7 @@ public class Ejercicio1Recursiva {
             
         }
         
+        // Creamos el array bidimensional: 
         while (primeraFila < ultimaFila) {
         	
             while (primeraColumna < ultimaColumna) {
@@ -120,6 +127,7 @@ public class Ejercicio1Recursiva {
             
             columna = 0;
             
+            // Saltar a la siguiente columna:
             if (columnaDePartida < matriz.length) {
             	
             	primeraColumna = 0;
