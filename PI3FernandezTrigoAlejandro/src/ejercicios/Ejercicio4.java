@@ -20,9 +20,11 @@ public class Ejercicio4 {
 	// ###################################################################################
 	// ###################################################################################
 
-	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
-	// y en cada linea dos enteros separados por coma, devuelve una lista de listas
-	// de enteros donde cada minilista representa un par de enteros:
+	/*
+	Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
+	y en cada linea dos enteros separados por coma, devuelve una lista de listas
+	de enteros donde cada minilista representa un par de enteros:
+	*/
 	public static List<List<Integer>> leeDatosEjercicio4(String fichero) {
 		
 		int i = 0;
@@ -53,14 +55,16 @@ public class Ejercicio4 {
 			
 	}
 	
-	// Funcion auxiliar para, dado una lista de listas de integers devuelta por
-	// la funcion de lectura, invocar a las funciones que resuelven el 
-	// ejercicio tantas veces como pares de numeros tenga la lista de entrada:
+	/*
+	Funcion auxiliar para, dado una lista de listas de integers devuelta por
+	la funcion de lectura, invocar a las funciones que resuelven el 
+	ejercicio tantas veces como pares de numeros tenga la lista de entrada:
+	*/
 	public static void funcionAuxiliarEjercicio4(List<List<Integer>> lista) {
 				
-		Integer resultadoIterativo;
-		Integer resultadoRecursivoConMemoria;
-		Integer resultadoRecursivoSinMemoria;
+		Long resultadoIterativo;
+		Long resultadoRecursivoConMemoria;
+		Long resultadoRecursivoSinMemoria;
 		
 		for (List<Integer> miniLista : lista) {
 			

@@ -14,11 +14,31 @@ public class Ejercicio3Iterativa {
 	// ###################################################################################
 	// ###################################################################################
 	
-	//
-	public static Integer ejercicio3Iterativo(Integer numero) {
+	/*
+	Funcion que dado un nº n entero calcula la siguiente sucesion numerica
+	haciendo uso de un bucle while y devuelve el resultado como Long:
+	* Complejidad: ????????????????????????
+	*/
+	public static Long ejercicio3Iterativo(Integer numero) {
 		
-		return null;
-		
+	    int i = 3;
+	    Long f1 = 1L;
+	    Long f2 = 1L;
+	    Long f3 = 2L;
+	    Long fn = 0L;
+	        
+	    while (i <= numero) {
+	    	
+	        fn = 4 * f1 + f2 + f3;
+	        f3 = f2;
+	        f2 = f1;
+	        f1 = fn;
+	        i++;
+	            
+	    }
+	    
+	    return fn;
+		 
 	}
 	
 }

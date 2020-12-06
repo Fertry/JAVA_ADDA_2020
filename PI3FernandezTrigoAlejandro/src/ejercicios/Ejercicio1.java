@@ -20,10 +20,12 @@ public class Ejercicio1 {
 	// ###################################################################################
 	// ###################################################################################
 
-	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
-	// y en cada linea un nº n de numeros enteros, las filas del fichero representan las
-	// filas de una matriz cuadrada de orden n*n. Pasamos los numeros de las filas al metodo
-	// toMultiArray() de Miguel Toro para acceder a las posiciones con facilidad:
+	/*
+	Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
+	y en cada linea un nº n de numeros enteros, las filas del fichero representan las
+	filas de una matriz cuadrada de orden n*n. Pasamos los numeros de las filas al metodo
+	toMultiArray() de Miguel Toro para acceder a las posiciones con facilidad:
+	*/
 	public static Integer [][] leeDatosEjercicio1(String fichero) {
 		
 		int fila = 0;
@@ -55,9 +57,11 @@ public class Ejercicio1 {
 		
 	}
 
-	// Funcion auxiliar para, dado una matriz leida por la funcion leeDatosEjercicio1(),
-	// llamar a la función recursiva que resuelve el ejercicio y formatear la salida
-	// acorde al fichero de salida de ejemplo proporcionado:
+	/*
+	Funcion auxiliar para, dado una matriz leida por la funcion leeDatosEjercicio1(),
+	llamar a la función recursiva que resuelve el ejercicio y formatear la salida
+	acorde al fichero de salida de ejemplo proporcionado:
+	*/
 	public static void funcionAuxiliarEjercicio1(Integer [][] matriz) {
 
 		int dimension = matriz.length;
@@ -71,11 +75,13 @@ public class Ejercicio1 {
 		
 	}
 	
-	// Funcion privada para mostrar una matriz por pantalla al pasarse esta
-	// por parametro siempre y cuando la dimension no exceda 16:
+	/*
+	Funcion privada para mostrar una matriz por pantalla al pasarse esta
+	por parametro siempre y cuando la dimension no exceda 8:
+	*/
 	private static void muestraMatrizPorPantalla(Integer [][] matriz) {
 		
-		if (matriz.length > 16) {
+		if (matriz.length > 8) {
 			
 			System.out.println("La matriz no se muestra debido al tamaño.");
 			

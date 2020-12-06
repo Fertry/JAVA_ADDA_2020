@@ -20,9 +20,11 @@ public class Ejercicio3 {
 	// ###################################################################################
 	// ###################################################################################
 
-	// Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
-	// y en cada linea un formato n=numero, hace split y se queda con los numeros
-	// que son devueltos en una lista:
+	/*
+	Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
+	y en cada linea un formato n=numero, hace split y se queda con los numeros
+	que son devueltos en una lista:
+	*/
 	public static List<Integer> leeDatosEjercicio3(String fichero) {
 
 		int i = 0;
@@ -42,14 +44,16 @@ public class Ejercicio3 {
 
 	}
 	
-	// Funcion auxiliar para, dado una lista de integers devuelta por
-	// la funcion de lectura, invocar a las funciones que resuelven el 
-	// ejercicio tantas veces como numeros tenga la lista de entrada:
+	/*
+	Funcion auxiliar para, dado una lista de integers devuelta por
+	la funcion de lectura, invocar a las funciones que resuelven el 
+	ejercicio tantas veces como numeros tenga la lista de entrada: 
+	*/
 	public static void funcionAuxiliarEjercicio3(List<Integer> lista) {
 				
-		Integer resultadoIterativo;
-		Integer resultadoRecursivoConMemoria;
-		Integer resultadoRecursivoSinMemoria;
+		Long resultadoIterativo;
+		Long resultadoRecursivoConMemoria;
+		Long resultadoRecursivoSinMemoria;
 		
 		for (Integer numero : lista) {
 			
