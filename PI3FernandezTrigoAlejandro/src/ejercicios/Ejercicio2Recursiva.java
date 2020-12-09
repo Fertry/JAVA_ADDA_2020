@@ -26,12 +26,12 @@ public class Ejercicio2Recursiva {
 	es mayor usando divide y venceras y que se realiza llamando a la funcion privada 
 	ejercicio1RecursivoPrivado para actuar de forma opaca hacia el usuario:  
 	*/
-	public static Tuple3 <Integer, Integer, Integer> ejercicio1Recursivo(List<Integer> lista) {
+	public static Tuple3 <Integer, Integer, Integer> ejercicio2Recursivo(List<Integer> lista) {
 		
 		Integer i = 0;
 		Integer j = lista.size();
 		
-		return ejercicio1RecursivoPrivado(lista, i, j);
+		return ejercicio2RecursivoPrivado(lista, i, j);
 		
 	}
 	
@@ -42,7 +42,7 @@ public class Ejercicio2Recursiva {
 	* Recursividad: ????????????????????????
 	* Complejidad: ????????????????????????
 	*/
-	private static Tuple3 <Integer, Integer, Integer> ejercicio1RecursivoPrivado(List<Integer> lista, int i, int j) {
+	private static Tuple3 <Integer, Integer, Integer> ejercicio2RecursivoPrivado(List<Integer> lista, int i, int j) {
 		
 		Tuple3 <Integer, Integer, Integer> resultado = null;
 		
@@ -58,8 +58,8 @@ public class Ejercicio2Recursiva {
 			
 			// Caso recursivo: divide y venceras: Si k esta en la subsecuencia maxima:
 			Tuple3 <Integer, Integer, Integer> sumaBase = null;
-			Tuple3 <Integer, Integer, Integer> parte1 = ejercicio1RecursivoPrivado(lista, i, k);
-			Tuple3 <Integer, Integer, Integer> parte2 = ejercicio1RecursivoPrivado(lista, (k + 1), j);
+			Tuple3 <Integer, Integer, Integer> parte1 = ejercicio2RecursivoPrivado(lista, i, k);
+			Tuple3 <Integer, Integer, Integer> parte2 = ejercicio2RecursivoPrivado(lista, (k + 1), j);
 			
 			if (parte1.v3 < parte2.v3) {
 				
@@ -73,9 +73,9 @@ public class Ejercicio2Recursiva {
 
 			// Caso recursivo: divide y venceras: Si k no esta en la subsecuencia maxima:
 			// Hacia la izquierda <---
-			Tuple3 <Integer, Integer, Integer> sumaIzquierda = ejercicio1RecursivoPrivado(lista, i, k);
+			Tuple3 <Integer, Integer, Integer> sumaIzquierda = ejercicio2RecursivoPrivado(lista, i, k);
 			// Hacia la derecha --->
-			Tuple3 <Integer, Integer, Integer> sumaDerecha = ejercicio1RecursivoPrivado(lista, (k + 1), j);
+			Tuple3 <Integer, Integer, Integer> sumaDerecha = ejercicio2RecursivoPrivado(lista, (k + 1), j);
 			
 			resultado = tuplaMayor(sumaBase, sumaIzquierda, sumaDerecha);
 			

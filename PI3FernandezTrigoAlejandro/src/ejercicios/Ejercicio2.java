@@ -65,33 +65,17 @@ public class Ejercicio2 {
 						
 		for (List<Integer> miniLista : lista) {
 		
-			Tuple3 <Integer, Integer, Integer> resultado = Ejercicio2Recursiva.ejercicio1Recursivo(miniLista);
+			Tuple3 <Integer, Integer, Integer> resultado = Ejercicio2Recursiva.ejercicio2Recursivo(miniLista);
 			
 			System.out.println("Lista de entrada: " + miniLista);
 			System.out.println("Secuencia de suma mayor en intervalo: [" + resultado.v1 + "," + resultado.v2 +")");
 			System.out.println("Subsecuencia: " + resultado.v3 + " Suma obtenida: " + resultado.v3);
+			System.out.println("Numeritos: " + resultado.v1 +  resultado.v2 + resultado.v3);
 			System.out.println("\n");
 			
 		}
 		
 	}
-	
-	/*
-	// Funcion privada que dado una lista de enteros, devuelve su suma:
-	private static Integer sumatorio(List <Integer> lista) {
-		
-		int resultado = 0;
-		
-		for (Integer numero : lista) {
-			
-			resultado += numero;
-			
-		}
-		
-		return resultado;
-		
-	}
-	*/
-					
+				
 }
 	

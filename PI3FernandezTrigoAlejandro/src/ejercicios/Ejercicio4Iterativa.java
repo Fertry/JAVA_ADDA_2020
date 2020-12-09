@@ -34,7 +34,25 @@ public class Ejercicio4Iterativa {
             
         } else {
         	
-            // while()
+        /*
+        int i = 3;
+	    Long f1 = 1L;
+	    Long f2 = 1L;
+	    Long f3 = 2L;
+	    Long fn = 0L;
+	        
+	    while (i <= numero) {
+	    	
+	        fn = 4 * f1 + f2 + f3;
+	        f3 = f2;
+	        f2 = f1;
+	        f1 = fn;
+	        i++;
+	            
+	    }
+	    
+	    return fn;
+        */
         	
         }
         

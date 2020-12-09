@@ -26,7 +26,7 @@ public class Ejercicio4RecursivaConMemoria {
 	*/
 	public static Long ejercicio4RecursivoConMemoria(Integer numeroA, Integer numeroB) {
 		
-		// Empleamos Tuple2 para "encapsular" los dos números que se reciben como parametros:
+		// Empleamos Tuple2 para "encapsular" los dos numeros que se reciben como parametros:
 		Map <Tuple2 <Integer, Integer>, Long> memoria = new HashMap <Tuple2 <Integer, Integer>, Long>();
 		
 		return ejercicio4RecursivoConMemoriaPrivado(numeroA, numeroB, memoria);
