@@ -43,7 +43,7 @@ public class Ejercicio3RecursivaSinMemoria {
 			
 		}
 		
-		return (long) resultado;
+		return resultado;
 		
 	}
 
