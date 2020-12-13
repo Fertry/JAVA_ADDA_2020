@@ -6,8 +6,6 @@
 
 package ejercicios;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import us.lsi.common.Tuple;
@@ -42,6 +40,128 @@ public class Ejercicio2Recursiva {
 	* Recursividad: ????????????????????????
 	* Complejidad: ????????????????????????
 	*/
+	private static Tuple3<Integer, Integer, Integer> maxSumaCruce(List<Integer> lista, int inicio, int fin) {
+		
+		int mitad = (inicio + fin) / 2;
+		int suma = 0;
+		int maxIzq = 0;
+		int sumaIzq = Integer.MIN_VALUE;
+		int i = mitad;
+		while (i >= inicio) {
+			suma = suma + lista.get(i);
+			if (suma > sumaIzq) {
+				sumaIzq = suma;
+				maxIzq = i;
+			}
+			i--;
+		}
+		suma = 0;
+		int maxDer = lista.size() - 1;
+		int sumaDer = Integer.MIN_VALUE;
+		int j = mitad + 1;
+		while (j <= fin) {
+			suma = suma + lista.get(j);
+			if (suma > sumaDer) {
+				sumaDer = suma;
+				maxDer = j;
+			}
+			j++;
+		}
+		return Tuple.create(maxIzq, maxDer, sumaIzq + sumaDer);
+		
+	}
+
+	private static Tuple3<Integer, Integer, Integer> ejercicio2RecursivoPrivado(List<Integer> lista, int inicio, int fin) {
+		if (inicio == fin) {
+			return Tuple.create(inicio, fin, lista.get(inicio));
+		}
+		int mitad = (inicio + fin) / 2;
+
+		Tuple3<Integer, Integer, Integer> subsecIzq = ejercicio2RecursivoPrivado(lista, inicio, mitad);
+		Tuple3<Integer, Integer, Integer> subsecDer = ejercicio2RecursivoPrivado(lista, mitad + 1, fin);
+		Tuple3<Integer, Integer, Integer> maxCrossingSubArray = maxSumaCruce(lista, inicio, fin);
+
+		int sumaIzq = subsecIzq.getV3();
+		int sumaDer = subsecDer.getV3();
+
+		int sumaCruce = maxCrossingSubArray.getV3();
+		if (sumaIzq > sumaDer && sumaIzq > sumaCruce) {
+			return subsecIzq;
+		} else if (sumaDer > sumaIzq && sumaDer > sumaCruce) {
+			return subsecDer;
+		} else {
+			return maxCrossingSubArray;
+		}
+	}
+	
+	
+	/*
+	private static Tuple3<Integer, Integer, Integer> ejercicio2RecursivoPrivado(List<Integer> ls, Integer i, Integer j) {
+
+		Tuple3<Integer, Integer, Integer> res;
+		
+		// Caso base
+		if (j - i <= 1) { // solo hay un único elemento
+			
+			// retorna una tupla <i, j, ls[i]>
+			res = Tuple.create(i, j, ls.get(i)); 
+			
+		} else {
+			
+			// Case Recursivo
+			Integer k = (i + j) / 2;
+			// 1) Suponemos que k sí está en la subsecuencia máxima
+     		///////// ESTO ES LO QUE HAY QUE CAMBIAR
+			Tuple3<Integer, Integer, Integer> s1 = maxSumaCruce(ls,i, j);
+			//Tuple3<Integer, Integer, Integer> s1 = ejercicio2RecursivoPrivado(ls, i, j - 1);
+
+			// 2) Suponemos que k no está en la subsecuencia máxima
+			// 2a) Buscamos por la izquierda
+			Tuple3<Integer, Integer, Integer> s2 = ejercicio2RecursivoPrivado(ls, i, k);
+			// 2b) Buscamos por la derecha
+			Tuple3<Integer, Integer, Integer> s3 = ejercicio2RecursivoPrivado(ls, k + 1, j);
+
+			res = tuplaMayor(s1, s2, s3);
+
+		}
+		// Devolvemos la secuencia cuya suma sea máxima
+		return res;
+	}
+	*/
+	
+	// Auxiliar:
+	/*
+	public static Tuple3<Integer, Integer, Integer> maxSumaCruce(List<Integer> lista, int inicio, int fin) {
+		int mitad = (inicio + fin) / 2;
+		int suma = 0;
+		int maxIzq = 0;
+		int sumaIzq = Integer.MIN_VALUE;
+		int i = mitad;
+		while (i >= inicio) {
+			suma = suma + lista.get(i);
+			if (suma > sumaIzq) {
+				sumaIzq = suma;
+				maxIzq = i;
+			}
+			i--;
+		}
+		suma = 0;
+		int maxDer = lista.size() - 1;
+		int sumaDer = Integer.MIN_VALUE;
+		int j = mitad + 1;
+		while (j <= fin) {
+			suma = suma + lista.get(j);
+			if (suma > sumaDer) {
+				sumaDer = suma;
+				maxDer = j;
+			}
+			j++;
+		}
+		return Tuple.create(maxIzq, maxDer, sumaIzq + sumaDer);
+	}
+	*/
+
+	/*
 	private static Tuple3 <Integer, Integer, Integer> ejercicio2RecursivoPrivado(List<Integer> lista, int i, int j) {
 		
 		Tuple3 <Integer, Integer, Integer> resultado = null;
@@ -84,12 +204,15 @@ public class Ejercicio2Recursiva {
 		return resultado;
 		
 	}
+	*/
 	
 	/*
 	Funcion privada que dadas tres tuplas cuyo tercer elemento se corresponde a la suma que buscamos,
 	hace uso de la funcion privada mayorDeTres() para determinar cual es la mejor (aquella cuya suma
 	sea mayor):
 	*/
+	
+	/*
 	private static Tuple3 <Integer, Integer, Integer> tuplaMayor(Tuple3 <Integer, Integer, Integer> tupla1, Tuple3 <Integer, Integer, Integer> tupla2, Tuple3 <Integer, Integer, Integer> tupla3) {
 		
 		int numeroTupla1 = tupla1.v3;
@@ -113,11 +236,14 @@ public class Ejercicio2Recursiva {
 		} 
 			
 	}
+	*/
 	
 	/*
 	Funcion privada que dados tres numeros enteros devuelve aquel que es mayor
-	haciend uso de conjuntos:
+	haciendo uso de conjuntos:
 	*/
+	
+	/*
 	private static Integer mayorDeTres(int numero1, int numero2, int numero3) {
 		
 		List<Integer> lista = new ArrayList<Integer>();
@@ -129,5 +255,6 @@ public class Ejercicio2Recursiva {
 		return Collections.max(lista);
 		
 	}
+	*/
 	
 }
