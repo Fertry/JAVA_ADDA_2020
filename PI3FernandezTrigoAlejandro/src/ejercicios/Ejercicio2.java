@@ -65,10 +65,10 @@ public class Ejercicio2 {
 						
 		for (List<Integer> miniLista : lista) {
 		
-			Tuple3 <Integer, Integer, Integer> resultado = Ejercicio2Recursiva.ejercicio2Recursivo(miniLista);
+			//Tuple3 <Integer, Integer, Integer> resultado = Ejercicio2Recursiva.ejercicio2Recursivo(miniLista);
 			
 			System.out.println("Lista de entrada: " + miniLista);
-			System.out.println(resultado);
+			//System.out.println(resultado);
 			//System.out.println("Secuencia de suma mayor en intervalo: [" + resultado.v1 + "," + resultado.v2 +")");
 			//System.out.println("Subsecuencia: " + resultado.v3 + " Suma obtenida: " + resultado.v3);
 			System.out.println("\n");
