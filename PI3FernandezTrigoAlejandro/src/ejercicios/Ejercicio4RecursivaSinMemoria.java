@@ -19,7 +19,6 @@ public class Ejercicio4RecursivaSinMemoria {
 	de dos casos bases y uno recursivo que se llama a si mismo tantas veces como sea necesario
 	y devuelve el resultado en forma de Long: 
 	* Recursividad: 2 casos base y uno recursivo
-	* Complejidad: ????????????????????????
 	*/
 	public static Long ejercicio4RecursivoSinMemoria(Integer numeroA, Integer numeroB) {
 		

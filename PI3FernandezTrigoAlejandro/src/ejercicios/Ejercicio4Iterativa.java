@@ -21,9 +21,9 @@ public class Ejercicio4Iterativa {
 	
 	/*
 	Funcion que dados dos enteros a, b, calcule la siguiente sucesion numerica de forma
-	iterativa gracias a dos bucles whiles en base a los parametros de entrada y devuelve
-	el resultado como Long: 
-	* Complejidad: ????????????????????????
+	iterativa gracias a un bucle while en base a los parametros de entrada y devuelve
+	el resultado como Long usando pares (tuplas) para calcular cada termino por separado
+	en base a las condiciones del ejercicio:
 	*/
 	public static Long ejercicio4Iterativo(Integer numeroA, Integer numeroB) {
 		

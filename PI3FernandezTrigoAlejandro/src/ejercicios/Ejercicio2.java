@@ -65,15 +65,34 @@ public class Ejercicio2 {
 						
 		for (List<Integer> miniLista : lista) {
 		
-			//Tuple3 <Integer, Integer, Integer> resultado = Ejercicio2Recursiva.ejercicio2Recursivo(miniLista);
+			Tuple3 <Integer, Integer, Integer> resultado = Ejercicio2Recursiva.ejercicio2Recursivo(miniLista);
 			
 			System.out.println("Lista de entrada: " + miniLista);
-			//System.out.println(resultado);
-			//System.out.println("Secuencia de suma mayor en intervalo: [" + resultado.v1 + "," + resultado.v2 +")");
-			//System.out.println("Subsecuencia: " + resultado.v3 + " Suma obtenida: " + resultado.v3);
+			System.out.println("Secuencia de suma mayor en intervalo: [" + resultado.v1 + "," + resultado.v2 +")");
+			System.out.println("Subsecuencia: " + subsecuencia(resultado, miniLista) + " Suma obtenida: " + resultado.v3);
 			System.out.println("\n");
 			
 		}
+		
+	}
+	
+	/*
+	Funcion privada para calcular una sublista de la lista de entrada en base a los indices
+	proporcionados por la tupla de entrada en sus valores 1 y 2:
+	*/
+	private static List <Integer> subsecuencia (Tuple3 <Integer, Integer, Integer> tupla, List <Integer> lista) {
+		
+		int i = tupla.getV1();
+		int j = tupla.getV2();
+		List <Integer> resultado = new ArrayList <Integer>();
+		
+		for (lista.get(i); i < j; i++) {
+			
+			resultado.add(lista.get(i));
+			
+		}
+		
+		return resultado;
 		
 	}
 				
