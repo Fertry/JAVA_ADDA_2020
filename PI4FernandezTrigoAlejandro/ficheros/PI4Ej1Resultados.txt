@@ -1,0 +1,18 @@
+Árbol de entrada: 10(4,6)
+¿Cumple el predicado del enunciado?: true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6(1,5))
+¿Cumple el predicado del enunciado?: true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6(1,5(2,3)))
+¿Cumple el predicado del enunciado?: true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4(2,2),6(1,5(2,3)))
+¿Cumple el predicado del enunciado?: true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4(2,1),6(1,5(2,3)))
+¿Cumple el predicado del enunciado?: false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 4(2,1)
+¿Cumple el predicado del enunciado?: false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

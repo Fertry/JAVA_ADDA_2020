@@ -1,0 +1,18 @@
+Árbol de entrada: A(B,C)
+¿Existe camino desde la raiz para [A, B, C]?: false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: A(B(C,D),E)
+¿Existe camino desde la raiz para [A, B, C]?: true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: A(O,E(U,I(O,U)))
+¿Existe camino desde la raiz para [E, I, O, U]?: false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: A(O,E(U,I(O(U,A),E(I,O))))
+¿Existe camino desde la raiz para [E, I, O, U]?: false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: A(O(U,I),E(U(E,A),I(O,U)))
+¿Existe camino desde la raiz para [A, E, I, O, U]?: false
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: A(E(I,O),E(O,I(U,O(I,U))))
+¿Existe camino desde la raiz para [A, E, I, O, U]?: true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -1,0 +1,42 @@
+============================= Predicado "es-par" =============================
+
+Árbol de entrada: 3(2,5)
+¿Cumple el predicado?: [false, false]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6,_)
+¿Cumple el predicado?: [true, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6(3,5,7),8)
+¿Cumple el predicado?: [true, true, false]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6(7,5(2,3)))
+¿Cumple el predicado?: [true, true, false, false]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4(2,7),6(11,5(2,3)))
+¿Cumple el predicado?: [true, true, false, false]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4(2,3),6(4,8(2,2)),_,7)
+¿Cumple el predicado?: [true, false, false, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+============================= Predicado "es-primo" =============================
+
+Árbol de entrada: 3(2,5)
+¿Cumple el predicado?: [true, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6,_)
+¿Cumple el predicado?: [false, false]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6(3,5,7),8)
+¿Cumple el predicado?: [false, false, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4,6(7,5(2,3)))
+¿Cumple el predicado?: [false, false, true, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4(2,7),6(11,5(2,3)))
+¿Cumple el predicado?: [false, false, true, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Árbol de entrada: 10(4(2,3),6(4,8(2,2)),_,7)
+¿Cumple el predicado?: [false, false, false, true]
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

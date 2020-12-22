@@ -1,0 +1,10 @@
+3(2,5)
+10(4,6,_)
+10(4,6(3,5,7),8)
+10(4,6(7,5(2,3)))
+10(4(2,7),6(11,5(2,3)))
+10(4(2,3),6(4,8(2,2)),_,7)
+
+// Testear con 2 predicados (quite las líneas comentadas si es necesario):
+// Predicado 1: predicado sobre enteros que devuelve cierto cuando el entero es par.
+// Predicado 2: predicado sobre enteros que devuelve cierto cuando el entero es primo.
