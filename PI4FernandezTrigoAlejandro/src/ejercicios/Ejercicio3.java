@@ -42,39 +42,53 @@ public class Ejercicio3 {
 		return resultado;
 		
 	}
+	
+	/*
+	* Funcion que...
+	*/
+	public static void funcionAuxiliarEjercicio3(List <Tree<String>> lista) {
+		
+		System.out.println("############### Predicado Par ###############");
+		for (Tree<String> arbol : lista) {
+			
+			funcionAuxiliarEjercicio3Par(arbol);
+			
+		}
+		
+		System.out.println("############### Predicado Primo ##############");
+		for (Tree<String> arbol : lista) {
+			
+			funcionAuxiliarEjercicio3Primo(arbol);
+			
+		}
+		
+	}
 
 	/*
 	* Funcion que...
 	*/
-	public static void funcionAuxiliarEjercicio3Par(List <Tree<String>> lista) {
-
-		for (Tree<String> arbol : lista) {
+	private static void funcionAuxiliarEjercicio3Par(Tree<String> arbol) {
+		
+		System.out.println("Arbol de entrada: " + arbol);
+		System.out.println("¿Cumple el predicado? " + predicadoPar(arbol) + "\n");
 			
-			System.out.println("############### Predicado Par ###############");
-			System.out.println("Arbol de entrada: " + arbol);
-			System.out.println("¿Cumple el predicado? " + predicadoPar(arbol) + "\n");
-			
-		}
-
 	}
 	
-	public static void funcionAuxiliarEjercicio3Primo(List <Tree<String>> lista) {
-
-		for (Tree<String> arbol : lista) {
+	/*
+	* Funcion que...
+	*/
+	private static void funcionAuxiliarEjercicio3Primo(Tree<String> arbol) {
+		
+		System.out.println("Arbol de entrada: " + arbol);
+		System.out.println("¿Cumple el predicado? " + predicadoPrimo(arbol) + "\n");
 			
-			System.out.println("############### Predicado Primo ##############");
-			System.out.println("Arbol de entrada: " + arbol);
-			System.out.println("¿Cumple el predicado? " + predicadoPrimo(arbol) + "\n");
-			
-		}
-
 	}
 	
 	// Predicado 1: predicado sobre enteros que devuelve cierto cuando el entero es par.
 	/*
 	* Funcion que...
 	*/
-	public static List<Boolean> predicadoPar(Tree<String> arbol) {
+	private static List<Boolean> predicadoPar(Tree<String> arbol) {
 		
 		return null;
 		
@@ -84,7 +98,7 @@ public class Ejercicio3 {
 	/*
 	* Funcion que...
 	*/
-	public static List<Boolean> predicadoPrimo(Tree<String> arbol) {
+	private static List<Boolean> predicadoPrimo(Tree<String> arbol) {
 		
 		return null;
 		

@@ -25,7 +25,7 @@ public class Ejercicio2Funcional {
 		if (numero1 == 0) {
 			
 			return true;
-			 
+
 		} else {
 
 			resultado = Stream.iterate(numero1, x -> x - numero2).limit(numero1).anyMatch(x -> x == 0);

@@ -7,7 +7,10 @@
 package ejercicios;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import us.lsi.flujossecuenciales.StreamsS;
@@ -50,10 +53,21 @@ public class Ejercicio5 {
 
 		for (Tree<String> arbol : lista) {
 
-			System.out.println("Arbolito: " + arbol + "\n");
+			System.out.println("Arbol de entrada: " + arbol);
+			System.out.println("Map de salida: " + ejercicio5(arbol) + "\n");
 
 		}
 
+	}
+	
+	private static Map<Integer, Set<Tree<Integer>>> ejercicio5(Tree<String> arbol) {
+		
+		Map<Integer, Set<Tree<Integer>>> resultado = new HashMap<Integer, Set<Tree<Integer>>>();
+		
+		
+		
+		return resultado;
+		
 	}
 
 }

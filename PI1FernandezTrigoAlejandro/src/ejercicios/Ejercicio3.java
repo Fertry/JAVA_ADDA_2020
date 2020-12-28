@@ -64,7 +64,7 @@ public class Ejercicio3 {
 				valorPunto = resultado.get(lista.get(i).getCuadrante());
 
 			}
-
+			
 			Double suma = valorPunto + lista.get(i).getX();
 			resultado.put(lista.get(i).getCuadrante(), suma);
 			i++;

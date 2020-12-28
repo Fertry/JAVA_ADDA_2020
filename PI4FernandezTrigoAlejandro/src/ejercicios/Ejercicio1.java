@@ -64,12 +64,12 @@ public class Ejercicio1 {
         if (arbol.isBinary()) {
         	
             int label = arbol.getLabel();
-            int left = arbol.getLeft().getLabel();
-            int right = arbol.getRight().getLabel();
+            int izquierda = arbol.getLeft().getLabel();
+            int derecha = arbol.getRight().getLabel();
             
-            Boolean sonIguales = (left + right) == label;
+            Boolean iguales = (izquierda + derecha) == label;
             
-            return sonIguales && ejercicio1(arbol.getLeft()) && ejercicio1(arbol.getRight());
+            return iguales && ejercicio1(arbol.getLeft()) && ejercicio1(arbol.getRight());
             
         } else {
         	

@@ -45,8 +45,7 @@ public class Test {
 		
 		System.out.println("#######################################################################");
 		System.out.println("######################### TEST EJERCICIO 3 ############################");
-		Ejercicio3.funcionAuxiliarEjercicio3Par(lista3);
-		Ejercicio3.funcionAuxiliarEjercicio3Primo(lista3);
+		Ejercicio3.funcionAuxiliarEjercicio3(lista3);
 		System.out.println("#######################################################################");
 		System.out.println("#######################################################################");
 		System.out.println("\n");
