@@ -19,12 +19,15 @@ public class Ejercicio2 {
 
 	// ###################################################################################
 	// ###################################################################################
-	// ####################### EJERCICIO 2 #################
+	// ####################### 				EJERCICIO 2 				 #################
 	// ###################################################################################
 	// ###################################################################################
 
 	/*
-	* Funcion que lee...
+	Funcion que lee el fichero de entrada que, por cada linea, representa un arbol binario
+	de tipo string y, separado por un "#", una lista de caracteres. Devuelve una tupla 
+	conteniendo el BinaryTree y la lista tras parsearlos usando split para separar ambos
+	contenidos en base al regex ("#"):
 	*/
 	public static List<Tuple2<BinaryTree<String>, List<String>>> leeDatosEjercicio2(String fichero) {
 
@@ -64,22 +67,28 @@ public class Ejercicio2 {
 	}
 
 	/*
-	* Funcion que...
+	Funcion auxiliar para recorrer la lista de tuplas devuelta por la lectura y, por cada tupla, obtener sus
+	valores (arbol y lista) que se muestran por pantalla y se pasan como parametros a la funcion que resuelve
+	el ejercicio:
 	*/
 	public static void funcionAuxiliarEjercicio2(List<Tuple2<BinaryTree<String>, List<String>>> tupla) {
 
+		System.out.println("\n");
 		for (Tuple2<BinaryTree<String>, List<String>> conjunto : tupla) {
 
 			System.out.println("Arbol de entrada: " + conjunto.getV1().toString());
 			System.out.println("¿Existe camino desde la raiz para " + conjunto.getV2().toString() + "? "
-					+ ejercicio2Privado(conjunto) + "\n");
+					+ ejercicio2Privado(conjunto));
+			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		}
+		System.out.println("\n");
 
 	}
 
 	/*
-	* Funcion que...
+	Funcion que llama de forma opaca al usuario a la funcion que resuelve el ejercicio
+	pasandole a esta como parametros los valores de la tupla ya extraidos de la misma:
 	*/
 	private static Boolean ejercicio2Privado(Tuple2<BinaryTree<String>, List<String>> conjunto) {
 		
@@ -91,14 +100,18 @@ public class Ejercicio2 {
 	}
 	
 	/*
-	* Funcion que...
+	Funcion que dado el arbol de tipo string y una lista de strings, comprueba por cada rama si existe
+	un camino donde sus caracteres (los del arbol) coinciden con los de la lista dada. Usa el índice i 
+	para recorrer la lista de caracteres y se llama de forma recursiva para cada rama:
 	*/
 	private static Boolean ejercicio2(BinaryTree<String> arbol, List<String> lista, Integer i) {
 		
+		// Recursividad:
 		if (arbol.isBinary()) {
 			
-			return arbol.getLabel().equals(lista.get(i)) && (ejercicio2(arbol.getLeft(), lista, i +1) || ejercicio2(arbol.getRight(), lista, i + 1));
-			
+			return arbol.getLabel().equals(lista.get(i)) && (ejercicio2(arbol.getLeft(), lista, i + 1) || ejercicio2(arbol.getRight(), lista, i + 1));
+
+		// Caso base:
 		} else {
 			
 			if (i == lista.size() - 1) {

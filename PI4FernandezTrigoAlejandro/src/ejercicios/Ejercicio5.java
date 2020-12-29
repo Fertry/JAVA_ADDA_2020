@@ -8,6 +8,7 @@ package ejercicios;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,7 +26,8 @@ public class Ejercicio5 {
 	// ###################################################################################
 
 	/*
-	* Funcion que lee...
+	Funcion que lee el fichero de entrada que, por cada linea, un arbol n-ario 
+	de tipo generico que se parsea y añade a la lista resultante: 
 	*/
 	public static List<Tree<String>> leeDatosEjercicio5(String fichero) {
 
@@ -51,23 +53,50 @@ public class Ejercicio5 {
 	*/
 	public static void funcionAuxiliarEjercicio5(List<Tree<String>> lista) {
 
-		for (Tree<String> arbol : lista) {
-
-			System.out.println("Arbol de entrada: " + arbol);
-			System.out.println("Map de salida: " + ejercicio5(arbol) + "\n");
-
+		int i = 0;
+		while (i < lista.size()) {
+			
+			System.out.println(realizarEjercicio(lista, i));
+			i++;
+			
 		}
 
 	}
 	
-	private static Map<Integer, Set<Tree<Integer>>> ejercicio5(Tree<String> arbol) {
-		
-		Map<Integer, Set<Tree<Integer>>> resultado = new HashMap<Integer, Set<Tree<Integer>>>();
-		
-		
-		
-		return resultado;
-		
-	}
+	public static Map<Integer, Set<Tree<String>>> realizarEjercicio(List<Tree<String>> trees, Integer arbol) {
+        Map<Integer, Set<Tree<String>>> res = new HashMap<Integer, Set<Tree<String>>>();
+        return realizarEjercicio(trees, res, 0, arbol, 0, 0);
+    }
 
+    public static Map<Integer, Set<Tree<String>>> realizarEjercicio(List<Tree<String>> trees,
+            Map<Integer, Set<Tree<String>>> res, Integer c, Integer arbol, Integer i, Integer j) {
+        if (i < trees.get(arbol).getHeight() + 1) {
+            if (j < trees.get(arbol).getLevel(i).size()) {
+                Set<Tree<String>> resSet = new HashSet<Tree<String>>();
+                if (res.containsKey(trees.get(arbol).getLevel(i).get(j).getNumOfChildren())) {
+                    resSet = res.get(trees.get(arbol).getLevel(i).get(j).getNumOfChildren());
+                    if (!trees.get(arbol).getLevel(i).get(j).isEmpty()) {
+                        resSet.add(trees.get(arbol).getLevel(i).get(j));
+                    } else {
+                        resSet.add(Tree.empty());
+                    }
+                    res.put(trees.get(arbol).getLevel(i).get(j).getNumOfChildren(), resSet);
+                } else {
+                    if (!trees.get(arbol).getLevel(i).get(j).isEmpty()) {
+                        resSet.add(trees.get(arbol).getLevel(i).get(j));
+                    } else {
+                        resSet.add(Tree.empty());
+                    }
+                    res.put(trees.get(arbol).getLevel(i).get(j).getNumOfChildren(), resSet);
+                }
+                resSet = new HashSet<Tree<String>>();
+                res = realizarEjercicio(trees, res, c, arbol, i, j + 1);
+            }
+            res = realizarEjercicio(trees, res, c, arbol, i + 1, j);
+        } else {
+            return res;
+        }
+        return res;
+    }
+	
 }
