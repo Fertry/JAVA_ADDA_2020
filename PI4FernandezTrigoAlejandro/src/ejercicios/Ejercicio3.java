@@ -29,8 +29,8 @@ public class Ejercicio3 {
 	public static List <Tree<String>> leeDatosEjercicio3(String fichero) {
 		
 		int i = 0;
-		List <String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		List <Tree<String>> resultado = new ArrayList<Tree<String>>();
+		List <String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		
 		while (i < lista.size()) {
 			
@@ -68,7 +68,7 @@ public class Ejercicio3 {
 		System.out.println("\n");
 		
 		int j = 0;
-		System.out.println("============================= Predicado primo =============================");
+		System.out.println("============================ Predicado primo ============================");
 		while (j < lista.size()) {
 			
 			System.out.println("Arbol de entrada: " + lista.get(j));
@@ -92,7 +92,7 @@ public class Ejercicio3 {
 		List<Boolean> booleanos = new ArrayList<Boolean>();
 		List<Tree<String>> niveles = new ArrayList<Tree<String>>();
 		
-		return funcionAuxiliarPredicadoPar(arboles, resultado, niveles, booleanos, 0, arbol);
+		return funcionAuxiliarPredicadoPar(arboles, resultado, niveles, booleanos, arbol, 0);
 			
 	}
 	
@@ -107,7 +107,7 @@ public class Ejercicio3 {
 		List<Boolean> booleanos = new ArrayList<Boolean>();
 		List<Tree<String>> niveles = new ArrayList<Tree<String>>();
 		
-		return funcionAuxiliarPredicadoPrimo(arboles, resultado, niveles, booleanos, 0, arbol);
+		return funcionAuxiliarPredicadoPrimo(arboles, resultado, niveles, booleanos, arbol, 0);
 			
 	}
 	
@@ -123,14 +123,20 @@ public class Ejercicio3 {
 			List<Boolean> resultado, 
 			List<Tree<String>> nivel, 
 			List<Boolean> lista, 
-			Integer i, 
-			Integer arbol) {
+			Integer arbol, 
+			Integer i) {
 		
 		if (i < arboles.get(arbol).getHeight() + 1) {
 			
+			// Obtener el nivel:
 			nivel = arboles.get(arbol).getLevel(i);
-			resultado.add(predicadoPar(nivel, 0, true));
-			resultado = funcionAuxiliarPredicadoPar(arboles, resultado, nivel, lista, i + 1, arbol);
+
+			// Añadir a la lista el booleano correspondiente a la 
+			// llamada de la funcion que comprueba el predicado:
+			resultado.add(predicadoPar(nivel, true, 0));
+			
+			// Recursion: siguente nivel:
+			resultado = funcionAuxiliarPredicadoPar(arboles, resultado, nivel, lista, arbol, i + 1);
 			
 		} 
 			
@@ -150,14 +156,20 @@ public class Ejercicio3 {
 			List<Boolean> resultado, 
 			List<Tree<String>> nivel, 
 			List<Boolean> lista, 
-			Integer i, 
-			Integer arbol) {
+			Integer arbol, 
+			Integer i) {
 		
 		if (i < arboles.get(arbol).getHeight() + 1) {
 			
+			// Obtener el nivel:
 			nivel = arboles.get(arbol).getLevel(i);
-			resultado.add(predicadoPrimo(nivel, 0, true));
-			resultado = funcionAuxiliarPredicadoPrimo(arboles, resultado, nivel, lista, i + 1, arbol);
+			
+			// Añadir a la lista el booleano correspondiente a la 
+			// llamada de la funcion que comprueba el predicado:
+			resultado.add(predicadoPrimo(nivel, true, 0));
+			
+			// Recursion: siguente nivel:
+			resultado = funcionAuxiliarPredicadoPrimo(arboles, resultado, nivel, lista, arbol, i + 1);
 			
 		} 
 			
@@ -172,9 +184,9 @@ public class Ejercicio3 {
 	el resultado como booleano:
 	*/
 	private static Boolean predicadoPar(
-			List<Tree<String>> arboles, 
-			Integer i, 
-			Boolean resultado) {
+			List<Tree<String>> arboles,  
+			Boolean resultado,
+			Integer i) {
 		
 		if (i < arboles.size()) {
 			
@@ -183,9 +195,11 @@ public class Ejercicio3 {
 				resultado = resultado && Math2.esPar(Integer.parseInt(arboles.get(i).getLabel()));
 				
 			}
-				
-			resultado = predicadoPar(arboles, i + 1, resultado);
-				
+
+			// Recursion:
+			resultado = predicadoPar(arboles, resultado, i + 1);
+		
+		// Caso base:
 		} else {
 			
 			return resultado;
@@ -203,9 +217,9 @@ public class Ejercicio3 {
 	el resultado como booleano:
 	*/
 	private static Boolean predicadoPrimo(
-			List<Tree<String>> arboles, 
-			Integer i, 
-			Boolean resultado) {
+			List<Tree<String>> arboles,  
+			Boolean resultado,
+			Integer i) {
 		
 		if (i < arboles.size()) {
 
@@ -215,8 +229,10 @@ public class Ejercicio3 {
 
 			} 
 
-			resultado = predicadoPrimo(arboles, i + 1, resultado);
+			// Recursion:
+			resultado = predicadoPrimo(arboles, resultado, i + 1);
 
+		// Caso base:
 		} else {
 
 			return resultado;

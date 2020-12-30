@@ -70,8 +70,10 @@ public class Ejercicio1 {
 	*/
 	private static Boolean ejercicio1(BinaryTree<Integer> arbol) {
 		
+		// Recursion:
         if (arbol.isBinary()) {
         	
+        	// Valores de los nodos:
             int label = arbol.getLabel();
             int izquierda = arbol.getLeft().getLabel();
             int derecha = arbol.getRight().getLabel();
@@ -79,7 +81,8 @@ public class Ejercicio1 {
             Boolean iguales = (izquierda + derecha) == label;
             
             return iguales && ejercicio1(arbol.getLeft()) && ejercicio1(arbol.getRight());
-            
+         
+        // Caso base:    
         } else {
         	
             return true;

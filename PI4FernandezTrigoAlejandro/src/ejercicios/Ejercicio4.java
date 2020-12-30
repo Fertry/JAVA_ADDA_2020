@@ -31,9 +31,9 @@ public class Ejercicio4 {
 	public static List<Tree<String>> leeDatosEjercicio4(String fichero) {
 
 		int i = 0;
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		List<Tree<String>> resultado = new ArrayList<Tree<String>>();
-
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		
 		while (i < lista.size()) {
 
 			String fila = lista.get(i);
@@ -77,7 +77,7 @@ public class Ejercicio4 {
 			List<Tree<String>> arboles, 
 			Integer arbol) {
 		
-        return ejercicio4(arboles, new HashMap<Integer, List<String>>(), 0, arbol);
+        return ejercicio4(arboles, new HashMap<Integer, List<String>>(), arbol, 0);
         
     }
 
@@ -91,8 +91,8 @@ public class Ejercicio4 {
     private static Map<Integer, List<String>> ejercicio4(
     		List<Tree<String>> arboles, 
     		Map<Integer, List<String>> resultado,
-            Integer i, 
-            Integer arbol) {
+    		Integer arbol,
+    		Integer i) {
     	
     	// Recursion:
         if (i < arboles.get(arbol).getHeight() + 1) {
@@ -101,7 +101,7 @@ public class Ejercicio4 {
             List<String> lista = new ArrayList<String>();
             
             // Llamada a la funcion auxiliar predicado() con el nivel:
-            lista.addAll(predicado(arboles.get(arbol).getLevel(i), 0, new ArrayList<String>()));
+            lista.addAll(predicado(arboles.get(arbol).getLevel(i), new ArrayList<String>(), 0));
             
             // Añadir al mapa la clave con su valor:
             resultado.put(i, lista);
@@ -110,7 +110,7 @@ public class Ejercicio4 {
             lista = new ArrayList<String>();
             
             // Llamada recursiva al ejercicio incrementando el nivel:
-            resultado = ejercicio4(arboles, resultado, i + 1, arbol);
+            resultado = ejercicio4(arboles, resultado, arbol, i + 1);
 
         // Caso base:
         } else {
@@ -123,29 +123,42 @@ public class Ejercicio4 {
     }
     
 	/*
-	Funcion auxiliar que dado 
+	Funcion auxiliar que dado una lista de entrada representando a un nivel
+	del arbol, un indice y una lista vacia de resultado, devuelve la lista 
+	de salida conteniendo los elementos que verifican el predicado: comprueba
+	para los elementos del nivel; primero que no esten vacios, que su nº de
+	hijos no sea cero y que dicho nº de hijos sea un nº par. Si esto se 
+	verifica, procedemos a añadir el valor de su etiquita (label) a la lista 
+	y llamamos recursivamente a la funcion para leer el siguente elemento
+	del nivel si lo hay:
 	*/
     private static List<String> predicado(
-    		List<Tree<String>> l, 
-    		Integer i, 
-    		List<String> listaAuxiliar) {
+    		List<Tree<String>> listaEntrada,  
+    		List<String> listaSalida,
+    		Integer i) {
     	
-        if (i < l.size()) {
+        if (i < listaEntrada.size()) {
         	
-            if (!l.get(i).isEmpty() && l.get(i).getNumOfChildren() != 0 && Math2.esPar(l.get(i).getNumOfChildren())) {
+        	// Caso base:
+            if (!listaEntrada.get(i).isEmpty() &&
+            	listaEntrada.get(i).getNumOfChildren() != 0 &&
+            	Math2.esPar(listaEntrada.get(i).getNumOfChildren())) {
             	
-                listaAuxiliar.add(l.get(i).getLabel());
+            	// Añadir a la lista:
+            	listaSalida.add(listaEntrada.get(i).getLabel());
                 
             }
             
-            listaAuxiliar = predicado(l, i + 1, listaAuxiliar);
-            
+            // Recursion:
+            listaSalida = predicado(listaEntrada, listaSalida, i + 1);
+        
+        // Caso base:
         } else {
         	
-            return listaAuxiliar;
+            return listaSalida;
         }
         
-        return listaAuxiliar;
+        return listaSalida;
         
     }
 

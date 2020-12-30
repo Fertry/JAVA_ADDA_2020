@@ -38,11 +38,16 @@ public class Ejercicio2 {
 
 		while (i < lista.size()) {
 
+			// Hacer split el base al "#": 
 			String fila = lista.get(i);
 			String[] contenido = fila.split("#");
+			
+			// Parsear el contenido a la izquierda del split, 
+			// correspondiente al arbol binario:
 			List<String> letras = new ArrayList<String>();
 			BinaryTree<String> arbol = BinaryTree.parse(contenido[0]);
 
+			// Eliminar caracteres "[, ]" y hacer split en base a la coma:
 			contenido[1] = contenido[1].replace("[", "");
 			contenido[1] = contenido[1].replace("]", "");
 			contenido[1] = contenido[1].replace("", "");
@@ -77,8 +82,7 @@ public class Ejercicio2 {
 		for (Tuple2<BinaryTree<String>, List<String>> conjunto : tupla) {
 
 			System.out.println("Arbol de entrada: " + conjunto.getV1().toString());
-			System.out.println("¿Existe camino desde la raiz para " + conjunto.getV2().toString() + "? "
-					+ ejercicio2Privado(conjunto));
+			System.out.println("¿Existe camino desde la raiz para " + conjunto.getV2().toString() + "? " + ejercicio2Privado(conjunto));
 			System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 		}
@@ -104,7 +108,10 @@ public class Ejercicio2 {
 	un camino donde sus caracteres (los del arbol) coinciden con los de la lista dada. Usa el índice i 
 	para recorrer la lista de caracteres y se llama de forma recursiva para cada rama:
 	*/
-	private static Boolean ejercicio2(BinaryTree<String> arbol, List<String> lista, Integer i) {
+	private static Boolean ejercicio2(
+			BinaryTree<String> arbol, 
+			List<String> lista, 
+			Integer i) {
 		
 		// Recursividad:
 		if (arbol.isBinary()) {
