@@ -110,7 +110,8 @@ public class Ejercicio4 {
             lista = new ArrayList<String>();
             
             // Llamada recursiva al ejercicio incrementando el nivel:
-            resultado = ejercicio4(arboles, resultado, arbol, i + 1);
+            int indice = i + 1;
+            resultado = ejercicio4(arboles, resultado, arbol, indice);
 
         // Caso base:
         } else {
@@ -150,7 +151,8 @@ public class Ejercicio4 {
             }
             
             // Recursion:
-            listaSalida = predicado(listaEntrada, listaSalida, i + 1);
+            int indice = i + 1;
+            listaSalida = predicado(listaEntrada, listaSalida, indice);
         
         // Caso base:
         } else {

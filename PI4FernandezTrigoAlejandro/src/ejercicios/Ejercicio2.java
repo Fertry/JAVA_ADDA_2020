@@ -116,7 +116,8 @@ public class Ejercicio2 {
 		// Recursividad:
 		if (arbol.isBinary()) {
 			
-			return arbol.getLabel().equals(lista.get(i)) && (ejercicio2(arbol.getLeft(), lista, i + 1) || ejercicio2(arbol.getRight(), lista, i + 1));
+			int indice = i + 1;
+			return arbol.getLabel().equals(lista.get(i)) && (ejercicio2(arbol.getLeft(), lista, indice) || ejercicio2(arbol.getRight(), lista, indice));
 
 		// Caso base:
 		} else {

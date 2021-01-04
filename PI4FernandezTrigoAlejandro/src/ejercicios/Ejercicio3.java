@@ -136,7 +136,8 @@ public class Ejercicio3 {
 			resultado.add(predicadoPar(nivel, true, 0));
 			
 			// Recursion: siguente nivel:
-			resultado = funcionAuxiliarPredicadoPar(arboles, resultado, nivel, lista, arbol, i + 1);
+			int indice = i + 1;
+			resultado = funcionAuxiliarPredicadoPar(arboles, resultado, nivel, lista, arbol, indice);
 			
 		} 
 			
@@ -169,7 +170,8 @@ public class Ejercicio3 {
 			resultado.add(predicadoPrimo(nivel, true, 0));
 			
 			// Recursion: siguente nivel:
-			resultado = funcionAuxiliarPredicadoPrimo(arboles, resultado, nivel, lista, arbol, i + 1);
+			int indice = i + 1;
+			resultado = funcionAuxiliarPredicadoPrimo(arboles, resultado, nivel, lista, arbol, indice);
 			
 		} 
 			
@@ -197,7 +199,8 @@ public class Ejercicio3 {
 			}
 
 			// Recursion:
-			resultado = predicadoPar(arboles, resultado, i + 1);
+			int indice = i + 1;
+			resultado = predicadoPar(arboles, resultado, indice);
 		
 		// Caso base:
 		} else {
@@ -230,7 +233,8 @@ public class Ejercicio3 {
 			} 
 
 			// Recursion:
-			resultado = predicadoPrimo(arboles, resultado, i + 1);
+			int indice = i + 1;
+			resultado = predicadoPrimo(arboles, resultado, indice);
 
 		// Caso base:
 		} else {

@@ -81,7 +81,7 @@ public class Ejercicio5 {
 		
         Map<Integer, Set<Tree<String>>> resultado = new HashMap<Integer, Set<Tree<String>>>();
         
-        return ejercicio5(arboles, arbol, 0, 0, 0, resultado);
+        return ejercicio5(arboles, arbol, 0, 0, resultado);
         
     }
 	
@@ -95,30 +95,29 @@ public class Ejercicio5 {
 	*/
     private static Map<Integer, Set<Tree<String>>> ejercicio5(
     		List<Tree<String>> arboles,
-            Integer arbol,
+            Integer arbol, 
             Integer i, 
-            Integer j, 
-            Integer k,
+            Integer j,
             Map<Integer, Set<Tree<String>>> resultado) {
     	
     	// Altura del arbol:
-        if (j < arboles.get(arbol).getHeight() + 1) {
+        if (i < arboles.get(arbol).getHeight() + 1) {
         	
         	// Anchura del arbol (nivel):
-            if (k < arboles.get(arbol).getLevel(j).size()) {
+            if (j < arboles.get(arbol).getLevel(i).size()) {
             	
             	// Conjunto vacio de tipo Tree:
                 Set<Tree<String>> conjunto = new HashSet<Tree<String>>();
                 
-                // Si el conjunto ya contiene la clave
-                if (resultado.containsKey(arboles.get(arbol).getLevel(j).get(k).getNumOfChildren())) {
+                // Si el conjunto ya contiene la clave:
+                if (resultado.containsKey(arboles.get(arbol).getLevel(i).get(j).getNumOfChildren())) {
                 	
-                	conjunto = resultado.get(arboles.get(arbol).getLevel(j).get(k).getNumOfChildren());
+                	conjunto = resultado.get(arboles.get(arbol).getLevel(i).get(j).getNumOfChildren());
                     
                 	// Si el arbol NO es vacio:
-                    if (!arboles.get(arbol).getLevel(j).get(k).isEmpty()) {
+                    if (!arboles.get(arbol).getLevel(i).get(j).isEmpty()) {
                     	
-                    	conjunto.add(arboles.get(arbol).getLevel(j).get(k));
+                    	conjunto.add(arboles.get(arbol).getLevel(i).get(j));
                     
                     // Si el arbol SI es vacio:
                     } else {
@@ -128,15 +127,15 @@ public class Ejercicio5 {
                     }
                     
                     // Añadir al mapa resultado la clave (nº hijos) + el set de arboles:
-                    resultado.put(arboles.get(arbol).getLevel(j).get(k).getNumOfChildren(), conjunto);
+                    resultado.put(arboles.get(arbol).getLevel(i).get(j).getNumOfChildren(), conjunto);
                 
                 // Si el conjunto no contiene la clave:
                 } else {
                 	
                 	// Si el arbol NO es vacio:
-                    if (!arboles.get(arbol).getLevel(j).get(k).isEmpty()) {
+                    if (!arboles.get(arbol).getLevel(i).get(j).isEmpty()) {
                     	
-                    	conjunto.add(arboles.get(arbol).getLevel(j).get(k));
+                    	conjunto.add(arboles.get(arbol).getLevel(i).get(j));
                       
                     // Si el arbol SI es vacio:	
                     } else {
@@ -146,7 +145,7 @@ public class Ejercicio5 {
                     }
                     
                     // Añadir al mapa resultado la clave (nº hijos) + el set de arboles:
-                    resultado.put(arboles.get(arbol).getLevel(j).get(k).getNumOfChildren(), conjunto);
+                    resultado.put(arboles.get(arbol).getLevel(i).get(j).getNumOfChildren(), conjunto);
                     
                 }
                 
@@ -154,12 +153,14 @@ public class Ejercicio5 {
                 conjunto = new HashSet<Tree<String>>();
                 
                 // Recursion:
-                resultado = ejercicio5(arboles, arbol, i, j, k + 1, resultado);
+                int indice = j + 1;
+                resultado = ejercicio5(arboles, arbol, i, indice, resultado);
                 
             }
 
             // Recursion:
-            resultado = ejercicio5(arboles, arbol, i, j + 1, k, resultado);
+            int indice = i + 1;
+            resultado = ejercicio5(arboles, arbol, indice, j, resultado);
 
         // Caso base: si no entramos en el if, se devuelve el set vacio:
         } else {
