@@ -152,13 +152,13 @@ public class Ejercicio5 {
                 // Vaciar el set:
                 conjunto = new HashSet<Tree<String>>();
                 
-                // Recursion:
+                // Recursion: siguiente nivel:
                 int indice = j + 1;
                 resultado = ejercicio5(arboles, arbol, i, indice, resultado);
                 
             }
 
-            // Recursion:
+            // Recursion: siguiente arbol:
             int indice = i + 1;
             resultado = ejercicio5(arboles, arbol, indice, j, resultado);
 
