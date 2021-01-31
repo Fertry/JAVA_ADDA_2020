@@ -8,10 +8,12 @@ package ejercicios;
 
 public class DivideYVenceras {
 	
-	// Divide y vencerás o búsqueda binaria sobre arrays: 
+	// Divide y vencerás o búsqueda binaria sobre arrays.
 
 	/*
-	 * 
+	 * Función de busqueda binaria sobre un conjunto. En este caso, dos
+	 * arrays que se recorren a la par reduciendo el area de busqueda a la mitad 
+	 * mediante el indice k. 
 	 */
 	public static Integer ejercicio1(String frase1, String frase2) {
 
@@ -47,7 +49,7 @@ public class DivideYVenceras {
 	// #######################################################################################
 
 	/*
-	 * 
+	 * Ejemplo de llamada opaca a una función de busqueda binaria recursiva más abajo:
 	 */
 	public static Integer ejercicio2(String frase1, String frase2) {
 
@@ -62,7 +64,10 @@ public class DivideYVenceras {
 	// #######################################################################################
 
 	/*
-	 * 
+	 * Ejempl de busqueda binaria recursiva. Similar al algoritmo de arriba en forma recursiva
+	 * donde el indice k se pasa como parámetro a la llamada de la función representando el índice
+	 * i en el caso de ir hacia la derecha o j en el caso de la izquierda para buscar un elemento
+	 * sobre dos arrays (strings) que representan frases:
 	 */
 	private static Integer ejercicio2Privado(int i, int j, String frase1, String frase2) {
 

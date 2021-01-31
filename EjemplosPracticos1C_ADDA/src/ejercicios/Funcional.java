@@ -99,7 +99,9 @@ public class Funcional {
 	// #######################################################################################
 	
 	/*
-	 * ..............
+	 * Función de tipo funcional para trabajar con Maps. Crear tuplas de los valores de entrada
+	 * para los cuales define un ciclo iterador, un filtro y una operación (reduce) antes de 
+	 * añadirlos al mapa en base a la clave (v2). 
 	 */
 	public static Long ejercicio3(Integer exponente, Integer n) {
 		
