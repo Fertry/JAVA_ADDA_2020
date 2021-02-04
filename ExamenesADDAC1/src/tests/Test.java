@@ -15,7 +15,7 @@ public class Test {
 		System.out.println("Exámenes de ADDA del primer cuatrimestre.\n");
 		
 		// Algunos tests:
-		List<Integer> listaEnteros = List.of(1, 2, 3, 4, 5, 6, 7, 8);
+		List<Integer> listaEnteros = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		Integer[] v = { 1, 2, 3, 4, 5, 6, 3, 2, 1, 5, 3, 12 };
 		
 		System.out.println("Ejercicio 1 Recursivo No Final 17/18: \n" + examenes17_18.Ejercicio1Recursividad.esProgGeom(listaEnteros));
@@ -34,6 +34,10 @@ public class Test {
 	    System.out.println("Sming recursivo final: \n" + examenes15_16.Ejercicio1Recursividad.smingFinal(0, v.length, v));
 	    System.out.println("Sming recursivo no final: \n" + examenes15_16.Ejercicio1Recursividad.smingNoFinal(0, v.length, v));
 	    System.out.println("Sming iterativo: \n" + examenes15_16.Ejercicio1Recursividad.smingFinal(0, v.length, v));
+		
+		//System.out.println("Elimina par DyD: \n" + examenes18_19.Ejercicio3DivideYVenceras.eliminaPar(listaEnteros, 3, 4));
+		//System.out.println("Elimina par DyD: \n" + examenes18_19.Ejercicio3DivideYVenceras.eliminaPar(listaEnteros, 5, 6));
+		//System.out.println("Elimina par DyD: \n" + examenes18_19.Ejercicio3DivideYVenceras.eliminaPar(listaEnteros, 9, 10));
 		
 	}
 
