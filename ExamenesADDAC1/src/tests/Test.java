@@ -15,6 +15,10 @@ public class Test {
 		// Algunos tests:
 		//List<Integer> listaEnteros = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 		//Integer[] v = { 1, 2, 3, 4, 5, 6, 3, 2, 1, 5, 3, 12 };
+		Integer[][] matrix1 = {{2, 3, 5, 6}, {2, 6, 7, 8}, {2, 6, 7, 8}, {2, 3, 5, 6}};
+		Integer[][] matrix2 = {{17, 23, 12, 30}, {37, 43, 4, 22}, {20, 63, 5, 10}, {8, 51, 16, 21}};
+		Integer[][] matrix3 = {{1, 1}, {2, 2}};
+		
 		String letras = "aabbccddeeffgghhii";
 		
 		//System.out.println("Ejercicio 1 Recursivo No Final 17/18: \n" + examenes17_18.Ejercicio1Recursividad.esProgGeom(listaEnteros));
@@ -40,7 +44,11 @@ public class Test {
 	    System.out.println("Test: \n" + examenes18_19.Ejercicio3Matrices.secuencia(letras));
 	    System.out.println("Test recursivo: \n" + examenes18_19.Ejercicio3Matrices.secuenciaRecursivaPublica(letras));
 	    System.out.println("Test recursivo no final: \n" + examenes18_19.Ejercicio3Matrices.secuenciaRecursivaPublicaNoFinal(letras));
-	    System.out.println("Test recursivo no final: \n" + examenes18_19.Ejercicio3Matrices.secuenciaFuncional(letras));
+	    System.out.println("Test funcional que funciona: \n" + examenes18_19.Ejercicio3Matrices.secuenciaFuncional(letras));
+	    
+	    System.out.println("Test de matrices: \n" + examenes18_19.Ejercicio3Matrices.coincidenSumasMatriz(matrix1));
+	    System.out.println("Test de matrices: \n" + examenes18_19.Ejercicio3Matrices.coincidenSumasMatriz(matrix2));
+	    System.out.println("Test de matrices: \n" + examenes18_19.Ejercicio3Matrices.coincidenSumasMatriz(matrix3));
 	   
 	}
 
