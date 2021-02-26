@@ -35,7 +35,6 @@ public class Ejercicio3RecursivaConMemoria {
 	veces como sea necesario haciendo uso de memoria con un Map para evitar
 	repetir operaciones y devuelve el resultado como Long:
 	* Recursividad: 3 casos base y uno recursivo
-	* Complejidad: ????????????????????????
 	*/
 	private static Long ejercicio3RecursivoConMemoriaPrivado(Integer numero, Map<Integer, Long> memoria) {
 		

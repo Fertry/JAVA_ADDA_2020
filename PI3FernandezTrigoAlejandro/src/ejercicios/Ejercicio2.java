@@ -24,7 +24,7 @@ public class Ejercicio2 {
 	/*
 	Funcion que lee un fichero de entrada; dado un fichero con multiples lineas
 	y en cada linea nºs separados por comas, devuelve una lista de listas donde 
-	cada lista interna representa un conjunto de números que se pasan al ejercicio: 
+	cada lista interna representa un conjunto de numeros que se pasan al ejercicio: 
 	*/
 	public static List<List<Integer>> leeDatosEjercicio2(String fichero) {
 		

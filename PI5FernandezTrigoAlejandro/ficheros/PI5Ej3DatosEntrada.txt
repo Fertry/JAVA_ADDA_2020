@@ -1,0 +1,15 @@
+Asignatura_01: {}
+Asignatura_02: {}
+Asignatura_03: {}
+Asignatura_04: {}
+Asignatura_05: {}
+Asignatura_06: {Asignatura_01}
+Asignatura_07: {Asignatura_01}
+Asignatura_08: {Asignatura_05}
+Asignatura_09: {Asignatura_06}
+Asignatura_10: {Asignatura_08,Asignatura_09}
+Asignatura_11: {Asignatura_02,Asignatura_03,Asignatura_04}
+Asignatura_12: {Asignatura_05,Asignatura_07}
+Asignatura_13: {Asignatura_08,Asignatura_09}
+Asignatura_14: {Asignatura_10}
+Asignatura_15: {Asignatura_10}

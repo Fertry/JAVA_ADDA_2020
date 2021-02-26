@@ -1,0 +1,7 @@
+Profe1: Grupo1, Grupo2, Grupo3
+Profe2: Grupo1, Grupo3, Grupo5
+Profe3: Grupo2, Grupo4, Grupo6
+Profe4: Grupo4, Grupo5, Grupo6
+Profe5: Grupo7, Grupo9
+Profe6: Grupo8, Grupo9
+Profe7: Grupo7, Grupo8

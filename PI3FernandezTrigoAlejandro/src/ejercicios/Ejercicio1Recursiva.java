@@ -40,7 +40,6 @@ public class Ejercicio1Recursiva {
 	necesario hasta que la matriz sea 2x2 o no se cumpla el requerimiento de que 
 	sus cuatro esquinas difieran:
 	* Recursividad: 2 casos base + 1 caso recursivo multiple
-	* Complejidad: ????????????????????????
 	*/
 	private static Boolean ejercicio1RecursivoPrivada(Integer [][] matriz, Integer fila, Integer columna, Integer dimension) {
 		
@@ -94,5 +93,7 @@ public class Ejercicio1Recursiva {
 		return resultado;
 		
 	}
+	
+	
 	
 }
