@@ -42,10 +42,10 @@ public class Relacion {
 	}
 	
 	// ATRIBUTOS DE LA CLASE
-	private int id;
+	private double id;
 	private Persona origen;
 	private Persona destino;
-	private static int numero = 0;
+	private static double numero = 0.0;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Relacion(Persona p1, Persona p2) {
@@ -106,32 +106,48 @@ public class Relacion {
 		return destino;
 		
 	}
+	
+	public double getId() {
+		
+		return this.id;
+		
+	}
 
 	// HASHCODE, EQUALS, TOSTRING DE LA CLASE
 	@Override
 	public int hashCode() {
-		
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + id;
+		result = prime * result + ((destino == null) ? 0 : destino.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(id);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((origen == null) ? 0 : origen.hashCode());
 		return result;
-		
 	}
 
 	@Override
 	public boolean equals(Object obj) {
-		
 		if (this == obj)
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Relacion))
+		if (getClass() != obj.getClass())
 			return false;
 		Relacion other = (Relacion) obj;
-		if (id != other.id)
+		if (destino == null) {
+			if (other.destino != null)
+				return false;
+		} else if (!destino.equals(other.destino))
+			return false;
+		if (Double.doubleToLongBits(id) != Double.doubleToLongBits(other.id))
+			return false;
+		if (origen == null) {
+			if (other.origen != null)
+				return false;
+		} else if (!origen.equals(other.origen))
 			return false;
 		return true;
-		
 	}
 	
 	@Override
@@ -140,5 +156,5 @@ public class Relacion {
 		return "("+getOrigen()+","+getDestino()+")";
 		
 	}
-	
+
 }

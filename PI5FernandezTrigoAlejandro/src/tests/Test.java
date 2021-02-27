@@ -57,7 +57,17 @@ public class Test {
 		Graph<Persona,Relacion> redSocial = GraphsReader.newGraph("ficheros/PI5Ej1DatosEntrada.txt",
 				Persona::ofFormat,
 				Relacion::ofFormat,
-                Graphs2::simpleGraph);
+                Graphs2::simpleWeightedGraph,
+                Relacion::getId);
+		
+		/*
+		 * Cambiando en la clase el atributo id por entero y eliminando el getter de Id, se escribe como:
+		 * 
+		 * Graph<Persona,Relacion> redSocial = GraphsReader.newGraph("ficheros/PI5Ej1DatosEntrada.txt",
+		 * Persona::ofFormat,
+		 * Relacion::ofFormat,
+         * Graphs2::simpleGraph);
+		*/
 		
 		System.out.println(redSocial);
 		Graphs2.toDot(redSocial, "salida/redSocial.gv");
