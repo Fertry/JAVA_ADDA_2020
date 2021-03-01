@@ -8,6 +8,17 @@ package ejercicio2;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import org.jgrapht.Graph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+
+import ejercicio1.Persona;
+import ejercicio1.Relacion;
+import us.lsi.flujossecuenciales.StreamsS;
+import us.lsi.graphs.Graphs2;
+import us.lsi.graphs.GraphsReader;
 
 /*
 En una academia se imparten una serie de grupos por parte de un conjunto de
@@ -30,13 +41,48 @@ public class Ejercicio2 {
 	/*
 	 * Lectura de datos; devuelve una lista de listas de....
 	 */
-	public static List<String> lecturaDatosEjercicio2(String fichero) {
+	public static List<List<String>> lecturaDatosEjercicio2(String fichero) {
 
-		List<String> resultado = new ArrayList<String>();
+		int i = 0;
+		int j = 0;
+		List<List<String>> resultado = new ArrayList<List<String>>();
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		
+		while (i < lista.size()) {
+			
+			String fila = lista.get(i);
+			// Hay que reemplazar los ":"
+			String contenido = fila.replace(":", ",");
+			// Una vez reemplazado, hacer split en base a la coma
+			String[] texto = contenido.split(",");
+			
+			// Creamos una lista auxiliar que representa cada fila
+			List<String> miniFila = new ArrayList<String>();
+			while (j < texto.length) {
+				
+				miniFila.add(texto[j]);
+				j++;
+				
+			}
+			
+			// Añadimos cada fila a la lista resultante
+			resultado.add(miniFila);
+			j = 0;
+			i++;
+			
+		}
 
 		return resultado;
 
 	}
+	
+	public Graph<String, DefaultEdge> grafo = new SimpleGraph(DefaultEdge.class);
+	
+	grafo.addVertex("");
+
+	grafo.addEdge("Sevilla", "Cadiz");
+	//Graph<Profesor, Grupo> grupos = GraphsReader.newGraph???????
+
 	
 	/*
 	 * Apartado A): Devuelve una lista....

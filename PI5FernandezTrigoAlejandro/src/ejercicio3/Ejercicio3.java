@@ -8,6 +8,9 @@ package ejercicio3;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import us.lsi.flujossecuenciales.StreamsS;
 
 /*
 Un plan de estudios está estructurado para que los alumnos no puedan matricularse
@@ -34,9 +37,38 @@ public class Ejercicio3 {
 	/*
 	 * Lectura de datos; devuelve una lista de listas de.....
 	 */
-	public static List<String> lecturaDatosEjercicio3(String fichero) {
+	public static List<List<String>> lecturaDatosEjercicio3(String fichero) {
 
-		List<String> resultado = new ArrayList<String>();
+		int i = 0;
+		int j = 0;
+		List<List<String>> resultado = new ArrayList<List<String>>();
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		
+		while (i < lista.size()) {
+			
+			String fila = lista.get(i);
+			// Hay que reemplazar los ":" y los "{ }"
+			String contenido = fila.replace("{", "");
+			contenido = fila.replace("}", "");
+			contenido = fila.replace(":", ",");
+			// Una vez reemplazado, hacer split en base a la coma
+			String[] texto = contenido.split(",");
+			
+			// Creamos una lista auxiliar que representa cada fila
+			List<String> miniFila = new ArrayList<String>();
+			while (j < texto.length) {
+				
+				miniFila.add(texto[j]);
+				j++;
+				
+			}
+			
+			// Añadimos cada fila a la lista resultante
+			resultado.add(miniFila);
+			j = 0;
+			i++;
+			
+		}
 
 		return resultado;
 

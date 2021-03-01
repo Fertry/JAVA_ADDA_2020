@@ -4,83 +4,92 @@
  *      Practica Individual 5
  */
 
-package ejercicio1;
+package ejercicio2;
 
-// Clase relación que representa una arista entre dos nodos (Personas), a modo 
-// de relación de amistad entre dos usuarios. 
-public class Relacion {
+//Clase grupo que representan aristas que unen profesores (vértices)
+public class Grupo {
 
 	// MÉTODOS DE LA CLASE
-	public static Relacion of() {
-		
-		return new Relacion();
-		
+	public static Grupo of() {
+
+		return new Grupo();
+
 	}
 
-	public static Relacion ofVertex(Persona p1, Persona p2) {
-		
-		return new Relacion(p1, p2);
-		
+	public static Grupo ofVertex(Profesor p1, Profesor p2, String nombre) {
+
+		return new Grupo(p1, p2, nombre);
+
 	}
 	
-	public static Relacion ofFormat(Persona p1, Persona p2, String[] formato) {
+	public static Grupo ofFormat(Profesor p1, Profesor p2, String[] formato) {
 		
-		return new Relacion(p1, p2, formato);
+		return new Grupo(p1, p2, formato);
 		
 	}
 
 	// ATRIBUTOS DE LA CLASE
 	private double id;
-	private Persona p1;
-	private Persona p2;
+	private Profesor p1;
+	private Profesor p2;
+	private String nombre;
 	private static double numero = 0.0;
 
 	// CONSTRUCTORES DE LA CLASE
-	private Relacion(Persona p1, Persona p2) {
-		
+	private Grupo(Profesor p1, Profesor p2, String nombre) {
+
 		super();
 		this.p1 = p1;
 		this.p2 = p2;
+		this.nombre = nombre;
+		this.id = numero;
+		numero++;
+
+	}
+	
+	private Grupo() {
+		
+		this.p1 = null;
+		this.p2 = null;
+		this.nombre = null;
 		this.id = numero;
 		numero++;
 		
 	}
 	
-	private Relacion() {
-		
-		this.p1 = null;
-		this.p2 = null;
-		this.id = numero;
-		numero++;
-		
-	} 
-	
-	private Relacion(Persona p1, Persona p2, String[] formato) {
+	private Grupo(Profesor p1, Profesor p2, String[] formato) {
 		
 		super();
 		this.p1 = p1;
 		this.p2 = p2;
+		this.nombre = formato[0];
 		this.id = numero;
 		numero++;
 		
 	}
 
 	// SETTERS/GETTTERS DE LA CLASE
-	public Persona getOrigen(){
-		
+	public Profesor getOrigen() {
+
 		return p1;
-		
+
 	}
-	
-	public Persona getDestino(){
-		
+
+	public Profesor getDestino() {
+
 		return p2;
-		
+
+	}
+
+	public double getId() {
+
+		return this.id;
+
 	}
 	
-	public double getId() {
+	public String getNombre() {
 		
-		return this.id;
+		return this.nombre;
 		
 	}
 
@@ -92,8 +101,7 @@ public class Relacion {
 		long temp;
 		temp = Double.doubleToLongBits(id);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + ((p1 == null) ? 0 : p1.hashCode());
-		result = prime * result + ((p2 == null) ? 0 : p2.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
 
@@ -105,18 +113,13 @@ public class Relacion {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Relacion other = (Relacion) obj;
+		Grupo other = (Grupo) obj;
 		if (Double.doubleToLongBits(id) != Double.doubleToLongBits(other.id))
 			return false;
-		if (p1 == null) {
-			if (other.p1 != null)
+		if (nombre == null) {
+			if (other.nombre != null)
 				return false;
-		} else if (!p1.equals(other.p1))
-			return false;
-		if (p2 == null) {
-			if (other.p2 != null)
-				return false;
-		} else if (!p2.equals(other.p2))
+		} else if (!nombre.equals(other.nombre))
 			return false;
 		return true;
 	}
@@ -124,7 +127,7 @@ public class Relacion {
 	@Override
 	public String toString() {
 		
-		return "("+getOrigen()+","+getDestino()+")";
+		return this.nombre;
 		
 	}
 
