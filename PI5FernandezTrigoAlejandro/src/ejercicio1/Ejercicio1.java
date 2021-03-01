@@ -6,6 +6,13 @@
 
 package ejercicio1;
 
+import java.util.Set;
+
+import org.jgrapht.Graph;
+
+import us.lsi.graphs.Graphs2;
+import us.lsi.graphs.GraphsReader;
+
 /*
 Una red social imaginaria y pequeña, se representa con un grafo en el que los vértices
 modelan a los miembros de la red y las aristas (sin etiqueta ni peso) modelan la
@@ -40,7 +47,109 @@ seleccionados.
 */
 
 public class Ejercicio1 {
-	
-	
-	
+
+	/*
+	 * Lectura de datos; devuelve un grafo de tipo <Persona, Relacion> siendo estos
+	 * clases definidas para nodos/vértices (usuarios) y aristas (conexiones).
+	 */
+	public static Graph<Persona, Relacion> lecturaDatosEjercicio1(String fichero) {
+
+		Graph<Persona, Relacion> redSocial = GraphsReader.newGraph(fichero, Persona::ofFormat, Relacion::ofFormat,
+				Graphs2::simpleWeightedGraph, Relacion::getId);
+
+		return redSocial;
+
+	}
+
+	/*
+	 * Cambiando en la clase el atributo id por entero y eliminando el getter de Id,
+	 * se escribe como: Graph<Persona,Relacion> redSocial = GraphsReader.newGraph(
+	 * fichero, Persona::ofFormat, Relacion::ofFormat, Graphs2::simpleGraph);
+	 */
+
+	/*
+	 * Apartado A.1): Devuelve un conjunto con los nodos/vértices que NO tienen
+	 * ninguna conexión con otro (esto es, no tienen amigos).
+	 */
+	private static Set<Graph<Persona, Relacion>> conjuntoSinAmigos(Graph<Persona, Relacion> grafo) {
+
+		Set<Graph<Persona, Relacion>> resultado = null;
+
+		return resultado;
+
+	}
+
+	/*
+	 * Apartado A.2): Devuelve un conjunto con los nodos/vértices que SI tienen
+	 * alguna conexión con otro (esto es, tienen algún amigo).
+	 */
+	private static Set<Graph<Persona, Relacion>> conjuntoConAmigos(Graph<Persona, Relacion> grafo) {
+
+		Set<Graph<Persona, Relacion>> resultado = null;
+
+		return resultado;
+
+	}
+
+	/*
+	 * Apartado A.3): Muestra el grafo generado en los apartados A.1 y A.2 coloreado
+	 * de forma distinta.
+	 */
+	public static void ejercicio1A(Graph<Persona, Relacion> grafo) {
+
+		Set<Graph<Persona, Relacion>> sinAmigos = conjuntoSinAmigos(grafo);
+		Set<Graph<Persona, Relacion>> conAmigos = conjuntoConAmigos(grafo);
+
+	}
+
+	/*
+	 * Apartado B.1): Devuelve una lista con el camino mas corto que existe desde un
+	 * miembro (Persona) a otro.
+	 */
+	private static void caminoMasCorto(Graph<Persona, Relacion> grafo) {
+
+	}
+
+	/*
+	 * Apartado B.2): Muestra el grafo coloreando la lista mas corta devuelta por el
+	 * método anterior que calcula el camino más corto entre miembros.
+	 */
+	public static void ejercicio1B(Graph<Persona, Relacion> grafo) {
+
+	}
+
+	/*
+	 * Apartado C.1): Devuelve los grupos existentes entre nodos/vértices del grafo
+	 * (siendo estos aquellos miembros (Personas) que están unidos directamente por
+	 * una arista o conectados mediante vértices intermedios).
+	 */
+	private static void calculaMiembros(Graph<Persona, Relacion> grafo) {
+
+	}
+
+	/*
+	 * Apartado C.2): Muestra el grafo coloreando cada grupo de miembros resultante
+	 * de la función calculaMiembros() de un color distinto.
+	 */
+	public static void ejercicio1C(Graph<Persona, Relacion> grafo) {
+
+	}
+
+	/*
+	 * Apartado D.1): Devuelve los nodos/vértices seleccionados de forma que todas
+	 * las relaciones de amistad (Relacion) esten cubiertas. Esto es, se seleccione
+	 * al menos un nodo/vértice (Persona) de cada par de amigos.
+	 */
+	private static void seleccionaNodos(Graph<Persona, Relacion> grafo) {
+
+	}
+
+	/*
+	 * Apartado D.2): Muestra el grafo coloreando cada miembro (Persona)
+	 * seleccionado por el método seleccionaNodos().
+	 */
+	public static void ejercicio1D(Graph<Persona, Relacion> grafo) {
+
+	}
+
 }
