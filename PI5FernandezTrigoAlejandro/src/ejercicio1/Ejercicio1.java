@@ -9,7 +9,6 @@ package ejercicio1;
 import java.util.Set;
 
 import org.jgrapht.Graph;
-
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.GraphsReader;
 
@@ -52,10 +51,14 @@ public class Ejercicio1 {
 	 * Lectura de datos; devuelve un grafo de tipo <Persona, Relacion> siendo estos
 	 * clases definidas para nodos/vértices (usuarios) y aristas (conexiones).
 	 */
-	public static Graph<Persona, Relacion> lecturaDatosEjercicio1(String fichero) {
+	private static Graph<Persona, Relacion> lecturaDatosEjercicio1(String fichero) {
 
-		Graph<Persona, Relacion> redSocial = GraphsReader.newGraph(fichero, Persona::ofFormat, Relacion::ofFormat,
-				Graphs2::simpleWeightedGraph, Relacion::getId);
+		Graph<Persona, Relacion> redSocial = GraphsReader.newGraph(
+				fichero,
+				Persona::ofFormat,
+				Relacion::ofFormat,
+				Graphs2::simpleWeightedGraph,
+				Relacion::getId);
 
 		return redSocial;
 
@@ -71,7 +74,7 @@ public class Ejercicio1 {
 	 * Apartado A.1): Devuelve un conjunto con los nodos/vértices que NO tienen
 	 * ninguna conexión con otro (esto es, no tienen amigos).
 	 */
-	private static Set<Graph<Persona, Relacion>> conjuntoSinAmigos(Graph<Persona, Relacion> grafo) {
+	private static Set<Graph<Persona, Relacion>> ejercicio1A1(Graph<Persona, Relacion> grafo) {
 
 		Set<Graph<Persona, Relacion>> resultado = null;
 
@@ -83,7 +86,7 @@ public class Ejercicio1 {
 	 * Apartado A.2): Devuelve un conjunto con los nodos/vértices que SI tienen
 	 * alguna conexión con otro (esto es, tienen algún amigo).
 	 */
-	private static Set<Graph<Persona, Relacion>> conjuntoConAmigos(Graph<Persona, Relacion> grafo) {
+	private static Set<Graph<Persona, Relacion>> ejercicio1A2(Graph<Persona, Relacion> grafo) {
 
 		Set<Graph<Persona, Relacion>> resultado = null;
 
@@ -95,10 +98,10 @@ public class Ejercicio1 {
 	 * Apartado A.3): Muestra el grafo generado en los apartados A.1 y A.2 coloreado
 	 * de forma distinta.
 	 */
-	public static void ejercicio1A(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1A(Graph<Persona, Relacion> grafo) {
 
-		Set<Graph<Persona, Relacion>> sinAmigos = conjuntoSinAmigos(grafo);
-		Set<Graph<Persona, Relacion>> conAmigos = conjuntoConAmigos(grafo);
+		Set<Graph<Persona, Relacion>> sinAmigos = ejercicio1A1(grafo);
+		Set<Graph<Persona, Relacion>> conAmigos = ejercicio1A2(grafo);
 
 	}
 
@@ -106,7 +109,7 @@ public class Ejercicio1 {
 	 * Apartado B.1): Devuelve una lista con el camino mas corto que existe desde un
 	 * miembro (Persona) a otro.
 	 */
-	private static void caminoMasCorto(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1B1(Graph<Persona, Relacion> grafo) {
 
 	}
 
@@ -114,7 +117,7 @@ public class Ejercicio1 {
 	 * Apartado B.2): Muestra el grafo coloreando la lista mas corta devuelta por el
 	 * método anterior que calcula el camino más corto entre miembros.
 	 */
-	public static void ejercicio1B(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1B2(Graph<Persona, Relacion> grafo) {
 
 	}
 
@@ -123,7 +126,7 @@ public class Ejercicio1 {
 	 * (siendo estos aquellos miembros (Personas) que están unidos directamente por
 	 * una arista o conectados mediante vértices intermedios).
 	 */
-	private static void calculaMiembros(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1C1(Graph<Persona, Relacion> grafo) {
 
 	}
 
@@ -131,7 +134,7 @@ public class Ejercicio1 {
 	 * Apartado C.2): Muestra el grafo coloreando cada grupo de miembros resultante
 	 * de la función calculaMiembros() de un color distinto.
 	 */
-	public static void ejercicio1C(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1C2(Graph<Persona, Relacion> grafo) {
 
 	}
 
@@ -140,7 +143,7 @@ public class Ejercicio1 {
 	 * las relaciones de amistad (Relacion) esten cubiertas. Esto es, se seleccione
 	 * al menos un nodo/vértice (Persona) de cada par de amigos.
 	 */
-	private static void seleccionaNodos(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1D1(Graph<Persona, Relacion> grafo) {
 
 	}
 
@@ -148,8 +151,20 @@ public class Ejercicio1 {
 	 * Apartado D.2): Muestra el grafo coloreando cada miembro (Persona)
 	 * seleccionado por el método seleccionaNodos().
 	 */
-	public static void ejercicio1D(Graph<Persona, Relacion> grafo) {
+	private static void ejercicio1D2(Graph<Persona, Relacion> grafo) {
 
+	}
+	
+	/*
+	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
+	 */
+	public static void ejercicio1(String fichero) {
+
+		System.out.println("Red social (grafo de entrada): ");
+		Graph<Persona, Relacion> grafo = lecturaDatosEjercicio1(fichero);
+		System.out.println(grafo);
+		Graphs2.toDot(grafo, "salida/salidaEjercicio1.gv");
+		
 	}
 
 }

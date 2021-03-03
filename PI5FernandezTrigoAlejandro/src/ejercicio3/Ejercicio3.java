@@ -37,7 +37,7 @@ public class Ejercicio3 {
 	/*
 	 * Lectura de datos; devuelve una lista de listas de.....
 	 */
-	public static List<List<String>> lecturaDatosEjercicio3(String fichero) {
+	private static List<List<String>> lecturaDatosEjercicio3(String fichero) {
 
 		int i = 0;
 		int j = 0;
@@ -99,5 +99,15 @@ public class Ejercicio3 {
 	 * Apartado C.2): Muestra el grafo resultante del método ....() coloreando las asignaturas que pueden cursarse
 	 * de un color y las que no de otro distinto. 
 	 */
+	
+	/*
+	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
+	 */
+	public static void ejercicio3(String fichero) {
+
+		List<List<String>> lista = lecturaDatosEjercicio3(fichero);
+		System.out.println("Datos de entrada: " + lista);
+		
+	}
 	
 }
