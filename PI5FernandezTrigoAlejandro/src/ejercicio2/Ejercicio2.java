@@ -187,11 +187,11 @@ public class Ejercicio2 {
 	 */
 	public static void ejercicio2(String fichero) {
 
-		System.out.println("Apartado A). \n");
 		Graph<String, DefaultEdge> grafo = lecturaDatosEjercicio2(fichero);
+		
+		System.out.println("Apartado A). - Franjas horarias \n");
 		ejercicio2A(grafo);
-		System.out.println("\n");
-		System.out.println("Apartado B). Volcado en carpeta \"salida\"\n");
+		System.out.println("Apartado B). - Salida volcada en fichero salidaEjercicio2.gv\n");
 		ejercicio2B(grafo);
 		
 	}
