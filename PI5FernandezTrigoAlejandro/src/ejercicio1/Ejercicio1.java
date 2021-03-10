@@ -6,9 +6,23 @@
 
 package ejercicio1;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
+import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
+import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
+import org.jgrapht.alg.vertexcover.GreedyVCImpl;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.SimpleGraph;
+import org.jgrapht.nio.Attribute;
+
+import us.lsi.colors.GraphColors;
+import us.lsi.colors.GraphColors.Style;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.GraphsReader;
 
@@ -53,22 +67,21 @@ public class Ejercicio1 {
 	 */
 	private static Graph<Persona, Relacion> lecturaDatosEjercicio1(String fichero) {
 
-		Graph<Persona, Relacion> redSocial = GraphsReader.newGraph(
+		// Se han creado dos clases adicionales: Persona y Relacion, para representar los vértices y las
+		// aristas respectivamente. Se emplea simpleWeightedGraph usando como atributo para el peso, el Id. 
+		// Esto último no es estrictamente necesario, se puede eliminar el atributo Id de la clase Relacion, 
+		// y se escribiría como: Graph<Persona,Relacion> redSocial = GraphsReader.newGraph(
+		// fichero, Persona::ofFormat, Relacion::ofFormat, Graphs2::simpleGraph). Es similar en cualquier caso. 
+		Graph<Persona, Relacion> grafo = GraphsReader.newGraph(
 				fichero,
 				Persona::ofFormat,
 				Relacion::ofFormat,
 				Graphs2::simpleWeightedGraph,
 				Relacion::getId);
 
-		return redSocial;
+		return grafo;
 
 	}
-
-	/*
-	 * Cambiando en la clase el atributo id por entero y eliminando el getter de Id,
-	 * se escribe como: Graph<Persona,Relacion> redSocial = GraphsReader.newGraph(
-	 * fichero, Persona::ofFormat, Relacion::ofFormat, Graphs2::simpleGraph);
-	 */
 
 	/*
 	 * Apartado A.1): Devuelve un conjunto con los nodos/vértices que NO tienen
@@ -160,10 +173,11 @@ public class Ejercicio1 {
 	 */
 	public static void ejercicio1(String fichero) {
 
-		System.out.println("Red social (grafo de entrada): ");
+		// Lectura de datos de entrada y generación del grafo:
 		Graph<Persona, Relacion> grafo = lecturaDatosEjercicio1(fichero);
-		System.out.println(grafo);
-		Graphs2.toDot(grafo, "salida/salidaEjercicio1.gv");
+    	 //System.out.println("Red social (grafo de entrada): ");
+		 //System.out.println(grafo);
+		 //Graphs2.toDot(grafo, "salida/grafoEjercicio1.gv");
 		
 	}
 

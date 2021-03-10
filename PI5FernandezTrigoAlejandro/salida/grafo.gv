@@ -1,7 +1,0 @@
-strict graph G {
-  1 [ label="Sevilla" ];
-  2 [ label="Huelva" ];
-  3 [ label="Cadiz" ];
-  1 -- 2;
-  1 -- 3;
-}

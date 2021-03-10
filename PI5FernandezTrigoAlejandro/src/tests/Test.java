@@ -16,20 +16,22 @@ public class Test {
 
 		// Mostrar datos por pantalla y volcar la salida en un fichero .gv para cada apartado que
 		// lo necesite (se encuentran en la carpeta salida).
+		// Todos los ejercicios tienen una función pública que ejecuta los test de todas las funciones
+		// implicadas (de caracter privado).
 		System.out.println("##################################################################");
-		System.out.println("#################### EJERCICIO 1 - APARTADO A) ###################");
+		System.out.println("######################### EJERCICIO 1 ############################");
 		Ejercicio1.ejercicio1("ficheros/PI5Ej1DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
-		System.out.println("#################### EJERCICIO 2 - APARTADO A) ###################");
+		System.out.println("######################### EJERCICIO 2 ############################");
 		Ejercicio2.ejercicio2("ficheros/PI5Ej2DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
-		System.out.println("#################### EJERCICIO 3 - APARTADO A) ###################");
+		System.out.println("######################### EJERCICIO 3 ############################");
 		Ejercicio3.ejercicio3("ficheros/PI5Ej3DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");

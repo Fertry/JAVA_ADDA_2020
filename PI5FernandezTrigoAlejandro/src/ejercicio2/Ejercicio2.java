@@ -63,8 +63,8 @@ public class Ejercicio2 {
 			String[] grupos = contenido[1].trim().split(",");
 
 			// Añadir cada nodo/vértice (grupo) de la lista al grafo vacío:
-			for (String grupo : grupos) {
-				grafo.addVertex(grupo.trim());
+			for (String vertice : grupos) {
+				grafo.addVertex(vertice.trim());
 			}
 
 			int j = 0;
@@ -187,12 +187,15 @@ public class Ejercicio2 {
 	 */
 	public static void ejercicio2(String fichero) {
 
+		// Lectura de datos de entrada y generación del grafo:
 		Graph<String, DefaultEdge> grafo = lecturaDatosEjercicio2(fichero);
 		
-		System.out.println("Apartado A). - Franjas horarias \n");
-		ejercicio2A(grafo);
-		System.out.println("Apartado B). - Salida volcada en fichero salidaEjercicio2.gv\n");
-		ejercicio2B(grafo);
+		System.out.println("Apartado A). - Franjas horarias");
+		 ejercicio2A(grafo);
+		 System.out.println("");
+		System.out.println("Apartado B). - Salida volcada en fichero salidaEjercicio2.gv");
+		 ejercicio2B(grafo);
+		 System.out.println("");
 		
 	}
 
