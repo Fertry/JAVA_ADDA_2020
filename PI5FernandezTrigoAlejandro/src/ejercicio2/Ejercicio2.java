@@ -141,14 +141,14 @@ public class Ejercicio2 {
 		}
 
 		// Salida por pantalla de datos:
-		System.out.println("Nº de franjas horarias necesarias: " + verticeColoreado.getNumberColors());
-		System.out.println("Grupos a impartirse en paralelo según franja horaria: ");
+		System.out.println(" Nº de franjas horarias necesarias: " + verticeColoreado.getNumberColors());
+		System.out.println(" Grupos a impartirse en paralelo según franja horaria: ");
 
 		for (int i = 0; i < verticeColoreado.getNumberColors(); i++) {
 
 			// Por cada franja horaria, muestra el nº junto con los grupos (en el mapa)
 			// asociados a la misma:
-			System.out.print(" Franja nº " + (i + 1) + ": " + mapa.get(i) + "\n");
+			System.out.print(" Franja nº " + (i + 1) + ": " + mapa.get(i));
 
 		}
 

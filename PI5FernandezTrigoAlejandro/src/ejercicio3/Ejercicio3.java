@@ -240,7 +240,7 @@ public class Ejercicio3 {
 			
 			return GraphColors.getColor(GraphColors.Color.blue);
 
-    	// Si el set de asignaturas seleccionadas contiene al vértice en cuestión Y está en resultado:
+    	// Si el set de asignaturas seleccionadas contiene al vértice en cuestión que está en resultado:
 		} else if (resultado.contains(vertice)) {
 			
 			return GraphColors.getColor(GraphColors.Color.yellow);
