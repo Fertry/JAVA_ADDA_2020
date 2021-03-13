@@ -14,13 +14,10 @@ import java.util.Map;
 import java.util.Set;
 
 import org.jgrapht.Graph;
-import org.jgrapht.GraphPath;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.alg.interfaces.ShortestPathAlgorithm;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 import org.jgrapht.alg.vertexcover.GreedyVCImpl;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.nio.Attribute;
 
 import us.lsi.colors.GraphColors;
@@ -208,31 +205,37 @@ public class Ejercicio1 {
 
 		// Objeto DijkstraShortestPath<> para el grafo:
 		ShortestPathAlgorithm<Persona, Relacion> camino = new DijkstraShortestPath<Persona, Relacion>(grafo);
-		
-		// Para que el método sea reutilizable y no restringido a dos personas fijas, dado los dos nombres
-		// empleo el método personaPorNombre() que busca en el grafo una Persona dado un nombre por parámetro:
+
+		// Para que el método sea reutilizable y no restringido a dos personas fijas,
+		// dado los dos nombres empleo el método personaPorNombre() que busca en 
+		// el grafo una Persona dado un nombre por parámetro:
 		Persona origen = personaPorNombre(grafo, persona1);
 		Persona destino = personaPorNombre(grafo, persona2);
-		
-		// Si se han encontrado a la persona1 y persona2, se devuelve la lista del camino mínimo; 
-		// de lo contrario, se devuelve la lista vacía:
+
+		List<Persona> resultado = new ArrayList<>();
+		// Si se han encontrado a la persona1 y persona2, se devuelve la lista del
+		// camino mínimo de lo contrario, se devuelve la lista vacía:
 		if (origen == null || destino == null) {
 			
-			List<Persona> resultado = new ArrayList<>();
 			return resultado;
-		
+
 		} else {
-			
+
 			return camino.getPath(origen, destino).getVertexList();
-			
+
 		}
-		
+
 	}
 	
+	/*
+	 * Método auxiliar que dado el grafo de entrada y un nombre (String) busca en el grafo si
+	 * existe una Persona por ese nombre y la devuelve. En caso contrario, devuelve un null.
+	 */
 	private static Persona personaPorNombre(Graph<Persona, Relacion> grafo, String nombre) {
 
 		Persona resultado = null;
 		
+		// Recorremos el grafo, vértice a vértice:
 		for (Persona persona : grafo.vertexSet()) {
 			
 			if (persona.getNombre().equals(nombre)) {
@@ -245,6 +248,33 @@ public class Ejercicio1 {
 		return resultado;
 		
 	}
+	
+	/*
+	public static List<Miembro> realizarApartadoB(Graph<Miembro, Amistad> res, Miembro from, Miembro to) {
+        ShortestPathAlgorithm<Miembro, Amistad> a = new DijkstraShortestPath<Miembro, Amistad>(res);
+
+        // TODO: añadir comprobación de lista vacía o nula
+        /*
+         * try { Graphs2.toDot(res, "ficheros/ejercicioUnoApartadoB.gv", v ->
+         * v.getNombre() + " (" + res.degreeOf(v) + " amigos )", e -> "", v ->
+         * GraphColors.getColorIf(GraphColors.Color.blue, GraphColors.Color.gray,
+         * a.getPath(from, to).getVertexList().contains(v)), e ->
+         * GraphColors.getStyle(Style.solid)); return a.getPath(from,
+         * to).getVertexList(); } catch (Exception e) { return new ArrayList<>(); }
+
+
+        if (a.getPath(from, to) == null) {
+            return new ArrayList<>();
+        } else {
+            Graphs2.toDot(res, "ficheros/ejercicioUnoApartadoB.gv",
+                    v -> v.getNombre() + " (" + res.degreeOf(v) + " amigos )", e -> "",
+                    v -> GraphColors.getColorIf(GraphColors.Color.blue, GraphColors.Color.gray,
+                            a.getPath(from, to).getVertexList().contains(v)),
+                    e -> GraphColors.getStyle(Style.solid));
+            return a.getPath(from, to).getVertexList();
+        }
+    }
+	*/
 		
 	/*
 	 * Apartado B.2): Muestra el grafo coloreando la lista mas corta devuelta por el
@@ -272,27 +302,71 @@ public class Ejercicio1 {
 	 * ConnectivityInspector<> de JGraph para devolver una lista con todos los grupos
 	 * (Sets<>) de Personas. 
 	 */
-	private static void ejercicio1C1(Graph<Persona, Relacion> grafo) {
+//	private static void ejercicio1C1(Graph<Persona, Relacion> grafo) {
+//
+//		// Método connectedSets() del objeto ConnectivityInspector<> para el grafo:
+//		List<Set<Persona>> conjuntos = new ConnectivityInspector<>(grafo).connectedSets();
+//		
+//		/*
+//		 * Para el coloreado creo un mapa en el que asocio enteros a colores de forma que pueda
+//		 * colorear tantos grupos como haya en el grafo, y de esta forma el método sea más reutilizable.
+//		 * Teniendo en cuenta eso sí, que solo hay disponibles 9 colores en el enumerado de la librería.
+//		 * PD: en realidad son 10 pero blank es nulo así que no lo tengo en cuenta.
+//		 */		
+//		Map<Integer, Color> mapaDeColores = new HashMap<Integer, Color>();
+//		mapaDeColores.put(0, GraphColors.Color.green);		
+//		mapaDeColores.put(1, GraphColors.Color.red);		
+//		mapaDeColores.put(2, GraphColors.Color.yellow);	
+//		mapaDeColores.put(3, GraphColors.Color.gray);	
+//		mapaDeColores.put(4, GraphColors.Color.cyan);		
+//		mapaDeColores.put(5, GraphColors.Color.orange);
+//		mapaDeColores.put(6, GraphColors.Color.magenta);
+//		mapaDeColores.put(7, GraphColors.Color.blue);
+//		mapaDeColores.put(8, GraphColors.Color.black);
+//		
+//		/*
+//		 * Creo un iterador, calculo el nº de conjuntos que existen y creo un mapa 
+//		 * para asociar a cada persona un nº que representará el color.
+//		 */
+//		int i = 0;
+//		Integer numeroDeConjuntos = conjuntos.size();
+//		Map<Persona, Integer> personasColoreadas = new HashMap<Persona, Integer>();
+//		
+//		/*
+//		 * Recorriendo el Set<Persona>, por cada set mostramos el grupo (osea, el Set), y le asociamos 
+//		 * un color gracias a mapaDeColores(i) además de actualizar el mapa de personasColoreadas que 
+//		 * guarda a cada Persona junto a su nº para luego poder colorearlos mediante el toDot(). 
+//		 */
+//		System.out.println(" Existen " + numeroDeConjuntos + " grupos. Su composición es: ");
+//		for (Set<Persona> set : conjuntos) {
+//			
+//			for (Persona persona : set) {
+//				
+//				personasColoreadas.put(persona, i);
+//				
+//			}
+//			
+//			System.out.println(" Grupo " + mapaDeColores.get(i) + " (" + set.size() + " usuario)");
+//			System.out.println(set);
+//			i++; 
+//			
+//		}
+//		
+//		// Muestra el grafo coloreando cada grupo de miembros resultante del calculo anterior con un color distinto:
+//		Graphs2.toDot(
+//			grafo, 																			// Grafo de entrada
+//			"salida/salidaEjercicio1C.gv",													// Ruta de salida de fichero
+//			v -> v.getNombre(),																// Valor de vértices: su nombre
+//			e -> "",																		// Valor de las aristas en blanco
+//			v -> GraphColors.getColor(colorearC(mapaDeColores, personasColoreadas, v)),		// Llamada al método colorearC() que devuelve un tipo Color en base al nº asociado a ese vértice
+//			e -> GraphColors.getStyle(Style.bold));											// Define el estilo del grafo
+//
+//	}
+	
+	private static void ejercicio1C1Testing(Graph<Persona, Relacion> grafo) {
 
 		// Método connectedSets() del objeto ConnectivityInspector<> para el grafo:
 		List<Set<Persona>> conjuntos = new ConnectivityInspector<>(grafo).connectedSets();
-		
-		/*
-		 * Para el coloreado creo un mapa en el que asocio enteros a colores de forma que pueda
-		 * colorear tantos grupos como haya en el grafo, y de esta forma el método sea más reutilizable.
-		 * Teniendo en cuenta eso sí, que solo hay disponibles 9 colores en el enumerado de la librería.
-		 * PD: en realidad son 10 pero blank es nulo así que no lo tengo en cuenta.
-		 */		
-		Map<Integer, Color> mapaDeColores = new HashMap<Integer, Color>();
-		mapaDeColores.put(0, GraphColors.Color.green);		
-		mapaDeColores.put(1, GraphColors.Color.red);		
-		mapaDeColores.put(2, GraphColors.Color.yellow);	
-		mapaDeColores.put(3, GraphColors.Color.gray);	
-		mapaDeColores.put(4, GraphColors.Color.cyan);		
-		mapaDeColores.put(5, GraphColors.Color.orange);
-		mapaDeColores.put(6, GraphColors.Color.magenta);
-		mapaDeColores.put(7, GraphColors.Color.blue);
-		mapaDeColores.put(8, GraphColors.Color.black);
 		
 		/*
 		 * Creo un iterador, calculo el nº de conjuntos que existen y creo un mapa 
@@ -316,19 +390,19 @@ public class Ejercicio1 {
 				
 			}
 			
-			System.out.println(" Grupo " + mapaDeColores.get(i) + " (" + set.size() + " usuario)");
+			System.out.println(" Grupo " + Color.values()[i] + " (" + set.size() + " usuario)");
 			System.out.println(set);
 			i++; 
 			
 		}
-		
+		 
 		// Muestra el grafo coloreando cada grupo de miembros resultante del calculo anterior con un color distinto:
 		Graphs2.toDot(
 			grafo, 																			// Grafo de entrada
 			"salida/salidaEjercicio1C.gv",													// Ruta de salida de fichero
 			v -> v.getNombre(),																// Valor de vértices: su nombre
 			e -> "",																		// Valor de las aristas en blanco
-			v -> GraphColors.getColor(colorearC(mapaDeColores, personasColoreadas, v)),		// Llamada al método colorearC() que devuelve un tipo Color en base al nº asociado a ese vértice
+			v -> GraphColors.getColor(Color.values()[personasColoreadas.get(v)]),		    // Llamada al método colorearC() que devuelve un tipo Color en base al nº asociado a ese vértice
 			e -> GraphColors.getStyle(Style.bold));											// Define el estilo del grafo
 
 	}
@@ -337,18 +411,18 @@ public class Ejercicio1 {
 	 * Método auxiliar para colorear cada vértice (Personas) de forma que todas las personas que pertenezcan al mismo grupo
 	 * tengan el mismo color. Para ello se dispone de dos mapas que guardan los colores asociados a un nº y las personas
 	 * ya con su nº asociado. 
-	 */
-	private static Color colorearC(Map<Integer, Color> mapaDeColores, Map<Persona, Integer> personasColoreadas, Persona persona) {
-		
-		// Obtener el nº asociado a la persona del mapa que guarda todas las personas con su nº color:
-		Integer nColor = personasColoreadas.get(persona);
-		
-		// Obtener el color asociado al nº anterior del mapa que guarda los colores asociados a un nº:
-		Color color = mapaDeColores.get(nColor);
-		
-		return color;
-		
-	}
+	 */ 
+//	private static Color colorearC(Map<Integer, Color> mapaDeColores, Map<Persona, Integer> personasColoreadas, Persona persona) {
+//		
+//		// Obtener el nº asociado a la persona del mapa que guarda todas las personas con su nº color:
+//		Integer nColor = personasColoreadas.get(persona);
+//		
+//		// Obtener el color asociado al nº anterior del mapa que guarda los colores asociados a un nº:
+//		Color color = mapaDeColores.get(nColor);
+//		
+//		return color;
+//		
+//	}
 
 	/*
 	 * Apartado D.1): Devuelve los nodos/vértices seleccionados de forma que todas
@@ -403,10 +477,12 @@ public class Ejercicio1 {
 	    System.out.println("Apartado B). - Lista más corta");
 	     System.out.println(" La lista más corta entre Juan y Ramiro es: " + ejercicio1B1(grafo, "Juan", "Ramiro"));
 		 System.out.println(" Salida volcada en fichero salidaEjercicio1B.gv");
+		 //System.out.println("No existen los usuarios especificados");
 		 ejercicio1B2(grafo, "Juan", "Ramiro");
 		 System.out.println("");
 		System.out.println("Apartado C). - Grupos de amigos");
-		 ejercicio1C1(grafo);
+		 //ejercicio1C1(grafo);
+		 ejercicio1C1Testing(grafo);
 		 System.out.println(" Salida volcada en fichero salidaEjercicio1C.gv");
 		 System.out.println("");
 		System.out.println("Apartado D). - Cuestionarios a grupos");

@@ -1,15 +1,15 @@
 strict graph G {
-  1 [ color="green" label="Ana" ];
-  2 [ color="red" label="Berta" ];
-  3 [ color="yellow" label="Adolfo" ];
-  4 [ color="gray" label="Ivan" ];
-  5 [ color="green" label="Carmen" ];
-  6 [ color="green" label="Luis" ];
-  7 [ color="green" label="Juan" ];
-  8 [ color="red" label="Pedro" ];
-  9 [ color="green" label="Ramiro" ];
-  10 [ color="cyan" label="Eloy" ];
-  11 [ color="green" label="Isabel" ];
+  1 [ color="brown" label="Ana" ];
+  2 [ color="brown" label="Berta" ];
+  3 [ color="brown" label="Adolfo" ];
+  4 [ color="brown" label="Ivan" ];
+  5 [ color="brown" label="Carmen" ];
+  6 [ color="brown" label="Luis" ];
+  7 [ color="brown" label="Juan" ];
+  8 [ color="brown" label="Pedro" ];
+  9 [ color="brown" label="Ramiro" ];
+  10 [ color="brown" label="Eloy" ];
+  11 [ color="brown" label="Isabel" ];
   1 -- 6 [ style="bold" label="" ];
   2 -- 8 [ style="bold" label="" ];
   9 -- 11 [ style="bold" label="" ];
