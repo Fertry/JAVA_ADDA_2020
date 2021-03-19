@@ -1,0 +1,27 @@
+#VERTEX#
+City1,12345
+City2,54321
+City3,23456
+City4,65432 
+City5,34567
+City6,76543
+City7, 45678
+City8, 87654
+City9, 56789
+#EDGE#
+City5,City7,Road-401,123.45
+City5,City1,Road-403,134.56
+City1,City2,Road-417,145.67
+City1,City9,Road-412,156.89
+City2,City3,Road-421,167.12
+City2,City8,Road-436,78.34
+City2,City9,Road-434,231.45
+City2,City7,Road-407,89.56
+City3,City6,Road-476,99.78
+City3,City4,Road-459,201.91
+City3,City7,Road-499,51.42
+City3,City9,Road-499,91.20
+City7,City8,Road-408,234.23
+City9,City4,Road-415,245.56
+City4,City6,Road-474,249.87
+City6,City8,Road-462,125.63
