@@ -16,33 +16,56 @@ public class Test {
 
 	public static void main(String[] args) {
 		
+		// Mostrar datos por pantalla y volcar la salida en un fichero .gv para el quinto apartado.
+		// Todos los ejercicios tienen una función pública que ejecuta los test de todas las funciones
+		// implicadas (de caracter privado).
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 1 ############################");
-		Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada1.txt");
+			System.out.println(" PI6Ej1DatosEntrada1.txt");
+			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada1.txt");
+			System.out.println(" PI6Ej1DatosEntrada2.txt");
+			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada2.txt");
+			System.out.println(" PI6Ej1DatosEntrada3.txt");
+			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 2 ############################");
-		
+			System.out.println(" PI6Ej2DatosEntrada1.txt");
+			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada1.txt");
+			System.out.println(" PI6Ej2DatosEntrada2.txt");
+			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada2.txt");
+			System.out.println(" PI6Ej2DatosEntrada3.txt");
+			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 3 ############################");
-		
+			System.out.println(" PI6E31DatosEntrada1.txt");
+			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada1.txt");
+			System.out.println(" PI6Ej3DatosEntrada2.txt");
+			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada2.txt");
+			System.out.println(" PI6Ej3DatosEntrada3.txt");
+			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 4 ############################");
-		
+			Ejercicio4.ejercicio4("ficheros/PI6Ej4DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 5 ############################");
-		
+			System.out.println(" PI6Ej5DatosEntrada1.txt");
+			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada1.txt");
+			System.out.println(" PI6Ej5DatosEntrada2.txt");
+			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada2.txt");
+			System.out.println(" PI6Ej5DatosEntrada3.txt");
+			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################");
 		

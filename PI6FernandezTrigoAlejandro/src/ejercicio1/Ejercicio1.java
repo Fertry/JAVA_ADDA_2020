@@ -6,12 +6,11 @@
 
 package ejercicio1;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
-
-import org.jgrapht.Graph;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
 
 import us.lsi.flujossecuenciales.StreamsS;
 
@@ -23,19 +22,21 @@ import us.lsi.flujossecuenciales.StreamsS;
 	todos los grupos deben tener el mismo número de alumnos, maximizando la
 	afinidad total conseguida para todos los alumnos, y teniendo en cuenta que no está
 	permitido asignar un alumno a un grupo para el que presente afinidad 0.
+	
+	Se piden soluciones por Programación Lineal y Algoritmos Genéticos
 */
 
 public class Ejercicio1 {
 	
 	/*
-	 * Lectura de datos; devuelve un grafo simple de tipo <String, DefaultEdge> que
-	 * representa los datos leídos como nodos.
+	 * Lectura de datos; devuelve un mapa de tipo <String, List<Integer> que se corresponde a los 
+	 * alumnos (claves) junto a la lista de afinidad de pertenencia a los respectivos grupos (valores).
 	 */
-	private static Graph<String, DefaultEdge> lecturaDatosEjercicio1(String fichero) {
+	private static Map<String, List<Integer>> lecturaDatosEjercicio1(String fichero) {
 		
-		int i = 0;
-		Graph<String, DefaultEdge> grafo = new SimpleGraph(DefaultEdge.class);
+		int i = 0;	
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		Map<String, List<Integer>> resultado = new HashMap<String, List<Integer>>();
 		
 		while (i < lista.size()) {
 
@@ -46,57 +47,70 @@ public class Ejercicio1 {
 			String[] contenido = fila.split(": ");
 			String alumno = contenido[0];
 			String[] grupos = contenido[1].split(",");
-
-			// Añadir el vértice al grafo vacío (cada alumno):
-			grafo.addVertex(alumno);
 			
-			// Para cada alumno, añadimos al grafo las aristas que representan las
-			// afinidades a pertenecer a cada uno de los 5 grupos:
+			// En cada iteración reinicio la lista:
+			List<Integer> listaAfinidades = new ArrayList<>();
+			
+			// Casteo los strings de "grupos" a entero para meterlos en la lista que se almacena en el mapa:
+			for (String numero : grupos) {
+				
+				listaAfinidades.add(Integer.parseInt(numero));
+				
+			}
+			
+			// Para cada alumno, añadimos al mapa su nombre (String) y como valor asociado 
+			// a dicha clave, la lista de afinidades:
+			resultado.put(alumno, listaAfinidades);
 
-
-//			int j = 0;
-//			int k = 0;
-//
-//			// Añadir al grafo resultante los vértices contenidos en grupos[] sin
-//			// espacios, comprobando que dicho vértice no se encuentra ya dentro:
-//			while (j < grupos.length) {
-//				while (k < grupos.length) {
-//
-//					// Si NO está ya en el grafo:
-//					if (!grupos[j].trim().equals(grupos[k].trim())) {
-//
-//						// Añade los vértices al grafo:
-//						grafo.addEdge(grupos[j].trim(), grupos[k].trim());
-//
-//					}
-//
-//					// Pasa al siguiente vértice:
-//					k++;
-//
-//				}
-//
-//				// Reinicia el acumulador cuando pasamos al siguiente vértice j para
-//				// comprobar uno a uno si grupo[j] == grupo[k] y pasa al siguiente j:
-//				k = 0;
-//				j++;
-//
-//			}
-//
-//			// Pasa a la siguiente línea del fichero:
-//			i++;
+			// Pasa a la siguiente línea del fichero:
+			i++;
 
 		}
 		
-		return grafo;
+		return resultado;
 		
 	}
 	
+	/*
+	 * Repartir a los alumnos en base a su afinidad a pertenecer a cada uno de los 5 grupos (siempre
+	 * que no sea 0) de forma que se maximize la afinidad total del grupo y que todos los grupos 
+	 * contengan el mismo nº de alumnos. Realizar mediante Programación Lineal (PL).
+	 */
+	private static void ejercicio1ProgramacionLineal() {
+		
+		//TO-DO
+		
+	}
+	
+	/*
+	 * Repartir a los alumnos en base a su afinidad a pertenecer a cada uno de los 5 grupos (siempre
+	 * que no sea 0) de forma que se maximize la afinidad total del grupo y que todos los grupos 
+	 * contengan el mismo nº de alumnos. Realizar mediante Algoritmos Genéticos (GA).
+	 */
+	private static void ejercicio1AlgoritmosGeneticos() {
+		
+		//TO-DO
+		
+	}
+	
+	/*
+	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
+	 */
 	public static void ejercicio1(String fichero) {
 		
-		// Lectura de datos de entrada y generación del grafo:
-		Graph<String, DefaultEdge> grafo = lecturaDatosEjercicio1(fichero);
+		// Lectura de datos de entrada:
+		Map<String, List<Integer>> mapa = lecturaDatosEjercicio1(fichero);
 		
-		System.out.println(grafo);
+		// Salida de datos:
+		ejercicio1ProgramacionLineal();
+		ejercicio1AlgoritmosGeneticos();
+		
+		System.out.println(" Reparto obtenido: ");
+		System.out.println(" ");
+		System.out.println(" Afinidad media: ");
+		System.out.println(" ");
+
+		System.out.println(mapa);
 		
 	}
 

@@ -1,0 +1,27 @@
+strict graph G {
+  1 [ color="green" label="City1" ];
+  2 [ color="green" label="City2" ];
+  3 [ color="green" label="City3" ];
+  4 [ color="green" label="City4" ];
+  5 [ color="green" label="City5" ];
+  6 [ color="green" label="City6" ];
+  7 [ color="green" label="City7" ];
+  8 [ color="green" label="City8" ];
+  9 [ color="green" label="City9" ];
+  5 -- 7 [ style="bold" label="123.45" ];
+  5 -- 1 [ style="bold" label="134.56" ];
+  1 -- 2 [ style="bold" label="145.67" ];
+  1 -- 9 [ style="bold" label="156.89" ];
+  2 -- 3 [ style="bold" label="167.12" ];
+  2 -- 8 [ style="bold" label="78.34" ];
+  2 -- 9 [ style="bold" label="231.45" ];
+  2 -- 7 [ style="bold" label="89.56" ];
+  3 -- 6 [ style="bold" label="99.78" ];
+  3 -- 4 [ style="bold" label="201.91" ];
+  3 -- 7 [ style="bold" label="51.42" ];
+  3 -- 9 [ style="bold" label="91.2" ];
+  7 -- 8 [ style="bold" label="234.23" ];
+  9 -- 4 [ style="bold" label="245.56" ];
+  4 -- 6 [ style="bold" label="249.87" ];
+  6 -- 8 [ style="bold" label="125.63" ];
+}
