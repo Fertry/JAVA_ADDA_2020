@@ -26,47 +26,33 @@ import us.lsi.flujossecuenciales.StreamsS;
 
 public class Ejercicio3 {
 	
-	// private static Tuple2<List<String>, List<Producto>> lecturaDatosEjercicio3(String fichero) 
-	private static Tuple2<List<String>, List<String>> lecturaDatosEjercicio3(String fichero) {
+	/*
+	 * Lectura de datos; devuelve un una tupla para encapsular, por un lado una lista con todas las funcionalidades
+	 * requeridas y, por otro lado, una lista del tipo Producto que a su vez define los siguientes atributos (parseados
+	 * en la propia clase) Nombre, Precio, Lista de funcionalidades cubiertas por el producto.
+	 */
+	private static Tuple2<List<String>, List<Producto>> lecturaDatosEjercicio3(String fichero)  {
 		
 		int i = 1;	
 		List<Producto> listaProductos = new ArrayList<Producto>();
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		
-		///
-		List<String> listaFuncionalidades = new ArrayList<String>();
-		///
-		
 		while (i < lista.size()) {
 			
 			String fila = lista.get(i);
 
-			// Crea el objeto producto a partir de los elementos de la linea leida:
-			//Producto producto = Producto.ofDatos(fila);
-			//listaProductos.add(producto);
-			
-			
-			/////
-			String[] primerSplit = fila.split(" (");
-			String nombreProducto = primerSplit[0].trim();
-			
-			String[] segundoSplit = primerSplit[1].split("):  ");
-			String[] funcionalidades = segundoSplit[1].split(",");
-			
-			String precioTexto = segundoSplit[0].replace(" euros", "");
-			Integer precioProducto = Integer.parseInt(precioTexto);
-			
-			for (String funcion : funcionalidades) {
-				
-				listaFuncionalidades.add(funcion);
-				
-			}
-			/////
-			
+			// Crea el objeto producto a partir de los elementos de la linea leida y lo añade a la lista:
+			Producto producto = Producto.ofDatos(fila);
+			listaProductos.add(producto);
+
 			i++;
 			
 		}
 		
+		/*
+		 * Tratar la primera línea de fichero por separado, devolviendo una lista
+		 * con las funcionalidades requeridas:
+		 */
 		String primeraFila = lista.get(0);
 		List<String> funcionalidadesRequeridas = new ArrayList<String>();
 		
@@ -78,13 +64,9 @@ public class Ejercicio3 {
 		}
 		
 		// Meterlo todo en la tupla:
-		//Tuple2<List<String>, List<Producto>> resultado = Tuple.create(funcionalidadesRequeridas, listaProductos);
+		Tuple2<List<String>, List<Producto>> resultado = Tuple.create(funcionalidadesRequeridas, listaProductos);
 
-		//return resultado;
-		
-		Tuple2<List<String>, List<String>> provisional = Tuple.create(funcionalidadesRequeridas, listaFuncionalidades);
-		
-		return provisional;
+		return resultado;
 		
 	}
 	
@@ -114,9 +96,8 @@ public class Ejercicio3 {
 	public static void ejercicio3(String fichero) {
 		
 		// Lectura de datos de entrada:
-		//Tuple2<List<String>, List<Producto>> tupla = lecturaDatosEjercicio3(fichero);
-		Tuple2<List<String>, List<String>> tupla = lecturaDatosEjercicio3(fichero);
-		
+		Tuple2<List<String>, List<Producto>> tupla = lecturaDatosEjercicio3(fichero);
+
 		// Salida de datos:
 		ejercicio3ProgramacionLineal();
 		ejercicio3AlgoritmosGeneticos();

@@ -3,7 +3,8 @@ package ejercicio3;
 import java.util.ArrayList;
 import java.util.List;
 
-// Clase producto
+// Clase producto para parsear la entrada por fichero del ejercicio creando objetos de clase Producto con 
+// sus respectivos atributos: Nombre, Precio y Lista de funcionalidades.
 public class Producto {
 
 	// MÉTODOS DE LA CLASE
@@ -13,7 +14,7 @@ public class Producto {
 
 	}
 
-	public static Producto ofDetails(String nombre, Integer precio, List<String> funcionalidades) {
+	public static Producto ofDetails(String nombre, Double precio, List<String> funcionalidades) {
 
 		return new Producto(nombre, precio, funcionalidades);
 
@@ -25,10 +26,10 @@ public class Producto {
 		
 	}
 
-	// ATRIBUTOS DE LA CLASE
-	private String nombre;
-	private Integer precio;
-	private List<String> funcionalidades;
+	// ATRIBUTOS DE LA CLASE INMUTABLES
+	private final String nombre;
+	private final Double precio;
+	private final List<String> funcionalidades;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Producto() {
@@ -39,7 +40,7 @@ public class Producto {
 		
 	}
 	
-	private Producto(String nombre, Integer precio, List<String> funcionalidades) {
+	private Producto(String nombre, Double precio, List<String> funcionalidades) {
 			
 		super();
 		this.nombre = nombre;
@@ -53,23 +54,24 @@ public class Producto {
 		super();
 		List<String> listaFuncionalidades = new ArrayList<String>();
 		
-		// Secuencia de trims y split: 
-		// Primer split:
-		//P01 (9.99 euros):  F1,F2
-		//P01
-		//9.99 euros):  F1,F2
-		// Segundo split:
-		//9.99euros
-		//F1,F2
+		// Secuencia de trims y splits: 
+		// P01 (9.99 euros):  F1,F2
+		// Primer paso: 
+		// P01(9.99euros)
+		// F1,F2
+		// Segundo paso: 
+		// P01
+		// 9.99euros)
+		// Replace final:
+		// 9.99
 		
-		String[] primerSplit = datos.split(" (");
-		String nombreProducto = primerSplit[0].trim();
-		
-		String[] segundoSplit = primerSplit[1].split("):  ");
-		String[] funcionalidades = segundoSplit[1].split(",");
-		
-		String precioTexto = segundoSplit[0].replace(" euros", "");
-		Integer precioProducto = Integer.parseInt(precioTexto);
+		// ********************************************************************************************
+		String[] primerpaso = datos.trim().split(":");
+		String[] funcionalidades = primerpaso[1].trim().split(","); 
+		String[] segundopaso = primerpaso[0].split("\\(");
+		String nombre = segundopaso[0];
+		Double precio = Double.parseDouble(segundopaso[1].replace("euros)", "")); 
+		// ********************************************************************************************
 		
 		for (String funcion : funcionalidades) {
 			
@@ -77,18 +79,18 @@ public class Producto {
 			
 		}
 		
-		this.nombre = nombreProducto;
-		this.precio = precioProducto;
+		this.nombre = nombre;
+		this.precio = precio;
 		this.funcionalidades = listaFuncionalidades;
 		
 	}
 
-	// SETTERS/GETTTERS DE LA CLASE
+	// GETTTERS DE LA CLASE
 	public String getNombre() {
 		return nombre;
 	}
 
-	public Integer getPrecio() {
+	public Double getPrecio() {
 		return precio;
 	}
 
@@ -133,7 +135,7 @@ public class Producto {
 			return false;
 		return true;
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Producto [nombre=" + nombre + ", precio=" + precio + ", funcionalidades=" + funcionalidades + "]";
