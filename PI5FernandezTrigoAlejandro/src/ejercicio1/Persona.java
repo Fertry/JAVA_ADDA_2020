@@ -29,8 +29,8 @@ public class Persona {
 		
 	}
 	
-	// ATRIBUTOS DE LA CLASE
-	private String nombre;
+	// ATRIBUTOS DE LA CLASE INMUTABLES
+	private final String nombre;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Persona(String nombre) {
@@ -47,7 +47,7 @@ public class Persona {
 		
 	}
 	
-	// SETTERS/GETTTERS DE LA CLASE
+	// GETTTERS DE LA CLASE
 	public String getNombre() {
 		
 		return nombre;

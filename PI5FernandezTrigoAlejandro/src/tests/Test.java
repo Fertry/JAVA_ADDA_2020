@@ -20,19 +20,19 @@ public class Test {
 		// implicadas (de caracter privado).
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 1 ############################");
-		Ejercicio1.ejercicio1("ficheros/PI5Ej1DatosEntrada.txt");
+			Ejercicio1.ejercicio1("ficheros/PI5Ej1DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 2 ############################");
-		Ejercicio2.ejercicio2("ficheros/PI5Ej2DatosEntrada.txt");
+			Ejercicio2.ejercicio2("ficheros/PI5Ej2DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 3 ############################");
-		Ejercicio3.ejercicio3("ficheros/PI5Ej3DatosEntrada.txt");
+			Ejercicio3.ejercicio3("ficheros/PI5Ej3DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		

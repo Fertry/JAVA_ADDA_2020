@@ -29,11 +29,9 @@ public class Relacion {
 		
 	}
 
-	// ATRIBUTOS DE LA CLASE
-	private double id;
-	private Persona p1;
-	private Persona p2;
-	private static double numero = 0.0;
+	// ATRIBUTOS DE LA CLASE INMUTABLES
+	private final Persona p1;
+	private final Persona p2;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Relacion(Persona p1, Persona p2) {
@@ -41,8 +39,6 @@ public class Relacion {
 		super();
 		this.p1 = p1;
 		this.p2 = p2;
-		this.id = numero;
-		numero++;
 		
 	}
 	
@@ -50,8 +46,6 @@ public class Relacion {
 		
 		this.p1 = null;
 		this.p2 = null;
-		this.id = numero;
-		numero++;
 		
 	} 
 	
@@ -60,12 +54,10 @@ public class Relacion {
 		super();
 		this.p1 = p1;
 		this.p2 = p2;
-		this.id = numero;
-		numero++;
 		
 	}
 
-	// SETTERS/GETTTERS DE LA CLASE
+	// GETTTERS DE LA CLASE
 	public Persona getOrigen(){
 		
 		return p1;
@@ -77,21 +69,12 @@ public class Relacion {
 		return p2;
 		
 	}
-	
-	public double getId() {
-		
-		return this.id;
-		
-	}
 
 	// HASHCODE, EQUALS, TOSTRING DE LA CLASE
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(id);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((p1 == null) ? 0 : p1.hashCode());
 		result = prime * result + ((p2 == null) ? 0 : p2.hashCode());
 		return result;
@@ -106,8 +89,6 @@ public class Relacion {
 		if (getClass() != obj.getClass())
 			return false;
 		Relacion other = (Relacion) obj;
-		if (Double.doubleToLongBits(id) != Double.doubleToLongBits(other.id))
-			return false;
 		if (p1 == null) {
 			if (other.p1 != null)
 				return false;
