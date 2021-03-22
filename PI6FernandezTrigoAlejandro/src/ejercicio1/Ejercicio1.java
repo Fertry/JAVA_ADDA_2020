@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import us.lsi.flujossecuenciales.StreamsS;
@@ -76,9 +77,26 @@ public class Ejercicio1 {
 	 * que no sea 0) de forma que se maximize la afinidad total del grupo y que todos los grupos 
 	 * contengan el mismo nº de alumnos. Realizar mediante Programación Lineal (PL).
 	 */
-	private static void ejercicio1ProgramacionLineal() {
+	private static void ejercicio1ProgramacionLineal(Map<String, List<Integer>> entrada) {
 		
-		//TO-DO
+		int i = 0;
+		Set<String> alumnos = entrada.keySet();
+		//Integer numeroGrupos = entrada.get("Alumno_01").size();
+
+		for (String alumno : alumnos) {
+			int aux = entrada.get(alumno).size();
+			while (i < aux) {
+				
+				System.out.println("Afinidad " + alumno + " grupo " + i + ": " + entrada.get(alumno).get(i).toString());
+				i++;
+			}
+			i=0;
+			
+		}
+		
+		/*
+		 * Mochila contiene: alumno con peso + valor
+		 */
 		
 	}
 	
@@ -102,7 +120,7 @@ public class Ejercicio1 {
 		Map<String, List<Integer>> mapa = lecturaDatosEjercicio1(fichero);
 		
 		// Salida de datos:
-		ejercicio1ProgramacionLineal();
+		ejercicio1ProgramacionLineal(mapa);
 		ejercicio1AlgoritmosGeneticos();
 		
 		System.out.println(" Reparto obtenido: ");
