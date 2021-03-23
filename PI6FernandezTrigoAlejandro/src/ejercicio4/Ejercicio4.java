@@ -34,9 +34,9 @@ public class Ejercicio4 {
 		
 		while (i < lista.size()) {
 
-			String fila = lista.get(i);
+			String linea = lista.get(i);
 			// Hacer split en base a las comas (junto al espacio) que separan los números:
-			String[] contenido = fila.split(", ");
+			String[] contenido = linea.split(", ");
 
 			// En cada iteración reinicio la lista:
 			List<Integer> listaNumeros = new ArrayList<>();

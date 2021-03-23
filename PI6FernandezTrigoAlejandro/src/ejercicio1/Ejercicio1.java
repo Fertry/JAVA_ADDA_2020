@@ -41,11 +41,11 @@ public class Ejercicio1 {
 		
 		while (i < lista.size()) {
 
-			String fila = lista.get(i);
+			String linea = lista.get(i);
 			// Hacer split en base a los dos puntos y quedarnos con la parte izquierda
 			// que representa a los alumnos, hacer split nuevamente en base a
 			// la coma (en la derecha) para quedarnos con la lista de grupos:
-			String[] contenido = fila.split(": ");
+			String[] contenido = linea.split(": ");
 			String alumno = contenido[0];
 			String[] grupos = contenido[1].split(",");
 			
@@ -72,6 +72,27 @@ public class Ejercicio1 {
 		
 	}
 	
+	private static List<Alumno> lecturaDatosEjercicio1_Test(String fichero) {
+		
+		int i = 0;	
+		List<Alumno> resultado = new ArrayList<Alumno>();
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		
+		while (i < lista.size()) {
+
+			String linea = lista.get(i);
+			Alumno alumno = Alumno.ofLinea(linea);
+			resultado.add(alumno);
+			
+			// Pasa a la siguiente línea del fichero:
+			i++;
+
+		}
+		
+		return resultado;
+		
+	}
+	
 	/*
 	 * Repartir a los alumnos en base a su afinidad a pertenecer a cada uno de los 5 grupos (siempre
 	 * que no sea 0) de forma que se maximize la afinidad total del grupo y que todos los grupos 
@@ -81,7 +102,6 @@ public class Ejercicio1 {
 		
 		int i = 0;
 		Set<String> alumnos = entrada.keySet();
-		//Integer numeroGrupos = entrada.get("Alumno_01").size();
 
 		for (String alumno : alumnos) {
 			int aux = entrada.get(alumno).size();
@@ -117,18 +137,20 @@ public class Ejercicio1 {
 	public static void ejercicio1(String fichero) {
 		
 		// Lectura de datos de entrada:
-		Map<String, List<Integer>> mapa = lecturaDatosEjercicio1(fichero);
+		//Map<String, List<Integer>> mapa = lecturaDatosEjercicio1(fichero);
+		List<Alumno> lista = lecturaDatosEjercicio1_Test(fichero);
 		
 		// Salida de datos:
-		ejercicio1ProgramacionLineal(mapa);
-		ejercicio1AlgoritmosGeneticos();
+		//ejercicio1ProgramacionLineal(mapa);
+		//ejercicio1AlgoritmosGeneticos();
 		
 		System.out.println(" Reparto obtenido: ");
 		System.out.println(" ");
 		System.out.println(" Afinidad media: ");
 		System.out.println(" ");
 
-		System.out.println(mapa);
+		//System.out.println(mapa);
+		System.out.println(lista);
 		
 	}
 

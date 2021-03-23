@@ -1,3 +1,9 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 6
+ */
+
 package ejercicio3;
 
 import java.util.ArrayList;
@@ -14,13 +20,13 @@ public class Producto {
 
 	}
 
-	public static Producto ofDetails(String nombre, Double precio, List<String> funcionalidades) {
+	public static Producto ofDatos(String nombre, Double precio, List<String> funcionalidades) {
 
 		return new Producto(nombre, precio, funcionalidades);
 
 	}
 	
-	public static Producto ofDatos(String datos) {
+	public static Producto ofLinea(String datos) {
 		
 		return new Producto(datos);
 		
@@ -66,6 +72,9 @@ public class Producto {
 		// 9.99
 		
 		// ********************************************************************************************
+		// Hacer split en base a los dos punts y eliminar los espacios; nos quedamos con la lista de funcionalidades
+		// a un lado, y al otro, volvemos a splitear en base a la "(" quedándonos con el nombre y el precio que se
+		// extrae eliminando los caracteres sobrantes y parseando a double:
 		String[] primerpaso = datos.trim().split(":");
 		String[] funcionalidades = primerpaso[1].trim().split(","); 
 		String[] segundopaso = primerpaso[0].split("\\(");
@@ -87,30 +96,39 @@ public class Producto {
 
 	// GETTTERS DE LA CLASE
 	public String getNombre() {
+		
 		return nombre;
+		
 	}
 
 	public Double getPrecio() {
+		
 		return precio;
+		
 	}
 
 	public List<String> getFuncionalidades() {
+		
 		return funcionalidades;
+		
 	}
 
 	// HASHCODE, EQUALS, TOSTRING DE LA CLASE
 	@Override
 	public int hashCode() {
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((funcionalidades == null) ? 0 : funcionalidades.hashCode());
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
 		return result;
+		
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -134,11 +152,14 @@ public class Producto {
 		} else if (!precio.equals(other.precio))
 			return false;
 		return true;
+		
 	}
 	
 	@Override
 	public String toString() {
+		
 		return "Producto [nombre=" + nombre + ", precio=" + precio + ", funcionalidades=" + funcionalidades + "]";
+		
 	}
 
 }

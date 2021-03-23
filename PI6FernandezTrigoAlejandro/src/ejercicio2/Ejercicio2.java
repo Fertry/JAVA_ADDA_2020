@@ -41,11 +41,11 @@ public class Ejercicio2 {
 		
 		while (i < lista.size()) {
 
-			String fila = lista.get(i);
+			String linea = lista.get(i);
 			// Hacer split en base a los dos puntos y quedarnos con la parte izquierda
 			// que representa a los abogados, hacer split nuevamente en base a
 			// la coma (en la derecha) para quedarnos con la lista de horas:
-			String[] contenido = fila.split(": ");
+			String[] contenido = linea.split(": ");
 			String abogado = contenido[0];
 			String[] horas = contenido[1].split(",");
 			
@@ -70,6 +70,26 @@ public class Ejercicio2 {
 		
 		return resultado;
 		
+	}
+	
+	private static List<Abogado> lecturaDatosEjercicio2_Test(String fichero) {
+		
+		int i = 0;	
+		List<Abogado> resultado = new ArrayList<Abogado>();
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		
+		while (i < lista.size()) {
+
+			String linea = lista.get(i);
+			Abogado abogado = Abogado.ofLinea(linea);
+			resultado.add(abogado);
+			
+			// Pasa a la siguiente línea del fichero:
+			i++;
+
+		}
+		
+		return resultado;
 	}
 	
 	/*
@@ -100,7 +120,8 @@ public class Ejercicio2 {
 	public static void ejercicio2(String fichero) {
 		
 		// Lectura de datos de entrada:
-		Map<String, List<Integer>> mapa = lecturaDatosEjercicio2(fichero);
+		//Map<String, List<Integer>> mapa = lecturaDatosEjercicio2(fichero);
+		List<Abogado> lista = lecturaDatosEjercicio2_Test(fichero);
 		
 		// Salida de datos:
 		ejercicio2ProgramacionLineal();
@@ -115,7 +136,8 @@ public class Ejercicio2 {
 				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + " horas.");
 		System.out.println(" ");
 		
-		System.out.println(mapa);
+		//System.out.println(mapa);
+		System.out.println(lista);
 			
 	}
 

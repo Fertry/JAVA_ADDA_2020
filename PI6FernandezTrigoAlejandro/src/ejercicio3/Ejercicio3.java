@@ -39,10 +39,10 @@ public class Ejercicio3 {
 		
 		while (i < lista.size()) {
 			
-			String fila = lista.get(i);
+			String linea = lista.get(i);
 
 			// Crea el objeto producto a partir de los elementos de la linea leida y lo añade a la lista:
-			Producto producto = Producto.ofDatos(fila);
+			Producto producto = Producto.ofLinea(linea);
 			listaProductos.add(producto);
 
 			i++;
@@ -53,15 +53,17 @@ public class Ejercicio3 {
 		 * Tratar la primera línea de fichero por separado, devolviendo una lista
 		 * con las funcionalidades requeridas:
 		 */
-		String primeraFila = lista.get(0);
+		// ********************************************************************************************
+		String primeraLinea = lista.get(0);
 		List<String> funcionalidadesRequeridas = new ArrayList<String>();
 		
-		String[] primeraLineaSinParsear = primeraFila.split(": ");
+		String[] primeraLineaSinParsear = primeraLinea.split(": ");
 		String[] primeraLineaParseada = primeraLineaSinParsear[1].split(",");
 		
 		for (String funcion : primeraLineaParseada) {
 			funcionalidadesRequeridas.add(funcion);
 		}
+		// ********************************************************************************************
 		
 		// Meterlo todo en la tupla:
 		Tuple2<List<String>, List<Producto>> resultado = Tuple.create(funcionalidadesRequeridas, listaProductos);
