@@ -114,10 +114,6 @@ public class Ejercicio1 {
 			
 		}
 		
-		/*
-		 * Mochila contiene: alumno con peso + valor
-		 */
-		
 	}
 	
 	/*

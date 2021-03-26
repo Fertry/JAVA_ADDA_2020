@@ -1,36 +1,21 @@
 head section
 
 
-Integer getCI()
 Integer getN()
-Integer getValor(Integer i)
-Integer getPeso(Integer i)
-Integer getNMU(Integer i)
-Integer CI = getCI()
-Integer n = getN()
-Integer p = getValor(2)
-
 String getNombre()
-List<Integer> getAfinidades(i)
-String nombre = getNombre()
-List<Integer> = getAfinidades()
+Integer getAfinidad(Integer i)
+Integer getNA()
+Integer numeroAfinidades = getNA()
+Integer n = getN()
 
 goal section
 
-max  sum(getValor(i) x[i], i in 0 .. n)
+max  sum(getAfinidad(i, j) x[i, j], i in 0 .. numeroAfinidades, j in 0 .. n)
 
 constraints section
 
-sum(getPeso(i) x[i], i in 0 .. n) <= CI
+sum(getAfinidad(i) x[i], i in 0 .. n) <= numeroAfinidades
 
-bounds section
+bin 
 
-x[i] <= getNMU(i), i in 0 .. n
-
-bin
-
-int  
-
-x[i], i in 0 .. n 
-
-free
+x[i, j], i in 0 .. n, j in 0 .. numero

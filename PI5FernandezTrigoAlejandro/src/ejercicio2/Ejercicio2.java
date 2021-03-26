@@ -47,9 +47,11 @@ public class Ejercicio2 {
 	 * representa los datos leídos como nodos (los vértices representan a cada
 	 * grupo).
 	 */
+	@SuppressWarnings("rawtypes")
 	private static Graph<String, DefaultEdge> lecturaDatosEjercicio2(String fichero) {
 
 		int i = 0;
+		@SuppressWarnings("unchecked")
 		Graph<String, DefaultEdge> grafo = new SimpleGraph(DefaultEdge.class);
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 

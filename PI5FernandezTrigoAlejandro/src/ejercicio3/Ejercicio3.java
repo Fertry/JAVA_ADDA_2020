@@ -52,9 +52,11 @@ public class Ejercicio3 {
 	 * asignatura y las aristas simbolizan un grafo dirigido donde unas asignaturas 
 	 * (vértices) apuntan a las asignaturas siguientes).
 	 */
+	@SuppressWarnings("rawtypes")
 	private static Graph<String, DefaultEdge> lecturaDatosEjercicio3(String fichero) {
 
 		int i = 0;
+		@SuppressWarnings("unchecked")
 		Graph<String, DefaultEdge> grafo = new SimpleDirectedGraph(DefaultEdge.class);
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		

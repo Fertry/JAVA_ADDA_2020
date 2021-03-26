@@ -1,0 +1,32 @@
+head section
+
+
+Integer getN()
+String getNombre()
+Integer getAfinidad(Integer i)
+Integer getNA()
+Integer numeroAfinidades = getNA()
+Integer n = getN()
+
+goal section
+
+max  sum(getAfinidad(i, j) x[i, j], i in 0 .. numeroAfinidades, j in 0 .. n) // Afinidad de i, j por x [i, j]
+// Tiene que dar como resultado un número.
+
+constraints section
+
+sum(getAfinidad(i) x[i], i in 0 .. n) <= numeroAfinidades
+sum(getAfinidad(i) x[i], i in 0 .. n) <= numeroAfinidades
+sum(getAfinidad(i) x[i], i in 0 .. n) <= numeroAfinidades
+
+// R1: Si x[i, j] == True, al alumno i le hemos asignado el grupo j
+// R2: Para todos los alumnos, debe de haber asignado un único grupo
+// Todos los grupos deben de tener el mismo número de alumnos
+
+bounds section
+
+x[i] <= getAfinidad(i), i in 0 .. n // NO HACE FALTA
+
+bin 
+
+x[i, j], i in 0 .. n, j in 0 .. numero
