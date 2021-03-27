@@ -72,12 +72,12 @@ public class Ejercicio2 {
 			int j = 0;
 			int k = 0;
 
-			// Añadir al grafo resultante los vértices contenidos en grupos[] sin
-			// espacios, comprobando que dicho vértice no se encuentra ya dentro:
+			// Añadir al grafo resultante las aristas contenidos en grupos[] sin
+			// espacios, comprobando que dicha conexión no se encuentra ya dentro:
 			while (j < grupos.length) {
 				while (k < grupos.length) {
 
-					// Si NO está ya en el grafo:
+					// Si NO está ya conectado en el grafo:
 					if (!grupos[j].trim().equals(grupos[k].trim())) {
 
 						// Añade los vértices al grafo:
