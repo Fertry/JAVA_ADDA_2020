@@ -105,11 +105,12 @@ public class Ejercicio3 {
 	 */
 	private static void ejercicio3A(Graph<String, DefaultEdge> grafo) {
 		
+		List<String> resultado = new ArrayList<>();
+		
 		// Ordenación topológica de JGraph:
 		TopologicalOrderIterator<String, DefaultEdge> ordenador = new TopologicalOrderIterator<>(grafo);
 		
 		// Genera una lista de nombres de asignaturas en base al objeto ordenador:
-		List<String> resultado = new ArrayList<>();
 		ordenador.forEachRemaining(v -> resultado.add(v));
 		System.out.println(resultado);
 		
@@ -146,8 +147,8 @@ public class Ejercicio3 {
 		Graphs2.toDot(
 				grafo,											// Grafo de entrada
 				"salida/salidaEjercicio3B.gv",					// Ruta de salida de fichero
-				v -> v,											// Valor de las vértices (v)
-				e -> "",										// Valor de las aritas a "vacío"
+				v -> v,											// Valor de los vértices (v)
+				e -> "",										// Valor de las aristas a "vacío"
 				v -> GraphColors.getColorIf(					// Condicional: en base al booleano devuelto
 						GraphColors.Color.green,   				// por grafo.incomingEdgesOf(v).size() == 0
 						GraphColors.Color.black,				// (apartado B.1), colorea en verde o negro 
@@ -169,7 +170,7 @@ public class Ejercicio3 {
 			
 			Set<String> vertices = new HashSet<String>();
 			// Si al grafo, dado un vértice NO le entra ningún otro vértice Y el set de asignaturas contiene a todos los padres del vértice dado:
-			if (!padres(grafo, vertice).isEmpty() && asignaturas.containsAll(padres(grafo, vertice))) {
+			if (!calculaOrigenesDeVertice(grafo, vertice).isEmpty() && asignaturas.containsAll(calculaOrigenesDeVertice(grafo, vertice))) {
 				
 				vertices.add(vertice);
 				// Si asignaturas NO contiene todos los vértices, se añade al set:
@@ -190,31 +191,36 @@ public class Ejercicio3 {
 	 * de un color y las que no de otro distinto. Emplea el método auxiliar colorear() pasando como paramétros el vértice, la lista
 	 * de asignaturas de entrada y una llamada al método previo. 
 	 */
-	private static void ejercicio3C2(Graph<String, DefaultEdge> grafo, Set<String> asignaturas, Set<String> resultado) {
+	private static void ejercicio3C2(Graph<String, DefaultEdge> grafo, Set<String> asignaturas, Set<String> resultado, String nombre) {
+		
+		// Para que el método no sobrescriba a cada grafo generado, le paso un cuarto parámetro que 
+		// simboliza el nombre del archivo.
 		
 		// Vuelca el resultado en un fichero .gv mediante el método toDot():
 		Graphs2.toDot(
 				grafo, 												// Grafo de entrada
-				"salida/salidaEjercicio3C.gv",					    // Ruta de salida de fichero
-				v -> v,												// Valor de las vértices (v)
-				e -> "",											// Valor de las aritas a "vacío"
-				v -> colorear(v, asignaturas, resultado),		    // Obtiene el color de la función colorear() en base a la lista de asignaturas de entrada y el resultado del apartado C
+				nombre,					    						// Ruta de salida de fichero
+				v -> v,												// Valor de los vértices (v)
+				e -> "",											// Valor de las aristas a "vacío"
+				v -> colorearC(v, asignaturas, resultado),		    // Obtiene el color de la función colorearC() en base a la lista de asignaturas de entrada y el resultado del apartado C
 				e -> GraphColors.getStyle(Style.bold));				// Define el estilo del grafo
 		
 	}
 	
-	/*
+	/* 
 	 * Método auxiliar para calcular un conjunto con los padres de un vértice; esto es, dado el grafo y el nombre del vértice, obtiene 
-	 * un set con los vérticess que apuntan a dicho vértice dado. 
-	 */
-	private static Set<String> padres(Graph<String, DefaultEdge> grafo, String vertice) {
+	 * un set con los vértices que apuntan a dicho vértice dado. 
+	 */ 
+	private static Set<String> calculaOrigenesDeVertice(Graph<String, DefaultEdge> grafo, String vertice) {
 		
 		Set<String> resultado = new HashSet<String>();
 		
 		// Por cada arista del vértice que se pasa como parámetro:
 		for (DefaultEdge arista : grafo.incomingEdgesOf(vertice)) { 
 
-			// Convertir a string y eliminar los caracteres sobrantes:
+			// Convertir a string y eliminar los caracteres sobrantes.
+			// Dado que el formato de la arista es (Asignatura_01 : Asignatura_06),
+			// obtengo la parte izquierda que es el padre:
 			String[] aristas = arista.toString().split(":");
 			String padre = aristas[0].replace("(", "").trim();
 			
@@ -234,8 +240,8 @@ public class Ejercicio3 {
 	 * Método auxiliar para, dado un vértice de entrada, un set de asignturas seleccionadas y el set devuelto por el método 
 	 * del ejercicio 3C, asignar colores a cada vértice por separado. Se usa este método al tratarse de una selección de 3
 	 * o más colores que no permite hacerlo con getColorIf().
-	 */
-	private static Map<String, Attribute> colorear(String vertice, Set<String> asignaturas, Set<String> resultado) {
+	 */ 
+	private static Map<String, Attribute> colorearC(String vertice, Set<String> asignaturas, Set<String> resultado) {
 		
 		// Si el set de asignaturas seleccionadas contiene al vértice en cuestión:
 		if (asignaturas.contains(vertice)) {
@@ -247,7 +253,7 @@ public class Ejercicio3 {
 			
 			return GraphColors.getColor(GraphColors.Color.yellow);
 		
-		// Case contrario:
+		// Caso contrario:
 		} else {
 			
 			return GraphColors.getColor(GraphColors.Color.black);
@@ -288,7 +294,6 @@ public class Ejercicio3 {
 		 System.out.println("");
 		System.out.println("Apartado B.1). - Asignaturas sin requisitos");
 		 ejercicio3B1(grafo);
-		 System.out.println("");
 		System.out.println("Apartado B.2). - Salida volcada en fichero salidaEjercicio3B.gv");
 		 System.out.println("");
 		 ejercicio3B2(grafo);
@@ -301,9 +306,11 @@ public class Ejercicio3 {
 		 Set<String> resultadoEjercicio3C12 = ejercicio3C1(grafo, datosDePrueba2);
 		 System.out.println(resultadoEjercicio3C12);
 		 System.out.println("");
-		System.out.println("Apartado C.2). - Salida volcada en fichero salidaEjercicio3C.gv\n"); 
-		 ejercicio3C2(grafo, datosDePrueba1, resultadoEjercicio3C11);
-		 ejercicio3C2(grafo, datosDePrueba2, resultadoEjercicio3C12);
+		System.out.println("Apartado C.2). - Salida de datos");
+		System.out.println(" Apartado C.2). - Test 1 - Salida volcada en fichero salidaEjercicio3C1.gv"); 
+		 ejercicio3C2(grafo, datosDePrueba1, resultadoEjercicio3C11, "salida/salidaEjercicio3C1.gv");
+		System.out.println(" Apartado C.2). - Test 2 - Salida volcada en fichero salidaEjercicio3C2.gv\n");
+		 ejercicio3C2(grafo, datosDePrueba2, resultadoEjercicio3C12, "salida/salidaEjercicio3C2.gv");
 		
 	}
 	

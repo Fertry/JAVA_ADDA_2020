@@ -65,6 +65,10 @@ public class Ejercicio2 {
 			String[] grupos = contenido[1].trim().split(",");
 
 			// Añadir cada nodo/vértice (grupo) de la lista al grafo vacío:
+			/*
+			 * grafo.addVertex(Grupo1, Grupo2, Grupo3);
+			 * Si está repetido no se añade.
+			 */
 			for (String vertice : grupos) {
 				grafo.addVertex(vertice.trim());
 			}
@@ -74,6 +78,9 @@ public class Ejercicio2 {
 
 			// Añadir al grafo resultante las aristas contenidos en grupos[] sin
 			// espacios, comprobando que dicha conexión no se encuentra ya dentro:
+			/*
+			 * if (GrupoA != GrupoB) --> grafo.addEdge(GrupoA, GrupoB)
+			 */
 			while (j < grupos.length) {
 				while (k < grupos.length) {
 
@@ -109,36 +116,43 @@ public class Ejercicio2 {
 	/*
 	 * Apartado A): Usando el tipo de GreedyColoring, igual al apartado B, obtenemos
 	 * un mapa que contiene los grupos del grafo de entrada y como valores, los
-	 * colores asociados después de colorear los vértices.
+	 * colores asociados después de colorear los vértices. Modelamos así el problema 
+	 * cómo un problema de coloreado mínimo de vértices. 
 	 */
 	private static void ejercicio2A(Graph<String, DefaultEdge> grafo) {
 
+		int i = 0;
+		
 		// Crea un objeto de tipo GreedyColoring y colorea el grafo entrante:
 		VertexColoringAlgorithm<String> vertice = new GreedyColoring<>(grafo);
 		VertexColoringAlgorithm.Coloring<String> verticeColoreado = vertice.getColoring();
 
-		// Crea un mapa donde las claves representan los grupos y sus valores los
-		// colores asociados:
-		Map<String, Integer> colores = verticeColoreado.getColors();
-
 		// Crea un mapa conteniendo las franjas horarias como claves y los grupos
 		// asociados a cada una:
 		Map<Integer, List<String>> mapa = new HashMap<Integer, List<String>>();
+		
+		// Crea un mapa donde las claves representan los grupos y sus valores los
+		// colores asociados. Se obtiene del propio método getColors():
+		Map<String, Integer> colores = verticeColoreado.getColors();
 
-		for (Entry<String, Integer> entry : colores.entrySet()) {
+		// Recorremos los colores devueltos por el set generado mediante entrySet(),
+		// por cada elemento del set compruebo si el mapa de resultado contiene el color
+		// (entero) asociado al vértice correspondiente. Si es así, guardo en la lista
+		// el valor del mapa (lista de string) asociado al color para ese vértice:
+		for (Entry<String, Integer> set : colores.entrySet()) {
 
 			// Lista de grupos vaciada en cada iteración:
 			List<String> lista = new ArrayList<String>();
 
-			if (mapa.containsKey(colores.get(entry.getKey()))) {
+			if (mapa.containsKey(colores.get(set.getKey()))) {
 
-				lista = mapa.get(colores.get(entry.getKey()));
+				lista = mapa.get(colores.get(set.getKey()));
 
 			}
 
 			// Añadir a la lista el grupo y meterlo en el mapa:
-			lista.add(entry.getKey());
-			mapa.put(colores.get(entry.getKey()), lista);
+			lista.add(set.getKey());
+			mapa.put(colores.get(set.getKey()), lista);
 
 		}
 
@@ -146,14 +160,17 @@ public class Ejercicio2 {
 		System.out.println(" Nº de franjas horarias necesarias: " + verticeColoreado.getNumberColors());
 		System.out.println(" Grupos a impartirse en paralelo según franja horaria: ");
 
-		for (int i = 0; i < verticeColoreado.getNumberColors(); i++) {
-
+		while (i < verticeColoreado.getNumberColors()) {
+			
 			// Por cada franja horaria, muestra el nº junto con los grupos (en el mapa)
 			// asociados a la misma:
 			System.out.print(" Franja nº " + (i + 1) + ": " + mapa.get(i));
-
+			i++;
+			
 		}
-
+		
+		System.out.println("");
+		
 	}
 
 	/*
