@@ -26,9 +26,9 @@ public class Alumno {
 
 	}
 
-	public static Alumno ofLinea(String datos) {
+	public static Alumno ofLinea(String linea) {
 
-		return new Alumno(datos);
+		return new Alumno(linea);
 
 	}
 	
@@ -40,7 +40,7 @@ public class Alumno {
 	public static Integer getAfinidadAGrupo(Alumno alumno, Integer grupo) {
 		
 		Integer resultado = null;
-		Integer numeroGrupos = alumno.getAfinidades().size();
+		Integer numeroGrupos = Alumno.getAfinidades().size();
 		
 		if (grupo > numeroGrupos || grupo < numeroGrupos) {
 			
@@ -48,7 +48,7 @@ public class Alumno {
 			
 		} else {
 			
-			resultado = alumno.getAfinidades().get(grupo);
+			resultado = Alumno.getAfinidades().get(grupo);
 			
 		}
 		
@@ -57,22 +57,27 @@ public class Alumno {
 	}
 
 	// ATRIBUTOS DE LA CLASE INMUTABLES
-	private final String nombre;
-	private final List<Integer> afinidades;
+	private static Integer n = 0;
+	public static Integer id;
+	public static String nombre;
+	public static List<Integer> afinidades;
 
 	// CONSTRUCTORES DE LA CLASE
-	private Alumno() {
+	public Alumno() {
 			
-		this.nombre = null;
-		this.afinidades = null;
+		Alumno.id = null;
+		Alumno.nombre = null;
+		Alumno.afinidades = null;
 		
 	}
 	
 	private Alumno(String nombre, List<Integer> afinidades) {
 		
 		super();
-		this.nombre = nombre;
-		this.afinidades = afinidades;
+		Alumno.id = n;
+		Alumno.nombre = nombre;
+		Alumno.afinidades = afinidades;
+		n++;
 		
 	}
 
@@ -102,64 +107,43 @@ public class Alumno {
 		}
 		// ********************************************************************************************
 
-		this.nombre = nombre;
-		this.afinidades = listaAfinidades;
+		Alumno.id = n;
+		Alumno.nombre = nombre;
+		Alumno.afinidades = listaAfinidades;
+		n++;
 		
 	}
 
 	// GETTTERS DE LA CLASE
-	public String getNombre() {
+	public static Integer getId() {
+		
+		return id;
+				
+	}
+	
+	public static String getNombre() {
 		
 		return nombre;
 		
 	}
 
-	public List<Integer> getAfinidades() {
+	public static List<Integer> getAfinidades() {
 		
 		return afinidades;
 		
 	}
-
-	// HASHCODE, EQUALS, TOSTRING DE LA CLASE	
-	@Override
-	public int hashCode() {
+	
+	public static Integer getNumeroGrupos() {
 		
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((afinidades == null) ? 0 : afinidades.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		return result;
+		return afinidades.size();
 		
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Alumno other = (Alumno) obj;
-		if (afinidades == null) {
-			if (other.afinidades != null)
-				return false;
-		} else if (!afinidades.equals(other.afinidades))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
-		
-	}
-
+	// TO_STRING DE LA CLASE	
 	@Override
 	public String toString() {
 		
-		return "Alumno [nombre=" + nombre + ", afinidades=" + afinidades + "]";
+		return "Alumno [Nombre = " + nombre + ", Afinidades = " + afinidades + "]";
 		
 	}
 

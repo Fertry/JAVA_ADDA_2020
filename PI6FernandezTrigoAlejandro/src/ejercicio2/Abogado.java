@@ -26,9 +26,9 @@ public class Abogado {
 
 	}
 
-	public static Abogado ofLinea(String datos) {
+	public static Abogado ofLinea(String linea) {
 
-		return new Abogado(datos);
+		return new Abogado(linea);
 
 	}
 	
@@ -40,7 +40,7 @@ public class Abogado {
 	public static Integer getHorasPorCaso(Abogado abogado, Integer caso) {
 		
 		Integer resultado = null;
-		Integer numeroCasos = abogado.getHoras().size();
+		Integer numeroCasos = Abogado.getHoras().size();
 		
 		if (caso > numeroCasos || caso < numeroCasos) {
 			
@@ -48,7 +48,7 @@ public class Abogado {
 			
 		} else {
 			
-			resultado = abogado.getHoras().get(caso);
+			resultado = Abogado.getHoras().get(caso);
 			
 		}
 		
@@ -57,22 +57,27 @@ public class Abogado {
 	}
 
 	// ATRIBUTOS DE LA CLASE INMUTABLES
-	private final String nombre;
-	private final List<Integer> horas;
+	private static Integer n = 0;
+	public static Integer id;
+	public static String nombre;
+	public static List<Integer> horas;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Abogado() {
 				
-			this.nombre = null;
-			this.horas = null;
+		Abogado.id = null;
+		Abogado.nombre = null;
+		Abogado.horas = null;
 			
 	}
 
 	private Abogado(String nombre, List<Integer> afinidades) {
 			
-			super();
-			this.nombre = nombre;
-			this.horas = afinidades;
+		super();
+		Abogado.id = n; 
+		Abogado.nombre = nombre;
+		Abogado.horas = afinidades;
+		n++;
 			
 	}
 
@@ -102,59 +107,44 @@ public class Abogado {
 		}
 		// ********************************************************************************************
 
-		this.nombre = nombre;
-		this.horas = listaHoras;
+		Abogado.id = n;
+		Abogado.nombre = nombre;
+		Abogado.horas = listaHoras;
+		n++;
 			
 	}
 
 	// GETTTERS DE LA CLASE
-	public String getNombre() {
+	public static Integer getId() {
+		
+		return id;
+		
+	}
+	
+	public static String getNombre() {
 
 		return nombre;
 
 	}
 
-	public List<Integer> getHoras() {
+	public static List<Integer> getHoras() {
 
 		return horas;
 
 	}
-
-	// HASHCODE, EQUALS, TOSTRING DE LA CLASE
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((horas == null) ? 0 : horas.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		return result;
+	
+	public static Integer getNumeroCasos() {
+		
+		return horas.size();
+		
 	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Abogado other = (Abogado) obj;
-		if (horas == null) {
-			if (other.horas != null)
-				return false;
-		} else if (!horas.equals(other.horas))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		return true;
-	}
-
+	
+	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
-		return "Abogado [nombre=" + nombre + ", horas=" + horas + "]";
+		
+		return "Abogado [Nombre = " + nombre + ", Horas = " + horas + "]";
+		
 	}
 
 }

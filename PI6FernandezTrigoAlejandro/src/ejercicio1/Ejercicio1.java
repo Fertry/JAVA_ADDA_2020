@@ -6,6 +6,7 @@
 
 package ejercicio1;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,7 +14,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
+import us.lsi.gurobi.GurobiLp;
+import us.lsi.solve.AuxGrammar;
 
 /*
 	Una academia de inglés tiene n alumnos a ser repartidos en m grupos (n múltiplo
@@ -127,6 +131,26 @@ public class Ejercicio1 {
 		
 	}
 	
+	public static void resolvedor() throws IOException {
+		
+		AuxGrammar.dataClass = Ejercicio1.class;
+		Ejercicio1.iniDatos("ficheros/PI6Ej1DatosEntrada1.txt");
+		AuxGrammar.generate(Ejercicio1.class, "src/ejercicio1/Alumno.lsi", "salida/alumno.lp");
+		GurobiLp.solve("salida/alumno.lp");
+		
+	}
+	
+	private static List<Alumno> alumnos;
+	public static Integer numeroDeAlumnos;
+	
+	public static void iniDatos(String fichero) {
+		
+		alumnos = Files2.streamFromFile(fichero).<Alumno>map((String s) -> Alumno.ofLinea(s)).collect(Collectors.<Alumno>toList());
+		
+		numeroDeAlumnos = alumnos.size();
+		
+	}
+	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
@@ -134,20 +158,72 @@ public class Ejercicio1 {
 		
 		// Lectura de datos de entrada:
 		//Map<String, List<Integer>> mapa = lecturaDatosEjercicio1(fichero);
-		List<Alumno> lista = lecturaDatosEjercicio1_Test(fichero);
+		//List<Alumno> lista = lecturaDatosEjercicio1_Test(fichero);
 		
 		// Salida de datos:
 		//ejercicio1ProgramacionLineal(mapa);
 		//ejercicio1AlgoritmosGeneticos();
 		
-		System.out.println(" Reparto obtenido: ");
-		System.out.println(" ");
-		System.out.println(" Afinidad media: ");
-		System.out.println(" ");
+		//System.out.println(" Reparto obtenido: ");
+		//System.out.println(" ");
+		//System.out.println(" Afinidad media: ");
+		//System.out.println(" ");
+		
+		try {
+			
+			resolvedor();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		}
+		
 
 		//System.out.println(mapa);
-		System.out.println(lista);
+		//System.out.println(lista);
 		
+	}
+	
+	
+	// =================================================================================================================
+	public static List<Alumno> getAlumnos() {
+		return alumnos;
+	}
+
+	public static Alumno getAlumno(int index) {
+		return Ejercicio1.getAlumnos().get(index);
+	}
+
+	public static String getNombre(int index) {
+		Ejercicio1.getAlumnos().get(index);
+		return Alumno.getNombre();
+	}
+
+	public static List<Integer> getAfinidades(int index) {
+		Ejercicio1.getAlumnos().get(index);
+		return Alumno.getAfinidades();
+	}
+
+	public static Integer obtenerAfinidad(Integer i, Integer j) {
+		Ejercicio1.getAlumnos().get(i);
+		/*
+		 * Dado un alumno, y un grupo, devolver su afinidad.
+		 */
+		return Alumno.afinidades.get(j);
+	}
+
+	public static Integer getNumeroAfinidades() { // i
+		alumnos.get(0);
+		return Alumno.getAfinidades().size();
+	}
+
+	public static Integer getNumeroAlumnos() { // j
+		return Ejercicio1.getAlumnos().size();
+	}
+
+	public static Boolean restricciones(Integer c) {
+		return c >= 0;
 	}
 	
 }

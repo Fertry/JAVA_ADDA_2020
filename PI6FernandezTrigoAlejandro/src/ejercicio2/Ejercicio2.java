@@ -6,13 +6,19 @@
 
 package ejercicio2;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import ejercicio1.Alumno;
+import ejercicio1.Ejercicio1;
+import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
+import us.lsi.gurobi.GurobiLp;
+import us.lsi.solve.AuxGrammar;
 
 /*
 	Un bufete de abogados cuenta con un equipo de n personas que deben analizar m
@@ -114,6 +120,26 @@ public class Ejercicio2 {
 		
 	}
 	
+	public static void resolvedor() throws IOException {
+		
+		AuxGrammar.dataClass = Ejercicio2.class;
+		Ejercicio2.iniDatos("ficheros/PI6Ej2DatosEntrada1.txt");
+		AuxGrammar.generate(Ejercicio2.class, "src/ejercicio2/Abogado.lsi", "salida/abogado.lp");
+		GurobiLp.solve("salida/alumno.lp");
+		
+	}
+	
+	private static List<Abogado> abogados;
+	public static Integer numeroDeAbogados;
+	
+	public static void iniDatos(String fichero) {
+		
+		abogados = Files2.streamFromFile(fichero).<Abogado>map((String s) -> Abogado.ofLinea(s)).collect(Collectors.<Abogado>toList());
+		
+		numeroDeAbogados = abogados.size();
+		
+	}
+	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
@@ -121,24 +147,37 @@ public class Ejercicio2 {
 		
 		// Lectura de datos de entrada:
 		//Map<String, List<Integer>> mapa = lecturaDatosEjercicio2(fichero);
-		List<Abogado> lista = lecturaDatosEjercicio2_Test(fichero);
+		//List<Abogado> lista = lecturaDatosEjercicio2_Test(fichero);
 		
 		// Salida de datos:
-		ejercicio2ProgramacionLineal();
-		ejercicio2AlgoritmosGeneticos();
+		//ejercicio2ProgramacionLineal();
+		//ejercicio2AlgoritmosGeneticos();
 		
-		System.out.println(" ");
-		System.out.println("  Horas empleadas: ");
-		System.out.println("  Casos estudiados: ");
-		System.out.println("  Media (horas/caso): ");
-		System.out.println(" · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- -");
-		System.out.println(" El estudio de todos los casos ha supuesto un total de " + " horas de trabajo\n"
-				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + " horas.");
-		System.out.println(" ");
+//		System.out.println(" ");
+//		System.out.println("  Horas empleadas: ");
+//		System.out.println("  Casos estudiados: ");
+//		System.out.println("  Media (horas/caso): ");
+//		System.out.println(" · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- -");
+//		System.out.println(" El estudio de todos los casos ha supuesto un total de " + " horas de trabajo\n"
+//				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + " horas.");
+//		System.out.println(" ");
 		
 		//System.out.println(mapa);
-		System.out.println(lista);
+		//System.out.println(lista);
+		
+		try {
+			
+			resolvedor();
+			
+		} catch (IOException e) {
+			
+			e.printStackTrace();
+			
+		}
 			
 	}
+	
+	// =================================================================================================================
+
 
 }
