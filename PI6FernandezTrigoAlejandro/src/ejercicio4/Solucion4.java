@@ -4,7 +4,7 @@
  *      Practica Individual 6
  */
 
-package ejercicio2;
+package ejercicio4;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 import us.lsi.flujossecuenciales.StreamsS;
 
 /*
- * Clase solución que pretende parsear la salida del resolvedor Gurobi y la salida
- * de algoritmos genéticos para mostrar los resultados acordes al fichero de resultados.
+ * Clase solución que pretende parsear la salida del resolvedor Gurobi para mostrar los 
+ * resultados acordes al fichero de resultados.
  */
-public class Solucion2 {
+public class Solucion4 {
 	
-	public static void solucionLP2(String fichero, String entrada) {
+	public static void solucionLP4(String fichero, String entrada) {
 		
 		// Crear el objeto para escribir sobre fichero:
 		PrintWriter writer = null;
@@ -30,7 +30,7 @@ public class Solucion2 {
 		try {
 			
 			// Crea el archivo para escribir sobre el:
-			archivo = new FileWriter("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""));
+			archivo = new FileWriter("volcado/salidaPLEj4DatosEntrada" + fichero.replace("ficheros/PI6Ej4DatosEntrada", ""));
 			
 			// Escribe sobre el archivo:
 			writer = new PrintWriter(archivo);
@@ -40,7 +40,7 @@ public class Solucion2 {
 			archivo.close();
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			formateo("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""), fichero);
+			//formateo("volcado/salidaPLEj4DatosEntrada" + fichero.replace("ficheros/PI6Ej4DatosEntrada", ""), fichero);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -77,23 +77,20 @@ public class Solucion2 {
 			// Una x (se descarta), el abogado y el caso.
 			String[] valores = datos[0].trim().split("_");
 			
-			// Añadir los valores al mapa, esto es: Abogado (como clave) y Caso (como valor):
+			// Añadir los valores al mapa, esto es: Conjunto (como clave) y Elemento (como valor):
 			reparto.put(Integer.parseInt(valores[1].trim()), Integer.parseInt(valores[2].trim()));
 			
 			i++;
 			
 		}
 		
-		String[] tiempo = lista.get(2).trim().split("==");
-		String horas = tiempo[1].trim();
-
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("Reparto obtenido:");
 		System.out.println(reparto);
-		System.out.println("Finalizado en " + horas + " horas.");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 	}
+
 }

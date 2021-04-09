@@ -26,7 +26,7 @@ public class Abogado {
 
 	}
 
-	// ATRIBUTOS DE LA CLASE INMUTABLES
+	// ATRIBUTOS DE LA CLASE
 	public static String nombre;
 	public static List<Integer> horas;
 

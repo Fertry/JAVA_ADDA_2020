@@ -6,12 +6,11 @@
 
 package ejercicio3;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import us.lsi.common.Tuple;
-import us.lsi.common.Tuple2;
 import us.lsi.flujossecuenciales.StreamsS;
 
 /*
@@ -27,92 +26,89 @@ import us.lsi.flujossecuenciales.StreamsS;
 public class Ejercicio3 {
 	
 	/*
-	 * Lectura de datos; devuelve un una tupla para encapsular, por un lado una lista con todas las funcionalidades
-	 * requeridas y, por otro lado, una lista del tipo Producto que a su vez define los siguientes atributos (parseados
-	 * en la propia clase) Nombre, Precio, Lista de funcionalidades cubiertas por el producto.
-	 */
-	private static Tuple2<List<String>, List<Producto>> lecturaDatosEjercicio3(String fichero)  {
+	 * Variables de la clase necesarias para ser accedidas por las clases
+	 * PL y AG que resuelven el ejercicio. 
+	*/
+	public static List<String> nombres;
+	public static List<List<Integer>> funcionalidades;
+	
+	/*
+	 * Método inicial para la lectura de datos del fichero que se pasa como
+	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
+	 * Se accederá a los datos desde las clases PL y AG que resuelven el ejercicio.
+	*/
+	public static void iniDatos(String fichero) {
 		
-		int i = 1;	
-		List<Producto> listaProductos = new ArrayList<Producto>();
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		funcionalidades = new ArrayList<List<Integer>>();
+		nombres = new ArrayList<String>();
 		
-		while (i < lista.size()) {
+		int i = 0;
+        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+
+        while (i < lista.size()) {
+        	
+            String linea = lista.get(i);            
+            create(linea);
+            i++;
+            
+        }
+
+	}
+	
+	public static void create(String s) {
+		
+		String[] contenido = s.split(": ");
+		String nombre2 = contenido[0];
+		String[] numeros = contenido[1].split(",");
+
+		List<Integer> afinidadesAux = new ArrayList<Integer>();
+		
+		for (String numero : numeros) {
 			
-			String linea = lista.get(i);
-
-			// Crea el objeto producto a partir de los elementos de la linea leida y lo añade a la lista:
-			Producto producto = Producto.ofLinea(linea);
-			listaProductos.add(producto);
-
-			i++;
+			afinidadesAux.add(Integer.parseInt(numero));
 			
 		}
-		
-		/*
-		 * Tratar la primera línea de fichero por separado, devolviendo una lista
-		 * con las funcionalidades requeridas:
-		 */
-		// ********************************************************************************************
-		String primeraLinea = lista.get(0);
-		List<String> funcionalidadesRequeridas = new ArrayList<String>();
-		
-		String[] primeraLineaSinParsear = primeraLinea.split(": ");
-		String[] primeraLineaParseada = primeraLineaSinParsear[1].split(",");
-		
-		for (String funcion : primeraLineaParseada) {
-			funcionalidadesRequeridas.add(funcion);
-		}
-		// ********************************************************************************************
-		
-		// Meterlo todo en la tupla:
-		Tuple2<List<String>, List<Producto>> resultado = Tuple.create(funcionalidadesRequeridas, listaProductos);
 
-		return resultado;
+		nombres.add(nombre2);
+		funcionalidades.add(afinidadesAux);
 		
 	}
 	
 	/*
-	 * Repartir los productos en lotes que por el menor precio (minimizar) tengan el mayor 
-	 * número de funcionalides cubiertas. Realizar mediante Programación Lineal (PL).
-	 */
-	private static void ejercicio3ProgramacionLineal() {
-		
-		//TO-DO
-		
-	}
-	
-	/*
-	 * Repartir los productos en lotes que por el menor precio (minimizar) tengan el mayor 
-	 * número de funcionalides cubiertas. Realizar mediante Algoritmos Genéticos (GA).
-	 */
-	private static void ejercicio3AlgoritmosGeneticos() {
-		
-		//TO-DO
-		
-	}
+	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
+	 * en el fichero .lsi para generar el modelo .lp. 
+	*/
 	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
 	public static void ejercicio3(String fichero) {
 		
-		// Lectura de datos de entrada:
-		Tuple2<List<String>, List<Producto>> tupla = lecturaDatosEjercicio3(fichero);
+		// Solución por Programación Lineal:
+		try {
 
-		// Salida de datos:
-		ejercicio3ProgramacionLineal();
-		ejercicio3AlgoritmosGeneticos();
-		
-		System.out.println(" Funcionalidades a cubrir: ");
-		System.out.println(" Composición del lote seleccionado: ");
-		System.out.println("  ");
-		System.out.println(" Funcionalidades de la selección: ");
-		System.out.println(" Precio total del lote seleccionado: " + " euros");
-		System.out.println(" ");
-		
-		System.out.println(tupla);
-		
+			LP3.ejercicio3LP(fichero);
+
+		} catch (IOException e) {
+
+			System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
+			System.out.println("para el fichero: " + fichero + ".\n");
+			// e.printStackTrace();
+
+		}
+
+		// Solución por Algoritmos Genéticos:
+//		try {
+//
+//			PL.ejercicio1LP();
+//
+//		} catch (IOException e) {
+//
+//			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
+//			e.printStackTrace();
+//
+//		}
+
 	}
 
 }

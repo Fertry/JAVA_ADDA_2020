@@ -8,7 +8,7 @@ package tests;
 
 import ejercicio1.Ejercicio1;
 import ejercicio2.Ejercicio2;
-//import ejercicio3.Ejercicio3;
+import ejercicio3.Ejercicio3;
 //import ejercicio4.Ejercicio4;
 //import ejercicio5.Ejercicio5;
 
@@ -34,18 +34,15 @@ public class Test {
 			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
-//		
-//		System.out.println("##################################################################");
-//		System.out.println("######################### EJERCICIO 3 ############################");
-//			System.out.println(" PI6E31DatosEntrada1.txt");
-//			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada1.txt");
-//			System.out.println(" PI6Ej3DatosEntrada2.txt");
-//			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada2.txt");
-//			System.out.println(" PI6Ej3DatosEntrada3.txt");
-//			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada3.txt");
-//		System.out.println("##################################################################");
-//		System.out.println("##################################################################\n");
-//		
+	
+		System.out.println("##################################################################");
+		System.out.println("######################### EJERCICIO 3 ############################");
+			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada1.txt");
+			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada2.txt");
+			Ejercicio3.ejercicio3("ficheros/PI6Ej3DatosEntrada3.txt");
+		System.out.println("##################################################################");
+		System.out.println("##################################################################\n");
+		
 //		System.out.println("##################################################################");
 //		System.out.println("######################### EJERCICIO 4 ############################");
 //			Ejercicio4.ejercicio4("ficheros/PI6Ej4DatosEntrada.txt");

@@ -6,6 +6,7 @@
 
 package ejercicio4;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,73 +24,76 @@ import us.lsi.flujossecuenciales.StreamsS;
 public class Ejercicio4 {
 	
 	/*
-	 * Lectura de datos; devuelve una lista de tipo List<List<Integer>> que se corresponde a las listas de números
-	 * leídos por fichero línea a línea. 
-	 */
-	private static List<List<Integer>> lecturaDatosEjercicio4(String fichero) {
+	 * Variables de la clase necesarias para ser accedidas por la clase
+	 * PL que resuelve el ejercicio. 
+	*/
+	public static List<String> nombres;
+	public static List<List<Integer>> elementos;
+	
+	/*
+	 * Método inicial para la lectura de datos del fichero que se pasa como
+	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
+	 * Se accederá a los datos desde la clase PL que resuelve el ejercicio.
+	*/
+	public static void iniDatos(String fichero) {
 		
-		int i = 0;	
-		List<List<Integer>> resultado = new ArrayList<List<Integer>>();
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		elementos = new ArrayList<List<Integer>>();
+		nombres = new ArrayList<String>();
 		
-		while (i < lista.size()) {
+		int i = 0;
+        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 
-			String linea = lista.get(i);
-			// Hacer split en base a las comas (junto al espacio) que separan los números:
-			String[] contenido = linea.split(", ");
+        while (i < lista.size()) {
+        	
+            String linea = lista.get(i);            
+            create(linea);
+            i++;
+            
+        }
 
-			// En cada iteración reinicio la lista:
-			List<Integer> listaNumeros = new ArrayList<>();
+	}
+	
+	public static void create(String s) {
+		
+		String[] contenido = s.split(": ");
+		String nombre2 = contenido[0];
+		String[] numeros = contenido[1].split(",");
+
+		List<Integer> afinidadesAux = new ArrayList<Integer>();
+		
+		for (String numero : numeros) {
 			
-			// Casteo los strings de "contenido" a entero para meterlos en la lista que se guarda en la lista resultado:
-			for (String numero : contenido) {
-				
-				listaNumeros.add(Integer.parseInt(numero));
-				
-			}
-
-			// Pasa a la siguiente línea del fichero y guarda la listaNumeros en la lista de resultado:
-			resultado.add(listaNumeros);
-			i++;
-
+			afinidadesAux.add(Integer.parseInt(numero));
+			
 		}
-		
-		return resultado;
+
+		nombres.add(nombre2);
+		elementos.add(afinidadesAux);
 		
 	}
 	
 	/*
-	 * Particionar el conjunto de entrada en tres subconjuntos de manera que los elementos de estos
-	 * sumen igual en los tres y que su tamaño sea el menor posible (minimizar). Realizar mediante
-	 * Programación Lineal (PL).
-	 */
-	private static void ejercicio4ProgramacionLineal() {
-		
-		//TO-DO
-		
-	}
+	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
+	 * en el fichero .lsi para generar el modelo .lp. 
+	*/
 	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
-	 */
+	*/
 	public static void ejercicio4(String fichero) {
-		
-		// Lectura de datos de entrada:
-		List<List<Integer>> listas = lecturaDatosEjercicio4(fichero);
-		
-		// Salida de datos:
-		ejercicio4ProgramacionLineal();
-		
-		System.out.println(" Conjunto de entrada: ");
-		System.out.println(" Suma objetivo: ");
-		System.out.println(" o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o");
-		System.out.println(" El menor conjunto tiene " + " elemento.");
-		System.out.println(" Elementos del conjunto 1: ");
-		System.out.println(" Elementos del conjunto 2: ");
-		System.out.println(" Elementos del conjunto 3: ");
-		System.out.println(" o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o~~~~·~~~~o");
-		
-		System.out.println(listas);
+
+		// Solución por Programación Lineal:
+		try {
+
+			LP4.ejercicio4LP(fichero);
+
+		} catch (IOException e) {
+
+			System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
+			System.out.println("para el fichero: " + fichero + ".\n");
+			//e.printStackTrace();
+
+		}
 		
 	}
 

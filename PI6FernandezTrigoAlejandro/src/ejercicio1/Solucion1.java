@@ -8,7 +8,6 @@ package ejercicio1;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -90,11 +89,11 @@ public class Solucion1 {
 		System.out.println("Reparto obtenido:");
 		System.out.println(reparto);
 		
-		for (Integer grupo : reparto.values()) {
-
-			System.out.println("Grupo " + (grupo + 1) + ": ");
-
-		}
+//		for (Integer grupo : reparto.values()) {
+//
+//			System.out.println("Grupo " + (grupo + 1) + ": ");
+//
+//		}
 		
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		

@@ -20,41 +20,27 @@ public class Producto {
 
 	}
 
-	public static Producto ofDatos(String nombre, Double precio, List<String> funcionalidades) {
-
-		return new Producto(nombre, precio, funcionalidades);
-
-	}
-	
 	public static Producto ofLinea(String datos) {
 		
 		return new Producto(datos);
 		
 	}
 
-	// ATRIBUTOS DE LA CLASE INMUTABLES
-	private final String nombre;
-	private final Double precio;
-	private final List<String> funcionalidades;
+	// ATRIBUTOS DE LA CLASE
+	public static String nombre;
+	public static Double precio;
+	public static List<String> funcionalidades;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Producto() {
 		
-		this.nombre = null;
-		this.precio = null;
-		this.funcionalidades = null;
+		Producto.nombre = null;
+		Producto.precio = null;
+		Producto.funcionalidades = null;
 		
 	}
 	
-	private Producto(String nombre, Double precio, List<String> funcionalidades) {
-			
-		super();
-		this.nombre = nombre;
-		this.precio = precio;
-		this.funcionalidades = funcionalidades;
-			
-	}
-	
+	// Este constructor representa el constructor principal de la clase encargado de parsear cada línea de fichero:
 	private Producto(String datos) {
 	
 		super();
@@ -70,8 +56,7 @@ public class Producto {
 		// 9.99euros)
 		// Replace final:
 		// 9.99
-		
-		// ********************************************************************************************
+
 		// Hacer split en base a los dos punts y eliminar los espacios; nos quedamos con la lista de funcionalidades
 		// a un lado, y al otro, volvemos a splitear en base a la "(" quedándonos con el nombre y el precio que se
 		// extrae eliminando los caracteres sobrantes y parseando a double:
@@ -80,7 +65,6 @@ public class Producto {
 		String[] segundopaso = primerpaso[0].split("\\(");
 		String nombre = segundopaso[0];
 		Double precio = Double.parseDouble(segundopaso[1].replace("euros)", "")); 
-		// ********************************************************************************************
 		
 		for (String funcion : funcionalidades) {
 			
@@ -88,9 +72,9 @@ public class Producto {
 			
 		}
 		
-		this.nombre = nombre;
-		this.precio = precio;
-		this.funcionalidades = listaFuncionalidades;
+		Producto.nombre = nombre;
+		Producto.precio = precio;
+		Producto.funcionalidades = listaFuncionalidades;
 		
 	}
 
@@ -113,48 +97,7 @@ public class Producto {
 		
 	}
 
-	// HASHCODE, EQUALS, TOSTRING DE LA CLASE
-	@Override
-	public int hashCode() {
-		
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((funcionalidades == null) ? 0 : funcionalidades.hashCode());
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((precio == null) ? 0 : precio.hashCode());
-		return result;
-		
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Producto other = (Producto) obj;
-		if (funcionalidades == null) {
-			if (other.funcionalidades != null)
-				return false;
-		} else if (!funcionalidades.equals(other.funcionalidades))
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (precio == null) {
-			if (other.precio != null)
-				return false;
-		} else if (!precio.equals(other.precio))
-			return false;
-		return true;
-		
-	}
-	
+	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 		
