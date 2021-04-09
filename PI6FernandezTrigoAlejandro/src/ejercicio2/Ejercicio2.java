@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import ejercicio1.Alumno;
 import ejercicio1.Ejercicio1;
+import ejercicio1.LP1;
 import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
 import us.lsi.gurobi.GurobiLp;
@@ -36,148 +37,84 @@ import us.lsi.solve.AuxGrammar;
 public class Ejercicio2 {
 	
 	/*
-	 * Lectura de datos; devuelve un mapa de tipo <String, List<Integer> que se corresponde a los 
-	 * abogados (claves) junto a la lista de horas por caso (posicion) (valores). 
-	 */
-	private static Map<String, List<Integer>> lecturaDatosEjercicio2(String fichero) {
-		
-		int i = 0;	
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-		Map<String, List<Integer>> resultado = new HashMap<String, List<Integer>>();
-		
-		while (i < lista.size()) {
-
-			String linea = lista.get(i);
-			// Hacer split en base a los dos puntos y quedarnos con la parte izquierda
-			// que representa a los abogados, hacer split nuevamente en base a
-			// la coma (en la derecha) para quedarnos con la lista de horas:
-			String[] contenido = linea.split(": ");
-			String abogado = contenido[0];
-			String[] horas = contenido[1].split(",");
-			
-			// En cada iteración reinicio la lista:
-			List<Integer> listaHoras = new ArrayList<>();
-			
-			// Casteo los strings de "horas" a entero para meterlos en la lista que se almacena en el mapa:
-			for (String numero : horas) {
-				
-				listaHoras.add(Integer.parseInt(numero));
-				
-			}
-			
-			// Para cada abogado, añadimos al mapa su nombre (String) y como valor asociado 
-			// a dicha clave, la lista de horas:
-			resultado.put(abogado, listaHoras);
-
-			// Pasa a la siguiente línea del fichero:
-			i++;
-
-		}
-		
-		return resultado;
-		
-	}
-	
-	private static List<Abogado> lecturaDatosEjercicio2_Test(String fichero) {
-		
-		int i = 0;	
-		List<Abogado> resultado = new ArrayList<Abogado>();
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-		
-		while (i < lista.size()) {
-
-			String linea = lista.get(i);
-			Abogado abogado = Abogado.ofLinea(linea);
-			resultado.add(abogado);
-			
-			// Pasa a la siguiente línea del fichero:
-			i++;
-
-		}
-		
-		return resultado;
-	}
+	 * Variables de la clase necesarias para ser accedidas por las clases
+	 * PL y AG que resuelven el ejercicio. 
+	*/
+	public static List<String> abogados;
+	public static List<List<Integer>> horas;
 	
 	/*
-	 * Repartir a los abogados por casos de forma que se minimice el tiempo invertido en casos.
-	 * Un caso solo puede ser investigado por un abogado (no varios) pero un abogado puede investigar
-	 * varios casos. Realizar mediante Programación Lineal (PL).
-	 */
-	private static void ejercicio2ProgramacionLineal() {
-		
-		//TO-DO
-		
-	}
-	
-	/*
-	 * Repartir a los abogados por casos de forma que se minimice el tiempo invertido en casos.
-	 * Un caso solo puede ser investigado por un abogado (no varios) pero un abogado puede investigar
-	 * varios casos. Realizar mediante Algoritmos Genéticos (GA).
-	 */
-	private static void ejercicio2AlgoritmosGeneticos() {
-		
-		//TO-DO
-		
-	}
-	
-	public static void resolvedor() throws IOException {
-		
-		AuxGrammar.dataClass = Ejercicio2.class;
-		Ejercicio2.iniDatos("ficheros/PI6Ej2DatosEntrada1.txt");
-		AuxGrammar.generate(Ejercicio2.class, "src/ejercicio2/Abogado.lsi", "salida/abogado.lp");
-		GurobiLp.solve("salida/alumno.lp");
-		
-	}
-	
-	private static List<Abogado> abogados;
-	public static Integer numeroDeAbogados;
-	
+	 * Método inicial para la lectura de datos del fichero que se pasa como
+	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
+	 * Se accederá a los datos desde las clases PL y AG que resuelven el ejercicio.
+	*/
 	public static void iniDatos(String fichero) {
 		
-		abogados = Files2.streamFromFile(fichero).<Abogado>map((String s) -> Abogado.ofLinea(s)).collect(Collectors.<Abogado>toList());
+		horas = new ArrayList<List<Integer>>();
+		abogados = new ArrayList<String>();
 		
-		numeroDeAbogados = abogados.size();
-		
+		int i = 0;
+        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+
+        while (i < lista.size()) {
+        	
+            String linea = lista.get(i);            
+            create(linea);
+            i++;
+            
+        }
+
 	}
 	
+	public static void create(String s) {
+		
+		String[] contenido = s.split(": ");
+		String nombre = contenido[0];
+		String[] horas = contenido[1].split(",");
+		
+		List<Integer> aux = new ArrayList<Integer>();
+		List<Integer> listaHoras = new ArrayList<Integer>();
+		
+		for (String numero : horas) {
+						
+			listaHoras.add(Integer.parseInt(numero));
+						
+		}
+		
+		abogados.add(nombre);
+		
+	}
+
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
 	public static void ejercicio2(String fichero) {
 		
-		// Lectura de datos de entrada:
-		//Map<String, List<Integer>> mapa = lecturaDatosEjercicio2(fichero);
-		//List<Abogado> lista = lecturaDatosEjercicio2_Test(fichero);
-		
-		// Salida de datos:
-		//ejercicio2ProgramacionLineal();
-		//ejercicio2AlgoritmosGeneticos();
-		
-//		System.out.println(" ");
-//		System.out.println("  Horas empleadas: ");
-//		System.out.println("  Casos estudiados: ");
-//		System.out.println("  Media (horas/caso): ");
-//		System.out.println(" · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- -");
-//		System.out.println(" El estudio de todos los casos ha supuesto un total de " + " horas de trabajo\n"
-//				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + " horas.");
-//		System.out.println(" ");
-		
-		//System.out.println(mapa);
-		//System.out.println(lista);
-		
+
+		// Solución por Programación Lineal:
 		try {
-			
-			resolvedor();
-			
+
+			LP2.ejercicio2LP(fichero);
+
 		} catch (IOException e) {
-			
+
+			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
 			e.printStackTrace();
-			
+
 		}
+		
+		// Solución por Algoritmos Genéticos:
+//		try {
+//
+//			LP2.ejercicio2LP();
+//
+//		} catch (IOException e) {
+//
+//			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
+//			e.printStackTrace();
+//
+//		}
 			
 	}
-	
-	// =================================================================================================================
-
 
 }

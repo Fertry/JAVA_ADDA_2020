@@ -7,10 +7,10 @@
 package tests;
 
 import ejercicio1.Ejercicio1;
-import ejercicio2.Ejercicio2;
-import ejercicio3.Ejercicio3;
-import ejercicio4.Ejercicio4;
-import ejercicio5.Ejercicio5;
+//import ejercicio2.Ejercicio2;
+//import ejercicio3.Ejercicio3;
+//import ejercicio4.Ejercicio4;
+//import ejercicio5.Ejercicio5;
 
 public class Test {
 
@@ -19,27 +19,21 @@ public class Test {
 		// Mostrar datos por pantalla y volcar la salida en un fichero .gv para el quinto apartado.
 		// Todos los ejercicios tienen una función pública que ejecuta los test de todas las funciones
 		// implicadas (de caracter privado).
-//		System.out.println("##################################################################");
-//		System.out.println("######################### EJERCICIO 1 ############################");
-			System.out.println(" PI6Ej1DatosEntrada1.txt");
+		System.out.println("##################################################################");
+		System.out.println("######################### EJERCICIO 1 ############################");
 			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada1.txt");
-//			System.out.println(" PI6Ej1DatosEntrada2.txt");
-//			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada2.txt");
-//			System.out.println(" PI6Ej1DatosEntrada3.txt");
-//			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada3.txt");
-//		System.out.println("##################################################################");
-//		System.out.println("##################################################################\n");
+			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada2.txt");
+			Ejercicio1.ejercicio1("ficheros/PI6Ej1DatosEntrada3.txt");
+		System.out.println("##################################################################");
+		System.out.println("##################################################################\n");
 		
-//		System.out.println("##################################################################");
-//		System.out.println("######################### EJERCICIO 2 ############################");
-//			System.out.println(" PI6Ej2DatosEntrada1.txt");
+		System.out.println("##################################################################");
+		System.out.println("######################### EJERCICIO 2 ############################");
 //			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada1.txt");
-//			System.out.println(" PI6Ej2DatosEntrada2.txt");
 //			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada2.txt");
-//			System.out.println(" PI6Ej2DatosEntrada3.txt");
 //			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada3.txt");
-//		System.out.println("##################################################################");
-//		System.out.println("##################################################################\n");
+		System.out.println("##################################################################");
+		System.out.println("##################################################################\n");
 //		
 //		System.out.println("##################################################################");
 //		System.out.println("######################### EJERCICIO 3 ############################");

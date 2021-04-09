@@ -1,0 +1,8 @@
+\ Model _copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Maximize
+ 
+Subject To
+ b3: = 7
+Bounds
+End
