@@ -8,9 +8,7 @@ package ejercicio1;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import us.lsi.flujossecuenciales.StreamsS;
@@ -65,7 +63,7 @@ public class Ejercicio1 {
 		String nombre2 = contenido[0];
 		String[] numeros = contenido[1].split(",");
 
-		 List<Integer> afinidadesAux = new ArrayList<Integer>();
+		List<Integer> afinidadesAux = new ArrayList<Integer>();
 		
 		for (String numero : numeros) {
 			
@@ -100,7 +98,7 @@ public class Ejercicio1 {
 	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
 	public static Integer getSizeGrupos() {
 		
-		return getNAlumnos()/getNAfinidades();
+		return getNAlumnos() / getNAfinidades();
 		
 	}
 
@@ -123,8 +121,9 @@ public class Ejercicio1 {
 
 		} catch (IOException e) {
 
-			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
-			e.printStackTrace();
+			System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
+			System.out.println("para el fichero: " + fichero + ".\n");
+			//e.printStackTrace();
 
 		}
 		

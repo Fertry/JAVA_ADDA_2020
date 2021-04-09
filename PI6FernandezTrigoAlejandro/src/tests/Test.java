@@ -7,7 +7,7 @@
 package tests;
 
 import ejercicio1.Ejercicio1;
-//import ejercicio2.Ejercicio2;
+import ejercicio2.Ejercicio2;
 //import ejercicio3.Ejercicio3;
 //import ejercicio4.Ejercicio4;
 //import ejercicio5.Ejercicio5;
@@ -29,9 +29,9 @@ public class Test {
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 2 ############################");
-//			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada1.txt");
-//			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada2.txt");
-//			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada3.txt");
+			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada1.txt");
+			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada2.txt");
+			Ejercicio2.ejercicio2("ficheros/PI6Ej2DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 //		

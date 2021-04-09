@@ -22,7 +22,7 @@ public class LP1 {
 	 */
 	public static void ejercicio1LP(String fichero) throws IOException {
 		
-		//Para que el método sea reutilizable edito el string correspondiente al nombre:
+		// Para que el método sea reutilizable edito el string correspondiente al nombre:
 		String ruta = "modelosLP/Alumno" + fichero.replace("ficheros/PI6Ej1DatosEntrada", "").replace(".txt", "") +  ".lp";
 		
 		// Inicializada la lectura del fichero ahora obtiene los datos de Ejercicio1.java:
@@ -33,8 +33,12 @@ public class LP1 {
 		AuxGrammar.generate(Ejercicio1.class, "modelosLSI/Alumno.lsi", ruta);
 		GurobiSolution solution = GurobiLp.gurobi(ruta);
 		
-		// Muestra la salida:
-		System.out.println(solution.toString((s, d) -> d > 0));
+		// Vuelca la salida "sin formatear" por consola:
+		// System.out.println(solution.toString((s, d) -> d > 0));
+		
+		// En su lugar, llamo a la clase Solucion1 para formatear la salida:
+		// solo se toman los valores seleccionados (d > 0):
+		Solucion1.solucionLP1(fichero, solution.toString((s, d) -> d > 0));
 		
 	}
 

@@ -1,15 +1,12 @@
 head section
 
 
-Integer obtenerNumeroHorasPorCaso(Integer i, Integer j)
-Integer numeroHorasEmpleadosPorAbogado(Integer i)
-Integer getNumeroAbogados()
-Integer getNumeroCasos()
-Integer obtenerCasoMasHoras(Integer j)
-Integer obtenerSumaTareasProcesador(Integer i)
+Integer getNHoras()
+Integer getNAbogados()
+Integer tiempoPorIndice(Integer i, Integer j)
 
-Integer abogados = getNumeroAbogados()
-Integer casos = getNumeroCasos()
+Integer abogados = getNAbogados()
+Integer casos = getNHoras()
 
 goal section
 
@@ -17,8 +14,8 @@ min t[0]
 
 constraints section
 
-sum(obtenerNumeroHorasPorCaso(i, j) x[i, j], j in 0 .. casos) - t[0] <= 0, i in 0 .. abogados
 sum(x[i, j], i in 0 .. abogados) = 1, j in 0 .. casos 
+sum(tiempoPorIndice(i, j) x[i, j], j in 0 .. casos) - t[0] <= 0, i in 0 .. abogados
 
 bin 
 

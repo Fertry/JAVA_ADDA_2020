@@ -11,5 +11,14 @@ package ejercicio2;
  * de algoritmos genéticos para mostrar los resultados acordes al fichero de resultados.
  */
 public class Solucion2 {
+	
+	public static void solucionLP2(String fichero, String entrada) {
+		
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("Entrada: " +  fichero.replace("ficheros/", ""));
+		System.out.println(entrada + "\n\n");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+	}
 
 }

@@ -9,8 +9,8 @@ package ejercicio2;
 import java.util.ArrayList;
 import java.util.List;
 
-//Clase abogado para parsear la entrada por fichero del ejercicio creando objetos de clase Abogado con 
-//sus respectivos atributos: Nombre y Lista de horas.
+// Clase abogado para parsear la entrada por fichero del ejercicio creando objetos de clase Abogado con 
+// sus respectivos atributos: Nombre y Lista de horas.
 public class Abogado {
 
 	// MÉTODOS DE LA CLASE
@@ -20,67 +20,25 @@ public class Abogado {
 
 	}
 
-	public static Abogado ofDatos(String nombre, List<Integer> horas) {
-
-		return new Abogado(nombre, horas);
-
-	}
-
 	public static Abogado ofLinea(String linea) {
 
 		return new Abogado(linea);
 
 	}
-	
-	/*
-	 * Método auxiliar para, dado un entero que corresponde a un caso
-	 * (posición) y un Abogado, devuelve las horas que emplea dicho abogado 
-	 * en ese caso o devuelve null si no existe dicho caso.
-	 */
-	public static Integer getHorasPorCaso(Abogado abogado, Integer caso) {
-		
-		Integer resultado = null;
-		Integer numeroCasos = Abogado.getHoras().size();
-		
-		if (caso > numeroCasos || caso < numeroCasos) {
-			
-			resultado = null;
-			
-		} else {
-			
-			resultado = Abogado.getHoras().get(caso);
-			
-		}
-		
-		return resultado;
-		
-	}
 
 	// ATRIBUTOS DE LA CLASE INMUTABLES
-	private static Integer n = 0;
-	public static Integer id;
 	public static String nombre;
 	public static List<Integer> horas;
 
 	// CONSTRUCTORES DE LA CLASE
 	private Abogado() {
 				
-		Abogado.id = null;
 		Abogado.nombre = null;
 		Abogado.horas = null;
 			
 	}
 
-	private Abogado(String nombre, List<Integer> afinidades) {
-			
-		super();
-		Abogado.id = n; 
-		Abogado.nombre = nombre;
-		Abogado.horas = afinidades;
-		n++;
-			
-	}
-
+	// Este constructor representa el constructor principal de la clase encargado de parsear cada línea de fichero:
 	private Abogado(String datos) {
 			
 		super();
@@ -91,7 +49,6 @@ public class Abogado {
 		// Abogado_01
 		// 1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5
 
-		// ********************************************************************************************
 		// Hacer split en base a los dos puntos y quedarnos con la parte izquierda
 	    // que representa los nombres, hacer split nuevamente en base a
 		// la coma (en la derecha) para quedarnos con la lista de horas:
@@ -105,37 +62,38 @@ public class Abogado {
 			listaHoras.add(Integer.parseInt(numero));
 						
 		}
-		// ********************************************************************************************
 
-		Abogado.id = n;
 		Abogado.nombre = nombre;
 		Abogado.horas = listaHoras;
-		n++;
 			
 	}
 
 	// GETTTERS DE LA CLASE
-	public static Integer getId() {
-		
-		return id;
-		
-	}
-	
+	// Devuelve el nombre de un Abogado:
 	public static String getNombre() {
 
 		return nombre;
 
 	}
 
+	// Devuelve la lista de horas de un Abogado:
 	public static List<Integer> getHoras() {
 
 		return horas;
 
 	}
 	
+	// Devuelve el nº de horas de un Abogado:
 	public static Integer getNumeroCasos() {
 		
 		return horas.size();
+		
+	}
+	
+	// Devuelva el tiempo i de un Abogado:
+	public Integer getHora(Integer i) {
+		
+		return horas.get(i);
 		
 	}
 	

@@ -8,18 +8,10 @@ package ejercicio2;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
-import ejercicio1.Alumno;
-import ejercicio1.Ejercicio1;
-import ejercicio1.LP1;
-import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
-import us.lsi.gurobi.GurobiLp;
-import us.lsi.solve.AuxGrammar;
 
 /*
 	Un bufete de abogados cuenta con un equipo de n personas que deben analizar m
@@ -40,7 +32,7 @@ public class Ejercicio2 {
 	 * Variables de la clase necesarias para ser accedidas por las clases
 	 * PL y AG que resuelven el ejercicio. 
 	*/
-	public static List<String> abogados;
+	public static List<String> nombres;
 	public static List<List<Integer>> horas;
 	
 	/*
@@ -51,7 +43,7 @@ public class Ejercicio2 {
 	public static void iniDatos(String fichero) {
 		
 		horas = new ArrayList<List<Integer>>();
-		abogados = new ArrayList<String>();
+		nombres = new ArrayList<String>();
 		
 		int i = 0;
         List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
@@ -70,18 +62,51 @@ public class Ejercicio2 {
 		
 		String[] contenido = s.split(": ");
 		String nombre = contenido[0];
-		String[] horas = contenido[1].split(",");
+		String[] tiempos = contenido[1].split(",");
 		
-		List<Integer> aux = new ArrayList<Integer>();
-		List<Integer> listaHoras = new ArrayList<Integer>();
+		List<Integer> horasAux = new ArrayList<Integer>();
 		
-		for (String numero : horas) {
+		for (String numero : tiempos) {
 						
-			listaHoras.add(Integer.parseInt(numero));
+			horasAux.add(Integer.parseInt(numero));
 						
 		}
 		
-		abogados.add(nombre);
+		nombres.add(nombre);
+		horas.add(horasAux);
+		
+	}
+	
+	/*
+	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
+	 * en el fichero .lsi para generar el modelo .lp. 
+	*/
+	
+	// Obtiene el nº de abogados:
+	public static Integer getNAbogados() {
+
+		return nombres.size();
+		
+	}
+	
+	// Obtiene el nº de horas:
+	public static Integer getNHoras() {
+		
+		return horas.get(0).size();
+		
+	}
+	
+	// Obtiene el tamaño del reparto: abogados / casos (horas) = tamaño grupos
+	public static Integer getSizeGrupos() {
+		
+		return getNAbogados() / getNHoras();
+		
+	}
+	
+	// Obtiene el tiempo de un abogado dado el abogado (i) para el caso (j):
+	public static Integer tiempoPorIndice(Integer i, Integer j) {
+		
+		return horas.get(i).get(j);
 		
 	}
 

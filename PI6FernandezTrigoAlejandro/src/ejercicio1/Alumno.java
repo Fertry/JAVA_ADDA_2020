@@ -83,14 +83,14 @@ public class Alumno {
 		
 	}
 	
-	// Devuelve el nº de afinidades de un alumno:
+	// Devuelve el nº de afinidades de un Alumno:
 	public Integer getNumeroAfinidades() {
 		
 		return afinidades.size();
 		
 	}
 	
-	// Devuelve la afinidad i de un alumno:
+	// Devuelve la afinidad i de un Alumno:
 	public Integer getAfinidad(Integer i) {
 		
 		return afinidades.get(i);
