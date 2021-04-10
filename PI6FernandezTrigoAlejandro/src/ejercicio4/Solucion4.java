@@ -61,7 +61,7 @@ public class Solucion4 {
 		// La tercera línea representa el tiempo total. 
 		// A partir de la cuarta línea comienzan los datos.
 		// El formato de cada línea es: 
-		// x_n_m == 1 dónde n es el abogado y m el caso.
+		// x_n_m == 1 dónde n es el conjunto y m el elemento.
 		
 		int i = 3;
 		Map<Integer, Integer> reparto = new HashMap<Integer, Integer>();
@@ -74,7 +74,7 @@ public class Solucion4 {
 			
 			// El contenido a la derecha queda descartado dado que siempre es 1
 			// A la izquierda, tras hacer split nos quedan tres valores:
-			// Una x (se descarta), el abogado y el caso.
+			// Una x (se descarta), el conjunto y el elemento.
 			String[] valores = datos[0].trim().split("_");
 			
 			// Añadir los valores al mapa, esto es: Conjunto (como clave) y Elemento (como valor):

@@ -21,7 +21,7 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion1 {
 	
-	public static void solucionLP1(String fichero, String entrada) {
+	public static void solucionLP1(String fichero, String entrada, Double valor) {
 		
 		// Crear el objeto para escribir sobre fichero:
 		PrintWriter writer = null;
@@ -40,7 +40,7 @@ public class Solucion1 {
 			archivo.close();
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			formateo("volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""), fichero);
+			formateo("volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""), fichero, valor);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class Solucion1 {
 				
 	}
 	
-	public static void formateo(String fichero, String nombre) {
+	public static void formateo(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -86,6 +86,7 @@ public class Solucion1 {
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
+		System.out.println("Valor objetivo: " + valor);
 		System.out.println("Reparto obtenido:");
 		System.out.println(reparto);
 		

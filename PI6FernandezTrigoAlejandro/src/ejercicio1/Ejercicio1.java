@@ -127,17 +127,18 @@ public class Ejercicio1 {
 
 		}
 		
-		// Solución por Algoritmos Genéticos:
-//		try {
-//
-//			PL.ejercicio1LP();
-//
-//		} catch (IOException e) {
-//
-//			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
-//			e.printStackTrace();
-//
-//		}
+		// Solución por Algoritmos Genéticos - Cromosoma de permutación:
+		try {
+
+			AG1.ejercicio1AG(fichero);
+
+		} catch (IOException e) {
+
+			System.out.println("No se ha podido calcular la solución mediante Algoritmos Genéticos ");
+			System.out.println("para el fichero: " + fichero + ".\n");
+			e.printStackTrace();
+
+		}
 		
 	}
 	

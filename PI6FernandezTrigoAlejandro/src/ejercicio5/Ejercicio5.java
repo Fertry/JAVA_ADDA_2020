@@ -6,6 +6,8 @@
 
 package ejercicio5;
 
+import java.io.IOException;
+
 import org.jgrapht.Graph;
 
 import us.lsi.colors.GraphColors;
@@ -48,11 +50,11 @@ public class Ejercicio5 {
 	/*
 	 * Método privado para volcar los datos del grafo en un fichero de extensión .gv para ser mostrado por pantalla.
 	 */
-	private static void salidaGrafo(Graph<Ciudad, Carretera> grafo, String nombreFichero) {
+	private static void salidaGrafo(Graph<Ciudad, Carretera> grafo) {
 
 		Graphs2.toDot(
 				grafo, 																			// Grafo de entrada
-				nombreFichero,																	// Ruta de salida de fichero
+				"salida/salidaEjercicio5.gv",													// Ruta de salida de fichero
 				v -> v.getNombre(),															    // Valor de vértices
 				e -> e.getKm().toString(),														// Valor de las aristas
 				v -> GraphColors.getColor(GraphColors.Color.green),								// Coloreado
@@ -60,15 +62,7 @@ public class Ejercicio5 {
 		
 	}
 	
-	/*
-	 * Determina el camino cerrado más corto (minimizar) que pasa por TODOS los vértices UNA SOLA VEZ y que contiene
-	 * al menos una arista que cumple el predicado. Realizar mediante Algoritmos Genéticos (GA).
-	 */
-	private static void ejercicio5AlgoritmosGeneticos() {
-		
-		//TO-DO
-		
-	}
+
 	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
@@ -78,26 +72,18 @@ public class Ejercicio5 {
 		// Lectura de datos de entrada:
 		Graph<Ciudad, Carretera> grafo = lecturaDatosEjercicio5(fichero);
 		
-		/*
-		 * Para que se pueda llamar múltiples veces al método y que la salida del grafo .gv NO 
-		 * sea sobrescrita con cada llamada, obtengo el nº del fichero de entrada y lo concateno 
-		 * al String que recibe el método salidaGrafo() para que todos los nombres sean distintos.
-		 */
-		String texto = fichero.replace("ficheros/PI6Ej5DatosEntrada", "").replace(".txt", "");
-		String nombre = "salida/salidaEjercicio5_".concat(texto).concat(".gv");
-		
-		// Salida del fichero .gv para mostrar el grafo visualmente:
-		salidaGrafo(grafo, nombre);
-		
-		// Salida de datos:
-		ejercicio5AlgoritmosGeneticos();
-		
-		System.out.println(" Predicado Carreteras de ... ");
-		System.out.println("  Camino propuesto: ");
-		System.out.println("  Coste total: " + " kms");
-		System.out.println(" ");
-		
-		System.out.println(grafo);
+		// Solución por Programación Lineal:
+		try {
+
+			AG5.ejercicio5AG(fichero);
+
+		} catch (IOException e) {
+
+			System.out.println("No se ha podido calcular la solución mediante Algoritmos Genéticos ");
+			System.out.println("para el fichero: " + fichero + ".\n");
+			//e.printStackTrace();
+
+		}
 
 	}
 

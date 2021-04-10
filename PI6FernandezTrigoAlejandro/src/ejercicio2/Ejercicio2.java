@@ -123,7 +123,8 @@ public class Ejercicio2 {
 
 		} catch (IOException e) {
 
-			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
+			System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
+			System.out.println("para el fichero: " + fichero + ".\n");
 			e.printStackTrace();
 
 		}
@@ -135,7 +136,8 @@ public class Ejercicio2 {
 //
 //		} catch (IOException e) {
 //
-//			System.out.println("No se ha podido calcular la solución mediante Programación Lineal");
+//			System.out.println("No se ha podido calcular la solución mediante Algoritmos Genéticos ");
+//			System.out.println("para el fichero: " + fichero + ".\n");
 //			e.printStackTrace();
 //
 //		}

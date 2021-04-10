@@ -6,6 +6,14 @@
 
 package ejercicio5;
 
+import java.io.IOException;
+
 public class AG5 {
+	
+	public static void ejercicio5AG(String fichero) throws IOException {
+		
+		System.out.println("Solucion algoritmos geneticos");
+		
+	}
 
 }
