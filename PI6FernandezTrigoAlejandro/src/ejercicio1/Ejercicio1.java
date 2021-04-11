@@ -42,8 +42,8 @@ public class Ejercicio1 {
 	public static void iniDatos(String fichero) {
 		
 		// Inicializar las variables de la clase Ejercicio1:
-		afinidades = new ArrayList<List<Integer>>();
 		nombres = new ArrayList<String>();
+		afinidades = new ArrayList<List<Integer>>();
 		
 		int i = 0;
         List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
@@ -51,33 +51,28 @@ public class Ejercicio1 {
         while (i < lista.size()) {
         	
             String linea = lista.get(i);            
-            create(linea);
+            
+            // Creo un objeto de tipo Alumno del cual extraer sus propieades:
+            Alumno alumno = Alumno.ofLinea(linea);
+            
+            nombres.add(alumno.getNombre());
+            
+            List<Integer> auxiliar = new ArrayList<Integer>();
+            for (Integer afinidad : alumno.getAfinidades()) {
+            	
+            	auxiliar.add(afinidad);
+            	
+            }
+            
+            afinidades.add(auxiliar);
+            
             i++;
             
         }
 
 	}
 	
-	// Método que parsea cada línea de fichero:
-	public static void create(String linea) {
-		
-		String[] contenido = linea.split(": ");
-		String nombre = contenido[0];
-		String[] numeros = contenido[1].split(",");
 
-		List<Integer> listaAfinidades = new ArrayList<Integer>();
-		
-		for (String numero : numeros) {
-			
-			listaAfinidades.add(Integer.parseInt(numero));
-			
-		}
-
-		nombres.add(nombre);
-		afinidades.add(listaAfinidades);
-		
-	}
-	
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
@@ -98,7 +93,7 @@ public class Ejercicio1 {
 	}
 	
 	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
-	public static Integer getSizeGrupos() {
+	public static Integer getNGrupos() {
 		
 		return getNAlumnos() / getNAfinidades();
 		
@@ -110,6 +105,7 @@ public class Ejercicio1 {
 		return afinidades.get(i).get(j);
 		
 	}
+	
 
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java

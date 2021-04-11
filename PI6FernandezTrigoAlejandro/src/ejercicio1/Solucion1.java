@@ -21,6 +21,7 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion1 {
 	
+	// Función que dado una solución de LP desde Gurobi escribe el resultado a fichero para parsearlo:
 	public static void solucionLP1(String fichero, String entrada, Double valor) {
 		
 		try {
@@ -43,6 +44,7 @@ public class Solucion1 {
 				
 	}
 	
+	// Función que parsea el fichero generado por solucionLP1 para mostrar el resultado por pantalla:
 	public static void formateo(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
@@ -52,9 +54,9 @@ public class Solucion1 {
 		// x_n_m == 1 dónde n es el alumno y m el grupo.
 		
 		int i = 2;
-		Map<Integer, Integer> reparto = new HashMap<Integer, Integer>();
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-				
+		Map<Integer, List<String>> reparto = new HashMap<Integer, List<String>>();
+		
 		while (i < lista.size()) {
 			
 			String linea = lista.get(i).trim();
@@ -65,37 +67,43 @@ public class Solucion1 {
 			// Una x (se descarta), el alumno y el grupo.
 			String[] valores = datos[0].trim().split("_");
 			
-			// Añadir los valores al mapa, esto es: Alumno (como clave) y Grupo (como valor):
-			reparto.put(Integer.parseInt(valores[1].trim()), Integer.parseInt(valores[2].trim()));
+			// Añadir los valores al mapa en función del grupo al que pertenecen, de forma que las claves
+			// son los alumnos y los valores el grupo:
+			List<String> alumnos = new ArrayList<String>();
+			if (reparto.containsKey(Integer.parseInt(valores[2].trim()))) {
+				
+				alumnos = reparto.get(Integer.parseInt(valores[2].trim()));
+				Integer alumno = Integer.parseInt(valores[1].trim()) + 1;
+				alumnos.add("Alumno_" + alumno);
+				
+				reparto.put(Integer.parseInt(valores[2].trim()), alumnos);
+				
+			} else {
+				
+				Integer alumno = Integer.parseInt(valores[1].trim()) + 1;
+				alumnos.add("Alumno_" + alumno);
+				
+				reparto.put(Integer.parseInt(valores[2].trim()), alumnos);
+				
+			}
 			
 			i++;
 			
 		}
 
+		// Afinidad media:
+		Double afinidadMedia = valor / Ejercicio1.getNAlumnos();
+		
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
-		System.out.println("Valor objetivo: " + valor);
 		System.out.println("Reparto obtenido:");
-		System.out.println(reparto);
-
-		Map<Integer, List<Integer>> aux = new HashMap<Integer, List<Integer>>();
-		for (Integer grupo : reparto.values()) {
+		for (Integer entrada : reparto.keySet()) {
 			
-			System.out.println(grupo);
-			List<Integer> list = new ArrayList<Integer>();
+			System.out.println("Grupo " + (entrada + 1) + ": " + reparto.get(entrada).toString());
 			
-			if (!aux.containsKey(grupo)) {
-				
-				list.add(reparto.get(grupo));
-				aux.put(grupo, list);
-
-			} 
-
 		}
-		
-		System.out.println(aux);
-
+		System.out.println("Afinidad media: " + afinidadMedia);
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 	}

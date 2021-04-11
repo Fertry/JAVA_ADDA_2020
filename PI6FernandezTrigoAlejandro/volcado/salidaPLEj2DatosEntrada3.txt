@@ -1,4 +1,4 @@
-El valor objetivo es 3,00
+El valor objetivo es 3.00
 Los valores de la variables
 t_0 == 3
 x_0_7 == 1

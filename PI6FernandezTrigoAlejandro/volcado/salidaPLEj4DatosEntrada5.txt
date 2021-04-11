@@ -1,4 +1,4 @@
-El valor objetivo es 1,00
+El valor objetivo es 1.00
 Los valores de la variables
 x_0_1 == 1
 x_1_0 == 1

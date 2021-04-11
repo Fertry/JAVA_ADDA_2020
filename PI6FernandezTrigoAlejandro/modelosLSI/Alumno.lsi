@@ -1,13 +1,12 @@
 head section
 
-
+Integer getNGrupos()
 Integer getNAlumnos()
-Integer getSizeGrupos()
 Integer getNAfinidades()
 Integer afinidadPorIndice(Integer i, Integer j)
 
+Integer nGrupos = getNGrupos()
 Integer alumnos = getNAlumnos()
-Integer sizeGrupos = getSizeGrupos()
 Integer afinidades = getNAfinidades()
 
 goal section
@@ -17,7 +16,7 @@ max sum(afinidadPorIndice(i, j) x[i, j], i in 0 .. alumnos, j in 0 .. afinidades
 constraints section
 
 sum(x[i, j], j in 0 .. afinidades) = 1, i in 0 .. alumnos 
-sum(x[i, j], i in 0 .. alumnos | afinidadPorIndice(i, j) > 0) = sizeGrupos, j in 0 .. afinidades 
+sum(x[i, j], i in 0 .. alumnos | afinidadPorIndice(i, j) > 0) = nGrupos, j in 0 .. afinidades 
 
 bin 
 

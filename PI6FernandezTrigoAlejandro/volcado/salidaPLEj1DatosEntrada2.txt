@@ -1,4 +1,4 @@
-El valor objetivo es 40,00
+El valor objetivo es 40.00
 Los valores de la variables
 x_0_3 == 1
 x_1_2 == 1

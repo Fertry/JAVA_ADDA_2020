@@ -9,9 +9,11 @@ package ejercicio1;
 import java.util.ArrayList;
 import java.util.List;
 
+import us.lsi.common.Pair;
+
 // Clase alumno para parsear la entrada por fichero del ejercicio creando objetos de clase Alumno con 
-// sus respectivos atributos: Nombre y Lista de afinidades.
-public class Alumno {
+// sus respectivos atributos: Nombre y Lista de afinidades. Implemento la clase como extensión de Pair.
+public class Alumno extends Pair<String, List<Integer>> {
 	
 	// MÉTODOS DE LA CLASE
 	public static Alumno ofLinea(String linea) {
@@ -27,7 +29,7 @@ public class Alumno {
 	// CONSTRUCTORES DE LA CLASE
 	private Alumno(String datos) {
 		
-		super();
+		super(nombre, afinidades);
 		List<Integer> listaAfinidades = new ArrayList<Integer>();
 		
 		// Secuencia de trims y splits:
@@ -66,20 +68,6 @@ public class Alumno {
 	public List<Integer> getAfinidades() {
 		
 		return afinidades;
-		
-	}
-	
-	// Devuelve el nº de afinidades de un Alumno:
-	public Integer getNumeroAfinidades() {
-		
-		return afinidades.size();
-		
-	}
-	
-	// Devuelve la afinidad i de un Alumno:
-	public Integer getAfinidad(Integer i) {
-		
-		return afinidades.get(i);
 		
 	}
 	

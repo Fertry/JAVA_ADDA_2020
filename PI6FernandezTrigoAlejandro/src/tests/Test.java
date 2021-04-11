@@ -6,6 +6,8 @@
 
 package tests;
 
+import java.util.Locale;
+
 import ejercicio1.Ejercicio1;
 import ejercicio2.Ejercicio2;
 import ejercicio3.Ejercicio3;
@@ -15,6 +17,8 @@ import ejercicio5.Ejercicio5;
 public class Test {
 
 	public static void main(String[] args) {
+		
+		Locale.setDefault(new Locale("en", "US"));
 		
 		/*
 		 *  Mostrar datos por pantalla y volcar la salida en un fichero .gv para el quinto apartado.
