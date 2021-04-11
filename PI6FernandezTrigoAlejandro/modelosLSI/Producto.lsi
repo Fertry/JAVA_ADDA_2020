@@ -1,0 +1,22 @@
+head section
+
+
+Double getPrecio(Integer i)
+Integer getNumeroProductos()
+Integer getNumeroFuncionalidades()
+Boolean fi(Integer producto, Integer funcionalidad)
+
+Integer productos = getNumeroProductos()
+Integer funcionalidades = getNumeroFuncionalidades()
+
+goal section
+
+min sum(getPrecio(i) x[i], i in 0 .. productos)
+
+constraints section
+
+sum(x[i], i in 0 .. productos | fi(i, j)) >= 1, j in 0 .. funcionalidades
+
+bin 
+
+x[i], i in 0 .. productos

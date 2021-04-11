@@ -1,0 +1,21 @@
+head section
+
+
+Integer e(Integer i)
+Integer getSumatorio()
+Integer getSizeConjunto()
+
+Integer size = getSizeConjunto()
+
+goal section
+
+min sum(x[i, 0], i in 0 .. size)
+
+constraints section
+
+sum(x[i, j], j in 0 .. 3) = 1, i in 0 .. size
+sum(e(i) x[i, j], i in 0 .. size) = getSumatorio(), j in 0 .. 3
+
+bin 
+
+x[i, j], i in 0 .. size, j in 0 .. 3

@@ -1,0 +1,10 @@
+El valor objetivo es 1,00
+Los valores de la variables
+x_0_1 == 1
+x_1_1 == 1
+x_2_1 == 1
+x_3_1 == 1
+x_4_1 == 1
+x_5_2 == 1
+x_6_2 == 1
+x_7_0 == 1

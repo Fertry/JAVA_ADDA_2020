@@ -6,13 +6,12 @@
 
 package ejercicio2;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
 
 /*
@@ -23,21 +22,10 @@ public class Solucion2 {
 	
 	public static void solucionLP2(String fichero, String entrada) {
 		
-		// Crear el objeto para escribir sobre fichero:
-		PrintWriter writer = null;
-		FileWriter archivo = null;
-	
 		try {
 			
-			// Crea el archivo para escribir sobre el:
-			archivo = new FileWriter("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""));
-			
-			// Escribe sobre el archivo:
-			writer = new PrintWriter(archivo);
-			writer.println(entrada.trim());
-			
-			// Cierra el archivo cuando se acaba de escribir:
-			archivo.close();
+			// Escribe el resultado a fichero para tratarlo a continuación:
+			Files2.toFile(entrada.trim(), "volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""));
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
 			formateo("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""), fichero);

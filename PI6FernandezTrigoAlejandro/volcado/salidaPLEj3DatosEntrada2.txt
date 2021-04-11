@@ -1,0 +1,5 @@
+El valor objetivo es 26,89
+Los valores de la variables
+x_2 == 1
+x_3 == 1
+x_9 == 1

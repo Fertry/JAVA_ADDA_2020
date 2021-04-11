@@ -20,13 +20,13 @@ public class LP4 {
 	 * especificadas en Conjunto.lsi. Vuelca todo el Conjunto.lp que se pasa a la clase GurobiSolution encargada
 	 * de calcular la solución.
 	 */
-	public static void ejercicio4LP(String fichero) throws IOException {
+	public static void ejercicio4LP(String fichero, Integer indice) throws IOException {
 		
 		// Para que el método sea reutilizable edito el string correspondiente al nombre:
-		String ruta = "modelosLP/Conjunto" + fichero.replace("ficheros/PI6Ej4DatosEntrada", "").replace(".txt", "") +  ".lp";
+		String ruta = "modelosLP/Conjunto" + (indice + 1) + ".lp";
 		
 		// Inicializada la lectura del fichero ahora obtiene los datos de Ejercicio2.java:
-		Ejercicio4.iniDatos(fichero);
+		Ejercicio4.iniDatos(fichero, indice);
 		AuxGrammar.dataClass = Ejercicio4.class;
 		
 		// Genera el fichero LP que se pasa al resolvedor de Gurobi:
@@ -38,7 +38,7 @@ public class LP4 {
 	
 		// En su lugar, llamo a la clase Solucion2 para formatear la salida;
 		// solo se toman los valores seleccionados (d > 0):
-		Solucion4.solucionLP4(fichero, solution.toString((s, d) -> d > 0));
+		Solucion4.solucionLP4(fichero, solution.toString((s, d) -> d > 0), indice);
 		
 	}
 }

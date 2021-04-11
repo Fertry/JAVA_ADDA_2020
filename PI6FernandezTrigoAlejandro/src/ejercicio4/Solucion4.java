@@ -6,13 +6,12 @@
 
 package ejercicio4;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
 
 /*
@@ -21,26 +20,15 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion4 {
 	
-	public static void solucionLP4(String fichero, String entrada) {
+	public static void solucionLP4(String fichero, String entrada, Integer indice) {
 		
-		// Crear el objeto para escribir sobre fichero:
-		PrintWriter writer = null;
-		FileWriter archivo = null;
-	
 		try {
 			
-			// Crea el archivo para escribir sobre el:
-			archivo = new FileWriter("volcado/salidaPLEj4DatosEntrada" + fichero.replace("ficheros/PI6Ej4DatosEntrada", ""));
-			
-			// Escribe sobre el archivo:
-			writer = new PrintWriter(archivo);
-			writer.println(entrada.trim());
-			
-			// Cierra el archivo cuando se acaba de escribir:
-			archivo.close();
+			// Escribe el resultado a fichero para tratarlo a continuación:
+			Files2.toFile(entrada.trim(), "volcado/salidaPLEj4DatosEntrada" + (indice + 1) + ".txt");
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			//formateo("volcado/salidaPLEj4DatosEntrada" + fichero.replace("ficheros/PI6Ej4DatosEntrada", ""), fichero);
+			formateo("volcado/salidaPLEj4DatosEntrada" + (indice + 1) + ".txt", fichero);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -48,7 +36,7 @@ public class Solucion4 {
 			System.out.println("No se ha podido formatear la salida así que se vuelca el ");
 			System.out.println("resultado directamente por consola.\n");
 			System.out.println(entrada + "\n");
-			e.printStackTrace();
+			// e.printStackTrace();
 			
 		}
 				
@@ -58,12 +46,11 @@ public class Solucion4 {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
-		// La tercera línea representa el tiempo total. 
-		// A partir de la cuarta línea comienzan los datos.
+		// A partir de la tercera línea comienzan los datos.
 		// El formato de cada línea es: 
-		// x_n_m == 1 dónde n es el conjunto y m el elemento.
+		// x_n_m == 1 dónde n es el elemento y m el conjunto.
 		
-		int i = 3;
+		int i = 2;
 		Map<Integer, Integer> reparto = new HashMap<Integer, Integer>();
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 				
@@ -77,7 +64,7 @@ public class Solucion4 {
 			// Una x (se descarta), el conjunto y el elemento.
 			String[] valores = datos[0].trim().split("_");
 			
-			// Añadir los valores al mapa, esto es: Conjunto (como clave) y Elemento (como valor):
+			// Añadir los valores al mapa, esto es: Elemento (como clave) y Conjunto (como valor):
 			reparto.put(Integer.parseInt(valores[1].trim()), Integer.parseInt(valores[2].trim()));
 			
 			i++;

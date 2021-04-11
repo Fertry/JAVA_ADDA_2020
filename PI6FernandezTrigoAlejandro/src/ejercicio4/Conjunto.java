@@ -14,12 +14,6 @@ import java.util.List;
 public class Conjunto {
 	
 	// MÉTODOS DE LA CLASE
-	public static Conjunto of() {
-
-		return new Conjunto();
-
-	}
-
 	public static Conjunto ofLinea(String linea) {
 
 		return new Conjunto(linea);
@@ -27,26 +21,14 @@ public class Conjunto {
 	}
 	
 	// ATRIBUTOS DE LA CLASE
-	public static String nombre;
 	public static List<Integer> elementos;
 
 	// CONSTRUCTORES DE LA CLASE
-	public Conjunto() {
-				
-		Conjunto.nombre = null;
-		Conjunto.elementos = null;
-			
-	}
-
-	// Este constructor representa el constructor principal de la clase encargado de parsear cada línea de fichero:
-	private Conjunto(String datos) {
+	public Conjunto(String datos) {
 			
 		super();
 		List<Integer> listaNumeros = new ArrayList<Integer>(); 
 		
-		// Secuencia de trims y splits:
-		//
-
 		String[] contenido = datos.split(", ");
 
 		// Casteo los strings de "contenido" a entero para meterlos en la lista que se guarda en la lista resultado:
@@ -59,21 +41,15 @@ public class Conjunto {
 	}
 	
 	// GETTTERS DE LA CLASE
-	// Devuelve el nombre de un Alumno:
-	public String getNombre() {
-		
-		return nombre;
-		
-	}
 
-	// Devuelve la lista de afinidades de un Alumno:
+	// Devuelve la lista de elementos de un Conjunto:
 	public List<Integer> getElementos() {
 		
 		return elementos;
 		
 	}
 	
-	// Devuelve el nº de afinidades de un Alumno:
+	// Devuelve el nº de elementos de un Conjunto:
 	public Integer getNumeroElementos() {
 		
 		return elementos.size();
@@ -84,7 +60,7 @@ public class Conjunto {
 	@Override
 	public String toString() {
 		
-		return "Conjunto " + nombre + "[" + elementos + "]";
+		return "[" + elementos + "]";
 		
 	}
 	

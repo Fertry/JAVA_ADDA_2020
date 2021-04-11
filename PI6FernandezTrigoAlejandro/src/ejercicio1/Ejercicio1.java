@@ -41,6 +41,7 @@ public class Ejercicio1 {
 	*/
 	public static void iniDatos(String fichero) {
 		
+		// Inicializar las variables de la clase Ejercicio1:
 		afinidades = new ArrayList<List<Integer>>();
 		nombres = new ArrayList<String>();
 		
@@ -57,22 +58,23 @@ public class Ejercicio1 {
 
 	}
 	
-	public static void create(String s) {
+	// Método que parsea cada línea de fichero:
+	public static void create(String linea) {
 		
-		String[] contenido = s.split(": ");
-		String nombre2 = contenido[0];
+		String[] contenido = linea.split(": ");
+		String nombre = contenido[0];
 		String[] numeros = contenido[1].split(",");
 
-		List<Integer> afinidadesAux = new ArrayList<Integer>();
+		List<Integer> listaAfinidades = new ArrayList<Integer>();
 		
 		for (String numero : numeros) {
 			
-			afinidadesAux.add(Integer.parseInt(numero));
+			listaAfinidades.add(Integer.parseInt(numero));
 			
 		}
 
-		nombres.add(nombre2);
-		afinidades.add(afinidadesAux);
+		nombres.add(nombre);
+		afinidades.add(listaAfinidades);
 		
 	}
 	
@@ -123,7 +125,7 @@ public class Ejercicio1 {
 
 			System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
 			System.out.println("para el fichero: " + fichero + ".\n");
-			//e.printStackTrace();
+			// e.printStackTrace();
 
 		}
 		
@@ -136,7 +138,7 @@ public class Ejercicio1 {
 
 			System.out.println("No se ha podido calcular la solución mediante Algoritmos Genéticos ");
 			System.out.println("para el fichero: " + fichero + ".\n");
-			e.printStackTrace();
+			// e.printStackTrace();
 
 		}
 		

@@ -27,48 +27,32 @@ public class Ejercicio4 {
 	 * Variables de la clase necesarias para ser accedidas por la clase
 	 * PL que resuelve el ejercicio. 
 	*/
-	public static List<String> nombres;
-	public static List<List<Integer>> elementos;
+	public static List<Integer> elementos;
 	
 	/*
 	 * Método inicial para la lectura de datos del fichero que se pasa como
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
 	 * Se accederá a los datos desde la clase PL que resuelve el ejercicio.
 	*/
-	public static void iniDatos(String fichero) {
+	public static void iniDatos(String fichero, Integer indice) {
 		
-		elementos = new ArrayList<List<Integer>>();
-		nombres = new ArrayList<String>();
+		elementos = new ArrayList<Integer>();
 		
-		int i = 0;
-        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-
-        while (i < lista.size()) {
-        	
-            String linea = lista.get(i);            
-            create(linea);
-            i++;
-            
-        }
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+        create(lista.get(indice));
 
 	}
 	
 	public static void create(String s) {
 		
-		String[] contenido = s.split(": ");
-		String nombre2 = contenido[0];
-		String[] numeros = contenido[1].split(",");
+		String[] contenido = s.split(", ");
 
-		List<Integer> afinidadesAux = new ArrayList<Integer>();
-		
-		for (String numero : numeros) {
+		// Casteo los strings de "contenido" a entero para meterlos en la lista que se guarda en la lista resultado:
+		for (String numero : contenido) {
 			
-			afinidadesAux.add(Integer.parseInt(numero));
+			elementos.add(Integer.parseInt(numero));
 			
 		}
-
-		nombres.add(nombre2);
-		elementos.add(afinidadesAux);
 		
 	}
 	
@@ -76,25 +60,65 @@ public class Ejercicio4 {
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
 	*/
+
+	// 
+	public static Integer e(Integer i) {
+		
+		return elementos.get(i);
+		
+	}
+
+	//
+	public static Integer getSizeConjunto() {
+		
+		return elementos.size();
+		
+	}
+
+	public static Integer getSumatorio() {
+		
+		Integer suma = 0;
+		
+		for (Integer elemento : elementos) {
+			
+			suma += elemento;;
+			
+		}
+		
+		return suma / 3;
+		
+	}
 	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
+	 * Este método difiere del resto en que el fichero de entrada representa no uno
+	 * sino varios ejercicios en un mismo fichero por lo que se llama al resolvedor
+	 * tantas veces como líneas de fichero entran.
 	*/
 	public static void ejercicio4(String fichero) {
 
-		// Solución por Programación Lineal:
-		try {
-
-			LP4.ejercicio4LP(fichero);
-
-		} catch (IOException e) {
-
-			System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
-			System.out.println("para el fichero: " + fichero + ".\n");
-			//e.printStackTrace();
-
-		}
+		int i = 0;
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
 		
+		while (i < lista.size()) {
+		
+			// Solución por Programación Lineal:
+			try {
+
+				LP4.ejercicio4LP(fichero, i);
+				
+			} catch (IOException e) {
+
+				System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
+				System.out.println("para el fichero: " + fichero + ".\n");
+				//e.printStackTrace();
+
+			}
+			
+			i++;
+			
+		}
+	
 	}
 
 }

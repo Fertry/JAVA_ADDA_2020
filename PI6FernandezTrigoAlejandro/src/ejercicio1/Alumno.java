@@ -14,12 +14,6 @@ import java.util.List;
 public class Alumno {
 	
 	// MÉTODOS DE LA CLASE
-	public static Alumno of() {
-
-		return new Alumno();
-
-	}
-
 	public static Alumno ofLinea(String linea) {
 
 		return new Alumno(linea);
@@ -31,14 +25,6 @@ public class Alumno {
 	public static List<Integer> afinidades;
 
 	// CONSTRUCTORES DE LA CLASE
-	public Alumno() {
-			
-		Alumno.nombre = null;
-		Alumno.afinidades = null;
-		
-	}
-
-	// Este constructor representa el constructor principal de la clase encargado de parsear cada línea de fichero:
 	private Alumno(String datos) {
 		
 		super();

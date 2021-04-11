@@ -6,13 +6,13 @@
 
 package ejercicio1;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
 
 /*
@@ -23,21 +23,10 @@ public class Solucion1 {
 	
 	public static void solucionLP1(String fichero, String entrada, Double valor) {
 		
-		// Crear el objeto para escribir sobre fichero:
-		PrintWriter writer = null;
-		FileWriter archivo = null;
-	
 		try {
 			
-			// Crea el archivo para escribir sobre el:
-			archivo = new FileWriter("volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""));
-			
-			// Escribe sobre el archivo:
-			writer = new PrintWriter(archivo);
-			writer.println(entrada.trim());
-			
-			// Cierra el archivo cuando se acaba de escribir:
-			archivo.close();
+			// Escribe el resultado a fichero para tratarlo a continuación:
+			Files2.toFile(entrada.trim(), "volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""));
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
 			formateo("volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""), fichero, valor);
@@ -48,7 +37,7 @@ public class Solucion1 {
 			System.out.println("No se ha podido formatear la salida así que se vuelca el ");
 			System.out.println("resultado directamente por consola.\n");
 			System.out.println(entrada + "\n");
-			e.printStackTrace();
+			// e.printStackTrace();
 			
 		}
 				
@@ -89,13 +78,24 @@ public class Solucion1 {
 		System.out.println("Valor objetivo: " + valor);
 		System.out.println("Reparto obtenido:");
 		System.out.println(reparto);
+
+		Map<Integer, List<Integer>> aux = new HashMap<Integer, List<Integer>>();
+		for (Integer grupo : reparto.values()) {
+			
+			System.out.println(grupo);
+			List<Integer> list = new ArrayList<Integer>();
+			
+			if (!aux.containsKey(grupo)) {
+				
+				list.add(reparto.get(grupo));
+				aux.put(grupo, list);
+
+			} 
+
+		}
 		
-//		for (Integer grupo : reparto.values()) {
-//
-//			System.out.println("Grupo " + (grupo + 1) + ": ");
-//
-//		}
-		
+		System.out.println(aux);
+
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 	}
