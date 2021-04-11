@@ -9,17 +9,15 @@ package ejercicio2;
 import java.util.ArrayList;
 import java.util.List;
 
-// Clase abogado para parsear la entrada por fichero del ejercicio creando objetos de clase Abogado con 
-// sus respectivos atributos: Nombre y Lista de horas.
-public class Abogado {
+import us.lsi.common.Pair;
+
+/*
+ *  Clase abogado para parsear la entrada por fichero del ejercicio creando objetos de clase Abogado con 
+ *  sus respectivos atributos: Nombre y Lista de horas. Implemento la clase como extensión de Pair.
+*/
+public class Abogado extends Pair<String, List<Integer>>{
 
 	// MÉTODOS DE LA CLASE
-	public static Abogado of() {
-
-		return new Abogado();
-
-	}
-
 	public static Abogado ofLinea(String linea) {
 
 		return new Abogado(linea);
@@ -31,17 +29,9 @@ public class Abogado {
 	public static List<Integer> horas;
 
 	// CONSTRUCTORES DE LA CLASE
-	private Abogado() {
-				
-		Abogado.nombre = null;
-		Abogado.horas = null;
-			
-	}
-
-	// Este constructor representa el constructor principal de la clase encargado de parsear cada línea de fichero:
 	private Abogado(String datos) {
 			
-		super();
+		super(nombre, horas);
 		List<Integer> listaHoras = new ArrayList<Integer>();
 			
 		// Secuencia de trims y splits:

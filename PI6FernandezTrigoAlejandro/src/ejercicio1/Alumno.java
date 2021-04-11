@@ -11,8 +11,10 @@ import java.util.List;
 
 import us.lsi.common.Pair;
 
-// Clase alumno para parsear la entrada por fichero del ejercicio creando objetos de clase Alumno con 
-// sus respectivos atributos: Nombre y Lista de afinidades. Implemento la clase como extensión de Pair.
+/*
+ * Clase alumno para parsear la entrada por fichero del ejercicio creando objetos de clase Alumno con 
+ * sus respectivos atributos: Nombre y Lista de afinidades. 
+*/
 public class Alumno extends Pair<String, List<Integer>> {
 	
 	// MÉTODOS DE LA CLASE

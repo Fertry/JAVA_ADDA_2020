@@ -9,9 +9,12 @@ package ejercicio4;
 import java.util.ArrayList;
 import java.util.List;
 
-// Clase conjunto para parsear la entrada por fichero del ejercicio creando objetos de clase Conjunto con 
-// sus respectivos atributos: Nombre y Lista de elementos.
-public class Conjunto {
+import us.lsi.common.Pair;
+
+/* Clase conjunto para parsear la entrada por fichero del ejercicio creando objetos de clase Conjunto con 
+ * sus respectivos atributos: Id y Lista de elementos. 
+*/
+public class Conjunto extends Pair<Integer, List<Integer>> {
 	
 	// MÉTODOS DE LA CLASE
 	public static Conjunto ofLinea(String linea) {
@@ -21,12 +24,14 @@ public class Conjunto {
 	}
 	
 	// ATRIBUTOS DE LA CLASE
+	private static Integer n = 0;
+	public static Integer id; 
 	public static List<Integer> elementos;
 
 	// CONSTRUCTORES DE LA CLASE
 	public Conjunto(String datos) {
 			
-		super();
+		super(id, elementos);
 		List<Integer> listaNumeros = new ArrayList<Integer>(); 
 		
 		String[] contenido = datos.split(", ");

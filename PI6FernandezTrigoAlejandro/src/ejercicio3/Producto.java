@@ -9,17 +9,14 @@ package ejercicio3;
 import java.util.ArrayList;
 import java.util.List;
 
-// Clase producto para parsear la entrada por fichero del ejercicio creando objetos de clase Producto con 
-// sus respectivos atributos: Nombre, Precio y Lista de funcionalidades.
-public class Producto {
+import us.lsi.common.Trio;
+
+/* Clase producto para parsear la entrada por fichero del ejercicio creando objetos de clase Producto con 
+ * sus respectivos atributos: Nombre, Precio y Lista de funcionalidades. Implemento la clase como extensión de Trio.
+*/
+public class Producto extends Trio<String, Double, List<String>>{
 
 	// MÉTODOS DE LA CLASE
-	public static Producto of() {
-
-		return new Producto();
-
-	}
-
 	public static Producto ofLinea(String datos) {
 		
 		return new Producto(datos);
@@ -32,18 +29,9 @@ public class Producto {
 	public static List<String> funcionalidades;
 
 	// CONSTRUCTORES DE LA CLASE
-	private Producto() {
-		
-		Producto.nombre = null;
-		Producto.precio = null;
-		Producto.funcionalidades = null;
-		
-	}
-	
-	// Este constructor representa el constructor principal de la clase encargado de parsear cada línea de fichero:
 	private Producto(String datos) {
 	
-		super();
+		super(nombre, precio, funcionalidades);
 		List<String> listaFuncionalidades = new ArrayList<String>();
 		
 		// Secuencia de trims y splits: 
