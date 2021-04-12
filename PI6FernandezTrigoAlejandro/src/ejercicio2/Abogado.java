@@ -39,10 +39,8 @@ public class Abogado extends Pair<String, List<Integer>>{
 		// Abogado_01
 		// 1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5
 
-		// Hacer split en base a los dos puntos y quedarnos con la parte izquierda
-	    // que representa los nombres, hacer split nuevamente en base a
-		// la coma (en la derecha) para quedarnos con la lista de horas:
 		String[] contenido = datos.split(": ");
+		
 		String nombre = contenido[0];
 		String[] horas = contenido[1].split(",");
 					
@@ -60,33 +58,19 @@ public class Abogado extends Pair<String, List<Integer>>{
 
 	// GETTTERS DE LA CLASE
 	// Devuelve el nombre de un Abogado:
-	public static String getNombre() {
+	public String getNombre() {
 
 		return nombre;
 
 	}
 
 	// Devuelve la lista de horas de un Abogado:
-	public static List<Integer> getHoras() {
+	public List<Integer> getHoras() {
 
 		return horas;
 
 	}
-	
-	// Devuelve el nº de horas de un Abogado:
-	public static Integer getNumeroCasos() {
 		
-		return horas.size();
-		
-	}
-	
-	// Devuelva el tiempo i de un Abogado:
-	public Integer getHora(Integer i) {
-		
-		return horas.get(i);
-		
-	}
-	
 	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {

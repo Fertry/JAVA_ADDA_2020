@@ -36,23 +36,20 @@ public class Producto extends Trio<String, Double, List<String>>{
 		
 		// Secuencia de trims y splits: 
 		// P01 (9.99 euros):  F1,F2
-		// Primer paso: 
 		// P01(9.99euros)
-		// F1,F2
-		// Segundo paso: 
+		// F1,F2 
 		// P01
 		// 9.99euros)
 		// Replace final:
 		// 9.99
 
-		// Hacer split en base a los dos punts y eliminar los espacios; nos quedamos con la lista de funcionalidades
-		// a un lado, y al otro, volvemos a splitear en base a la "(" quedándonos con el nombre y el precio que se
-		// extrae eliminando los caracteres sobrantes y parseando a double:
-		String[] primerpaso = datos.trim().split(":");
-		String[] funcionalidades = primerpaso[1].trim().split(","); 
-		String[] segundopaso = primerpaso[0].split("\\(");
-		String nombre = segundopaso[0];
-		Double precio = Double.parseDouble(segundopaso[1].replace("euros)", "")); 
+		String[] contenido = datos.trim().split(":");
+		
+		String[] funcionalidades = contenido[1].trim().split(","); 
+		String[] data = contenido[0].split("\\(");
+		
+		String nombre = data[0];
+		Double precio = Double.parseDouble(data[1].replace("euros)", "")); 
 		
 		for (String funcion : funcionalidades) {
 			
@@ -67,18 +64,21 @@ public class Producto extends Trio<String, Double, List<String>>{
 	}
 
 	// GETTTERS DE LA CLASE
+	// Devuelve el nombre de un Producto:
 	public String getNombre() {
 		
 		return nombre;
 		
 	}
 
+	// Devuelve el precio de un Producto:
 	public Double getPrecio() {
 		
 		return precio;
 		
 	}
 
+	// Devuelve la lista de funcionalidades de un Producto:
 	public List<String> getFuncionalidades() {
 		
 		return funcionalidades;

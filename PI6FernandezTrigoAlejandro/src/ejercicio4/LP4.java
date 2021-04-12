@@ -36,7 +36,7 @@ public class LP4 {
 		// Vuelca la salida "sin formatear" por consola:
 		// System.out.println(solution.toString((s, d) -> d > 0));
 	
-		// En su lugar, llamo a la clase Solucion2 para formatear la salida;
+		// En su lugar, llamo a la clase Solucion4 para formatear la salida;
 		// solo se toman los valores seleccionados (d > 0):
 		Solucion4.solucionLP4(fichero, solution.toString((s, d) -> d > 0), indice);
 		

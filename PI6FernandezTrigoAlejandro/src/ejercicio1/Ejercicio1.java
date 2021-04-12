@@ -72,12 +72,10 @@ public class Ejercicio1 {
 
 	}
 	
-
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
-	*/
-	
+	*/	
 	// Obtiene el nº de alumnos:
 	public static Integer getNAlumnos() { 
 		
@@ -106,7 +104,6 @@ public class Ejercicio1 {
 		
 	}
 	
-
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	*/

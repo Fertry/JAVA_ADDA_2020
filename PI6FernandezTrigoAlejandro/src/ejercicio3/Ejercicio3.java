@@ -29,8 +29,8 @@ public class Ejercicio3 {
 	 * Variables de la clase necesarias para ser accedidas por las clases
 	 * PL y AG que resuelven el ejercicio. 
 	*/
+	public static List<String> nombres;
 	public static List<Double> precios;
-	public static List<String> productos;
 	public static List<Integer> requisitos;
 	public static List<List<Integer>> funcionalidades;
 	
@@ -41,8 +41,9 @@ public class Ejercicio3 {
 	*/
 	public static void iniDatos(String fichero) {
 		
+		// Inicializar las variables de la clase Ejercicio3:
+		nombres = new ArrayList<String>();
 		precios = new ArrayList<Double>();
-		productos = new ArrayList<String>();
 		requisitos = new ArrayList<Integer>();
 		funcionalidades = new ArrayList<List<Integer>>();
 		
@@ -52,18 +53,33 @@ public class Ejercicio3 {
         while (i < lista.size()) {
         	
             String linea = lista.get(i);            
-            create(linea);
+            
+            // Creo un objeto de tipo Producto del cual extraer sus propiedades:
+            Producto producto = Producto.ofLinea(linea);
+            
+            nombres.add(producto.getNombre());
+            precios.add(producto.getPrecio());
+            
+            List<Integer> auxiliar = new ArrayList<Integer>();
+            for (String funcionalidad : producto.getFuncionalidades()) {
+				
+            	auxiliar.add(Integer.parseInt(funcionalidad.replace("F", "")));
+  
+			}
+            
+            funcionalidades.add(auxiliar);
+            
             i++;
             
         }
         
         // Los requisitos vienen especificados en la 1º línea de fichero:
-		String linea_1 = lista.get(0);
-		String[] linea_1_1 = linea_1.split(":");
-		String[] requisitos_string = linea_1_1[1].trim().split(",");
+		String primeraLinea = lista.get(0);
+		String[] primerLineaString = primeraLinea.split(":");
+		String[] requisitosString = primerLineaString[1].trim().split(",");
 		
 		// Se castea a entero para que el resolvedor reciba un nº:
-		for(String requisito : requisitos_string){
+		for(String requisito : requisitosString){
 			
 			requisitos.add(Integer.parseInt(requisito.replace("F", "")));
 			
@@ -71,57 +87,36 @@ public class Ejercicio3 {
 
 	}
 	
-	public static void create(String s) {
-		
-		String[] productoResto = s.trim().split("\\(");
-		// String[1] --> 9.99 euros): F1,F2
-
-		String[] precioResto = productoResto[1].trim().split("euros\\):");
-		// String[0] --> 9.99
-		// String[1] --> F1,F2
-
-		precios.add(Double.parseDouble(precioResto[0].trim()));
-
-		String[] funcionalidadesProducto = precioResto[1].split(",");
-		// String[0] --> F1
-		// String[1] --> F2
-
-		List<Integer> ls = new ArrayList<Integer>();
-		for (int x = 0; x < funcionalidadesProducto.length; x++) {
-			ls.add(Integer.parseInt(funcionalidadesProducto[x].replace("F", "").trim()));
-		}
-		funcionalidades.add(ls);
-		ls = new ArrayList<Integer>();
-
-	}
-	
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
 	*/
-	
+	// Obtiene el precio de un producto dado un indice:
 	public static Double getPrecio(Integer i) {
+		
 		return precios.get(i);
+		
 	}
 	
-	public static Integer getNumeroProductos() {
-		return precios.size();
+	// Obtiene el nº de productos: 
+	public static Integer getNProductos() {
+		
+		return nombres.size();
+		
 	}
 	
-	public static Integer getNumeroFuncionalidades() {
+	// Obtiene el nº de funcionalidades, que es el nº de requisitos
+	public static Integer getNFuncionalidades() {
+		
 		return requisitos.size();
+		
 	}
 
-	public static List<Integer> getFuncionalidad(Integer i) {
-		return funcionalidades.get(i);
-	}
-
-	public static Integer getFuncionalidades(Integer i) {
-		return requisitos.size();
-	}
-	
-	public static Boolean fi(Integer producto, Integer funcionalidad) {
-		return funcionalidades.get(producto).contains(requisitos.get(funcionalidad));
+	// Comprueba si un producto cubre una funcionalidad dada, siendo i el producto y j la funcionalidad:
+	public static Boolean contiene(Integer i, Integer j) {
+		
+		return funcionalidades.get(i).contains(requisitos.get(j));
+		
 	}
 	
 	/*
@@ -145,7 +140,7 @@ public class Ejercicio3 {
 		// Solución por Algoritmos Genéticos:
 //		try {
 //
-//			PL.ejercicio1LP();
+//			AG3.ejercicio3AG();
 //
 //		} catch (IOException e) {
 //

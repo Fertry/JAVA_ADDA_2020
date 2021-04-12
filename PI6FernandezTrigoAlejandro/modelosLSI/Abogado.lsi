@@ -5,8 +5,8 @@ Integer getNHoras()
 Integer getNAbogados()
 Integer tiempoPorIndice(Integer i, Integer j)
 
-Integer abogados = getNAbogados()
 Integer casos = getNHoras()
+Integer abogados = getNAbogados()
 
 goal section
 

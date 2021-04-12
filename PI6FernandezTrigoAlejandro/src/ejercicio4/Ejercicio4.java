@@ -36,21 +36,17 @@ public class Ejercicio4 {
 	*/
 	public static void iniDatos(String fichero, Integer indice) {
 		
+		// Inicializar las variables de la clase Ejercicio4:
 		elementos = new ArrayList<Integer>();
 		
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-        create(lista.get(indice));
-
-	}
-	
-	public static void create(String s) {
+        
+		// Creo un objeto de tipo Conjunto del cual extraer sus propiedades:
+		Conjunto conjunto = Conjunto.ofLinea(lista.get(indice));
 		
-		String[] contenido = s.split(", ");
-
-		// Casteo los strings de "contenido" a entero para meterlos en la lista que se guarda en la lista resultado:
-		for (String numero : contenido) {
+		for (Integer elemento : conjunto.getElementos()) {
 			
-			elementos.add(Integer.parseInt(numero));
+			elementos.add(elemento);
 			
 		}
 		
@@ -60,21 +56,21 @@ public class Ejercicio4 {
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
 	*/
-
-	// 
-	public static Integer e(Integer i) {
+	// Obtiene el elemento dado un indice:
+	public static Integer elemento(Integer i) {
 		
 		return elementos.get(i);
 		
 	}
 
-	//
+	// Obtiene el nº de elementos del conjunto:
 	public static Integer getSizeConjunto() {
 		
 		return elementos.size();
 		
 	}
 
+	// Obtiene el sumatorio de los elementos de un conjunto partido de 3:
 	public static Integer getSumatorio() {
 		
 		Integer suma = 0;
@@ -111,7 +107,7 @@ public class Ejercicio4 {
 
 				System.out.println("No se ha podido calcular la solución mediante Programación Lineal ");
 				System.out.println("para el fichero: " + fichero + ".\n");
-				//e.printStackTrace();
+				// e.printStackTrace();
 
 			}
 			

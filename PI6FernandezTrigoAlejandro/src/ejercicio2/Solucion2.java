@@ -6,6 +6,7 @@
 
 package ejercicio2;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +37,17 @@ public class Solucion2 {
 			System.out.println("No se ha podido formatear la salida así que se vuelca el ");
 			System.out.println("resultado directamente por consola.\n");
 			System.out.println(entrada + "\n");
-			e.printStackTrace();
+			// e.printStackTrace();
 			
 		}
 				
+	}
+	
+	// Función que dado una solución de Algoritmos Genéticos escribe el resultado a fichero para parsearlo:
+	public static void solucionAG2() {
+		
+		// TO-DO
+		
 	}
 	
 	public static void formateo(String fichero, String nombre) {
@@ -52,9 +60,9 @@ public class Solucion2 {
 		// x_n_m == 1 dónde n es el abogado y m el caso.
 		
 		int i = 3;
-		Map<Integer, Integer> reparto = new HashMap<Integer, Integer>();
 		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-				
+		Map<Integer, List<String>> reparto = new HashMap<Integer, List<String>>();		
+		
 		while (i < lista.size()) {
 			
 			String linea = lista.get(i).trim();
@@ -65,23 +73,53 @@ public class Solucion2 {
 			// Una x (se descarta), el abogado y el caso.
 			String[] valores = datos[0].trim().split("_");
 			
-			// Añadir los valores al mapa, esto es: Abogado (como clave) y Caso (como valor):
-			reparto.put(Integer.parseInt(valores[1].trim()), Integer.parseInt(valores[2].trim()));
+			// Añadir los valores al mapa en función del abogado al que se asocien, de forma 
+			// que las claves son los abogados y los valores los casos:
+			List<String> casos = new ArrayList<String>();
+			if (reparto.containsKey(Integer.parseInt(valores[1].trim()))) {
+				
+				casos = reparto.get(Integer.parseInt(valores[1].trim()));
+				Integer caso = Integer.parseInt(valores[2].trim()) + 1;
+				casos.add("Caso " + caso);
+				
+				reparto.put(Integer.parseInt(valores[1].trim()), casos);
+				
+			} else {
+				
+				Integer caso = Integer.parseInt(valores[2].trim()) + 1;
+				casos.add("Caso " + caso);
+				
+				reparto.put(Integer.parseInt(valores[1].trim()), casos);
+				
+			}
 			
 			i++;
 			
 		}
 		
+		// Tiempo total y tiempo en paralelo:
 		String[] tiempo = lista.get(2).trim().split("==");
 		String horas = tiempo[1].trim();
+		
+		Double horasTotal = 0.0;
 
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
-		System.out.println("Reparto obtenido:");
-		System.out.println(reparto);
-		System.out.println("Finalizado en " + horas + " horas.");
+		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
+		for (Integer abogado : reparto.keySet()) {
+			
+			System.out.println("Abogado_" + (abogado + 1));
+			System.out.println("	Horas empleadas: "	);
+			System.out.println("	Casos estudiados: " + reparto.get(abogado));
+			System.out.println("	Media (horas/caso): "	);
+		}
+		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
+		System.out.println("El estudio de todos los casos ha supuesto un total de " + horasTotal + " horas de trabajo\r\n"
+				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + horas + "\r\n"
+				+ "horas.");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-		
+			
 	}
+	
 }

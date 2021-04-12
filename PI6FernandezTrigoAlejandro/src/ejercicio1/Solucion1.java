@@ -44,6 +44,13 @@ public class Solucion1 {
 				
 	}
 	
+	// Función que dado una solución de Algoritmos Genéticos escribe el resultado a fichero para parsearlo:
+	public static void solucionAG1() {
+		
+		// TO-DO
+		
+	}
+	
 	// Función que parsea el fichero generado por solucionLP1 para mostrar el resultado por pantalla:
 	public static void formateo(String fichero, String nombre, Double valor) {
 		

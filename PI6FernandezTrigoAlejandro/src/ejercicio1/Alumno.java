@@ -13,7 +13,7 @@ import us.lsi.common.Pair;
 
 /*
  * Clase alumno para parsear la entrada por fichero del ejercicio creando objetos de clase Alumno con 
- * sus respectivos atributos: Nombre y Lista de afinidades. 
+ * sus respectivos atributos: Nombre y Lista de afinidades. Implemento la clase como extensión de Pair.
 */
 public class Alumno extends Pair<String, List<Integer>> {
 	
@@ -39,9 +39,6 @@ public class Alumno extends Pair<String, List<Integer>> {
 		// Alumno_08
 		// 5,3,2,0
 
-		// Hacer split en base a los dos puntos y quedarnos con la parte izquierda
-		// que representa al nombre, hacer split nuevamente en base a
-		// la coma (en la derecha) para quedarnos con la lista de afinidades:
 		String[] contenido = datos.split(": ");
 		String nombre = contenido[0];
 		String[] numeros = contenido[1].split(",");

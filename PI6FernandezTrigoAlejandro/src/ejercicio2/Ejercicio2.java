@@ -42,8 +42,9 @@ public class Ejercicio2 {
 	*/
 	public static void iniDatos(String fichero) {
 		
-		horas = new ArrayList<List<Integer>>();
+		// Inicializar las variables de la clase Ejercicio2:
 		nombres = new ArrayList<String>();
+		horas = new ArrayList<List<Integer>>();
 		
 		int i = 0;
         List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
@@ -51,37 +52,31 @@ public class Ejercicio2 {
         while (i < lista.size()) {
         	
             String linea = lista.get(i);            
-            create(linea);
+            
+            // Creo un objeto de tipo Abogado del cual extraer sus propiedades:
+            Abogado abogado = Abogado.ofLinea(linea);
+            
+            nombres.add(abogado.getNombre());
+            
+            List<Integer> auxiliar = new ArrayList<Integer>();
+            for (Integer hora : abogado.getHoras()) {
+				
+            	auxiliar.add(hora);
+            	
+			}
+            
+            horas.add(auxiliar);
+            
             i++;
             
         }
 
 	}
 	
-	public static void create(String s) {
-		
-		String[] contenido = s.split(": ");
-		String nombre = contenido[0];
-		String[] tiempos = contenido[1].split(",");
-		
-		List<Integer> horasAux = new ArrayList<Integer>();
-		
-		for (String numero : tiempos) {
-						
-			horasAux.add(Integer.parseInt(numero));
-						
-		}
-		
-		nombres.add(nombre);
-		horas.add(horasAux);
-		
-	}
-	
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
 	*/
-	
 	// Obtiene el nº de abogados:
 	public static Integer getNAbogados() {
 
@@ -95,14 +90,7 @@ public class Ejercicio2 {
 		return horas.get(0).size();
 		
 	}
-	
-	// Obtiene el tamaño del reparto: abogados / casos (horas) = tamaño grupos
-	public static Integer getSizeGrupos() {
 		
-		return getNAbogados() / getNHoras();
-		
-	}
-	
 	// Obtiene el tiempo de un abogado dado el abogado (i) para el caso (j):
 	public static Integer tiempoPorIndice(Integer i, Integer j) {
 		
@@ -132,7 +120,7 @@ public class Ejercicio2 {
 		// Solución por Algoritmos Genéticos:
 //		try {
 //
-//			LP2.ejercicio2LP();
+//			AG2.ejercicio2AG();
 //
 //		} catch (IOException e) {
 //

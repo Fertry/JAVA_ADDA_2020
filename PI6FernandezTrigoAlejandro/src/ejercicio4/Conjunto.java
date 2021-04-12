@@ -12,7 +12,7 @@ import java.util.List;
 import us.lsi.common.Pair;
 
 /* Clase conjunto para parsear la entrada por fichero del ejercicio creando objetos de clase Conjunto con 
- * sus respectivos atributos: Id y Lista de elementos. 
+ * sus respectivos atributos: Id y Lista de elementos. Implemento la clase como extensión de Pair.
 */
 public class Conjunto extends Pair<Integer, List<Integer>> {
 	
@@ -34,14 +34,21 @@ public class Conjunto extends Pair<Integer, List<Integer>> {
 		super(id, elementos);
 		List<Integer> listaNumeros = new ArrayList<Integer>(); 
 		
+		// Secuencia de trims y splits:
+		// 1, 2, 3, 4, 5, 7, 8, 15
+		// [1, 2, 3, 4, 5, 7, 8, 15]
+		
 		String[] contenido = datos.split(", ");
 
-		// Casteo los strings de "contenido" a entero para meterlos en la lista que se guarda en la lista resultado:
+		// Casteo los strings de "contenido" a entero para meterlos en la lista:
 		for (String numero : contenido) {
 			
 			listaNumeros.add(Integer.parseInt(numero));
 			
 		}
+		
+		Conjunto.id = n + 1;
+		Conjunto.elementos = listaNumeros;
 
 	}
 	
@@ -54,18 +61,11 @@ public class Conjunto extends Pair<Integer, List<Integer>> {
 		
 	}
 	
-	// Devuelve el nº de elementos de un Conjunto:
-	public Integer getNumeroElementos() {
-		
-		return elementos.size();
-		
-	}
-
 	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 		
-		return "[" + elementos + "]";
+		return "Conjunto " + id + "[" + elementos + "]";
 		
 	}
 	

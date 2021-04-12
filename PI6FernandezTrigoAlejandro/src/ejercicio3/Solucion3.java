@@ -35,10 +35,17 @@ public class Solucion3 {
 			System.out.println("No se ha podido formatear la salida así que se vuelca el ");
 			System.out.println("resultado directamente por consola.\n");
 			System.out.println(entrada + "\n");
-			e.printStackTrace();
+			// e.printStackTrace();
 			
 		}
 				
+	}
+	
+	// Función que dado una solución de Algoritmos Genéticos escribe el resultado a fichero para parsearlo:
+	public static void solucionAG3() {
+		
+		// TO-DO
+		
 	}
 	
 	public static void formateo(String fichero, String nombre) {
