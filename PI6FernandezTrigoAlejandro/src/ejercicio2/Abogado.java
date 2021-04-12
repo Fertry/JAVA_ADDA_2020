@@ -70,7 +70,7 @@ public class Abogado extends Pair<String, List<Integer>>{
 		return horas;
 
 	}
-		
+	
 	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {

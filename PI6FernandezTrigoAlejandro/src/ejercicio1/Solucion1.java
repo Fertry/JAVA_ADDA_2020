@@ -75,7 +75,7 @@ public class Solucion1 {
 			String[] valores = datos[0].trim().split("_");
 			
 			// Añadir los valores al mapa en función del grupo al que pertenecen, de forma que las claves
-			// son los alumnos y los valores el grupo:
+			// son los grupos y los valores alumnos:
 			List<String> alumnos = new ArrayList<String>();
 			if (reparto.containsKey(Integer.parseInt(valores[2].trim()))) {
 				

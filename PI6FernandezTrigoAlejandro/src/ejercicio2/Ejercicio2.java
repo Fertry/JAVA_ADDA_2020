@@ -97,7 +97,31 @@ public class Ejercicio2 {
 		return horas.get(i).get(j);
 		
 	}
-
+	
+	/*
+	 * Métodos auxiliares para ser accedidos por las clases de Solucion; solo son
+	 * usados para el formateo de la salida y no están involucrados en la solución del
+	 * ejercicio por PL o AG.
+	 */
+	// Calcula el sumatorio de TODOS los casos (el tiempo total sin reparto paralelo de casos):
+	public static Integer tiempoSinParalelismo() {
+		
+		Integer tiempo = 0;
+		
+		// Recorrer cada lista de listas de "horas" para sumarlas todas:
+		for (List<Integer> listaHoras : horas) {
+			for (Integer hora : listaHoras) {
+				
+				tiempo += hora;
+				
+			}
+		}
+		
+		return tiempo;
+		
+	}
+	
+	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */

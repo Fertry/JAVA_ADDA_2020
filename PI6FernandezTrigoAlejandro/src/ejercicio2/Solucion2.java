@@ -74,10 +74,10 @@ public class Solucion2 {
 			String[] valores = datos[0].trim().split("_");
 			
 			// Añadir los valores al mapa en función del abogado al que se asocien, de forma 
-			// que las claves son los abogados y los valores los casos:
+			// que las claves son los abogados y los valores casos:
 			List<String> casos = new ArrayList<String>();
 			if (reparto.containsKey(Integer.parseInt(valores[1].trim()))) {
-				
+				// Abogados son [1]
 				casos = reparto.get(Integer.parseInt(valores[1].trim()));
 				Integer caso = Integer.parseInt(valores[2].trim()) + 1;
 				casos.add("Caso " + caso);
@@ -97,22 +97,57 @@ public class Solucion2 {
 			
 		}
 		
-		// Tiempo total y tiempo en paralelo:
+		// DEBUG: EL MAPA SE GENERA BIEN, ERROR POR DEBAJO DE ESTA LINEA
+		// System.out.println(reparto);
+		
+		// Tiempo total, tiempo en paralelo y tiempo por abogado:
+		Integer horasEmpleadas = 0;
 		String[] tiempo = lista.get(2).trim().split("==");
 		String horas = tiempo[1].trim();
+		Integer horasTotal = Ejercicio2.tiempoSinParalelismo();
 		
-		Double horasTotal = 0.0;
-
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		for (Integer abogado : reparto.keySet()) {
 			
+			// DEBUG: FALLA AL RECORRER LOS CASOS
+			System.out.println(reparto.get(abogado));
+			
+			// ============================================================
+			for (String string : reparto.get(abogado)) {
+				
+				Integer n = Integer.parseInt(string) - 1;
+				// Esta n es el caso:
+				System.out.println(n);
+
+				// Si quiero el tiempo dado un abogado y el caso n:
+				System.out.println("Tiempo para el caso " + n + " asociado al abogado " + Ejercicio2.tiempoPorIndice(abogado, n));
+				
+			}
+			
+			
+			// ============================================================
+
+			
+			// Sumatorio de horas dados los casos asociados a un abogado:
+//			for (List<String> casos : reparto.values()) {
+//				for (String caso : casos) {
+//					
+//					// Restar 1 al caso (se sumó +1 antes por conveniencia al mostrar los datos)
+//					Integer casoEntero = Integer.parseInt(caso) - 1; 
+//					horasEmpleadas += Ejercicio2.tiempoPorIndice(abogado, casoEntero);
+//					
+//				}
+//				
+//			}
+			
 			System.out.println("Abogado_" + (abogado + 1));
-			System.out.println("	Horas empleadas: "	);
+			System.out.println("	Horas empleadas: " + horasEmpleadas);
 			System.out.println("	Casos estudiados: " + reparto.get(abogado));
-			System.out.println("	Media (horas/caso): "	);
+			System.out.println("	Media (horas/casos): " + (horasEmpleadas / reparto.get(abogado).size()));
+			
 		}
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		System.out.println("El estudio de todos los casos ha supuesto un total de " + horasTotal + " horas de trabajo\r\n"
