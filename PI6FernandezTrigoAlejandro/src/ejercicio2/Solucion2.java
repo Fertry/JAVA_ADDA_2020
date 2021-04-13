@@ -21,7 +21,7 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion2 {
 	
-	public static void solucionLP2(String fichero, String entrada) {
+	public static void solucionLP2(String fichero, String entrada, Double valor) {
 		
 		try {
 			
@@ -29,7 +29,7 @@ public class Solucion2 {
 			Files2.toFile(entrada.trim(), "volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""));
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			formateo("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""), fichero);
+			formateo("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""), fichero, valor);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -50,7 +50,7 @@ public class Solucion2 {
 		
 	}
 	
-	public static void formateo(String fichero, String nombre) {
+	public static void formateo(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -99,8 +99,6 @@ public class Solucion2 {
 		
 		// Tiempo total, tiempo en paralelo y tiempo por abogado:
 		Integer horasEmpleadas = 0;
-		String[] valorObjetivo = lista.get(2).trim().split("==");
-		String horas = valorObjetivo[1].trim();
 		Integer horasTotal = Ejercicio2.tiempoSinParalelismo();
 		
 		// Salida final por pantalla:
@@ -108,19 +106,7 @@ public class Solucion2 {
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		for (Integer abogado : reparto.keySet()) {
-			
-			// Sumatorio de horas dados los casos asociados a un abogado:
-//			for (List<String> casos : reparto.values()) {
-//				for (String caso : casos) {
-//					
-//					// Restar 1 al caso (se sumó +1 antes por conveniencia al mostrar los datos)
-//					Integer casoEntero = Integer.parseInt(caso) - 1; 
-//					horasEmpleadas += Ejercicio2.tiempoPorIndice(abogado, casoEntero);
-//					
-//				}
-//				
-//			}
-			
+	
 			System.out.println("Abogado_" + (abogado + 1));
 			System.out.println("	Horas empleadas: " + horasEmpleadas);
 			System.out.println("	Casos estudiados: " + reparto.get(abogado));
@@ -129,10 +115,23 @@ public class Solucion2 {
 		}
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		System.out.println("El estudio de todos los casos ha supuesto un total de " + horasTotal + " horas de trabajo\r\n"
-				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + horas + "\r\n"
+				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + Math.round(valor) + "\r\n"
 				+ "horas.");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			
 	}
+	
+	// Método auxiliar para calcular el tiempo empleado por abogado en base a sus casos asociados:
+	
+//	for (List<String> casos : reparto.values()) {
+//		for (String caso : casos) {
+//			
+//			// Restar 1 al caso (se sumó +1 antes por conveniencia al mostrar los datos)
+//			Integer casoEntero = Integer.parseInt(caso) - 1; 
+//			horasEmpleadas += Ejercicio2.tiempoPorIndice(abogado, casoEntero);
+//			
+//		}
+//		
+//	}
 	
 }

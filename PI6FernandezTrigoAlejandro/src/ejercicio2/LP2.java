@@ -38,7 +38,7 @@ public class LP2 {
 	
 		// En su lugar, llamo a la clase Solucion2 para formatear la salida;
 		// solo se toman los valores seleccionados (d > 0):
-		Solucion2.solucionLP2(fichero, solution.toString((s, d) -> d > 0));
+		Solucion2.solucionLP2(fichero, solution.toString((s, d) -> d > 0), solution.objVal);
 		
 	}
 

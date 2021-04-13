@@ -103,7 +103,7 @@ public class Solucion4 {
 		System.out.println("El menor conjunto tiene " + menor + " elemento/s.");
 		for (Integer conjunto : reparto.keySet()) {
 			
-			System.out.println("Elementos del conjunto " + (conjunto + 1) + ":" + reparto.get(conjunto));
+			System.out.println("Elementos del conjunto " + (conjunto + 1) + ": " + reparto.get(conjunto));
 			
 		}
 		System.out.println("o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o");
