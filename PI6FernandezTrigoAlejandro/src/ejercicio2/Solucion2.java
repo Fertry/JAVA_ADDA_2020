@@ -97,10 +97,6 @@ public class Solucion2 {
 			
 		}
 		
-		// Tiempo total, tiempo en paralelo y tiempo por abogado:
-		Integer horasEmpleadas = 0;
-		Integer horasTotal = Ejercicio2.tiempoSinParalelismo();
-		
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
@@ -108,13 +104,13 @@ public class Solucion2 {
 		for (Integer abogado : reparto.keySet()) {
 	
 			System.out.println("Abogado_" + (abogado + 1));
-			System.out.println("	Horas empleadas: " + horasEmpleadas);
+			System.out.println("	Horas empleadas: " + Math.round(sumatorioHoras(reparto, abogado)));
 			System.out.println("	Casos estudiados: " + reparto.get(abogado));
-			System.out.println("	Media (horas/casos): " + (horasEmpleadas / reparto.get(abogado).size()));
+			System.out.println("	Media (horas/casos): " + Math.round((sumatorioHoras(reparto, abogado) / reparto.get(abogado).size())));
 			
 		}
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
-		System.out.println("El estudio de todos los casos ha supuesto un total de " + horasTotal + " horas de trabajo\r\n"
+		System.out.println("El estudio de todos los casos ha supuesto un total de " + Math.round(sumatorioHorasTotal(reparto)) + " horas de trabajo\r\n"
 				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + Math.round(valor) + "\r\n"
 				+ "horas.");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -122,16 +118,43 @@ public class Solucion2 {
 	}
 	
 	// Método auxiliar para calcular el tiempo empleado por abogado en base a sus casos asociados:
+	private static Double sumatorioHoras(Map<Integer, List<String>> reparto, Integer abogado) {
+		
+		Integer suma = 0;
+		
+		for (String caso : reparto.get(abogado)) {
+			
+			// Los casos que son Strings los casteo a entero: 
+			Integer n = Integer.parseInt(caso.replace("Caso ", ""));
+
+			suma += Ejercicio2.tiempoPorIndice(abogado, n - 1);
+			
+		}
+		
+		return (double)suma;
+		
+	}
 	
-//	for (List<String> casos : reparto.values()) {
-//		for (String caso : casos) {
-//			
-//			// Restar 1 al caso (se sumó +1 antes por conveniencia al mostrar los datos)
-//			Integer casoEntero = Integer.parseInt(caso) - 1; 
-//			horasEmpleadas += Ejercicio2.tiempoPorIndice(abogado, casoEntero);
-//			
-//		}
-//		
-//	}
+	// Método auxiliar para calcular el tiempo total empleado sin paralelismo según el reparto:
+	private static Double sumatorioHorasTotal(Map<Integer, List<String>> reparto) {
+		
+		Integer suma = 0;
+		
+		for (Integer abogado : reparto.keySet()) {
+			
+			for (String caso : reparto.get(abogado)) {
+				
+				// Los casos que son Strings los casteo a entero: 
+				Integer n = Integer.parseInt(caso.replace("Caso ", ""));
+				
+				suma += Ejercicio2.tiempoPorIndice(abogado, n - 1);
+				
+			}
+			
+		}
+		
+		return (double)suma;
+	
+	}
 	
 }
