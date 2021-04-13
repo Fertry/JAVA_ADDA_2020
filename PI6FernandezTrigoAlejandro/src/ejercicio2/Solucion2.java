@@ -99,8 +99,8 @@ public class Solucion2 {
 		
 		// Tiempo total, tiempo en paralelo y tiempo por abogado:
 		Integer horasEmpleadas = 0;
-		String[] tiempo = lista.get(2).trim().split("==");
-		String horas = tiempo[1].trim();
+		String[] valorObjetivo = lista.get(2).trim().split("==");
+		String horas = valorObjetivo[1].trim();
 		Integer horasTotal = Ejercicio2.tiempoSinParalelismo();
 		
 		// Salida final por pantalla:

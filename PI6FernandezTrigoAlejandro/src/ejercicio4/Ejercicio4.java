@@ -86,6 +86,18 @@ public class Ejercicio4 {
 	}
 	
 	/*
+	 * Métodos auxiliares para ser accedidos por las clases de Solucion; solo son
+	 * usados para el formateo de la salida y no están involucrados en la solución del
+	 * ejercicio por PL o AG.
+	 */
+	// Método que devuelve el conjunto de entrada:
+	public static List<Integer> conjunto() {
+		
+		return elementos;
+		
+	}
+	
+	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 * Este método difiere del resto en que el fichero de entrada representa no uno
 	 * sino varios ejercicios en un mismo fichero por lo que se llama al resolvedor
