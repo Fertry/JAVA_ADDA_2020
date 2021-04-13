@@ -120,6 +120,41 @@ public class Ejercicio3 {
 	}
 	
 	/*
+	 * Métodos auxiliares para ser accedidos por las clases de Solucion; solo son
+	 * usados para el formateo de la salida y no están involucrados en la solución del
+	 * ejercicio por PL o AG.
+	 */
+	// Devuelve las funcionalidades de un producto:
+	public static List<String> funcionalidadesPorProducto(Integer i) {
+		
+		List<String> resultado = new ArrayList<String>();
+		
+		for (Integer funcionalidad : funcionalidades.get(i)) {
+			
+			resultado.add("F" + funcionalidad);
+			
+		}
+		
+		return resultado;
+		
+	}
+	
+	// Devuelve la lista de requisitos:
+	public static List<String> requisitos() {
+		
+		List<String> resultado = new ArrayList<String>();
+		
+		for (Integer requisito : requisitos) {
+			
+			resultado.add("F" + requisito);
+			
+		}
+		
+		return resultado;
+		
+	}
+	
+	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
 	public static void ejercicio3(String fichero) {

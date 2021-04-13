@@ -76,12 +76,31 @@ public class Solucion3 {
 			i++;
 			
 		}
-
+		
+		// Funcionalidades y precios totales:
+		Double precio = 0.0;
+		List<String> funcionalidades = new ArrayList<String>();
+		
 		// Salida final por pantalla:
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
-		System.out.println("Reparto obtenido:");
-		System.out.println(seleccion);
+		System.out.println("Funcionalidades a cubrir: " + Ejercicio3.requisitos());
+		System.out.println("Composición del lote seleccionado: ");
+		for (Integer producto : seleccion) {
+			
+			System.out.println("P" + producto + " (" + Ejercicio3.getPrecio(producto - 1) + " euros) " + "=> " + Ejercicio3.funcionalidadesPorProducto(producto - 1));
+			
+			for (String funcionalidad : Ejercicio3.funcionalidadesPorProducto(producto - 1)) {
+				
+				funcionalidades.add(funcionalidad);
+				
+			}
+			
+			precio += Ejercicio3.getPrecio(producto - 1);
+			
+		}
+		System.out.println("Funcionalidades de la selección: " + funcionalidades);
+		System.out.println("Precio total del lote seleccionado: " + Math.round(precio) + " euros");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 	}

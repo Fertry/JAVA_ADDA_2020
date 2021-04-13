@@ -97,9 +97,6 @@ public class Solucion2 {
 			
 		}
 		
-		// DEBUG: EL MAPA SE GENERA BIEN, ERROR POR DEBAJO DE ESTA LINEA
-		// System.out.println(reparto);
-		
 		// Tiempo total, tiempo en paralelo y tiempo por abogado:
 		Integer horasEmpleadas = 0;
 		String[] tiempo = lista.get(2).trim().split("==");
@@ -111,25 +108,6 @@ public class Solucion2 {
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		for (Integer abogado : reparto.keySet()) {
-			
-			// DEBUG: FALLA AL RECORRER LOS CASOS
-			System.out.println(reparto.get(abogado));
-			
-			// ============================================================
-			for (String string : reparto.get(abogado)) {
-				
-				Integer n = Integer.parseInt(string) - 1;
-				// Esta n es el caso:
-				System.out.println(n);
-
-				// Si quiero el tiempo dado un abogado y el caso n:
-				System.out.println("Tiempo para el caso " + n + " asociado al abogado " + Ejercicio2.tiempoPorIndice(abogado, n));
-				
-			}
-			
-			
-			// ============================================================
-
 			
 			// Sumatorio de horas dados los casos asociados a un abogado:
 //			for (List<String> casos : reparto.values()) {

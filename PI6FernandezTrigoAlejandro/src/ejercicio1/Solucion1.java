@@ -110,7 +110,7 @@ public class Solucion1 {
 			System.out.println("Grupo " + (entrada + 1) + ": " + reparto.get(entrada).toString());
 			
 		}
-		System.out.println("Afinidad media: " + afinidadMedia);
+		System.out.println("Afinidad media: " + Math.round(afinidadMedia));
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		
 	}

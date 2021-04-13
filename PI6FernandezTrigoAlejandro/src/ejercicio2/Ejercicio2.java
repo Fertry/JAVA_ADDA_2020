@@ -121,7 +121,6 @@ public class Ejercicio2 {
 		
 	}
 	
-	
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
