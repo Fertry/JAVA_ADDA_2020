@@ -11,7 +11,8 @@ import java.util.List;
 
 import us.lsi.common.Pair;
 
-/* Clase conjunto para parsear la entrada por fichero del ejercicio creando objetos de clase Conjunto con 
+/* 
+ * Clase conjunto para parsear la entrada por fichero del ejercicio creando objetos de clase Conjunto con 
  * sus respectivos atributos: Id y Lista de elementos. Implemento la clase como extensión de Pair.
 */
 public class Conjunto extends Pair<Integer, List<Integer>> {

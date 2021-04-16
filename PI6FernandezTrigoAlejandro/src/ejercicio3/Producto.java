@@ -11,7 +11,8 @@ import java.util.List;
 
 import us.lsi.common.Trio;
 
-/* Clase producto para parsear la entrada por fichero del ejercicio creando objetos de clase Producto con 
+/* 
+ * Clase producto para parsear la entrada por fichero del ejercicio creando objetos de clase Producto con 
  * sus respectivos atributos: Nombre, Precio y Lista de funcionalidades. Implemento la clase como extensión de Trio.
 */
 public class Producto extends Trio<String, Double, List<String>>{

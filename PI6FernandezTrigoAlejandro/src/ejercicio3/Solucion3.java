@@ -19,6 +19,7 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion3 {
 	
+	// Función que dado una solución de LP desde Gurobi escribe el resultado a fichero para parsearlo:
 	public static void solucionLP3(String fichero, String entrada) {
 
 		try {
@@ -27,7 +28,7 @@ public class Solucion3 {
 			Files2.toFile(entrada.trim(), "volcado/salidaPLEj3DatosEntrada" + fichero.replace("ficheros/PI6Ej3DatosEntrada", ""));
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			formateo("volcado/salidaPLEj3DatosEntrada" + fichero.replace("ficheros/PI6Ej3DatosEntrada", ""), fichero);
+			formateoPL("volcado/salidaPLEj3DatosEntrada" + fichero.replace("ficheros/PI6Ej3DatosEntrada", ""), fichero);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -41,14 +42,15 @@ public class Solucion3 {
 				
 	}
 	
-	// Función que dado una solución de Algoritmos Genéticos escribe el resultado a fichero para parsearlo:
+	// Función que dado una solución de Algoritmos Genéticos parsea la solución:
 	public static void solucionAG3() {
 		
 		// TO-DO
 		
 	}
 	
-	public static void formateo(String fichero, String nombre) {
+	// Función que parsea el fichero generado por solucionLP3 para mostrar el resultado por pantalla:
+	public static void formateoPL(String fichero, String nombre) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -82,26 +84,35 @@ public class Solucion3 {
 		List<String> funcionalidades = new ArrayList<String>();
 		
 		// Salida final por pantalla:
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~PROGRAMACIÓN LINEAL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
-		System.out.println("Funcionalidades a cubrir: " + Ejercicio3.requisitos());
+		System.out.println("Funcionalidades a cubrir: " + Ejercicio3LP.requisitos());
 		System.out.println("Composición del lote seleccionado: ");
 		for (Integer producto : seleccion) {
 			
-			System.out.println("P" + producto + " (" + Ejercicio3.getPrecio(producto - 1) + " euros) " + "=> " + Ejercicio3.funcionalidadesPorProducto(producto - 1));
+			System.out.println("P" + producto + " (" + Ejercicio3LP.getPrecio(producto - 1) + " euros) " + "=> " + Ejercicio3LP.funcionalidadesPorProducto(producto - 1));
 			
-			for (String funcionalidad : Ejercicio3.funcionalidadesPorProducto(producto - 1)) {
+			for (String funcionalidad : Ejercicio3LP.funcionalidadesPorProducto(producto - 1)) {
 				
 				funcionalidades.add(funcionalidad);
 				
 			}
 			
-			precio += Ejercicio3.getPrecio(producto - 1);
+			precio += Ejercicio3LP.getPrecio(producto - 1);
 			
 		}
 		System.out.println("Funcionalidades de la selección: " + funcionalidades);
 		System.out.println("Precio total del lote seleccionado: " + Math.round(precio) + " euros");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
+	}
+	
+	// Función que parsea la salida de solucionAG1 para mostrar el resultado por pantalla:
+	public static void formateoAG(String nombre, List<Integer> reparto, Double valor) {
+		
+		// Salida final por pantalla:
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~ALGORITMOS GENÉTICOS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		
 		
 	}
 

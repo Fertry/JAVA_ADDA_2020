@@ -21,6 +21,7 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion4 {
 	
+	// Función que dado una solución de LP desde Gurobi escribe el resultado a fichero para parsearlo:
 	public static void solucionLP4(String fichero, String entrada, Integer indice, Double valor) {
 		
 		try {
@@ -43,6 +44,7 @@ public class Solucion4 {
 				
 	}
 	
+	// Función que parsea el fichero generado por solucionLP4 para mostrar el resultado por pantalla:
 	public static void formateo(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.

@@ -21,6 +21,7 @@ import us.lsi.flujossecuenciales.StreamsS;
  */
 public class Solucion2 {
 	
+	// Función que dado una solución de LP desde Gurobi escribe el resultado a fichero para parsearlo:
 	public static void solucionLP2(String fichero, String entrada, Double valor) {
 		
 		try {
@@ -29,7 +30,7 @@ public class Solucion2 {
 			Files2.toFile(entrada.trim(), "volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""));
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			formateo("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""), fichero, valor);
+			formateoPL("volcado/salidaPLEj2DatosEntrada" + fichero.replace("ficheros/PI6Ej2DatosEntrada", ""), fichero, valor);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -43,14 +44,46 @@ public class Solucion2 {
 				
 	}
 	
-	// Función que dado una solución de Algoritmos Genéticos escribe el resultado a fichero para parsearlo:
-	public static void solucionAG2() {
+	// Función que dado una solución de Algoritmos Genéticos parsea la solución:
+	public static void solucionAG2(String fichero, List<Integer> entrada) {
 		
-		// TO-DO
+		// La lista incluye como indice a los casos, cada indice representa
+		// a un caso y el valor en dicha posición el abogado asignado:
+		Double valor = 0.0;
+		Map<Integer, List<String>> reparto = new HashMap<Integer, List<String>>();
+
+		int i = 0;
+		while (i < entrada.size()) {
+			
+			if (reparto.containsKey(entrada.get(i) + 1)) {
+				
+				List<String> casos = new ArrayList<>();
+				casos = reparto.get(entrada.get(i) + 1);
+				casos.add(Ejercicio2AG.nombres.get(i));
+				reparto.put(entrada.get(i) + 1, casos);
+				
+			} else {
+				
+				List<String> casos = new ArrayList<>();
+				casos.add(Ejercicio2AG.nombres.get(i));
+				reparto.put(entrada.get(i) + 1, casos);
+				
+			}
+			
+			// Valor representa el sumatorio de afinidades para el calculo de la afinidad media:
+			valor += Ejercicio2AG.tiempoPorIndice(i, entrada.get(i));
+			
+			i++;
+				
+		}
+			
+		// Con el mapa creado, se llama a la función que lo parsea:
+		formateoAG(fichero, reparto, valor);
 		
 	}
 	
-	public static void formateo(String fichero, String nombre, Double valor) {
+	// Función que parsea el fichero generado por solucionLP2 para mostrar el resultado por pantalla:
+	public static void formateoPL(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -98,7 +131,7 @@ public class Solucion2 {
 		}
 		
 		// Salida final por pantalla:
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~PROGRAMACIÓN LINEAL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		for (Integer abogado : reparto.keySet()) {
@@ -113,8 +146,31 @@ public class Solucion2 {
 		System.out.println("El estudio de todos los casos ha supuesto un total de " + Math.round(sumatorioHorasTotal(reparto)) + " horas de trabajo\r\n"
 				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + Math.round(valor) + "\r\n"
 				+ "horas.");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 			
+	}
+	
+	// Función que parsea la salida de solucionAG1 para mostrar el resultado por pantalla:
+	public static void formateoAG(String nombre, Map<Integer, List<String>> reparto, Double valor) {
+		
+		// Salida final por pantalla:
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~ALGORITMOS GENÉTICOS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(nombre.replace("ficheros/", "") + ":");	
+		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
+		for (Integer abogado : reparto.keySet()) {
+	
+			System.out.println("Abogado_" + (abogado + 1));
+			System.out.println("	Horas empleadas: " + Math.round(sumatorioHoras(reparto, abogado)));
+			System.out.println("	Casos estudiados: " + reparto.get(abogado));
+			System.out.println("	Media (horas/casos): " + Math.round((sumatorioHoras(reparto, abogado) / reparto.get(abogado).size())));
+			
+		}
+		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
+		System.out.println("El estudio de todos los casos ha supuesto un total de " + Math.round(sumatorioHorasTotal(reparto)) + " horas de trabajo\r\n"
+				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + Math.round(valor) + "\r\n"
+				+ "horas.");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+		
 	}
 	
 	// Método auxiliar para calcular el tiempo empleado por abogado en base a sus casos asociados:
@@ -127,7 +183,7 @@ public class Solucion2 {
 			// Los casos que son Strings los casteo a entero: 
 			Integer n = Integer.parseInt(caso.replace("Caso ", ""));
 
-			suma += Ejercicio2.tiempoPorIndice(abogado, n - 1);
+			suma += Ejercicio2LP.tiempoPorIndice(abogado, n - 1);
 			
 		}
 		
@@ -147,7 +203,7 @@ public class Solucion2 {
 				// Los casos que son Strings los casteo a entero: 
 				Integer n = Integer.parseInt(caso.replace("Caso ", ""));
 				
-				suma += Ejercicio2.tiempoPorIndice(abogado, n - 1);
+				suma += Ejercicio2LP.tiempoPorIndice(abogado, n - 1);
 				
 			}
 			

@@ -26,11 +26,11 @@ public class LP2 {
 		String ruta = "modelosLP/Abogado" + fichero.replace("ficheros/PI6Ej2DatosEntrada", "").replace(".txt", "") +  ".lp";
 		
 		// Inicializada la lectura del fichero ahora obtiene los datos de Ejercicio2.java:
-		Ejercicio2.iniDatos(fichero);
-		AuxGrammar.dataClass = Ejercicio2.class;
+		Ejercicio2LP.iniDatos(fichero);
+		AuxGrammar.dataClass = Ejercicio2LP.class;
 		
 		// Genera el fichero LP que se pasa al resolvedor de Gurobi:
-		AuxGrammar.generate(Ejercicio2.class, "modelosLSI/Abogado.lsi", ruta);
+		AuxGrammar.generate(Ejercicio2LP.class, "modelosLSI/Abogado.lsi", ruta);
 		GurobiSolution solution = GurobiLp.gurobi(ruta);
 		
 		// Vuelca la salida "sin formatear" por consola:

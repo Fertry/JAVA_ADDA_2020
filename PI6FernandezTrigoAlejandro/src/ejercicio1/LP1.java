@@ -12,6 +12,7 @@ import us.lsi.gurobi.GurobiLp;
 import us.lsi.gurobi.GurobiSolution;
 import us.lsi.solve.AuxGrammar;
 
+// Programación Lineal
 public class LP1 {
 	
 	/*
@@ -26,11 +27,11 @@ public class LP1 {
 		String ruta = "modelosLP/Alumno" + fichero.replace("ficheros/PI6Ej1DatosEntrada", "").replace(".txt", "") +  ".lp";
 		
 		// Inicializada la lectura del fichero ahora obtiene los datos de Ejercicio1.java:
-		Ejercicio1.iniDatos(fichero);
-		AuxGrammar.dataClass = Ejercicio1.class;
+		Ejercicio1LP.iniDatos(fichero);
+		AuxGrammar.dataClass = Ejercicio1LP.class;
 		
 		// Genera el fichero LP que se pasa al resolvedor de Gurobi:
-		AuxGrammar.generate(Ejercicio1.class, "modelosLSI/Alumno.lsi", ruta);
+		AuxGrammar.generate(Ejercicio1LP.class, "modelosLSI/Alumno.lsi", ruta);
 		GurobiSolution solution = GurobiLp.gurobi(ruta);
 		
 		// Vuelca la salida "sin formatear" por consola:

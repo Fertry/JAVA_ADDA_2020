@@ -30,7 +30,7 @@ public class Solucion1 {
 			Files2.toFile(entrada.trim(), "volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""));
 			
 			// Con el fichero creado, se llama a la función que lo parsea:
-			formateo("volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""), fichero, valor);
+			formateoPL("volcado/salidaPLEj1DatosEntrada" + fichero.replace("ficheros/PI6Ej1DatosEntrada", ""), fichero, valor);
 
 		// Si algo falla, mostramos el contenido de forma directa: 
 		} catch (Exception e) {
@@ -44,15 +44,47 @@ public class Solucion1 {
 				
 	}
 	
-	// Función que dado una solución de Algoritmos Genéticos escribe el resultado a fichero para parsearlo:
-	public static void solucionAG1() {
+	// Función que dado una solución de Algoritmos Genéticos parsea la solución:
+	public static void solucionAG1(String fichero, List<Integer> entrada) {
+
+		// La lista incluye como indice a los alumnos, cada indice representa
+		// a un alumno y el valor en dicha posición el grupo asignado:
 		
-		// TO-DO
-		
+		Double valor = 0.0;
+		Map<Integer, List<String>> reparto = new HashMap<Integer, List<String>>();
+
+		int i = 0;
+		while (i < entrada.size()) {
+			
+			if (reparto.containsKey(entrada.get(i) + 1)) {
+				
+				List<String> alumnos = new ArrayList<>();
+				alumnos = reparto.get(entrada.get(i) + 1);
+				alumnos.add(Ejercicio1AG.nombres.get(i));
+				reparto.put(entrada.get(i) + 1, alumnos);
+				
+			} else {
+				
+				List<String> alumnos = new ArrayList<>();
+				alumnos.add(Ejercicio1AG.nombres.get(i));
+				reparto.put(entrada.get(i) + 1, alumnos);
+				
+			}
+			
+			// Valor representa el sumatorio de afinidades para el calculo de la afinidad media:
+			valor += Ejercicio1AG.afinidadPorIndice(i, entrada.get(i));
+			
+			i++;
+				
+		}
+			
+		// Con el mapa creado, se llama a la función que lo parsea:
+		formateoAG(fichero, reparto, valor);
+
 	}
 	
 	// Función que parsea el fichero generado por solucionLP1 para mostrar el resultado por pantalla:
-	public static void formateo(String fichero, String nombre, Double valor) {
+	public static void formateoPL(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -99,10 +131,10 @@ public class Solucion1 {
 		}
 
 		// Afinidad media:
-		Double afinidadMedia = valor / Ejercicio1.getNAlumnos();
+		Double afinidadMedia = valor / Ejercicio1LP.getNAlumnos();
 		
 		// Salida final por pantalla:
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~PROGRAMACIÓN LINEAL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("Reparto obtenido:");
 		for (Integer entrada : reparto.keySet()) {
@@ -111,8 +143,28 @@ public class Solucion1 {
 			
 		}
 		System.out.println("Afinidad media: " + Math.round(afinidadMedia));
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 		
 	}
+	
+	// Función que parsea la salida de solucionAG1 para mostrar el resultado por pantalla:
+	public static void formateoAG(String nombre, Map<Integer, List<String>> reparto, Double valor) {
+		
+		// Afinidad media:
+		Double afinidadMedia = valor / Ejercicio1AG.getNAlumnos();
+		
+		// Salida final por pantalla:
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~ALGORITMOS GENÉTICOS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println(nombre.replace("ficheros/", "") + ":");
+		System.out.println("Reparto obtenido:");
+		for (Integer entrada : reparto.keySet()) {
 
+			System.out.println("Grupo " + (entrada + 1) + ": " + reparto.get(entrada).toString());
+
+		}
+		System.out.println("Afinidad media: " + Math.round(afinidadMedia));
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
+		
+	}
+	
 }
