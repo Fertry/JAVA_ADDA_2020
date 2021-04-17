@@ -180,9 +180,9 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 		Double recompensa = 0.0;
 		
 		int i = 0;
-		while (i < getCellsNumber()) {
+		while (i < getNAbogados()) {
 			
-			recompensa += Ejercicio2AG.tiempoPorIndice(i, cromosomas.get(i));
+			recompensa += Ejercicio2AG.tiempoPorIndice(i, 0);
 			i++;
 			
 		}
@@ -225,7 +225,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 			i++;
 			
 		}
-
+		
 		// Valor de penalización: 100000, 120000, 150000, 80000, etc.
 		return penalizacion * 120000;
 		

@@ -46,10 +46,10 @@ public class AG2 {
 		List<Integer> solucion = objetoAG.getSolucion(cromosomas.getBestChromosome());
 
 		// Vuelca la salida "sin formatear" por consola:
-		System.out.println(solucion);
+		// System.out.println(solucion);
 
 		// En su lugar, llamo a la clase Solucion2 para formatear la salida:
-		//Solucion2.solucionAG2(fichero, solucion);
+		Solucion2.solucionAG2(fichero, solucion);
 
 	}
 	

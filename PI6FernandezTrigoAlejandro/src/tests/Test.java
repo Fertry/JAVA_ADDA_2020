@@ -58,23 +58,23 @@ public class Test {
 			Ejercicio3LP.ejercicio3LP("ficheros/PI6Ej3DatosEntrada2.txt");
 			Ejercicio3LP.ejercicio3LP("ficheros/PI6Ej3DatosEntrada3.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada1.txt");
-			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada2.txt");
-			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada3.txt");
+//			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada1.txt");
+//			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada2.txt");
+//			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 4 ############################");
-			Ejercicio4.ejercicio4("ficheros/PI6Ej4DatosEntrada.txt");
+//			Ejercicio4.ejercicio4("ficheros/PI6Ej4DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
      	System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 5 ############################");
-			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada1.txt");
-			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada2.txt");
-			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada3.txt");
+//			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada1.txt");
+//			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada2.txt");
+//			Ejercicio5.ejercicio5("ficheros/PI6Ej5DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################");
 		
