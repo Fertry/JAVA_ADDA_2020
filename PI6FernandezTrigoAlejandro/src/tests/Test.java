@@ -66,7 +66,7 @@ public class Test {
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 4 ############################");
-//			Ejercicio4.ejercicio4("ficheros/PI6Ej4DatosEntrada.txt");
+			Ejercicio4.ejercicio4("ficheros/PI6Ej4DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
