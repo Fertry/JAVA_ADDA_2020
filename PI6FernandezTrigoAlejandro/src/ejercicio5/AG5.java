@@ -21,7 +21,7 @@ public class AG5 {
 	 * Resolvedor de Algoritmos Genéticos: Se reciben los datos del fichero de entrada .txt y se 
 	 * inicializan los datos en la clase Ejercicio5 donde se crea un objeto al cual se aplica el 
 	 * algoritmo y devuelve la mejor solución que se pasa a la clase solución.
-	 */
+	*/
 	public static void ejercicio5AG(String fichero) throws IOException {
 		
 		/*
@@ -48,7 +48,7 @@ public class AG5 {
 		System.out.println(solucion);
 
 		// En su lugar, llamo a la clase Solucion5 para formatear la salida:
-		//Solucion5.solucionAG5(fichero, solucion);
+		// Solucion5.solucionAG5(fichero, solucion);
 		
 	}
 

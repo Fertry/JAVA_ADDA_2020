@@ -8,19 +8,16 @@ package ejercicio5;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.jgrapht.Graph;
+import org.jgrapht.graph.SimpleWeightedGraph;
 
-import ejercicio3.Ejercicio3AG;
 import us.lsi.ag.ValuesInRangeProblemAG;
 import us.lsi.ag.agchromosomes.ChromosomeFactory.ChromosomeType;
 import us.lsi.ag.agchromosomes.ValuesInRangeChromosome;
-import us.lsi.colors.GraphColors;
-import us.lsi.colors.GraphColors.Style;
 import us.lsi.grafos.datos.Carretera;
 import us.lsi.grafos.datos.Ciudad;
-import us.lsi.graphs.Graphs2;
-import us.lsi.graphs.GraphsReader;
 
 /*
 	Se tiene un grafo cuyos vértices son Ciudades y sus Aristas son Carreteras, y un
@@ -37,6 +34,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	 * Variables de la clase necesarias para ser accedidas por la clase
 	 * AG que resuelve el ejercicio. 
 	*/
+	public static Graph<Ciudad, Carretera> grafo;
 	
 	/*
 	 * Métodos inicializadores de la clase AG.
@@ -54,55 +52,59 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	}
 	
 	/*
+	 * Predicados que se aplican al ejercicio: 
+	 * 1. Carreteras de más de 100 kms
+	 * 2. Carreteras de más de 200 kms
+	*/
+	Predicate<Circuito> predicado100 = new Predicate<Circuito>() {
+
+		@Override
+		public boolean test(Circuito circuito) {
+
+			return false;
+			
+		}
+		
+	};
+	
+	Predicate<Circuito> predicado200 = new Predicate<Circuito>() {
+
+		@Override
+		public boolean test(Circuito circuito) {
+			
+			return false;
+			
+		}
+		
+	};
+	
+	/*
 	 * Método inicial para la lectura de datos del fichero que se pasa como
-	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
-	 * Se accederá a los datos desde la clase AG que resuelve el ejercicio.
+	 * parámetro. Se accederá a los datos desde la clase AG que resuelve el ejercicio.
 	*/
-	
-	/*
-	 * Lectura de datos; devuelve un grafo de tipo <Ciudad, Carretera> siendo estos
-	 * clases definidas para nodos/vértices (ciudades) y aristas (carreteras).
-	*/
-	private static Graph<Ciudad, Carretera> lecturaDatosEjercicio5(String fichero) {
+	private static void iniDatos(String fichero) {
 
-		// Se emplea el método GraphsReader con las clases predefinidas Ciudad y Carreta de la librería
-		// para definir un grafo ponderado a partir del fichero de entrada:
-		Graph<Ciudad, Carretera> grafo = GraphsReader.newGraph(
-				fichero,
-				Ciudad::ofFormat,
-				Carretera::ofFormat,
-				Graphs2::simpleWeightedGraph,
-				Carretera::getKm);
+		// Inicializar las variables de la clase Ejercicio5:
+		grafo = new SimpleWeightedGraph<>(null,null);
+		
+		// Creo un objeto de tipo Circuito del cual extraer sus propiedades:
+		Circuito circuito = Circuito.ofFichero(fichero);
 
-		return grafo;
-
-	}
-	
-	/*
-	 * Método privado para volcar los datos del grafo en un fichero de extensión .gv para ser mostrado por pantalla.
-	*/
-	private static void salidaGrafo(Graph<Ciudad, Carretera> grafo) {
-
-		Graphs2.toDot(
-				grafo, 																			// Grafo de entrada
-				"salida/salidaEjercicio5.gv",													// Ruta de salida de fichero
-				v -> v.getNombre(),															    // Valor de vértices
-				e -> e.getKm().toString(),														// Valor de las aristas
-				v -> GraphColors.getColor(GraphColors.Color.green),								// Coloreado
-				e -> GraphColors.getStyle(Style.bold));											// Define el estilo del grafo
+		grafo = circuito.getGrafo();
 		
 	}
+
 	
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema y métodos para ser usados
 	 * por el algoritmo de resolución. Son invocados en la clase AG5. 
 	*/	
-
+	
 	// Define el tipo de cromosoma que usa el problema:
 	@Override
 	public ChromosomeType getType() {
 
-		return null;
+		return ChromosomeType.Range;
 		
 	}
 
@@ -154,7 +156,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	/*
 	 * Método objetivo o recompensa para recompensar cromosomas que cumplan las
 	 * restricciones.
-	 */
+	*/
 	public Double recompensa(List<Integer> cromosomas) {
 
 		return null;
@@ -164,7 +166,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	/*
 	 * Método de "castigo" o penalización para cromosomas que no cumplen las
 	 * restricciones.
-	 */
+	*/
 	public Double penalizacion(List<Integer> cromosomas) {
 
 		return null;
@@ -175,11 +177,8 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	*/
 	public static void ejercicio5(String fichero) {
-		
-		// Lectura de datos de entrada:
-		Graph<Ciudad, Carretera> grafo = lecturaDatosEjercicio5(fichero);
-		
-		// Solución por Programación Lineal:
+				
+		// Solución por Algoritmos Genéticos - Cromosoma de ... :
 		try {
 
 			AG5.ejercicio5AG(fichero);

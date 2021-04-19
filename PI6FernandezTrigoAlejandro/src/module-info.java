@@ -1,15 +1,14 @@
 module PI6FernandezTrigoAlejandro {
 	
+	// Exports de los paquetes accesibles por el resolvedor de Gurobi:
 	exports ejercicio1;
 	exports ejercicio2;
 	exports ejercicio3;
 	exports ejercicio4;
-	exports ejercicio5;
 	
-	requires partecomun;
-	requires datos_compartidos;
-	requires solve;
-	requires grafos;
-	requires geneticos;
+	// Requires de las librerías del proyecto:
+	requires transitive solve;
+	requires transitive grafos;
+	requires transitive geneticos;
 	
 }
