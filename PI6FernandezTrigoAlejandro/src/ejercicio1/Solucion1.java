@@ -62,12 +62,14 @@ public class Solucion1 {
 				List<String> alumnos = new ArrayList<>();
 				alumnos = reparto.get(entrada.get(i) + 1);
 				alumnos.add(Ejercicio1AG.nombres.get(i));
+				
 				reparto.put(entrada.get(i) + 1, alumnos);
 				
 			} else {
 				
 				List<String> alumnos = new ArrayList<>();
 				alumnos.add(Ejercicio1AG.nombres.get(i));
+				
 				reparto.put(entrada.get(i) + 1, alumnos);
 				
 			}
@@ -160,7 +162,7 @@ public class Solucion1 {
 		System.out.println("Reparto obtenido:");
 		for (Integer entrada : reparto.keySet()) {
 
-			System.out.println("Grupo " + (entrada + 1) + ": " + reparto.get(entrada).toString());
+			System.out.println("Grupo " + (entrada) + ": " + reparto.get(entrada).toString());
 
 		}
 		System.out.println("Afinidad media: " + Math.round(afinidadMedia));

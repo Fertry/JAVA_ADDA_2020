@@ -227,7 +227,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 		}
 		
 		// Valor de penalización: 100000, 120000, 150000, 80000, etc.
-		return penalizacion * 120000;
+		return penalizacion * 150000;
 		
 	}
 
