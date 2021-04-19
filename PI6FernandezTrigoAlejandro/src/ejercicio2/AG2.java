@@ -49,7 +49,7 @@ public class AG2 {
 		System.out.println(solucion);
 
 		// En su lugar, llamo a la clase Solucion2 para formatear la salida:
-		// Solucion2.solucionAG2(fichero, solucion);
+		Solucion2.solucionAG2(fichero, solucion);
 
 	}
 	

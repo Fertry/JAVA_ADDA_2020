@@ -49,29 +49,33 @@ public class Solucion2 {
 		
 		// La lista incluye como indice a los casos, cada indice representa
 		// a un caso y el valor en dicha posición el abogado asignado:
+		// Ej: [8, 7, 1, 7, 8, 8, 5, 0, 2, 2, 0, 7, 6, 8, 5, 9, 0, 6, 4, 8]
+		// Se mantiene un mapa cuyas claves son los abogados y los valores, los casos asignados:
+		
 		Double valor = 0.0;
 		Map<Integer, List<String>> reparto = new HashMap<Integer, List<String>>();
-
+		//Map<List<String>, Integer> reparto = new HashMap<List<String>, Integer>();
+		
 		int i = 0;
 		while (i < entrada.size()) {
 			
-			if (reparto.containsKey(entrada.get(i) + 1)) {
-				
+			if (reparto.containsKey(i)) {
+			
 				List<String> casos = new ArrayList<>();
-				casos = reparto.get(entrada.get(i) + 1);
-				casos.add(Ejercicio2AG.nombres.get(i));
-				reparto.put(entrada.get(i) + 1, casos);
+				casos = reparto.get(i);
+				casos.add("Caso " + i + "");
+				reparto.put(i, casos);
 				
 			} else {
 				
 				List<String> casos = new ArrayList<>();
-				casos.add(Ejercicio2AG.nombres.get(i));
-				reparto.put(entrada.get(i) + 1, casos);
+				casos.add("Caso " + i + "");
+				reparto.put(entrada.get(i), casos);
 				
 			}
 			
 			// Valor representa el sumatorio de afinidades para el calculo de la afinidad media:
-			valor += Ejercicio2AG.tiempoPorIndice(i, entrada.get(i));
+			//valor += Ejercicio2AG.tiempoPorIndice(i, entrada.get(i));
 			
 			i++;
 				
@@ -159,16 +163,17 @@ public class Solucion2 {
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
 		for (Integer abogado : reparto.keySet()) {
 	
-			System.out.println("Abogado_" + (abogado + 1));
-			System.out.println("	Horas empleadas: " + Math.round(sumatorioHoras(reparto, abogado)));
+			//System.out.println("Abogado_" + (abogado + 1));
+			System.out.println("Abogado_" + abogado);
+//			System.out.println("	Horas empleadas: " + Math.round(sumatorioHoras(reparto, abogado)));
 			System.out.println("	Casos estudiados: " + reparto.get(abogado));
-			System.out.println("	Media (horas/casos): " + Math.round((sumatorioHoras(reparto, abogado) / reparto.get(abogado).size())));
+//			System.out.println("	Media (horas/casos): " + Math.round((sumatorioHoras(reparto, abogado) / reparto.get(abogado).size())));
 			
 		}
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- ·");
-		System.out.println("El estudio de todos los casos ha supuesto un total de " + Math.round(sumatorioHorasTotal(reparto)) + " horas de trabajo\r\n"
-				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + Math.round(valor) + "\r\n"
-				+ "horas.");
+//		System.out.println("El estudio de todos los casos ha supuesto un total de " + Math.round(sumatorioHorasTotal(reparto)) + " horas de trabajo\r\n"
+//				+ "para el bufete, que al trabajar en paralelo se ha podido llevar a cabo en " + Math.round(valor) + "\r\n"
+//				+ "horas.");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 		
 	}

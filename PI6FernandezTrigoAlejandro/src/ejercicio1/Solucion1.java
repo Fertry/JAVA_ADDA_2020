@@ -49,6 +49,7 @@ public class Solucion1 {
 
 		// La lista incluye como indice a los alumnos, cada indice representa
 		// a un alumno y el valor en dicha posición el grupo asignado:
+		// Se mantiene un mapa cuyas claves son los grupos y los valores, los alumnos asociados:
 		
 		Double valor = 0.0;
 		Map<Integer, List<String>> reparto = new HashMap<Integer, List<String>>();
