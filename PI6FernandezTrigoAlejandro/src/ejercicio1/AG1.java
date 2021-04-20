@@ -22,12 +22,12 @@ public class AG1 {
 	 * Resolvedor de Algoritmos Genéticos: Se reciben los datos del fichero de entrada .txt y se 
 	 * inicializan los datos en la clase Ejercicio1AG donde se crea un objeto al cual se aplica el 
 	 * algoritmo y devuelve la mejor solución que se pasa a la clase solución.
-	 */
+	*/
 	public static void ejercicio1AG(String fichero) throws IOException {
 		
 		/*
 		 * Parámetros configurables de algoritmos genéticos.
-		 */
+		*/
 		AlgoritmoAG.ELITISM_RATE = 0.30;
 		AlgoritmoAG.MUTATION_RATE = 0.7;
 		AlgoritmoAG.CROSSOVER_RATE = 0.8;

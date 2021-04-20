@@ -65,6 +65,7 @@ public class Producto extends Trio<String, Double, List<String>>{
 	}
 
 	// GETTTERS DE LA CLASE
+	
 	// Devuelve el nombre de un Producto:
 	public String getNombre() {
 		

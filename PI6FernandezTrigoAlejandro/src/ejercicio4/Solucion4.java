@@ -18,7 +18,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 /*
  * Clase soluci鏮 que pretende parsear la salida del resolvedor Gurobi para mostrar los 
  * resultados acordes al fichero de resultados.
- */
+*/
 public class Solucion4 {
 	
 	// Funci鏮 que dado una soluci鏮 de LP desde Gurobi escribe el resultado a fichero para parsearlo:
@@ -109,7 +109,7 @@ public class Solucion4 {
 			
 		}
 		System.out.println("o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o~~~~業~~~o");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
 		
 	}
 	

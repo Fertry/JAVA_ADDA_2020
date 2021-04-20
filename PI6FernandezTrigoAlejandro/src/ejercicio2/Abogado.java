@@ -57,6 +57,7 @@ public class Abogado extends Pair<String, List<Integer>>{
 	}
 
 	// GETTTERS DE LA CLASE
+	
 	// Devuelve el nombre de un Abogado:
 	public String getNombre() {
 

@@ -56,6 +56,7 @@ public class Alumno extends Pair<String, List<Integer>> {
 	}
 
 	// GETTTERS DE LA CLASE
+	
 	// Devuelve el nombre de un Alumno:
 	public String getNombre() {
 		

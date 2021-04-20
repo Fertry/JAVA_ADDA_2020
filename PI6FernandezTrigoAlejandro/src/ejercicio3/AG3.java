@@ -21,7 +21,7 @@ public class AG3 {
 	 * Resolvedor de Algoritmos Genéticos: Se reciben los datos del fichero de entrada .txt y se 
 	 * inicializan los datos en la clase Ejercicio3AG donde se crea un objeto al cual se aplica el 
 	 * algoritmo y devuelve la mejor solución que se pasa a la clase solución.
-	 */
+	*/
 	public static void ejercicio3AG(String fichero) throws IOException {
 		
 		/*
@@ -45,10 +45,10 @@ public class AG3 {
 		List<Integer> solucion = objetoAG.getSolucion(cromosomas.getBestChromosome());
 
 		// Vuelca la salida "sin formatear" por consola:
-		System.out.println(solucion);
+		// System.out.println(solucion);
 
 		// En su lugar, llamo a la clase Solucion3 para formatear la salida:
-		//Solucion3.solucionAG3(fichero, solucion);
+		Solucion3.solucionAG3(fichero, solucion);
 		
 	}
 	

@@ -18,7 +18,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 /*
  * Clase solución que pretende parsear la salida del resolvedor Gurobi y la salida
  * de algoritmos genéticos para mostrar los resultados acordes al fichero de resultados.
- */
+*/
 public class Solucion2 {
 	
 	// Función que dado una solución de LP desde Gurobi escribe el resultado a fichero para parsearlo:
