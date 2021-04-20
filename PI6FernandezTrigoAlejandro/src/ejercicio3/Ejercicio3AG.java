@@ -8,7 +8,9 @@ package ejercicio3;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import us.lsi.ag.ValuesInRangeProblemAG;
@@ -90,12 +92,24 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
             i++;
             
         }
+        
+        // Los requisitos vienen especificados en la 1º línea de fichero:
+		String primeraLinea = lista.get(0);
+		String[] primerLineaString = primeraLinea.split(":");
+		String[] requisitosString = primerLineaString[1].trim().split(",");
+		
+		// Se castea a entero para que el resolvedor reciba un nº:
+		for(String requisito : requisitosString){
+			
+			requisitos.add(Integer.parseInt(requisito.replace("F", "")));
+			
+		}
 	
 	}
 	
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema y métodos para ser usados
-	 * por el algoritmo de resolución. Son invocados en la clase AG2. 
+	 * por el algoritmo de resolución. Son invocados en la clase AG3. 
 	*/	
 
 	// Obtiene el precio de un producto dado un indice:
@@ -118,6 +132,13 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 		return requisitos.size();
 
 	}
+	
+	// Obtiene las funcionalidades de un producto por índice:
+	public static List<Integer> funcionalidadesPorIndice(Integer i) {
+		
+		return funcionalidades.get(i);
+		
+	}
 
 	// Comprueba si un producto cubre una funcionalidad dada, siendo i el producto y
 	// j la funcionalidad:
@@ -131,24 +152,24 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	@Override
 	public ChromosomeType getType() {
 
-		return ChromosomeType.Range;
+		return ChromosomeType.Binary;
 		
 	}
 
-	// Define el nº de elementos del problema: Nº de ...:
+	// Define el nº de elementos del problema: Nº de productos:
 	@Override
 	public Integer getCellsNumber() {
 
-		return null;
+		return getNProductos();
 		
 	}
 
-	// Define el límite superior del problema: Nº de ...:
+	// Define el límite superior del problema: Nº de funcionalidades que cubrir:
 	@Override
 	public Integer getMax(Integer i) {
 
-		return null;
-		
+		return getNFuncionalidades();
+				
 	}
 
 	// Devuelve el límite inferior del problema: siempre 0:
@@ -187,7 +208,18 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	*/
 	public Double recompensa(List<Integer> cromosomas) {
 		
-		return null;
+		Double recompensa = 0.0;
+		
+		int i = 0;
+		while (i < cromosomas.size()) {
+			
+			recompensa += Ejercicio3AG.getPrecio(i) * cromosomas.get(i);
+			i++;
+			
+		}
+		
+		// Minimizar un problema es = -(maximizar):
+		return -(recompensa);
 		
 	}
 	
@@ -196,10 +228,25 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	*/
 	public Double penalizacion(List<Integer> cromosomas) {
 		
-		return null;
+		Double penalizacion = 0.0;
+
+		Set<Integer> funcionalidades = new HashSet<Integer>();
+		for (int i = 0; i < cromosomas.size(); i++) {
+			if (cromosomas.get(i) == 1) {
+				funcionalidades.addAll(Ejercicio3AG.funcionalidades.get(i));
+			}
+		}
+		for (int i : Ejercicio3AG.requisitos) {
+			if (!funcionalidades.contains(i)) {
+				penalizacion++;
+			}
+		}
+		
+		// Valor de penalización: 100000, 120000, 150000, 80000, etc.
+		return penalizacion * 120000;
 		
 	}
-	
+
 	/*
 	 * Métodos auxiliares para ser accedidos por las clases de Solucion; solo son
 	 * usados para el formateo de la salida y no están involucrados en la solución

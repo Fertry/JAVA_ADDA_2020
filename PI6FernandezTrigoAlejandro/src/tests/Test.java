@@ -58,9 +58,9 @@ public class Test {
 			Ejercicio3LP.ejercicio3LP("ficheros/PI6Ej3DatosEntrada2.txt");
 			Ejercicio3LP.ejercicio3LP("ficheros/PI6Ej3DatosEntrada3.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada1.txt");
-//			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada2.txt");
-//			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada3.txt");
+			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada1.txt");
+			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada2.txt");
+			Ejercicio3AG.ejercicio3AG("ficheros/PI6Ej3DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
