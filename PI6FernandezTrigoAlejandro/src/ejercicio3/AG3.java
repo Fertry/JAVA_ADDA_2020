@@ -15,6 +15,7 @@ import us.lsi.ag.agchromosomes.ValuesInRangeChromosome;
 import us.lsi.ag.agstopping.StoppingConditionFactory;
 import us.lsi.ag.agstopping.StoppingConditionFactory.StoppingConditionType;
 
+//Algoritmos Genéticos - Cromosoma binario
 public class AG3 {
 	
 	/*

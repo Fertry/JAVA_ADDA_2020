@@ -182,7 +182,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 		int i = 0;
 		while (i < getNAbogados()) {
 			
-			recompensa += Ejercicio2AG.tiempoPorIndice(i, 0);
+			recompensa += Ejercicio2AG.tiempoPorIndice(i, cromosomas.get(i));
 			i++;
 			
 		}

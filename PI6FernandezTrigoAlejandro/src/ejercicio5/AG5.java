@@ -8,13 +8,18 @@ package ejercicio5;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.function.Predicate;
 
-import us.lsi.ag.ValuesInRangeProblemAG;
+import us.lsi.ag.SeqNormalProblemAG;
 import us.lsi.ag.agchromosomes.AlgoritmoAG;
-import us.lsi.ag.agchromosomes.ValuesInRangeChromosome;
+import us.lsi.ag.agchromosomes.ChromosomeFactory;
+import us.lsi.ag.agchromosomes.ChromosomeFactory.CrossoverType;
+import us.lsi.ag.agchromosomes.SeqNomalChromosome;
 import us.lsi.ag.agstopping.StoppingConditionFactory;
 import us.lsi.ag.agstopping.StoppingConditionFactory.StoppingConditionType;
+import us.lsi.grafos.datos.Carretera;
 
+//Algoritmos Genéticos - Cromosoma de permutación
 public class AG5 {
 	
 	/*
@@ -30,19 +35,23 @@ public class AG5 {
 		AlgoritmoAG.ELITISM_RATE = 0.30;
 		AlgoritmoAG.MUTATION_RATE = 0.7;
 		AlgoritmoAG.CROSSOVER_RATE = 0.8;
-		AlgoritmoAG.POPULATION_SIZE = 1000;
+		AlgoritmoAG.POPULATION_SIZE = 500;
 		StoppingConditionFactory.NUM_GENERATIONS = 400;
+		ChromosomeFactory.crossoverType = CrossoverType.OnePoint;
 		StoppingConditionFactory.stoppingConditionType = StoppingConditionType.GenerationCount;
 
 		// Inicializa el objeto AG en la clase Ejercicio5:
-		ValuesInRangeProblemAG<Integer, List<Integer>> objetoAG = Ejercicio5.AG(fichero);
-		AlgoritmoAG<ValuesInRangeChromosome<Integer>> cromosomas = AlgoritmoAG.create(objetoAG);
+		SeqNormalProblemAG<List<Integer>> objetoAG = Ejercicio5.AG(fichero);
+		System.out.println(Ejercicio5.carreteras);
+		System.out.println(Ejercicio5.ciudades);
+		AlgoritmoAG<SeqNomalChromosome> cromosomas = AlgoritmoAG.create(objetoAG);
 
 		// Ejecuta el algoritmo de Algoritmos Genéticos:
 		cromosomas.ejecuta();
 
 		// Solución del problema:
-		List<Integer> solucion = objetoAG.getSolucion(cromosomas.getBestChromosome());
+		// List<Integer> solucion = objetoAG.getSolucion(cromosomas.getBestChromosome());
+		SeqNomalChromosome solucion = cromosomas.getBestChromosome();
 
 		// Vuelca la salida "sin formatear" por consola:
 		System.out.println(solucion);

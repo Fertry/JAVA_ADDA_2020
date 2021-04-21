@@ -288,7 +288,7 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	*/
 	public static void ejercicio3AG(String fichero) {
 		
-		// Solución por Algoritmos Genéticos - Cromosoma de rango:
+		// Solución por Algoritmos Genéticos - Cromosoma binario:
 		try {
 
 			AG3.ejercicio3AG(fichero);

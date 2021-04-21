@@ -7,15 +7,13 @@
 package ejercicio5;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import org.jgrapht.Graph;
-import org.jgrapht.graph.SimpleWeightedGraph;
-
-import us.lsi.ag.ValuesInRangeProblemAG;
+import us.lsi.ag.SeqNormalProblemAG;
 import us.lsi.ag.agchromosomes.ChromosomeFactory.ChromosomeType;
-import us.lsi.ag.agchromosomes.ValuesInRangeChromosome;
+import us.lsi.ag.agchromosomes.SeqNomalChromosome;
 import us.lsi.grafos.datos.Carretera;
 import us.lsi.grafos.datos.Ciudad;
 
@@ -28,13 +26,14 @@ import us.lsi.grafos.datos.Ciudad;
 	Se pide solucionar por Algoritmos Genéticos
 */
 
-public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>> {
+public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	
 	/*
 	 * Variables de la clase necesarias para ser accedidas por la clase
 	 * AG que resuelve el ejercicio. 
 	*/
-	public static Graph<Ciudad, Carretera> grafo;
+	public static List<Ciudad> ciudades;
+	public static List<Carretera> carreteras;
 	
 	/*
 	 * Métodos inicializadores de la clase AG.
@@ -52,58 +51,55 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	}
 	
 	/*
-	 * Predicados que se aplican al ejercicio: 
-	 * 1. Carreteras de más de 100 kms
-	 * 2. Carreteras de más de 200 kms
-	*/
-	
-	// Predicate (booleano) que se cumple si la carretera excede los 100 Kms:
-	Predicate<Ciudad> predicado100 = new Predicate<Ciudad>() {
-
-		@Override
-		public boolean test(Ciudad ciudad1) {
-
-			// Debería recibir como parámetro dos vértices, de los cuales comprueba (booleano) si la distancia entre los 
-			// dos (la arista que los une) es menor a 100 Km o no:
-			return false;
-			
-		}
-		
-	};
-
-	// Predicate (booleano) que se cumple si la carretera excede los 200 Kms:
-	Predicate<Circuito> predicado200 = new Predicate<Circuito>() {
-
-		@Override
-		public boolean test(Circuito circuito) {
-			
-			return false;
-			
-		}
-		
-	};
-	
-	/*
 	 * Método inicial para la lectura de datos del fichero que se pasa como
 	 * parámetro. Se accederá a los datos desde la clase AG que resuelve el ejercicio.
 	*/
 	private static void iniDatos(String fichero) {
 
 		// Inicializar las variables de la clase Ejercicio5:
-		grafo = new SimpleWeightedGraph<>(null,null);
+		ciudades = new ArrayList<Ciudad>();
+		carreteras = new ArrayList<Carretera>();
 		
 		// Creo un objeto de tipo Circuito del cual extraer sus propiedades:
 		Circuito circuito = Circuito.ofFichero(fichero);
 
-		grafo = circuito.getGrafo();
+		ciudades = circuito.getCiudades();
+		carreteras = circuito.getCarreteras();
 		
 	}
 
-	
 	/*
 	 * Métodos auxiliares para definir las restricciones del problema y métodos para ser usados
 	 * por el algoritmo de resolución. Son invocados en la clase AG5. 
 	*/	
+	
+	// Obtiene el nº de ciudades:
+	public static Integer getNCiudades() {
+		
+		return ciudades.size();
+		
+	}
+	
+	// Obtiene el nº de carreteras:
+	public static Integer getNCarreteras() {
+		
+		return carreteras.size();
+		
+	}
+	
+	// Obtiene una ciudad en base un índice:
+	public static Ciudad ciudadPorIndice(Integer i) {
+		
+		return ciudades.get(i);
+		
+	}
+	
+	// Obtiene una carretera en base a un índice:
+	public static Carretera carreteraPorIndice(Integer i) {
+		
+		return carreteras.get(i);
+		
+	}
 	
 	// Define el tipo de cromosoma que usa el problema:
 	@Override
@@ -113,25 +109,11 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 		
 	}
 
-	// Define el nº de elementos del problema: Nº de ...:
+	// Define el nº de elementos del problema: Nº de ciudades:
 	@Override
-	public Integer getCellsNumber() {
+	public Integer getIndexNumber() {
 
-		return null;
-		
-	}
-
-	// Define el límite superior del problema: Nº de ...:
-	public Integer getMax(Integer i) {
-
-		return null;
-		
-	}
-
-	// Devuelve el límite inferior del problema: siempre 0:
-	public Integer getMin(Integer i) {
-
-		return 0;
+		return getNCiudades();
 		
 	}
 
@@ -142,7 +124,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	
 	// Función de fitness que define el problema:
 	@Override
-	public Double fitnessFunction(ValuesInRangeChromosome<Integer> cromosoma) {
+	public Double fitnessFunction(SeqNomalChromosome cromosoma) {
 
 		List<Integer> cromosomas = cromosoma.decode();
 
@@ -152,7 +134,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 
 	// Función decode:
 	@Override
-	public List<Integer> getSolucion(ValuesInRangeChromosome<Integer> cromosoma) {
+	public List<Integer> getSolucion(SeqNomalChromosome cromosoma) {
 
 		return cromosoma.decode();
 
@@ -164,8 +146,36 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	*/
 	public Double recompensa(List<Integer> cromosomas) {
 
-		return null;
+		Double recompensa = 0.0;
 
+		int i = 0;
+		while (i < cromosomas.size() - 1) {
+		
+			Ciudad origen = ciudadPorIndice(cromosomas.get(i));
+			Ciudad destino = ciudadPorIndice(cromosomas.get(i + 1));
+				
+			if (getExistenciaCarretera(origen, destino)) {
+					
+				recompensa += getDistanciaCiudades(origen, destino);
+				
+			} else if (getExistenciaCarretera(destino, origen)) {
+				
+				recompensa += getDistanciaCiudades(destino, origen);
+				
+			} else {
+				
+				// Si no hay carretera, no aumenta la recompensa:
+				recompensa += 0;
+				
+			}
+			
+			i++;
+
+		}
+			
+		// Minimizar un problema es = -(maximizar):
+		return -(recompensa);		
+		
 	}
 
 	/*
@@ -174,8 +184,62 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	*/
 	public Double penalizacion(List<Integer> cromosomas) {
 
-		return null;
+		Double penalizacion = 0.0;
+		
+		int i = 0;
+		while (i < cromosomas.size() - 1) {
+		
+			Ciudad origen = ciudadPorIndice(cromosomas.get(i));
+			Ciudad destino = ciudadPorIndice(cromosomas.get(i + 1));
+				
+			if (getExistenciaCarretera(origen, destino)) {
+					
+				// Obtener la carretera concreta:
+				Carretera carretera = getCarreteraPorCiudades(origen, destino);
+			
+				// Si la carretera cumple el predicado no castiga:
+				if (predicado100.test(carretera)) {
+					
+					penalizacion += 0;
+					
+				} else {
+					
+					// De lo contrario aumenta la penalización:
+					penalizacion++;
+					
+				}
+				
+			} else if (getExistenciaCarretera(destino, origen)) {
+				
+				// Obtener la carretera concreta:
+				Carretera carretera = getCarreteraPorCiudades(destino, origen);
+				
+				// Si la carretera cumple el predicado no castiga:
+				if (predicado100.test(carretera)) {
+					
+					penalizacion += 0;
+					
+				} else {
+					
+					// De lo contrario aumenta la penalización:
+					penalizacion++;
+					
+				}
+				
+			} else {
+				
+				// Si no hay carretera, aumenta la penalización:
+				penalizacion++;
+				
+			}
+			
+			i++;
 
+		}
+		
+		// Valor de penalización: 100000, 120000, 150000, 80000, etc.
+		return penalizacion * 120000;
+		
 	}
 	
 	/*
@@ -185,7 +249,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 				
 		// Solución por Algoritmos Genéticos - Cromosoma de Permutación:
 		try {
-
+			
 			AG5.ejercicio5AG(fichero);
 
 		} catch (IOException e) {
@@ -197,5 +261,146 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 		}
 
 	}
+	
+	/*
+	 * Métodos adicionales y predicados:
+	 */
+	
+	// Devuelve la arista que existe entre dos ciudades dadas como parámetro:
+	public static Carretera getCarreteraPorCiudades(Ciudad ciudad1, Ciudad ciudad2) {
+		
+		Carretera arista = null;
 
+		int i = 0;
+		while (i < carreteras.size()) {
+			
+			if (carreteras.get(i).getSource() == ciudad1 && carreteras.get(i).getTarget() == ciudad2) {
+				
+				arista = carreteras.get(i);
+				
+			}
+			
+			if (carreteras.get(i).getSource() == ciudad2 && carreteras.get(i).getTarget() == ciudad1) {
+				
+				arista = carreteras.get(i);
+				
+			}
+			
+			i++;
+			
+		}
+		
+		return arista;
+		
+	}
+	
+	// Devuelve un booleano que responde a la existencia o no de camino entre dos ciudades:
+	public static Boolean getExistenciaCarretera(Ciudad ciudad1, Ciudad ciudad2) {
+		
+		Boolean existencia = false;
+
+		int i = 0;
+		while (i < carreteras.size()) {
+			
+			if (carreteras.get(i).getSource() == ciudad1 && carreteras.get(i).getTarget() == ciudad2) {
+				
+				existencia = true;
+				
+			}
+			
+			if (carreteras.get(i).getSource() == ciudad2 && carreteras.get(i).getTarget() == ciudad1) {
+				
+				existencia = true;
+				
+			}
+			
+			i++;
+			
+		}
+		
+		return existencia;
+		
+	}
+	
+	// Devuelve la distancia como doble entre dos ciudades:
+	public static Double getDistanciaCiudades(Ciudad ciudad1, Ciudad ciudad2) {
+		
+		Double distancia = 0.0;
+
+		int i = 0;
+		while (i < carreteras.size()) {
+			
+			if (carreteras.get(i).getSource() == ciudad1 && carreteras.get(i).getTarget() == ciudad2) {
+				
+				distancia = carreteras.get(i).getKm();
+				
+			}
+			
+			if (carreteras.get(i).getSource() == ciudad2 && carreteras.get(i).getTarget() == ciudad1) {
+				
+				distancia = carreteras.get(i).getKm();
+				
+			}
+			
+			i++;
+			
+		}
+		
+		return distancia;
+		
+	}
+	
+	/*
+	 * Predicados que se aplican al ejercicio 5: 
+	 * 1. Carreteras de menos de 100 kms
+	 * 2. Carreteras de más de 200 kms
+	*/
+	
+	// Predicate (booleano) que se cumple si la carretera no excede los 100 Kms:
+	public static Predicate<Carretera> predicado100 = new Predicate<Carretera>() {
+
+		@Override
+		public boolean test(Carretera carretera) {
+
+			// Debería recibir como parámetro una arista, de la cual comprueba (booleano) si el peso
+			// (kilometraje) es menor a 100 Km o no:
+			return carretera.getKm() < 100;
+			
+		}
+		
+	};
+
+	// Predicate (booleano) que se cumple si la carretera excede los 200 Kms:
+	public static Predicate<Carretera> predicado200 = new Predicate<Carretera>() {
+
+		@Override
+		public boolean test(Carretera carretera) {
+			
+			// Debería recibir como parámetro una arista, de la cual comprueba (booleano) si el peso
+			// (kilometraje) es mayor a 200 Km o no:
+			return carretera.getKm() > 200;
+			
+		}
+		
+	};
+
+//	private static void seleccionaPredicado(Integer seleccion) {
+//		
+//		if (seleccion == 1) {
+//			
+//			predicadoSeleccionado = predicado100;
+//			
+//		} else if (seleccion == 2) {
+//			
+//			predicadoSeleccionado = predicado200;
+//			
+//		} else {
+//			
+//			System.out.println("Se ha seleccionado un predicado incorrecto.");
+//			
+//		}
+//		
+//	}
+	
 }
+

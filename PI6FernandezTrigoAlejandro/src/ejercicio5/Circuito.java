@@ -6,8 +6,9 @@
 
 package ejercicio5;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.jgrapht.Graph;
-
 import us.lsi.colors.GraphColors;
 import us.lsi.colors.GraphColors.Style;
 import us.lsi.common.Pair;
@@ -20,7 +21,7 @@ import us.lsi.graphs.GraphsReader;
  * Clase circuito para parsear la entrada por fichero del ejercicio creando objetos de clase Circuito con 
  * sus respectivos atributos, esto es, el Grafo en si y un ID. Implemento la clase como extensión de Pair.
 */
-public class Circuito extends Pair<Graph<Ciudad, Carretera>, Integer> {
+public class Circuito extends Pair<List<Ciudad>, List<Carretera>> {
 
 	// MÉTODOS DE LA CLASE
 	public static Circuito ofFichero(String fichero) {
@@ -45,14 +46,13 @@ public class Circuito extends Pair<Graph<Ciudad, Carretera>, Integer> {
 	}
 	
 	// ATRIBUTOS DE LA CLASE
-	private static Integer n = 0;
-	public static Integer id;
-	public static Graph<Ciudad, Carretera> grafo;
+	public static List<Ciudad> ciudades;
+	public static List<Carretera> carreteras;
 	
 	// CONSTRUCTORES DE LA CLASE
 	public Circuito(String fichero) {
 		
-		super(grafo, n);
+		super(ciudades, carreteras);
 		
 		// La creación del grafo se delega al método GraphsReader de la librería:
 		Graph<Ciudad, Carretera> grafo = GraphsReader.newGraph(
@@ -62,17 +62,38 @@ public class Circuito extends Pair<Graph<Ciudad, Carretera>, Integer> {
 				Graphs2::simpleWeightedGraph,
 				Carretera::getKm);
 		
-		Circuito.id = n + 1;
-		Circuito.grafo = grafo;
+		List<Ciudad> lista1 = new ArrayList<Ciudad>();
+		for (Ciudad ciudad : grafo.vertexSet()) {
+			
+			lista1.add(ciudad);
+			
+		}
+		
+		List<Carretera> list2 = new ArrayList<Carretera>();
+		for (Carretera carretera : grafo.edgeSet()) {
+			
+			list2.add(carretera);
+			
+		}
+		
+		Circuito.ciudades = lista1;
+		Circuito.carreteras = list2;
 		
 	}
-	
+
 	// GETTTERS DE LA CLASE
 	
-	// Devuelve un objeto de tipo Graph<Ciudad, Carretera> creado:
-	public Graph<Ciudad, Carretera> getGrafo() {
+	// Devuelve la lista de ciudades:
+	public List<Ciudad> getCiudades() {
 		
-		return grafo;
+		return ciudades;
+		
+	}
+
+	// Devuelve la lista de carreteras:
+	public List<Carretera> getCarreteras() {
+		
+		return carreteras;
 		
 	}
 	
@@ -80,8 +101,8 @@ public class Circuito extends Pair<Graph<Ciudad, Carretera>, Integer> {
 	@Override
 	public String toString() {
 		
-		return "[Circuito_" + id + ", cuyo grafo es: " + grafo + "]";
+		return "[Circuito: Ciudades: " + ciudades +  " , carreteras:  " + carreteras + "]";
 		
 	}
-
+	
 }
