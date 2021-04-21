@@ -8,6 +8,8 @@ package ejercicio5;
 
 import org.jgrapht.Graph;
 
+import us.lsi.colors.GraphColors;
+import us.lsi.colors.GraphColors.Style;
 import us.lsi.common.Pair;
 import us.lsi.grafos.datos.Carretera;
 import us.lsi.grafos.datos.Ciudad;
@@ -24,6 +26,21 @@ public class Circuito extends Pair<Graph<Ciudad, Carretera>, Integer> {
 	public static Circuito ofFichero(String fichero) {
 		
 		return new Circuito(fichero);
+		
+	}
+	
+	// Método auxiliar para hacer debug: se usa toGraph para mostrar el grafo por pantalla creando una salida de tipo .gv:
+	public static void salidaGrafo(Graph<Ciudad, Carretera> grafo, String fichero) {
+		
+		String ruta = "salida/salidaEjercicio5_" + fichero.replace("ficheros/PI6Ej5DatosEntrada", "").replace(".txt", "") + ".gv";
+		
+		Graphs2.toDot(
+				grafo, 																			// Grafo de entrada
+				ruta,																			// Ruta de salida de fichero
+				v -> v.getNombre(),															    // Valor de vértices
+				e -> e.getKm().toString(),														// Valor de las aristas
+				v -> GraphColors.getColor(GraphColors.Color.green),								// Coloreado
+				e -> GraphColors.getStyle(Style.bold));											// Define el estilo del grafo
 		
 	}
 	
@@ -59,11 +76,11 @@ public class Circuito extends Pair<Graph<Ciudad, Carretera>, Integer> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE
+	// TO_STRING DE LA CLASE (Solo para debug)
 	@Override
 	public String toString() {
 		
-		return "Circuito " + id + "" + grafo;
+		return "[Circuito_" + id + ", cuyo grafo es: " + grafo + "]";
 		
 	}
 

@@ -71,7 +71,7 @@ public class Solucion3 {
 	}
 	
 	// Función que parsea el fichero generado por solucionLP3 para mostrar el resultado por pantalla:
-	public static void formateoPL(String fichero, String nombre) {
+	private static void formateoPL(String fichero, String nombre) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -129,7 +129,7 @@ public class Solucion3 {
 	}
 	
 	// Función que parsea la salida de solucionAG1 para mostrar el resultado por pantalla:
-	public static void formateoAG(String nombre, List<Integer> seleccion) {
+	private static void formateoAG(String nombre, List<Integer> seleccion) {
 		
 		// Funcionalidades y precios totales:
 		Double precio = 0.0;

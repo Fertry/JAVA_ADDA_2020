@@ -88,7 +88,7 @@ public class Solucion1 {
 	}
 	
 	// Función que parsea el fichero generado por solucionLP1 para mostrar el resultado por pantalla:
-	public static void formateoPL(String fichero, String nombre, Double valor) {
+	private static void formateoPL(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -152,7 +152,7 @@ public class Solucion1 {
 	}
 	
 	// Función que parsea la salida de solucionAG1 para mostrar el resultado por pantalla:
-	public static void formateoAG(String nombre, Map<Integer, List<String>> reparto, Double valor) {
+	private static void formateoAG(String nombre, Map<Integer, List<String>> reparto, Double valor) {
 		
 		// Afinidad media:
 		Double afinidadMedia = valor / Ejercicio1AG.getNAlumnos();

@@ -24,7 +24,7 @@ public class Test {
 		Locale.setDefault(new Locale("en", "US"));
 		
 		/*
-		 *  Mostrar datos por pantalla y volcar la salida en un fichero .gv para el quinto apartado.
+		 *  Mostrar datos por pantalla formateados por las clases solución de todos los ejercicios.
 		 *	Todos los ejercicios tienen una función pública que ejecuta los test de todas las funciones
 		 *	implicadas.
 		*/

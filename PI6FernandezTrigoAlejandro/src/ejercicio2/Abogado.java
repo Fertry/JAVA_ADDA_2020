@@ -34,7 +34,6 @@ public class Abogado extends Pair<String, List<Integer>>{
 		super(nombre, horas);
 		List<Integer> listaHoras = new ArrayList<Integer>();
 			
-		// Secuencia de trims y splits:
 		// Abogado_01: 1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5
 		// Abogado_01
 		// 1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5,1,2,3,5
@@ -76,7 +75,7 @@ public class Abogado extends Pair<String, List<Integer>>{
 	@Override
 	public String toString() {
 		
-		return "Abogado [Nombre = " + nombre + ", Horas = " + horas + "]";
+		return "[Abogado_" + nombre + ", lista de horas: " + horas + "]";
 		
 	}
 

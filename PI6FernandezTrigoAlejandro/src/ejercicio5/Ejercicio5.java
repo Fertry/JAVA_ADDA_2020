@@ -56,17 +56,22 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	 * 1. Carreteras de más de 100 kms
 	 * 2. Carreteras de más de 200 kms
 	*/
-	Predicate<Circuito> predicado100 = new Predicate<Circuito>() {
+	
+	// Predicate (booleano) que se cumple si la carretera excede los 100 Kms:
+	Predicate<Ciudad> predicado100 = new Predicate<Ciudad>() {
 
 		@Override
-		public boolean test(Circuito circuito) {
+		public boolean test(Ciudad ciudad1) {
 
+			// Debería recibir como parámetro dos vértices, de los cuales comprueba (booleano) si la distancia entre los 
+			// dos (la arista que los une) es menor a 100 Km o no:
 			return false;
 			
 		}
 		
 	};
-	
+
+	// Predicate (booleano) que se cumple si la carretera excede los 200 Kms:
 	Predicate<Circuito> predicado200 = new Predicate<Circuito>() {
 
 		@Override
@@ -104,7 +109,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	@Override
 	public ChromosomeType getType() {
 
-		return ChromosomeType.Range;
+		return ChromosomeType.Permutation;
 		
 	}
 
@@ -178,7 +183,7 @@ public class Ejercicio5 implements ValuesInRangeProblemAG<Integer, List<Integer>
 	*/
 	public static void ejercicio5(String fichero) {
 				
-		// Solución por Algoritmos Genéticos - Cromosoma de ... :
+		// Solución por Algoritmos Genéticos - Cromosoma de Permutación:
 		try {
 
 			AG5.ejercicio5AG(fichero);

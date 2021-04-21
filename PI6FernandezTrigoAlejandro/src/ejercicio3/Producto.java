@@ -34,14 +34,12 @@ public class Producto extends Trio<String, Double, List<String>>{
 	
 		super(nombre, precio, funcionalidades);
 		List<String> listaFuncionalidades = new ArrayList<String>();
-		
-		// Secuencia de trims y splits: 
+
 		// P01 (9.99 euros):  F1,F2
 		// P01(9.99euros)
 		// F1,F2 
 		// P01
 		// 9.99euros)
-		// Replace final:
 		// 9.99
 
 		String[] contenido = datos.trim().split(":");
@@ -87,11 +85,11 @@ public class Producto extends Trio<String, Double, List<String>>{
 		
 	}
 
-	// TO_STRING DE LA CLASE
+	// TO_STRING DE LA CLASE (Solo para debug)
 	@Override
 	public String toString() {
 		
-		return "Producto [nombre=" + nombre + ", precio=" + precio + ", funcionalidades=" + funcionalidades + "]";
+		return "[Producto_" + nombre + ", precio: " + precio + " euros, funcionalidades: " + funcionalidades + "]";
 		
 	}
 

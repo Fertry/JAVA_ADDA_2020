@@ -62,11 +62,11 @@ public class Conjunto extends Pair<Integer, List<Integer>> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE
+	// TO_STRING DE LA CLASE (Solo para debug)
 	@Override
 	public String toString() {
 		
-		return "Conjunto " + id + "[" + elementos + "]";
+		return "[Conjunto_" + id + " ,elementos: " + elementos + "]";
 		
 	}
 	

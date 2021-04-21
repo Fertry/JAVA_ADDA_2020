@@ -34,7 +34,6 @@ public class Alumno extends Pair<String, List<Integer>> {
 		super(nombre, afinidades);
 		List<Integer> listaAfinidades = new ArrayList<Integer>();
 		
-		// Secuencia de trims y splits:
 		// Alumno_08: 5,3,2,0
 		// Alumno_08
 		// 5,3,2,0
@@ -71,11 +70,11 @@ public class Alumno extends Pair<String, List<Integer>> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE	
+	// TO_STRING DE LA CLASE (Solo para debug)
 	@Override
 	public String toString() {
 		
-		return "Alumno [Nombre = " + nombre + ", Afinidades = " + afinidades + "]";
+		return "[Alumno_" + nombre + ", lista de afinidades: " + afinidades + "]";
 		
 	}
 

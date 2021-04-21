@@ -45,7 +45,7 @@ public class Solucion4 {
 	}
 	
 	// Función que parsea el fichero generado por solucionLP4 para mostrar el resultado por pantalla:
-	public static void formateo(String fichero, String nombre, Double valor) {
+	private static void formateo(String fichero, String nombre, Double valor) {
 		
 		// La primera línea representa el valor objetivo.
 		// La segunda línea es descartable.
@@ -93,7 +93,7 @@ public class Solucion4 {
 			
 		}
 		
-		// Suma de elementos:
+		// Suma de elementos: el valor objetivo devuelto por Gurobi es de tipo doble pero se castea a entero:
 		Integer menor = (int)Math.round(valor);
 		
 		// Salida final por pantalla:
