@@ -8,7 +8,9 @@ package ejercicio2;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import us.lsi.ag.ValuesInRangeProblemAG;
@@ -178,19 +180,23 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	private Double recompensa(List<Integer> cromosomas) {
 		
 		Double recompensa = 0.0;
+		Map<Integer, Double> cromosomasConHoras = calculaCromosomasConHoras(cromosomas);
 		
-		int i = 0;
-		while (i < cromosomas.size()) {
+		// min max(tiempoPorIndice(i, j))
+		for (Integer abogado : cromosomasConHoras.keySet()) {
 			
-			// min max(tiempoPorIndice(i, j))
-			recompensa += Ejercicio2AG.tiempoPorIndice(cromosomas.get(i), i);
-			i++;
+			// Recorrer el sumatorio del tiempo por abogados:
+			if (cromosomasConHoras.get(abogado) > recompensa) {
+					
+				recompensa = cromosomasConHoras.get(abogado);
+					
+			}
 			
 		}
 
 		// Minimizar un problema es = -(maximizar):
 		return -(recompensa);
-		
+
 	}
 	
 	/*
@@ -205,7 +211,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 			
 			/*
 			 * Primera restricción del problema:
-			 * sum(tiempoPorIndice(i, j) x[i, j], j in 0 .. casos) - t[0] <= 0, i in 0 .. abogados
+			 * sum(x[i, j], i in 0 .. abogados) = 1, j in 0 .. casos 
 			*/
 			if (cromosomas.get(i) >= getCellsNumber()) {
 				
@@ -215,7 +221,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 			
 			/*
 			 * Segunda restricción del problema:
-			 * sum(x[i, j], i in 0 .. abogados) = 1, j in 0 .. casos 
+			 * sum(tiempoPorIndice(i, j) x[i, j], j in 0 .. casos) - t[0] <= 0, i in 0 .. abogados
 			*/
 			if (cromosomas.get(i) < 0) {
 				
@@ -249,6 +255,49 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 			// e.printStackTrace();
 
 		}
+		
+	}
+	
+	/*
+	 * Métodos adicionales. 
+	*/
+	
+	// Método que guarda los abogados (cromosomas) junto a su sumatorio de horas para determinar el mayor:
+	private static Map<Integer, Double> calculaCromosomasConHoras(List<Integer> cromosomas) {
+		
+		Integer abogado = 0;
+		Double sumatorio = 0.0;
+		Map<Integer, Double> resultado = new HashMap<Integer, Double>();
+		
+		int i = 0;
+		while(i < cromosomas.size()) {
+			
+			if(resultado.containsKey(cromosomas.get(i))) {
+				
+				// Obtener el abogado:
+				abogado = cromosomas.get(i);
+				
+				// Obtener el tiempo del mapa para ese abogado:
+				sumatorio = resultado.get(abogado);
+				
+				// Calcular el tiempo para dicho abogado y sumarlo al mapa:
+				resultado.put(abogado, sumatorio + tiempoPorIndice(abogado, i));
+				
+			} else {
+				
+				// Obtener el abogado:
+				abogado = cromosomas.get(i);
+				
+				// Calcular el tiempo para dicho abogado y sumarlo al mapa:
+				resultado.put(abogado, sumatorio + tiempoPorIndice(abogado, i));
+				
+			}
+			
+			i++;
+			
+		}
+		
+		return resultado;
 		
 	}
 	

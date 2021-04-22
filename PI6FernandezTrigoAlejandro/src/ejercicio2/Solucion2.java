@@ -64,7 +64,6 @@ public class Solucion2 {
 				casos = reparto.get(entrada.get(i) + 1);
 				casos.add("Caso " + (i + 1));
 				
-				//reparto.put(entrada.get(i) + 1, casos);
 				reparto.put(entrada.get(i), casos);
 				
 			} else {
@@ -72,7 +71,6 @@ public class Solucion2 {
 				List<String> casos = new ArrayList<>();
 				casos.add("Caso " + (i + 1));
 				
-				//reparto.put(entrada.get(i) + 1, casos);
 				reparto.put(entrada.get(i), casos);
 				
 			}
