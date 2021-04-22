@@ -85,7 +85,7 @@ public class Producto extends Trio<String, Double, List<String>>{
 		
 	}
 
-	// TO_STRING DE LA CLASE (Solo para debug)
+	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
 	@Override
 	public String toString() {
 		

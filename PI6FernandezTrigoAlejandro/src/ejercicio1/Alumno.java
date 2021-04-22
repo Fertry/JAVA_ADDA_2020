@@ -70,7 +70,7 @@ public class Alumno extends Pair<String, List<Integer>> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE (Solo para debug)
+	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
 	@Override
 	public String toString() {
 		

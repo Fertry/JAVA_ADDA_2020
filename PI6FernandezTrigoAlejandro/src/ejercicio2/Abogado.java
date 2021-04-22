@@ -71,7 +71,7 @@ public class Abogado extends Pair<String, List<Integer>>{
 
 	}
 	
-	// TO_STRING DE LA CLASE
+	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
 	@Override
 	public String toString() {
 		

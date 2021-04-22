@@ -56,6 +56,7 @@ public class Ejercicio4 {
 	 * Métodos auxiliares para definir las restricciones del problema. Son invocados
 	 * en el fichero .lsi para generar el modelo .lp. 
 	*/
+	
 	// Obtiene el elemento dado un indice:
 	public static Integer elemento(Integer i) {
 		
@@ -89,7 +90,8 @@ public class Ejercicio4 {
 	 * Métodos auxiliares para ser accedidos por las clases de Solucion; solo son
 	 * usados para el formateo de la salida y no están involucrados en la solución del
 	 * ejercicio por PL o AG.
-	 */
+	*/
+	
 	// Método que devuelve el conjunto de entrada:
 	public static List<Integer> conjunto() {
 		

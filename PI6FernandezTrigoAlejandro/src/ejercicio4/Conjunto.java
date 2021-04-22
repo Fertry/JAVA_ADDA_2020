@@ -30,12 +30,11 @@ public class Conjunto extends Pair<Integer, List<Integer>> {
 	public static List<Integer> elementos;
 
 	// CONSTRUCTORES DE LA CLASE
-	public Conjunto(String datos) {
+	private Conjunto(String datos) {
 			
 		super(id, elementos);
 		List<Integer> listaNumeros = new ArrayList<Integer>(); 
 		
-		// Secuencia de trims y splits:
 		// 1, 2, 3, 4, 5, 7, 8, 15
 		// [1, 2, 3, 4, 5, 7, 8, 15]
 		
@@ -62,11 +61,11 @@ public class Conjunto extends Pair<Integer, List<Integer>> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE (Solo para debug)
+	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
 	@Override
 	public String toString() {
 		
-		return "[Conjunto_" + id + " ,elementos: " + elementos + "]";
+		return "[Conjunto_" + id + ", elementos: " + elementos + "]";
 		
 	}
 	

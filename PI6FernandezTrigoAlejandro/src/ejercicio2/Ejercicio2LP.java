@@ -103,7 +103,6 @@ public class Ejercicio2LP {
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	 */
 	public static void ejercicio2LP(String fichero) {
-		
 
 		// Solución por Programación Lineal:
 		try {

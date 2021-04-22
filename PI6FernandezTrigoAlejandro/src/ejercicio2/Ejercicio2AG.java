@@ -41,7 +41,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Métodos inicializadores de la clase AG.
 	*/
-	public Ejercicio2AG(String fichero) {
+	private Ejercicio2AG(String fichero) {
 		
 		Ejercicio2AG.iniDatos(fichero);
 		
@@ -58,7 +58,7 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
 	 * Se accederá a los datos desde la clase AG que resuelve el ejercicio.
 	*/
-	public static void iniDatos(String fichero) {
+	private static void iniDatos(String fichero) {
 		
 		// Inicializar las variables de la clase Ejercicio2AG:
 		nombres = new ArrayList<String>();
@@ -97,14 +97,14 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	*/	
 	
 	// Obtiene el nº de abogados:
-	public static Integer getNAbogados() {
+	private static Integer getNAbogados() {
 
 		return nombres.size();
 
 	}
 
 	// Obtiene el nº de horas:
-	public static Integer getNHoras() {
+	private static Integer getNHoras() {
 
 		return horas.get(0).size();
 
@@ -175,14 +175,15 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Método objetivo o recompensa para recompensar cromosomas que cumplan las restricciones.
 	*/
-	public Double recompensa(List<Integer> cromosomas) {
+	private Double recompensa(List<Integer> cromosomas) {
 		
 		Double recompensa = 0.0;
 		
 		int i = 0;
-		while (i < getNAbogados()) {
+		while (i < cromosomas.size()) {
 			
-			recompensa += Ejercicio2AG.tiempoPorIndice(i, cromosomas.get(i));
+			// min max(tiempoPorIndice(i, j))
+			recompensa += Ejercicio2AG.tiempoPorIndice(cromosomas.get(i), i);
 			i++;
 			
 		}
@@ -195,12 +196,12 @@ public class Ejercicio2AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Método de "castigo" o penalización para cromosomas que no cumplen las restricciones.
 	*/
-	public Double penalizacion(List<Integer> cromosomas) {
+	private Double penalizacion(List<Integer> cromosomas) {
 		
 		Double penalizacion = 0.0;
 		
 		int i = 0;
-		while (i < getCellsNumber()) {
+		while (i < cromosomas.size()) {
 			
 			/*
 			 * Primera restricción del problema:

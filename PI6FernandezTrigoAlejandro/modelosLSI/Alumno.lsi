@@ -1,5 +1,6 @@
 head section
 
+
 Integer getNGrupos()
 Integer getNAlumnos()
 Integer getNAfinidades()

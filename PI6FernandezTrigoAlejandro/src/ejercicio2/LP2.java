@@ -12,6 +12,7 @@ import us.lsi.gurobi.GurobiLp;
 import us.lsi.gurobi.GurobiSolution;
 import us.lsi.solve.AuxGrammar;
 
+//Programación Lineal
 public class LP2 {
 	
 	/*

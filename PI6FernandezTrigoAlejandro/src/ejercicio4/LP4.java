@@ -12,6 +12,7 @@ import us.lsi.gurobi.GurobiLp;
 import us.lsi.gurobi.GurobiSolution;
 import us.lsi.solve.AuxGrammar;
 
+//Programación Lineal
 public class LP4 {
 
 	/*
@@ -19,13 +20,13 @@ public class LP4 {
 	 * LP con la entrada de los datos leidos en la clase Ejercicio4 y las restricciones 
 	 * especificadas en Conjunto.lsi. Vuelca todo el Conjunto.lp que se pasa a la clase GurobiSolution encargada
 	 * de calcular la solución.
-	 */
+	*/
 	public static void ejercicio4LP(String fichero, Integer indice) throws IOException {
 		
 		// Para que el método sea reutilizable edito el string correspondiente al nombre:
 		String ruta = "modelosLP/Conjunto" + (indice + 1) + ".lp";
 		
-		// Inicializada la lectura del fichero ahora obtiene los datos de Ejercicio2.java:
+		// Inicializada la lectura del fichero ahora obtiene los datos de Ejercicio4.java:
 		Ejercicio4.iniDatos(fichero, indice);
 		AuxGrammar.dataClass = Ejercicio4.class;
 		
@@ -41,4 +42,5 @@ public class LP4 {
 		Solucion4.solucionLP4(fichero, solution.toString((s, d) -> d > 0), indice, solution.objVal);
 		
 	}
+	
 }

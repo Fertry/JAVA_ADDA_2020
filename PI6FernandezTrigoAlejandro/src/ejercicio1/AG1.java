@@ -31,7 +31,7 @@ public class AG1 {
 		AlgoritmoAG.ELITISM_RATE = 0.30;
 		AlgoritmoAG.MUTATION_RATE = 0.7;
 		AlgoritmoAG.CROSSOVER_RATE = 0.8;
-		AlgoritmoAG.POPULATION_SIZE = 1000;
+		AlgoritmoAG.POPULATION_SIZE = 800;
 		StoppingConditionFactory.NUM_GENERATIONS = 400;
 		StoppingConditionFactory.stoppingConditionType = StoppingConditionType.GenerationCount;
 		

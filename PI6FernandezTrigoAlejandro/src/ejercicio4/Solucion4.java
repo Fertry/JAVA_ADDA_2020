@@ -97,7 +97,7 @@ public class Solucion4 {
 		Integer menor = (int)Math.round(valor);
 		
 		// Salida final por pantalla:
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+		System.out.println("~~~~~~~~~~~~~~~~~~~~~PROGRAMACIÓN LINEAL~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 		System.out.println(nombre.replace("ficheros/", "") + ":");	
 		System.out.println("Conjunto de entrada: " + Ejercicio4.conjunto());
 		System.out.println("Suma Objetivo: " + sumaObjetivo(reparto));

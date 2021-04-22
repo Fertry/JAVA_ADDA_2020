@@ -34,11 +34,12 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	*/
 	public static List<Ciudad> ciudades;
 	public static List<Carretera> carreteras;
+	public static Predicate<Carretera> predicado;
 	
 	/*
 	 * Métodos inicializadores de la clase AG.
 	*/
-	public Ejercicio5(String fichero) {
+	private Ejercicio5(String fichero) {
 		
 		Ejercicio5.iniDatos(fichero);
 		
@@ -74,30 +75,16 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	*/	
 	
 	// Obtiene el nº de ciudades:
-	public static Integer getNCiudades() {
+	private static Integer getNCiudades() {
 		
 		return ciudades.size();
 		
 	}
-	
-	// Obtiene el nº de carreteras:
-	public static Integer getNCarreteras() {
 		
-		return carreteras.size();
-		
-	}
-	
 	// Obtiene una ciudad en base un índice:
 	public static Ciudad ciudadPorIndice(Integer i) {
 		
 		return ciudades.get(i);
-		
-	}
-	
-	// Obtiene una carretera en base a un índice:
-	public static Carretera carreteraPorIndice(Integer i) {
-		
-		return carreteras.get(i);
 		
 	}
 	
@@ -144,7 +131,7 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	 * Método objetivo o recompensa para recompensar cromosomas que cumplan las
 	 * restricciones.
 	*/
-	public Double recompensa(List<Integer> cromosomas) {
+	private Double recompensa(List<Integer> cromosomas) {
 
 		Double recompensa = 0.0;
 
@@ -153,7 +140,8 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 		
 			Ciudad origen = ciudadPorIndice(cromosomas.get(i));
 			Ciudad destino = ciudadPorIndice(cromosomas.get(i + 1));
-				
+			
+			// Si existe camino, aumenta su recompensa en base a su ponderación (kms):
 			if (getExistenciaCarretera(origen, destino)) {
 					
 				recompensa += getDistanciaCiudades(origen, destino);
@@ -182,7 +170,7 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	 * Método de "castigo" o penalización para cromosomas que no cumplen las
 	 * restricciones.
 	*/
-	public Double penalizacion(List<Integer> cromosomas) {
+	private Double penalizacion(List<Integer> cromosomas) {
 
 		Double penalizacion = 0.0;
 		
@@ -191,14 +179,15 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 		
 			Ciudad origen = ciudadPorIndice(cromosomas.get(i));
 			Ciudad destino = ciudadPorIndice(cromosomas.get(i + 1));
-				
+			
+			// Cuando no hay camino o el camino incumple el predicado propuesto, aumenta el castigo:
 			if (getExistenciaCarretera(origen, destino)) {
 					
 				// Obtener la carretera concreta:
 				Carretera carretera = getCarreteraPorCiudades(origen, destino);
 			
 				// Si la carretera cumple el predicado no castiga:
-				if (predicado100.test(carretera)) {
+				if (predicado.test(carretera)) {
 					
 					penalizacion += 0;
 					
@@ -215,7 +204,7 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 				Carretera carretera = getCarreteraPorCiudades(destino, origen);
 				
 				// Si la carretera cumple el predicado no castiga:
-				if (predicado100.test(carretera)) {
+				if (predicado.test(carretera)) {
 					
 					penalizacion += 0;
 					
@@ -245,12 +234,14 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	/*
 	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
 	*/
-	public static void ejercicio5(String fichero) {
+	public static void ejercicio5(String fichero, Integer seleccion) {
 				
 		// Solución por Algoritmos Genéticos - Cromosoma de Permutación:
 		try {
 			
-			AG5.ejercicio5AG(fichero);
+			// Activa el predicado seleccionado y ejecuta el ejercicio:
+			seleccionaPredicado(seleccion);
+			AG5.ejercicio5AG(fichero, seleccion);
 
 		} catch (IOException e) {
 
@@ -264,10 +255,10 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	
 	/*
 	 * Métodos adicionales y predicados:
-	 */
+	*/
 	
-	// Devuelve la arista que existe entre dos ciudades dadas como parámetro:
-	public static Carretera getCarreteraPorCiudades(Ciudad ciudad1, Ciudad ciudad2) {
+	// Devuelve la arista que existe entre dos ciudades:
+	private static Carretera getCarreteraPorCiudades(Ciudad ciudad1, Ciudad ciudad2) {
 		
 		Carretera arista = null;
 
@@ -295,7 +286,7 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	}
 	
 	// Devuelve un booleano que responde a la existencia o no de camino entre dos ciudades:
-	public static Boolean getExistenciaCarretera(Ciudad ciudad1, Ciudad ciudad2) {
+	private static Boolean getExistenciaCarretera(Ciudad ciudad1, Ciudad ciudad2) {
 		
 		Boolean existencia = false;
 
@@ -357,7 +348,7 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	*/
 	
 	// Predicate (booleano) que se cumple si la carretera no excede los 100 Kms:
-	public static Predicate<Carretera> predicado100 = new Predicate<Carretera>() {
+	private static Predicate<Carretera> predicado100 = new Predicate<Carretera>() {
 
 		@Override
 		public boolean test(Carretera carretera) {
@@ -371,7 +362,7 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 	};
 
 	// Predicate (booleano) que se cumple si la carretera excede los 200 Kms:
-	public static Predicate<Carretera> predicado200 = new Predicate<Carretera>() {
+	private static Predicate<Carretera> predicado200 = new Predicate<Carretera>() {
 
 		@Override
 		public boolean test(Carretera carretera) {
@@ -384,23 +375,23 @@ public class Ejercicio5 implements SeqNormalProblemAG<List<Integer>> {
 		
 	};
 
-//	private static void seleccionaPredicado(Integer seleccion) {
-//		
-//		if (seleccion == 1) {
-//			
-//			predicadoSeleccionado = predicado100;
-//			
-//		} else if (seleccion == 2) {
-//			
-//			predicadoSeleccionado = predicado200;
-//			
-//		} else {
-//			
-//			System.out.println("Se ha seleccionado un predicado incorrecto.");
-//			
-//		}
-//		
-//	}
+	private static void seleccionaPredicado(Integer seleccion) {
+		
+		if (seleccion == 1) {
+			
+			predicado = predicado100;
+			
+		} else if (seleccion == 2) {
+			
+			predicado = predicado200;
+			
+		} else {
+			
+			System.out.println("Se ha seleccionado un predicado incorrecto. Por defecto se ha seteado el predicado 1.");
+			predicado = predicado100;
+			
+		}
+		
+	}
 	
 }
-

@@ -42,7 +42,7 @@ public class Ejercicio1AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Métodos inicializadores de la clase AG.
 	*/
-	public Ejercicio1AG(String fichero) {
+	private Ejercicio1AG(String fichero) {
 		
 		Ejercicio1AG.iniDatos(fichero);
 		
@@ -59,7 +59,7 @@ public class Ejercicio1AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
 	 * Se accederá a los datos desde la clase AG que resuelve el ejercicio.
 	*/
-	public static void iniDatos(String fichero) {
+	private static void iniDatos(String fichero) {
 		
 		// Inicializar las variables de la clase Ejercicio1AG:
 		nombres = new ArrayList<String>();
@@ -105,14 +105,14 @@ public class Ejercicio1AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	}
 	
 	// Obtiene el nº de afinidades:
-	public static Integer getNAfinidades() { 
+	private static Integer getNAfinidades() { 
 		
 		return afinidades.get(0).size();
 		
 	}
 	
 	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
-	public static Integer getNGrupos() {
+	private static Integer getNGrupos() {
 		
 		return getNAlumnos() / getNAfinidades();
 		
@@ -183,13 +183,14 @@ public class Ejercicio1AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Método objetivo o recompensa para recompensar cromosomas que cumplan las restricciones.
 	*/
-	public Double recompensa(List<Integer> cromosomas) {
+	private Double recompensa(List<Integer> cromosomas) {
 		
 		Double recompensa = 0.0;
 		
 		int i = 0;
-		while (i < getCellsNumber()) {
+		while (i < cromosomas.size()) {
 			
+			// max sum(afinidadPorIndice(i, j) x[i, j], i in 0 .. alumnos, j in 0 .. afinidades)
 			recompensa += Ejercicio1AG.afinidadPorIndice(i, cromosomas.get(i));
 			i++;
 			
@@ -202,7 +203,7 @@ public class Ejercicio1AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Método de "castigo" o penalización para cromosomas que no cumplen las restricciones.
 	*/
-	public Double penalizacion(List<Integer> cromosomas) {
+	private Double penalizacion(List<Integer> cromosomas) {
 		
 		Double penalizacion = 0.0;
 		Map<Integer, Integer> auxiliar = new HashMap<Integer, Integer>();
@@ -212,7 +213,7 @@ public class Ejercicio1AG implements ValuesInRangeProblemAG<Integer, List<Intege
 		 * sum(x[i, j], j in 0 .. afinidades) = 1, i in 0 .. alumnos 
 		*/
 		int i = 0;
-		while(i < getCellsNumber()) {
+		while(i < cromosomas.size()) {
 			
 			// Si el valor es 0, aumenta el castigo:
 			if (Ejercicio1AG.afinidadPorIndice(i, cromosomas.get(i)) == 0) {

@@ -42,7 +42,7 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Métodos inicializadores de la clase AG.
 	*/
-	public Ejercicio3AG(String fichero) {
+	private Ejercicio3AG(String fichero) {
 		
 		Ejercicio3AG.iniDatos(fichero);
 		
@@ -59,7 +59,7 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
 	 * Se accederá a los datos desde la clase AG que resuelve el ejercicio.
 	*/
-	public static void iniDatos(String fichero) {
+	private static void iniDatos(String fichero) {
 		
 		// Inicializar las variables de la clase Ejercicio3:
 		nombres = new ArrayList<String>();
@@ -120,31 +120,16 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	}
 
 	// Obtiene el nº de productos:
-	public static Integer getNProductos() {
+	private static Integer getNProductos() {
 
 		return nombres.size();
 
 	}
 
 	// Obtiene el nº de funcionalidades, que es el nº de requisitos
-	public static Integer getNFuncionalidades() {
+	private static Integer getNFuncionalidades() {
 
 		return requisitos.size();
-
-	}
-	
-	// Obtiene las funcionalidades de un producto por índice:
-	public static List<Integer> funcionalidadesPorIndice(Integer i) {
-		
-		return funcionalidades.get(i);
-		
-	}
-
-	// Comprueba si un producto cubre una funcionalidad dada, siendo i el producto y
-	// j la funcionalidad:
-	public static Boolean contiene(Integer i, Integer j) {
-
-		return funcionalidades.get(i).contains(requisitos.get(j));
 
 	}
 	
@@ -206,13 +191,14 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Método objetivo o recompensa para recompensar cromosomas que cumplan las restricciones.
 	*/
-	public Double recompensa(List<Integer> cromosomas) {
+	private Double recompensa(List<Integer> cromosomas) {
 		
 		Double recompensa = 0.0;
 		
 		int i = 0;
 		while (i < cromosomas.size()) {
 			
+			// min sum(getPrecio(i) x[i], i in 0 .. productos)
 			recompensa += Ejercicio3AG.getPrecio(i) * cromosomas.get(i);
 			i++;
 			
@@ -226,20 +212,23 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	/*
 	 * Método de "castigo" o penalización para cromosomas que no cumplen las restricciones.
 	*/
-	public Double penalizacion(List<Integer> cromosomas) {
+	private Double penalizacion(List<Integer> cromosomas) {
 		
 		Double penalizacion = 0.0;
-
-		Set<Integer> funcionalidades = new HashSet<Integer>();
-		for (int i = 0; i < cromosomas.size(); i++) {
-			if (cromosomas.get(i) == 1) {
-				funcionalidades.addAll(Ejercicio3AG.funcionalidades.get(i));
-			}
-		}
-		for (int i : Ejercicio3AG.requisitos) {
-			if (!funcionalidades.contains(i)) {
+		Set<Integer> funciones = setFuncionalidades(cromosomas);
+		
+		int i = 0;
+		while (i < Ejercicio3AG.requisitos.size()) {
+			
+			// Si el cromosoma NO cubre los requisitos necesarios, aumenta el castigo:
+			if (!funciones.contains(requisitos.get(i))) {
+				
 				penalizacion++;
+				
 			}
+			
+			i++;
+			
 		}
 		
 		// Valor de penalización: 100000, 120000, 150000, 80000, etc.
@@ -257,7 +246,6 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	public static List<String> funcionalidadesPorProducto(Integer i) {
 
 		List<String> resultado = new ArrayList<String>();
-
 		for (Integer funcionalidad : funcionalidades.get(i)) {
 
 			resultado.add("F" + funcionalidad);
@@ -272,7 +260,6 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 	public static List<String> requisitos() {
 
 		List<String> resultado = new ArrayList<String>();
-
 		for (Integer requisito : requisitos) {
 
 			resultado.add("F" + requisito);
@@ -303,4 +290,29 @@ public class Ejercicio3AG implements ValuesInRangeProblemAG<Integer, List<Intege
 		
 	}
 	
+	// Método auxiliar para calcular un set de funciones aportadas por los cromosomas seleccionados.
+	// Se emplea un Set<> para no repetir funcionalidades.
+	private static Set<Integer> setFuncionalidades(List<Integer> cromosomas) {
+		
+		Set<Integer> funciones = new HashSet<Integer>();
+		
+		int i = 0;
+		while (i < cromosomas.size()) {
+			
+			// SOLO si el cromosoma (binario) es seleccionado:
+			if (cromosomas.get(i) == 1) {
+				
+				// Se añaden las funcionalidades que aport 
+				funciones.addAll(Ejercicio3AG.funcionalidades.get(i));
+				
+			}
+			
+			i++;
+			
+		}
+		
+		return funciones;
+		
+	}
+
 }

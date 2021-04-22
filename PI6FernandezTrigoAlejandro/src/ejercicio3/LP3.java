@@ -12,6 +12,7 @@ import us.lsi.gurobi.GurobiLp;
 import us.lsi.gurobi.GurobiSolution;
 import us.lsi.solve.AuxGrammar;
 
+//Programación Lineal
 public class LP3 {
 	
 	/*
@@ -19,7 +20,7 @@ public class LP3 {
 	 * LP con la entrada de los datos leidos en la clase Ejercicio3 y las restricciones 
 	 * especificadas en Producto.lsi. Vuelca todo el Producto.lp que se pasa a la clase GurobiSolution encargada
 	 * de calcular la solución.
-	 */
+	*/
 	public static void ejercicio3LP(String fichero) throws IOException {
 		
 		// Para que el método sea reutilizable edito el string correspondiente al nombre:
@@ -41,6 +42,5 @@ public class LP3 {
 		Solucion3.solucionLP3(fichero, solution.toString((s, d) -> d > 0));
 		
 	}
-
 
 }

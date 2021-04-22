@@ -31,7 +31,7 @@ public class AG2 {
 		AlgoritmoAG.ELITISM_RATE = 0.30;
 		AlgoritmoAG.MUTATION_RATE = 0.7;
 		AlgoritmoAG.CROSSOVER_RATE = 0.8;
-		AlgoritmoAG.POPULATION_SIZE = 1000;
+		AlgoritmoAG.POPULATION_SIZE = 3000;
 		StoppingConditionFactory.NUM_GENERATIONS = 400;
 		StoppingConditionFactory.stoppingConditionType = StoppingConditionType.GenerationCount;
 
@@ -46,7 +46,7 @@ public class AG2 {
 		List<Integer> solucion = objetoAG.getSolucion(cromosomas.getBestChromosome());
 
 		// Vuelca la salida "sin formatear" por consola:
-		System.out.println(solucion);
+		// System.out.println(solucion);
 
 		// En su lugar, llamo a la clase Solucion2 para formatear la salida:
 		Solucion2.solucionAG2(fichero, solucion);

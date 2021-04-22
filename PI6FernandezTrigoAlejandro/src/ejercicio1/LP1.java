@@ -20,7 +20,7 @@ public class LP1 {
 	 * LP con la entrada de los datos leidos en la clase Ejercicio1 y las restricciones 
 	 * especificadas en Alumno.lsi. Vuelca todo el Alumno.lp que se pasa a la clase GurobiSolution encargada
 	 * de calcular la solución.
-	 */
+	*/
 	public static void ejercicio1LP(String fichero) throws IOException {
 		
 		// Para que el método sea reutilizable edito el string correspondiente al nombre:

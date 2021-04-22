@@ -19,7 +19,7 @@ import us.lsi.graphs.GraphsReader;
 
 /* 
  * Clase circuito para parsear la entrada por fichero del ejercicio creando objetos de clase Circuito con 
- * sus respectivos atributos, esto es, el Grafo en si y un ID. Implemento la clase como extensión de Pair.
+ * sus respectivos atributos, esto es, ciudades y carreteras. Implemento la clase como extensión de Pair.
 */
 public class Circuito extends Pair<List<Ciudad>, List<Carretera>> {
 
@@ -30,27 +30,12 @@ public class Circuito extends Pair<List<Ciudad>, List<Carretera>> {
 		
 	}
 	
-	// Método auxiliar para hacer debug: se usa toGraph para mostrar el grafo por pantalla creando una salida de tipo .gv:
-	public static void salidaGrafo(Graph<Ciudad, Carretera> grafo, String fichero) {
-		
-		String ruta = "salida/salidaEjercicio5_" + fichero.replace("ficheros/PI6Ej5DatosEntrada", "").replace(".txt", "") + ".gv";
-		
-		Graphs2.toDot(
-				grafo, 																			// Grafo de entrada
-				ruta,																			// Ruta de salida de fichero
-				v -> v.getNombre(),															    // Valor de vértices
-				e -> e.getKm().toString(),														// Valor de las aristas
-				v -> GraphColors.getColor(GraphColors.Color.green),								// Coloreado
-				e -> GraphColors.getStyle(Style.bold));											// Define el estilo del grafo
-		
-	}
-	
 	// ATRIBUTOS DE LA CLASE
 	public static List<Ciudad> ciudades;
 	public static List<Carretera> carreteras;
 	
 	// CONSTRUCTORES DE LA CLASE
-	public Circuito(String fichero) {
+	private Circuito(String fichero) {
 		
 		super(ciudades, carreteras);
 		
@@ -97,11 +82,26 @@ public class Circuito extends Pair<List<Ciudad>, List<Carretera>> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE (Solo para debug)
+	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
 	@Override
 	public String toString() {
 		
 		return "[Circuito: Ciudades: " + ciudades +  " , carreteras:  " + carreteras + "]";
+		
+	}
+	
+	// Método auxiliar SOLO PARA HACER DEBUG: se usa toGraph para mostrar el grafo por pantalla creando una salida de tipo .gv:
+	public static void salidaGrafo(Graph<Ciudad, Carretera> grafo, String fichero) {
+		
+		String ruta = "salida/salidaEjercicio5_" + fichero.replace("ficheros/PI6Ej5DatosEntrada", "").replace(".txt", "") + ".gv";
+		
+		Graphs2.toDot(
+				grafo, 																			// Grafo de entrada
+				ruta,																			// Ruta de salida de fichero
+				v -> v.getNombre(),															    // Valor de vértices
+				e -> e.getKm().toString(),														// Valor de las aristas
+				v -> GraphColors.getColor(GraphColors.Color.green),								// Coloreado
+				e -> GraphColors.getStyle(Style.bold));											// Define el estilo del grafo
 		
 	}
 	
