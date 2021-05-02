@@ -7,5 +7,36 @@
 package soluciones;
 
 public class Solucion2 {
+	
+	public static void solucion2A() {
+		
+		
+	}
+	
+	public static void solucion2BT() {
+		
+		
+	}
+	
+	public static void solucion2PD() {
+		
+		
+	}
+	
+	
+	private static void formateo2A() {
+		
+		
+	}
+	
+	private static void formateo2BT() {
+		
+		
+	}
+	
+	private static void formateo2PD() {
+		
+		
+	}
 
 }
