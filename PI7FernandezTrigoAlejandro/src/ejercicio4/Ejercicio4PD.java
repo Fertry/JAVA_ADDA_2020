@@ -18,7 +18,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	subconjuntos de manera que la suma de elementos en los tres subconjuntos sea la
 	misma, y que el tamaño de uno de ellos sea lo menor posible.
 	
-	Solución por PD.
+	Solución por Programación Dinámica.
 */
 
 public class Ejercicio4PD {

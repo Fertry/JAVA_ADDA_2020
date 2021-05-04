@@ -2,7 +2,7 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio1;
 
@@ -69,6 +69,10 @@ public class Ejercicio1A {
         }
 
 	}
+	
+	/*
+	 * Método inicial para construir el grafo a partir de las propiedades extraidas de la lectura.
+	*/
 	
 	/*
 	 * Métodos auxiliares para resolver el problema. 

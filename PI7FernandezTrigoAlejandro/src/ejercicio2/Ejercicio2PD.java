@@ -2,7 +2,7 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio2;
 
@@ -23,7 +23,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	Determine cuál es la mejor asignación de casos a abogados para conseguir el
 	objetivo indicado (terminar de analizar todos los casos lo antes posible).
 	
-	Solución por PD.
+	Solución por Programación Dinámica.
 */
 
 public class Ejercicio2PD {

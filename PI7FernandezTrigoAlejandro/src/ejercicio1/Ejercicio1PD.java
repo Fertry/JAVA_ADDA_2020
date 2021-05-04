@@ -22,7 +22,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	afinidad total conseguida para todos los alumnos, y teniendo en cuenta que no está
 	permitido asignar un alumno a un grupo para el que presente afinidad 0.
 	
-	Solución por PD.
+	Solución por Programación Dinámica.
 */
 
 public class Ejercicio1PD {

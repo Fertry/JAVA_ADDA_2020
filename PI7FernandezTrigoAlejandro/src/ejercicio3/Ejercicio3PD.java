@@ -20,7 +20,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	conjunto de funcionalidades deseadas entre todos productos seleccionados al
 	menor precio.
 	
-	Solución por PD.
+	Solución por Programación Dinámica.
 */
 
 public class Ejercicio3PD {

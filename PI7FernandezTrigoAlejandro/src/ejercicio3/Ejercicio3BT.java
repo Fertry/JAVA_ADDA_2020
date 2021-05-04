@@ -2,7 +2,7 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio3;
 
@@ -20,7 +20,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	conjunto de funcionalidades deseadas entre todos productos seleccionados al
 	menor precio.
 	
-	Solución por BT.
+	Solución por Backtracking.
 */
 
 public class Ejercicio3BT {

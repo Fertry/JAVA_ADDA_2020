@@ -23,7 +23,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	Determine cuál es la mejor asignación de casos a abogados para conseguir el
 	objetivo indicado (terminar de analizar todos los casos lo antes posible).
 	
-	Solución por BT.
+	Solución por Backtracking.
 */
 
 public class Ejercicio2BT {

@@ -22,7 +22,7 @@ import us.lsi.flujossecuenciales.StreamsS;
 	afinidad total conseguida para todos los alumnos, y teniendo en cuenta que no está
 	permitido asignar un alumno a un grupo para el que presente afinidad 0.
 	
-	Solución por BT.
+	Solución por Backtracking.
 */
 
 public class Ejercicio1BT {
