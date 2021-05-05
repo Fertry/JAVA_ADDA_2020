@@ -6,6 +6,7 @@
 
 package aristas;
 
+import ejercicio1.Ejercicio1;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import vertices.VerticeAlumno;
 
@@ -14,9 +15,24 @@ import vertices.VerticeAlumno;
 */
 public class AristaAlumno extends ActionSimpleEdge<VerticeAlumno, Integer> {
 
-	protected AristaAlumno(VerticeAlumno c1, VerticeAlumno c2) {
-		super(c1, c2);
-		// TODO Auto-generated constructor stub
+	// ATRIBUTOS DE LA CLASE
+	public Integer accion;
+	
+	// MÉTODOS DE LA CLASE
+	public static AristaAlumno of(VerticeAlumno origen,  VerticeAlumno destino, Integer accion) {
+		
+		return new AristaAlumno(origen, destino, accion);
+		
+	}
+	
+	// CONSTRUCTORES DE LA CLASE
+	private AristaAlumno(VerticeAlumno origen, VerticeAlumno destino, Integer accion) {
+		
+		super(origen, destino);
+		
+		this.accion = accion;
+		this.weight = (double) (accion * Ejercicio1.afinidadPorIndice(VerticeAlumno.getIndice(), accion));
+		
 	}
 
 }
