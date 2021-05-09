@@ -20,8 +20,8 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
 public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlumno, Integer> {
 
 	// ATRIBUTOS DE LA CLASE
-	private final Integer indice;
-	private final List<Integer> plazas;
+	public Integer indice;
+	public List<Integer> plazas;
 	public static Integer grupos = Ejercicio1.getNGrupos();
 	public static Integer reparto = Ejercicio1.getReparto();
 	public static Integer alumnos = Ejercicio1.getNAlumnos();
@@ -66,7 +66,7 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	}
 
 	/*
-	 * Vértice de final.
+	 * Vértice de final (cota superior del problema).
 	*/
 	public static VerticeAlumno lastVertex() {
 		
@@ -104,23 +104,41 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	}
 	
 	/*
-	 * Heurística
+	 * Heurística: optimación de lo que falta para maximizar el resultado.
 	*/
-	public Double heuristicAction() {
-		Double res = 0.;
-		Integer max = 0;
-		for (int i = indice; i < alumnos; i++) {
-			for (int j = 0; j < grupos; j++) {
+	public Double heuristica() {
+		
+		int i = 0;
+		int j = 0;
+		Integer maximo = 0;
+		Double resultado = 0.0;
+
+		while (i < alumnos) {
+			while (j < grupos) {
+			
+				// Si plazas NO están llenas:
 				if (plazas.get(j) > 0) {
-					if (Ejercicio1.afinidadPorIndice(i, j) > max) {
-						max = Ejercicio1.afinidadPorIndice(i, j);
+					
+					Integer afinidad = Ejercicio1.afinidadPorIndice(i, j);
+					if (afinidad > maximo) {
+						
+						maximo = afinidad;
+						
 					}
+					
 				}
+				
+				j++;
+				
 			}
-			res += max;
-			max = 0;
+			
+			resultado += maximo;
+			i++;
+			
 		}
-		return 0.;
+		
+		return resultado;
+
 	}
 
 	// MÉTODOS HEREDADOS
@@ -164,14 +182,23 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	*/
 	public List<Integer> actions() {
 		
-		List<Integer> res = new ArrayList<Integer>();
-		for (int a = 0; a < grupos; a++) {
-			if (plazas.get(a) > 0 && Ejercicio1.afinidadPorIndice(indice, a) > 0) {
-				res.add(a);
-			}
-		}
-		return res;
+		int i = 0;
+		List<Integer> auxiliar = new ArrayList<Integer>();
 		
+		while (i < grupos)  {
+			
+			// Si la afinidad NO es cero Y plazas NO están llenas:
+			if (Ejercicio1.afinidadPorIndice(indice, i) > 0 && plazas.get(i) > 0) {
+				
+				auxiliar.add(i);
+				i++;
+				
+			}
+			
+		}
+		
+		return auxiliar;
+
 	}
 
 	@Override
@@ -188,10 +215,9 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	/*
 	 * 
 	*/
-	public AristaAlumno edge(Integer a) {
+	public AristaAlumno edge(Integer accion) {
 		
-		VerticeAlumno v = this.neighbor(a);
-		return AristaAlumno.of(this, v, a);
+		return null;
 		
 	}
 	
@@ -205,15 +231,18 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 
 	@Override
 	public int hashCode() {
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((indice == null) ? 0 : indice.hashCode());
 		result = prime * result + ((plazas == null) ? 0 : plazas.hashCode());
 		return result;
+		
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -232,13 +261,13 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		} else if (!plazas.equals(other.plazas))
 			return false;
 		return true;
+		
 	}
 
-	public static Integer getIndice() {
-		// TODO Auto-generated method stub
+	public Integer getIndice() {
+		
 		return indice;
+		
 	}
-
-
 
 }

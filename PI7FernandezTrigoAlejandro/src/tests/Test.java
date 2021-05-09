@@ -2,7 +2,7 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package tests;
 
@@ -36,11 +36,11 @@ public class Test {
 		*/
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 1 ############################\n");
-			Ejercicio1A.ejercicio1A("");
+			Ejercicio1A.EjecutaEjercicio1A("ficheros/PI7Ej1DatosEntrada1.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Ejercicio1BT.ejercicio1BT("");
+			Ejercicio1BT.EjecutaEjercicio1BT("ficheros/PI7Ej1DatosEntrada1.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Ejercicio1PD.ejercicio1PD("");
+			Ejercicio1PD.EjecutaEjercicio1PD("ficheros/PI7Ej1DatosEntrada1.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
