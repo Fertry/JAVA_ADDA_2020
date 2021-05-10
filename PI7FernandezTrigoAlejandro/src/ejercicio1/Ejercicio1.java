@@ -7,13 +7,11 @@
 package ejercicio1;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import clases.Alumno;
 import us.lsi.flujossecuenciales.StreamsS;
-import vertices.VerticeAlumno;
 
 /*
 	Una academia de inglés tiene n alumnos a ser repartidos en m grupos (n múltiplo
@@ -33,53 +31,12 @@ public class Ejercicio1 {
 	private static List<String> nombres;
 	private static List<List<Integer>> afinidades;
 	
-	
-	private static List<VerticeAlumno> verticesDisponibles;
-	private static Comparator<VerticeAlumno> ordenVertices;
-	public static Integer capacidad;
-	public static Integer numero;
-	public static Integer n;
-	
-
 	/*
 	 * Método inicial para la lectura de datos del fichero que se pasa como
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
 	*/
-//	public static void iniDatos(String fichero) {
-//		
-//		// Inicializar las variables de la clase Ejercicio1A:
-//		nombres = new ArrayList<String>();
-//		afinidades = new ArrayList<List<Integer>>();
-//		
-//		int i = 0;
-//        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-//
-//        while (i < lista.size()) {
-//        	
-//            String linea = lista.get(i);            
-//            
-//            // Creo un objeto de tipo Alumno del cual extraer sus propieades:
-//            Alumno alumno = Alumno.ofLinea(linea);
-//            
-//            nombres.add(alumno.getNombre());
-//            
-//            List<Integer> auxiliar = new ArrayList<Integer>();
-//            for (Integer afinidad : alumno.getAfinidades()) {
-//            	
-//            	auxiliar.add(afinidad);
-//            	
-//            }
-//            
-//            afinidades.add(auxiliar);
-//            
-//            i++;
-//            
-//        }
-//
-//	}
-
 	public static void iniDatos(String fichero) {
-				
+		
 		// Inicializar las variables de la clase Ejercicio1A:
 		nombres = new ArrayList<String>();
 		afinidades = new ArrayList<List<Integer>>();
@@ -108,13 +65,9 @@ public class Ejercicio1 {
             i++;
             
         }
-        
-		ordenVertices = Comparator.reverseOrder();
-		n = nombres.size();
 
 	}
-	
-	
+
 	/*
 	 * Métodos auxiliares para resolver el problema. 
 	*/	
@@ -137,6 +90,13 @@ public class Ejercicio1 {
 	public static Integer getReparto() {
 		
 		return getNAlumnos() / getNGrupos();
+		
+	}
+	
+	// Obtiene la lista de listas de afinidaes
+	public static List<List<Integer>> getAfinidades() {
+		
+		return afinidades;
 		
 	}
 

@@ -25,13 +25,22 @@ public class AristaAlumno extends ActionSimpleEdge<VerticeAlumno, Integer> {
 		
 	}
 	
-	// CONSTRUCTORES DE LA CLASE
+	// CONSTRUCTORES DE LA CLASE (heredado de la superclase)
 	private AristaAlumno(VerticeAlumno origen, VerticeAlumno destino, Integer accion) {
 		
 		super(origen, destino);
 		
+		// En base a la afinidad por alumno: 
 		this.accion = accion;
-		this.weight = (double) (accion * Ejercicio1.afinidadPorIndice(origen.indice, accion));
+		this.weight = (double) (accion * Ejercicio1.afinidadPorIndice(origen.getIndice(), accion));
+		
+	}
+	
+	// TO_STRING DE LA CLASE (Sólo para debug)
+	@Override
+	public String toString() {
+		
+		return "[Vertice: " + accion + "]";
 		
 	}
 
