@@ -32,30 +32,34 @@ import vertices.VerticeAlumno;
 public class Ejercicio1A {
 	
 	public static void EjecutaEjercicio1A(String entrada) {
-		
-		// Inicializar las variables de la clase Ejercicio1 que son los datos del problema:
+
+		// Inicializa las variables de la clase Ejercicio1:
 		Ejercicio1.iniDatos(entrada);
-		
-		// DEBUG: Mostrar los datos de entrada:
-		System.out.println("Alumnos: " + Ejercicio1.getNAlumnos());
-		System.out.println("Afinidades (grupos): " +  Ejercicio1.getNGrupos());
-		System.out.println("Reparto (alumnos/grupos): " + Ejercicio1.getReparto());
-		 
-		// Vertice inicial y final 
-		VerticeAlumno verticeInicial = VerticeAlumno.of();
+
+		// Declarar vértices de inicio y de final para el grafo:
 		VerticeAlumno verticeFinal = VerticeAlumno.lastVertex();
+		VerticeAlumno verticeInicial = VerticeAlumno.initialVertex();
 		
-		System.out.println(verticeInicial);
+		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial:
+		EGraph<VerticeAlumno, AristaAlumno> grafo = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
+		
+		// Invoca al algoritmo A* con el grafo virtual, su destino y la heurística encargada de mejorar la solución:
+		AStar<VerticeAlumno, AristaAlumno> recorrido = GraphAlg.aStarEnd(grafo, verticeFinal, HeuristicaAlumno::heuristica);
+		
+		// DEBUG!!!
 		System.out.println(verticeFinal);
-		
-		EGraph<VerticeAlumno, AristaAlumno> graph = Graphs2.simpleVirtualGraph(verticeInicial,x->-x.getEdgeWeight());	
-		System.out.println(graph.vertexSet());
-	
-		AStar<VerticeAlumno, AristaAlumno> ms = GraphAlg.aStarEnd(graph,verticeFinal,HeuristicaAlumno::heuristic_negate);
-		
-		GraphPath<VerticeAlumno,AristaAlumno> path = ms.search().get();
-		List<AristaAlumno> edges = path.getEdgeList();
-		System.out.println(edges);
+		System.out.println(verticeInicial);
+		System.out.println(grafo.vertexSet());
+		System.out.println(recorrido);
+		System.out.println("Grupos (nº afinidades): " + Ejercicio1.getNGrupos());
+		System.out.println("Alumnos: " + Ejercicio1.getNAlumnos());
+		System.out.println("Reparto: " + Ejercicio1.getReparto());
+		System.out.println("Indice " + VerticeAlumno.initialVertex());
+		System.out.println("Indice " + VerticeAlumno.lastVertex());
+		 
+		GraphPath<VerticeAlumno, AristaAlumno> camino = recorrido.search().get();
+	//	List<AristaAlumno> edges = camino.getEdgeList();
+	//	System.out.println(edges);
 		
 	}
 	

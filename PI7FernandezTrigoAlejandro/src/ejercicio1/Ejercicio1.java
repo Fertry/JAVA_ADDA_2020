@@ -9,10 +9,7 @@ package ejercicio1;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import clases.Alumno;
-import clases.Grupo;
 import us.lsi.flujossecuenciales.StreamsS;
 
 /*
@@ -30,53 +27,18 @@ public class Ejercicio1 {
 	/*
 	 * Variables de la clase necesarias para resolver el ejercicio. 
 	*/
-	//private static List<String> nombres;
-	//private static List<List<Integer>> afinidades;
-	private static List<Grupo> grupos;
-	private static List<Alumno> alumnos;
-	
+	private static List<String> nombres;
+	private static List<List<Integer>> afinidades;
+
 	/*
 	 * Método inicial para la lectura de datos del fichero que se pasa como
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
 	*/
-//	public static void iniDatos(String fichero) {
-//		
-//		// Inicializar las variables de la clase Ejercicio1A:
-//		nombres = new ArrayList<String>();
-//		afinidades = new ArrayList<List<Integer>>();
-//		
-//		int i = 0;
-//        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-//
-//        while (i < lista.size()) {
-//        	
-//            String linea = lista.get(i);            
-//            
-//            // Creo un objeto de tipo Alumno del cual extraer sus propieades:
-//            Alumno alumno = Alumno.ofLinea(linea);
-//            
-//            nombres.add(alumno.getNombre());
-//            
-//            List<Integer> auxiliar = new ArrayList<Integer>();
-//            for (Integer afinidad : alumno.getAfinidades()) {
-//            	
-//            	auxiliar.add(afinidad);
-//            	
-//            }
-//            
-//            afinidades.add(auxiliar);
-//            
-//            i++;
-//            
-//        }
-//
-//	}
-	
 	public static void iniDatos(String fichero) {
 		
 		// Inicializar las variables de la clase Ejercicio1:
-		grupos = new ArrayList<Grupo>();
-		alumnos = new ArrayList<Alumno>();
+		nombres = new ArrayList<String>();
+		afinidades = new ArrayList<List<Integer>>();
 		
 		int i = 0;
         List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
@@ -85,89 +47,56 @@ public class Ejercicio1 {
         	
             String linea = lista.get(i);            
             
-            // Creo un objeto de tipo Alumno:
+            // Creo un objeto de tipo Alumno del cual extraer sus propieades:
             Alumno alumno = Alumno.ofLinea(linea);
             
-            // Creo un objeto de tipo Grupo:
-            Grupo grupo = Grupo.create(alumno.getAfinidades().size());
+            nombres.add(alumno.getNombre());
             
-            // Añadirlo todo a las variables de la clase:
-            grupos.add(grupo);
-            alumnos.add(alumno);
+            List<Integer> auxiliar = new ArrayList<Integer>();
+            for (Integer afinidad : alumno.getAfinidades()) {
+            	
+            	auxiliar.add(afinidad);
+            	
+            }
+            
+            afinidades.add(auxiliar);
             
             i++;
             
         }
 
 	}
-
+	
 	/*
 	 * Métodos auxiliares para resolver el problema. 
 	*/	
-	
-	public static Integer getNAlumnos() {
+
+	// Obtiene el nº de alumnos:
+	public static Integer getNAlumnos() { 
 		
-		return alumnos.size();
-		
-	}
-	
-	public static Integer getNGrupos() {
-		
-		return alumnos.get(0).getAfinidades().size();
+		return nombres.size();
 		
 	}
 	
+	// Obtiene el nº de afinidades:
+	public static Integer getNGrupos() { 
+		
+		return afinidades.get(0).size();
+		
+	}
+	
+	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
 	public static Integer getReparto() {
 		
 		return getNAlumnos() / getNGrupos();
 		
 	}
-	
+
+	// Obtiene la afinidad de un alumno dado el alumno (i) para el grupo (j):
 	public static Integer getAfinidadPorIndice(Integer i, Integer j) {
-		
-		return alumnos.get(i).getAfinidades().get(j);
+
+		return afinidades.get(i).get(j);
 		
 	}
-	
-	public static List<Integer> getListaAnchuras() {
-		
-		return IntStream.range(0, getNGrupos()).map(i -> i = getNAlumnos()).boxed().collect(Collectors.toList());
-		//return IntStream.range(0, getNumeroEstantes()).map(i -> i = getAnchuraEstante()).boxed().collect(Collectors.toList());
-	}
-	
-//	// Obtiene el nº de alumnos:
-//	public static Integer getNAlumnos() { 
-//		
-//		return nombres.size();
-//		
-//	}
-//	
-//	// Obtiene el nº de afinidades:
-//	public static Integer getNGrupos() { 
-//		
-//		return afinidades.get(0).size();
-//		
-//	}
-//	
-//	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
-//	public static Integer getReparto() {
-//		
-//		return getNAlumnos() / getNGrupos();
-//		
-//	}
-//	
-//	// Obtiene la lista de listas de afinidaes
-//	public static List<List<Integer>> getAfinidades() {
-//		
-//		return afinidades;
-//		
-//	}
-//
-//	// Obtiene la afinidad de un alumno dado el alumno (i) para el grupo (j):
-//	public static Integer afinidadPorIndice(Integer i, Integer j) {
-//
-//		return afinidades.get(i).get(j);
-//		
-//	}
 	
 }
