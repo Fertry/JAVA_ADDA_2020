@@ -6,12 +6,15 @@
 
 package ejercicio1;
 
-import java.util.function.BiFunction;
+import java.util.List;
+import org.jgrapht.GraphPath;
 
 import aristas.AristaAlumno;
 import heuristicas.HeuristicaAlumno;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
+import us.lsi.graphs.alg.GraphAlg;
+import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAlumno;
 
 /*
@@ -42,22 +45,17 @@ public class Ejercicio1A {
 		VerticeAlumno verticeInicial = VerticeAlumno.of();
 		VerticeAlumno verticeFinal = VerticeAlumno.lastVertex();
 		
+		System.out.println(verticeInicial);
+		System.out.println(verticeFinal);
 		
-		//Grafo virtual. Aristas -> Alternativas y su peso
-//		AStar<VerticeAlumno, AristaAlumno> graph = Graphs2.simpleVirtualGraph(null);
+		EGraph<VerticeAlumno, AristaAlumno> graph = Graphs2.simpleVirtualGraph(verticeInicial,x->-x.getEdgeWeight());	
+		System.out.println(graph.vertexSet());
+	
+		AStar<VerticeAlumno, AristaAlumno> ms = GraphAlg.aStarEnd(graph,verticeFinal,HeuristicaAlumno::heuristic_negate);
 		
-		//Algoritmo A*
-//		BiFunction<VerticeAlumno, VerticeAlumno, Double> heuristic = (v1,v2)->-HeuristicaAlumno.heuristica(v1,v2);
-//		AStar<VerticeAlumno, AristaAlumno> a = AStar.of(graph,e0,e1,heuristic);
-		
-		//Solucion
-//		SolucionEstanteria s = SolucionEstanteria.empty();
-//		a.getPathEdgeList().stream().forEach(e -> s.add(DatosEstanteria.getLibros().get(e.getSource().getIndex()) ,e.a.intValue()));
-//		System.out.println(s);
-		
-//		List<EstanteriaEdge> edges = a.getPathEdgeList();
-//		System.out.println(edges);
-		
+		GraphPath<VerticeAlumno,AristaAlumno> path = ms.search().get();
+		List<AristaAlumno> edges = path.getEdgeList();
+		System.out.println(edges);
 		
 	}
 	

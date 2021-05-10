@@ -8,7 +8,6 @@ package vertices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -275,9 +274,13 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	private Integer indice;
 	private List<Integer> plazasRestantes;
 	
+	private static Integer grupos = Ejercicio1.getNGrupos();
+	private static Integer reparto = Ejercicio1.getReparto();
+	private static Integer alumnos = Ejercicio1.getNAlumnos();
+	
 	public static VerticeAlumno of() {
 		
-		return new VerticeAlumno(0, Ejercicio1.getNGrupos());
+		return new VerticeAlumno(0, Ejercicio1.getListaAnchuras());
 		
 	}
 	
@@ -285,7 +288,6 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		return new VerticeAlumno(Ejercicio1.getNAlumnos(), 
 				IntStream.range(0, Ejercicio1.getNGrupos()).boxed().map(x -> x = 0).collect(Collectors.toList()));
 	}
-	
 	
 	public static VerticeAlumno of(Integer indice, List<Integer> plazasRestantes) {
 		return new VerticeAlumno(indice, plazasRestantes);
@@ -343,25 +345,46 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	@Override
 	public Boolean isValid() {
 		
-		return null;
+		boolean res = true;
+		if (!(indice >= 0 && indice <= alumnos)) {
+			res = false;
+		}
+		for (int k = 0; k < grupos; k++) {
+			if (plazasRestantes.get(k) < 0) {
+				res = false;
+			}
+		}
+		return res;
 		
 	}
 
 	@Override
 	public List<Integer> actions() {
 
-		return null;
+		List<Integer> res = new ArrayList<Integer>();
+		for (int a = 0; a < grupos; a++) {
+			if (plazasRestantes.get(a) > 0 && Ejercicio1.getAfinidadPorIndice(indice, a) > 0) {
+				res.add(a);
+			}
+		}
+		return res;
 		
 	}
 
 	@Override
 	public VerticeAlumno neighbor(Integer a) {
 
-		return null;
+		List<Integer> aux = new ArrayList<Integer>(this.plazasRestantes);
+		if(a > -1) {
+			int n = aux.get(a);
+			aux.set(a, n);
+		}
+		return VerticeAlumno.of(indice + 1, aux);
 		
 	}
 	
-	public AristaAlumno getEdgeFromAction(Integer a) {
+	@Override
+	public AristaAlumno edge(Integer a) {
 		
 		VerticeAlumno v = this.neighbor(a);
 		return AristaAlumno.of(this, v, a);
@@ -375,10 +398,4 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		
 	}
 
-	@Override
-	public AristaAlumno edge(Integer a) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
 }

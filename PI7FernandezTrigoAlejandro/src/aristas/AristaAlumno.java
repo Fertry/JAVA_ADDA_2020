@@ -32,7 +32,7 @@ public class AristaAlumno extends ActionSimpleEdge<VerticeAlumno, Integer> {
 		
 		// En base a la afinidad por alumno: 
 		this.accion = accion;
-		this.weight = (double) (accion * Ejercicio1.afinidadPorIndice(origen.getIndice(), accion));
+		this.weight = (double) (accion * Ejercicio1.getAfinidadPorIndice(origen.getIndice(), accion));
 		
 	}
 	

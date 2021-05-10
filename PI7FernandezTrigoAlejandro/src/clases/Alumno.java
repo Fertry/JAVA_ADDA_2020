@@ -9,13 +9,11 @@ package clases;
 import java.util.ArrayList;
 import java.util.List;
 
-import us.lsi.common.Pair;
-
 /*
  * Clase alumno para parsear la entrada por fichero del ejercicio creando objetos de clase Alumno con 
- * sus respectivos atributos: Nombre y Lista de afinidades. Implemento la clase como extensión de Pair.
+ * sus respectivos atributos.
 */
-public class Alumno extends Pair<String, List<Integer>> {
+public class Alumno {
 
 	// MÉTODOS DE LA CLASE
 	public static Alumno ofLinea(String linea) {
@@ -25,13 +23,19 @@ public class Alumno extends Pair<String, List<Integer>> {
 	}
 	
 	// ATRIBUTOS DE LA CLASE
-	public static String nombre;
-	public static List<Integer> afinidades;
+	private String nombre;
+	private List<Integer> afinidades;
 	
 	// CONSTRUCTORES DE LA CLASE
+	private Alumno() {
+		
+		super();
+		
+	}
+	
 	private Alumno(String datos) {
 		
-		super(nombre, afinidades);
+		super();
 		List<Integer> listaAfinidades = new ArrayList<Integer>();
 		
 		// Alumno_08: 5,3,2,0
@@ -49,8 +53,8 @@ public class Alumno extends Pair<String, List<Integer>> {
 			
 		}
 
-		Alumno.nombre = nombre;
-		Alumno.afinidades = listaAfinidades;
+		this.nombre = nombre;
+		this.afinidades = listaAfinidades;
 
 	}
 
@@ -70,12 +74,47 @@ public class Alumno extends Pair<String, List<Integer>> {
 		
 	}
 	
-	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
+	// HASHCODE Y EQUALS DE LA CLASE
+	@Override
+	public int hashCode() {
+		
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((afinidades == null) ? 0 : afinidades.hashCode());
+		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		return result;
+		
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Alumno other = (Alumno) obj;
+		if (afinidades == null) {
+			if (other.afinidades != null)
+				return false;
+		} else if (!afinidades.equals(other.afinidades))
+			return false;
+		if (nombre == null) {
+			if (other.nombre != null)
+				return false;
+		} else if (!nombre.equals(other.nombre))
+			return false;
+		return true;
+		
+	}
 	
+	// TO_STRING DE LA CLASE (SOLO PARA HACER DEBUG)
 	@Override
 	public String toString() {
 		
-		return "[Alumno_" + nombre + ", lista de afinidades: " + afinidades + "]";
+		return "[Alumno: " + nombre + ", lista de afinidades: " + afinidades + "]";
 		
 	}
 	
