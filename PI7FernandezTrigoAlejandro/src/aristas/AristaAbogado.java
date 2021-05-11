@@ -14,9 +14,22 @@ import vertices.VerticeAbogado;
 */
 public class AristaAbogado extends ActionSimpleEdge<VerticeAbogado, Integer> {
 
-	protected AristaAbogado(VerticeAbogado c1, VerticeAbogado c2) {
-		super(c1, c2);
-		// TODO Auto-generated constructor stub
+	public static AristaAbogado of(VerticeAbogado v1, VerticeAbogado v2, Integer a) {
+		return new AristaAbogado(v1, v2, a);
 	}
 
+	public Integer a;
+
+	private AristaAbogado(VerticeAbogado v1, VerticeAbogado v2, Integer a) {
+		super(v1, v2);
+		this.a = a;
+		super.weight = null;
+	}
+
+	@Override
+	public String toString() {
+		
+		return null;
+		
+	}
 }

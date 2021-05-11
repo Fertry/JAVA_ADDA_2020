@@ -9,7 +9,6 @@ package tests;
 import java.util.Locale;
 
 import ejercicio1.Ejercicio1A;
-import ejercicio1.Ejercicio1PD;
 import ejercicio2.Ejercicio2A;
 import ejercicio2.Ejercicio2PD;
 import ejercicio3.Ejercicio3A;

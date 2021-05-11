@@ -14,9 +14,22 @@ import vertices.VerticeConjunto;
 */
 public class AristaConjunto extends ActionSimpleEdge<VerticeConjunto, Integer> {
 
-	protected AristaConjunto(VerticeConjunto c1, VerticeConjunto c2) {
-		super(c1, c2);
-		// TODO Auto-generated constructor stub
+	public static AristaConjunto of(VerticeConjunto v1, VerticeConjunto v2, Integer a) {
+		return new AristaConjunto(v1, v2, a);
 	}
 
+	public Integer a;
+
+	private AristaConjunto(VerticeConjunto v1, VerticeConjunto v2, Integer a) {
+		super(v1, v2);
+		this.a = a;
+		super.weight = null;
+	}
+
+	@Override
+	public String toString() {
+		
+		return null;
+		
+	}
 }

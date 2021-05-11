@@ -1,3 +1,9 @@
+/*
+ *  	Analisis y Diseño de Datos y Algoritmos - 2020
+ *      Author: Alejandro Fernandez Trigo
+ *      Practica Individual 7
+*/
+
 package heuristicas;
 
 import java.util.function.Predicate;
@@ -7,22 +13,24 @@ import vertices.VerticeAlumno;
 
 public class HeuristicaAlumno {
 	
-	public static Double heuristica(VerticeAlumno origen, Predicate<VerticeAlumno> goal, VerticeAlumno destino) {
-		
-		Double resultado = 0.0;
+	/*
+	 * Método heurístico de de mejora que proporciona una dirección de mejora para la solución buscada. 
+	*/
+	public static Double heuristic(VerticeAlumno v1, Predicate<VerticeAlumno> goal, VerticeAlumno v2) {
+		Double res = 0.;
 		Integer max = 0;
-		for (int i = origen.getIndice(); i < Ejercicio1.getNAlumnos(); i++) {
+		for (int i = v1.indice; i < Ejercicio1.getNAlumnos(); i++) {
 			for (int j = 0; j < Ejercicio1.getNGrupos(); j++) {
-				if (origen.getPlazasRestantes().get(j) > 0) {
+				if (v1.plazasRestantes.get(j) > 0) {
 					if (Ejercicio1.getAfinidadPorIndice(i, j) > max) {
 						max = Ejercicio1.getAfinidadPorIndice(i, j);
 					}
 				}
 			}
-			resultado += max;
+			res += max;
 			max = 0;
 		}
-		return resultado;
+		return res;
 	}
-
+	
 }

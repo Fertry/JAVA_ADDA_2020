@@ -14,9 +14,22 @@ import vertices.VerticeProducto;
 */
 public class AristaProducto extends ActionSimpleEdge<VerticeProducto, Integer> {
 
-	protected AristaProducto(VerticeProducto c1, VerticeProducto c2) {
-		super(c1, c2);
-		// TODO Auto-generated constructor stub
+	public static AristaProducto of(VerticeProducto v1, VerticeProducto v2, Integer a) {
+		return new AristaProducto(v1, v2, a);
 	}
 
+	public Integer a;
+
+	private AristaProducto(VerticeProducto v1, VerticeProducto v2, Integer a) {
+		super(v1, v2);
+		this.a = a;
+		super.weight = null;
+	}
+
+	@Override
+	public String toString() {
+		
+		return null;
+		
+	}
 }
