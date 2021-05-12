@@ -2,93 +2,45 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio4;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.jgrapht.GraphPath;
 
-import clases.Conjunto;
-import us.lsi.flujossecuenciales.StreamsS;
-
-/*
-	Dado un conjunto de enteros determinar si puede particionarse en tres
-	subconjuntos de manera que la suma de elementos en los tres subconjuntos sea la
-	misma, y que el tamaño de uno de ellos sea lo menor posible.
-	
-	Solución por A*.
-*/
+import aristas.AristaConjunto;
+import heuristicas.HeuristicaConjunto;
+import us.lsi.graphs.Graphs2;
+import us.lsi.graphs.alg.AStar;
+import us.lsi.graphs.alg.GraphAlg;
+import us.lsi.graphs.virtual.EGraph;
+import vertices.VerticeConjunto;
 
 public class Ejercicio4A {
 	
-	/*
-	 * Variables de la clase necesarias para resolver el ejercicio. 
-	*/
-	private static List<Integer> elementos;
-	
-	/*
-	 * Método inicial para la lectura de datos del fichero que se pasa como
-	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
-	*/
-	private static void iniDatos(String fichero, Integer indice) {
+	public static void EjecutaEjercicio4A(String entrada) {
 		
-		// Inicializar las variables de la clase Ejercicio4A:
-		elementos = new ArrayList<Integer>();
+		// Inicializa las variables de la clase Ejercicio4:
+		Ejercicio4.iniDatos(entrada, 0);
 		
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-        
-		// Creo un objeto de tipo Conjunto del cual extraer sus propiedades:
-		Conjunto conjunto = Conjunto.ofLinea(lista.get(indice));
+		// Declarar vértices de inicio y de final para el grafo:
+		VerticeConjunto verticeFinal = VerticeConjunto.verticeFinal();
+		VerticeConjunto verticeInicial = VerticeConjunto.verticeInicial();
 		
-		for (Integer elemento : conjunto.getElementos()) {
-			
-			elementos.add(elemento);
-			
-		}
-		
-	}
-	
-	/*
-	 * Métodos auxiliares para resolver el problema.
-	*/
-	
-	// Obtiene el elemento dado un indice:
-	private static Integer elemento(Integer i) {
-		
-		return elementos.get(i);
-		
-	}
+		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
+		EGraph<VerticeConjunto, AristaConjunto> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
 
-	// Obtiene el nº de elementos del conjunto:
-	private static Integer getSizeConjunto() {
-		
-		return elementos.size();
-		
-	}
+		// Invocar el algoritmo de A*: 
+		/*
+		 * 2 vías: 
+		 *  · Expresando el vértice final de destino.
+		 *  · ????
+		 */
+		AStar<VerticeConjunto, AristaConjunto> algoritmoA = GraphAlg.aStarEnd(grafoVirtual, verticeFinal, HeuristicaConjunto::heuristica);
 
-	// Obtiene el sumatorio de los elementos de un conjunto partido de 3:
-	private static Integer getSumatorio() {
-		
-		Integer suma = 0;
-		
-		for (Integer elemento : elementos) {
-			
-			suma += elemento;;
-			
-		}
-		
-		return suma / 3;
-		
-	}
-	
-	/*
-	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
-	*/
-	public static void ejercicio4A(String fichero) {
+		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
+		GraphPath<VerticeConjunto, AristaConjunto> caminoA = algoritmoA.search().get();
 
-	
 	}
 
 }

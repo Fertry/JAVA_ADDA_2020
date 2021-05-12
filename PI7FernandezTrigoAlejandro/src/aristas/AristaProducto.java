@@ -6,6 +6,7 @@
 
 package aristas;
 
+import ejercicio3.Ejercicio3;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import vertices.VerticeProducto;
 
@@ -14,22 +15,31 @@ import vertices.VerticeProducto;
 */
 public class AristaProducto extends ActionSimpleEdge<VerticeProducto, Integer> {
 
-	public static AristaProducto of(VerticeProducto v1, VerticeProducto v2, Integer a) {
-		return new AristaProducto(v1, v2, a);
+	// MÉTODOS DE LA CLASE
+	public static AristaProducto of(VerticeProducto origen, VerticeProducto destino, Integer accion) {
+		
+		return new AristaProducto(origen, destino, accion);
+		
 	}
 
-	public Integer a;
+	// ATRIBUTOS DE LA CLASE
+	private Integer accion;
 
-	private AristaProducto(VerticeProducto v1, VerticeProducto v2, Integer a) {
-		super(v1, v2);
-		this.a = a;
-		super.weight = null;
+	// CONSTRUCTORES DE LA CLASE (heredado de la superclase)
+	private AristaProducto(VerticeProducto origen, VerticeProducto destino, Integer accion) {
+		
+		super(origen, destino);
+		
+		this.accion = accion;
+		this.weight = null;
+		
 	}
 
+	// TO_STRING DE LA CLASE (Sólo para debug; source/target pertenecen a la superclase)
 	@Override
 	public String toString() {
 		
-		return null;
+		return "[Selección origen: " + this.source.getIndice() + ", Selección destino: " + this.target.getIndice() + ", con precio: " + this.getEdgeWeight() + "]";
 		
 	}
 }

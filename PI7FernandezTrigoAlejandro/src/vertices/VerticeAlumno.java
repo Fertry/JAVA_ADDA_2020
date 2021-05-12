@@ -15,364 +15,218 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
  * Clase vértice alumno para representar vértices del grafo de un tipo definido.
+ * 
+ * Interpretación: Encontrar la asignación de estudiantes a grupos, desde indice hasta el final, que
+ * optimicen la afinidad.
 */
-//public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlumno, Integer> {
-//
-//	// ATRIBUTOS DE LA CLASE
-//	private Integer indice;
-//	private List<Integer> plazasRestantes;
-//	
-//	private static Integer grupos = Ejercicio1.getNGrupos();
-//	private static Integer alumnos = Ejercicio1.getNAlumnos();
-//	
-//	// MÉTODOS DE LA CLASE
-//	public static VerticeAlumno of(Integer indice, List<Integer> plazasRestantes) {
-//		
-//		return new VerticeAlumno(indice, plazasRestantes);
-//		
-//	}
-//	
-//	// CONSTRUCTORES DE LA CLASE
-//	private VerticeAlumno(Integer indice, List<Integer> plazasRestantes) {
-//				
-//		super();
-//		
-//		int i = 0;
-//		List<Integer> auxiliar = new ArrayList<Integer>();
-//		
-//		while (i < grupos) {
-//			
-//			// Estado inicial: todas las plazas están vacías:
-//			auxiliar.add(0);
-//			i++;
-//			
-//		}
-//
-//		this.indice = indice;
-//		this.plazasRestantes = plazasRestantes;
-//		
-//		// SÓLO si indice > nº alumnos, entonces plazasRestantes = estado final = auxiliar:
-////		if (alumnos < indice) {
-////			
-////			this.plazasRestantes = plazasRestantes;
-////			
-////		} else {
-////			
-////			this.plazasRestantes = auxiliar;
-////			
-////		}
-//		
-//	}
-//
-//	// GETTERS DE LA CLASE
-//	
-//	// Devuelve el índice del vértice:
-//	public Integer getIndice() {
-//		
-//		return indice;
-//		
-//	}
-//	
-//	// Devuelve la lista de plazas del vértice:
-//	public List<Integer> getPlazasRestantes() {
-//		
-//		return plazasRestantes;
-//		
-//	}
-//
-//	// MÉTODOS HEREDADOS DE LA SUPERCLASE
-//	
-//	@Override
-//	public Boolean isValid() {
-//		boolean res = true;
-//		if (!(indice >= 0 && indice <= alumnos)) {
-//			res = false;
-//		}
-//		for (int k = 0; k < grupos; k++) {
-//			if (plazasRestantes.get(k) < 0) {
-//				res = false;
-//			}
-//		}
-//		return res;
-//	}
-//
-//	@Override
-//	public List<Integer> actions() {
-//		
-//		int accion = 0;
-//		List<Integer> acciones = new ArrayList<Integer>();
-//		
-//		while (accion < grupos) {
-//			
-//			// Si la afinidad para el movimiento "accion" NO es cero:
-//			if (Ejercicio1.getAfinidadPorIndice(indice, accion) > 0) {
-//				
-//				// Y si hay plazas disponibles en el grupo:
-//				if (plazasRestantes.get(accion) > 0) {
-//					
-//					acciones.add(accion);
-//					
-//				}
-//			}
-//			
-//			accion++;
-//			
-//		}
-//		
-//		return acciones;
-//		
-//	}
-//
-//	@Override
-//	public VerticeAlumno neighbor(Integer a) {
-//		
-//		Integer nuevoIndice = indice++;
-//		VerticeAlumno resultado = null;
-//		List<Integer> auxiliar = new ArrayList<Integer>();
-//		
-//		auxiliar.set(a, (this.plazasRestantes.get(a) - 1));
-//		
-//		resultado = VerticeAlumno.of(nuevoIndice, auxiliar);
-//		return resultado;
-//		
-//	}
-//
-//	@Override
-//	public AristaAlumno edge(Integer a) {
-//		
-//		VerticeAlumno v = this.neighbor(a);
-//		return AristaAlumno.of(this, v, a);
-//		
-//	}
-//	
-//	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
-//	
-//	// Definir un vértice de comienzo dónde todas sus plazas están "vacías",
-//	// esto es, sus capacidades son máximas (alumnos / grupos):
-//	public static VerticeAlumno initialVertex() {
-//		
-//		int i = 0;
-//		List<Integer> auxiliar = new ArrayList<Integer>();
-//		
-//		while (i < grupos) {
-//			
-//			auxiliar.add(alumnos / grupos);
-//			System.out.println(alumnos / grupos);
-//			i++;
-//			
-//		}
-//		
-//		System.out.println(auxiliar);
-//		VerticeAlumno resultado = VerticeAlumno.of(0, auxiliar);
-//		return resultado;
-//
-//	}
-//
-//	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
-//	// esto es, sus capacidades son cero:
-//	public static VerticeAlumno lastVertex() {
-//		
-//		int i = 0;
-//		List<Integer> auxiliar = new ArrayList<Integer>();
-//		
-//		while (i < grupos) {
-//			
-//			auxiliar.add(0);
-//			i++;
-//			
-//		}
-//		
-//		VerticeAlumno resultado = VerticeAlumno.of(grupos, auxiliar);
-//		return resultado;
-//		
-//	}
-//	
-//	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de alumnos:
-//	public static Predicate<VerticeAlumno> goal() {
-//		
-//		return (VerticeAlumno vertice) -> vertice.indice == VerticeAlumno.alumnos;
-//		
-//	}
-//	
-//	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
-//	public static VerticeAlumno copy(VerticeAlumno vertice) {
-//		
-//		VerticeAlumno resultado = VerticeAlumno.of(vertice.getIndice(), vertice.getPlazasRestantes());
-//		
-//		return resultado;
-//		
-//	}
-//	
-//	public static Double heuristica(VerticeAlumno origen, Predicate<VerticeAlumno> goal, VerticeAlumno destino) {
-//		
-//		Double resultado = 0.0;
-//		Integer max = 0;
-//		for (int i = origen.getIndice(); i < Ejercicio1.getNAlumnos(); i++) {
-//			for (int j = 0; j < Ejercicio1.getNGrupos(); j++) {
-//				if (origen.getPlazasRestantes().get(j) > 0) {
-//					if (Ejercicio1.getAfinidadPorIndice(i, j) > max) {
-//						max = Ejercicio1.getAfinidadPorIndice(i, j);
-//					}
-//				}
-//			}
-//			resultado += max;
-//			max = 0;
-//		}
-//		return resultado;
-//	}
-//	
-//	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y PLAZAS RESTANTES
-//	@Override
-//	public int hashCode() {
-//		
-//		final int prime = 31;
-//		int result = 1;
-//		result = prime * result + ((indice == null) ? 0 : indice.hashCode());
-//		result = prime * result + ((plazasRestantes == null) ? 0 : plazasRestantes.hashCode());
-//		return result;
-//		
-//	}
-//
-//	@Override
-//	public boolean equals(Object obj) {
-//		
-//		if (this == obj)
-//			return true;
-//		if (obj == null)
-//			return false;
-//		if (getClass() != obj.getClass())
-//			return false;
-//		VerticeAlumno other = (VerticeAlumno) obj;
-//		if (indice == null) {
-//			if (other.indice != null)
-//				return false;
-//		} else if (!indice.equals(other.indice))
-//			return false;
-//		if (plazasRestantes == null) {
-//			if (other.plazasRestantes != null)
-//				return false;
-//		} else if (!plazasRestantes.equals(other.plazasRestantes))
-//			return false;
-//		return true;
-//		
-//	}
-//	
-//	// TO_STRING DE LA CLASE (Sólo para debug)
-//	@Override
-//	public String toString() {
-//		
-//		return "[El grupo: " + indice + ", dispone de " + plazasRestantes + " plazas]";
-//		
-//	}
-//	
-//}
-
 public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlumno, Integer> {
 
-	public Integer indice;
-	public List<Integer> plazasRestantes = new ArrayList<Integer>();
-
-	public static Integer alumnos = Ejercicio1.getNAlumnos();
-	public static Integer grupos = Ejercicio1.getNGrupos();
-	public static Integer reparto = alumnos / grupos;
-
-	public static VerticeAlumno of(int indice, List<Integer> plazasRestantes) {
+	// MÉTODOS DE LA CLASE
+	public static VerticeAlumno of(Integer indice, List<Integer> plazasRestantes) {
+		
 		return new VerticeAlumno(indice, plazasRestantes);
+		
 	}
-
-	public VerticeAlumno(int indice, List<Integer> plazasRestantes) {
+	
+	// ATRIBUTOS DE LA CLASE
+	
+	// Variables básicas:
+	private Integer indice;
+	private List<Integer> plazasRestantes;
+	
+	// Variables compartidas (Extraidas de clase general donde se inicializan los datos):
+	private static Integer grupos = Ejercicio1.getNGrupos();
+	private static Integer alumnos = Ejercicio1.getNAlumnos();
+	
+	// Variables derivadas (calculadas en la propia clase):
+	private static Integer reparto = alumnos / grupos;
+	
+	// CONSTRUCTORES DE LA CLASE
+	public VerticeAlumno(Integer indice, List<Integer> plazasRestantes) {
+		
 		super();
-		List<Integer> plazasRestantesFinal = new ArrayList<Integer>();
-		for (int i = 0; i < grupos; i++) {
-			plazasRestantesFinal.add(0);
-		}
+		
 		this.indice = indice;
-		if (indice < alumnos) {
-			this.plazasRestantes = plazasRestantes;
-		} else {
-			this.plazasRestantes = plazasRestantesFinal;
+		this.plazasRestantes = plazasRestantes;
+	
+	}
+	
+	// GETTERS DE LA CLASE
+
+	// Devuelve el índice del vértice:
+	public Integer getIndice() {
+		
+		return indice;
+		
+	}
+	
+	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
+	
+	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de alumnos:
+	public static Predicate<VerticeAlumno> objetivo() {
+		
+		return (VerticeAlumno vertice) -> vertice.getIndice() == VerticeAlumno.alumnos;
+		
+	}
+	
+	// Definir un vértice de comienzo dónde todas sus plazas están "vacías",
+	// esto es, sus capacidades son máximas (alumnos / grupos):
+	public static VerticeAlumno verticeInicial() {
+		
+		int i = 0;
+		List<Integer> auxiliar = new ArrayList<Integer>();
+		
+		while (i < grupos) {
+			
+			auxiliar.add(reparto);
+			i++;
+			
 		}
+		
+		VerticeAlumno resultado = VerticeAlumno.of(0, auxiliar);
+		return resultado;
+	
 	}
 
-	public static VerticeAlumno initialVertex() {
-		List<Integer> plazasRestantesInicial = new ArrayList<Integer>();
-		for (int i = 0; i < grupos; i++) {
-			plazasRestantesInicial.add(reparto);
+	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
+	// esto es, sus capacidades son cero:
+	public static VerticeAlumno verticeFinal() {
+		
+		int i = 0;
+		List<Integer> auxiliar = new ArrayList<Integer>();
+		
+		while (i < grupos) {
+			
+			auxiliar.add(0);
+			i++;
+			
 		}
-		return of(0, plazasRestantesInicial);
+		
+		VerticeAlumno resultado = VerticeAlumno.of(alumnos, auxiliar);
+		return resultado;
+			
 	}
-
-	public static VerticeAlumno copy(VerticeAlumno grupos) {
-		return of(grupos.indice, grupos.plazasRestantes);
+	
+	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
+	public static VerticeAlumno copiar(VerticeAlumno vertice) {
+		
+		VerticeAlumno resultado = VerticeAlumno.of(vertice.indice, vertice.plazasRestantes);
+		
+		return resultado;
+		
 	}
-
-	public static VerticeAlumno lastVertex() {
-		List<Integer> plazasRestantesFinal = new ArrayList<Integer>();
-		for (int i = 0; i < grupos; i++) {
-			plazasRestantesFinal.add(0);
-		}
-		return of(alumnos, plazasRestantesFinal);
-	}
-
+	
+	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
+	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
+	public AristaAlumno edge(Integer accion) {
+		
+		// 1º obtener el vértice "vecino" correspondiente a la acción:
+		VerticeAlumno vertice = this.neighbor(accion);
+		
+		// 2º obtener la arista que los conecta (el camino): origen, destino, accion
+		AristaAlumno resultado = AristaAlumno.of(this, vertice, accion);
+		
+		return resultado;
+		
+	}
+	
+	@Override
+	// 
 	public Boolean isValid() {
-		boolean res = true;
-		if (!(indice >= 0 && indice <= alumnos)) {
-			res = false;
+		
+		int i = 0;
+		Boolean valido = false;
+		
+		// Si NO es el vértice inicial NI el final:
+		if (this.indice >= 0 && this.indice <= alumnos) {
+			
+			valido = true;
+			
 		}
-		for (int k = 0; k < grupos; k++) {
-			if (plazasRestantes.get(k) < 0) {
-				res = false;
+
+		// Si el grupo i NO está lleno (hay plazas):
+		while (i < grupos) {
+		
+			if (this.plazasRestantes.get(i) > 0) {
+				
+				valido = true;
+				
 			}
+			
+			i++;
+			
 		}
-		return res;
+				
+		return valido;
+	
+	}
+	
+	@Override
+	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
+	public VerticeAlumno neighbor(Integer accion) {
+		
+		// 1º obtener el siguiente indice:
+		Integer siguiente = this.indice + 1;
+		
+		// 2º copiar la lista de plazasRestantes actual:
+		List<Integer> auxiliar = new ArrayList<>(this.plazasRestantes);
+		
+		// 3º alterar el valor de la lista: esto es, para la posición del grupo indicada por la acción
+		// restarle uno indicando que hay una capacidad menos:
+		auxiliar.set(accion, (this.plazasRestantes.get(accion) - 1));
+		
+		// 4º devolver el vértice nuevo:
+		VerticeAlumno resultado = VerticeAlumno.of(siguiente, auxiliar);
+		
+		return resultado;
+		
 	}
 
 	@Override
+	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
-		List<Integer> res = new ArrayList<Integer>();
-		for (int a = 0; a < grupos; a++) {
-			if (plazasRestantes.get(a) > 0 && Ejercicio1.getAfinidadPorIndice(indice, a) > 0) {
-				res.add(a);
+		
+		int i = 0;
+		List<Integer> acciones = new ArrayList<Integer>();
+		
+		while (i < grupos) {
+			
+			// Si hay plazas disponibles en el grupo:
+			if (this.plazasRestantes.get(i) > 0) {
+				
+				// Y si la afinidad para el movimiento NO es cero:
+				if (Ejercicio1.getAfinidadPorIndice(this.indice, i) > 0) {
+					
+					// Entonces es una acción posible de mejora:
+					acciones.add(i);
+					
+				}
 			}
+			
+			i++;
+			
 		}
-		return res;
+		
+		return acciones;
+			
 	}
 
-	@Override
-	public VerticeAlumno neighbor(Integer a) {
-		int i = indice + 1;
-		List<Integer> list = new ArrayList<>(plazasRestantes);
-		list.set(a, (this.plazasRestantes.get(a) - 1));
-		return of(i, list);
-	}
-
-	public static Predicate<VerticeAlumno> goal() {
-		return (VerticeAlumno v) -> v.indice == VerticeAlumno.alumnos;
-	}
-
-	@Override
-	public AristaAlumno edge(Integer a) {
-		VerticeAlumno v = this.neighbor(a);
-		return AristaAlumno.of(this, v, a);
-	}
-
+	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y PLAZAS RESTANTES
 	@Override
 	public int hashCode() {
+		
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((indice == null) ? 0 : indice.hashCode());
 		result = prime * result + ((plazasRestantes == null) ? 0 : plazasRestantes.hashCode());
 		return result;
-	}
-
-	@Override
-	public String toString() {
-		return "VerticeAlumno [indice=" + indice + ", plazasRestantes=" + plazasRestantes + ", alumnos=" + alumnos + ", grupos=" + grupos + ", reparto=" + reparto + "]";
+		
 	}
 
 	@Override
 	public boolean equals(Object obj) {
+		
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -391,21 +245,14 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		} else if (!plazasRestantes.equals(other.plazasRestantes))
 			return false;
 		return true;
+		
 	}
 
-//	// GETTERS DE LA CLASE
-//	
-	// Devuelve el índice del vértice:
-	public Integer getIndice() {
+	// TO_STRING DE LA CLASE (Sólo para debug)
+	@Override
+	public String toString() {
 		
-		return indice;
-		
-	}
-	
-	// Devuelve la lista de plazas del vértice:
-	public List<Integer> getPlazasRestantes() {
-		
-		return plazasRestantes;
+		return "[Indice: " + this.indice + ", cuenta con las plazas: " + this.plazasRestantes + "]";
 		
 	}
 	

@@ -85,13 +85,6 @@ public class Ejercicio1 {
 		
 	}
 	
-	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
-	public static Integer getReparto() {
-		
-		return getNAlumnos() / getNGrupos();
-		
-	}
-
 	// Obtiene la afinidad de un alumno dado el alumno (i) para el grupo (j):
 	public static Integer getAfinidadPorIndice(Integer i, Integer j) {
 

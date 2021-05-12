@@ -15,7 +15,7 @@ public class HeuristicaConjunto {
 	/*
 	 * Método heurístico de de mejora que proporciona una dirección de mejora para la solución buscada. 
 	*/
-	public static Double heuristic(VerticeConjunto v1, Predicate<VerticeConjunto> goal, VerticeConjunto v2) {
+	public static Double heuristica(VerticeConjunto origen, Predicate<VerticeConjunto> objetivo, VerticeConjunto destino) {
 		
 		return 0.0;
 		

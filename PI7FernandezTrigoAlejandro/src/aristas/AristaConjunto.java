@@ -6,6 +6,7 @@
 
 package aristas;
 
+import ejercicio4.Ejercicio4;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import vertices.VerticeConjunto;
 
@@ -14,22 +15,32 @@ import vertices.VerticeConjunto;
 */
 public class AristaConjunto extends ActionSimpleEdge<VerticeConjunto, Integer> {
 
-	public static AristaConjunto of(VerticeConjunto v1, VerticeConjunto v2, Integer a) {
-		return new AristaConjunto(v1, v2, a);
+	// MÉTODOS DE LA CLASE
+	public static AristaConjunto of(VerticeConjunto origen, VerticeConjunto destino, Integer accion) {
+		
+		return new AristaConjunto(origen, destino, accion);
+		
 	}
 
-	public Integer a;
+	// ATRIBUTOS DE LA CLASE
+	private Integer accion;
 
-	private AristaConjunto(VerticeConjunto v1, VerticeConjunto v2, Integer a) {
-		super(v1, v2);
-		this.a = a;
-		super.weight = null;
+	// CONSTRUCTORES DE LA CLASE (heredado de la superclase)
+	private AristaConjunto(VerticeConjunto origen, VerticeConjunto destino, Integer accion) {
+		
+		super(origen, destino);
+		
+		this.accion = accion;
+		this.weight = (double) Ejercicio4.getSumatorio() * accion;
+		
 	}
 
+	// TO_STRING DE LA CLASE (Sólo para debug; source/target pertenecen a la superclase)
 	@Override
 	public String toString() {
 		
-		return null;
+		return "[Conjunto origen: " + this.source.getIndice() + ", conjunto destino: " + this.target.getIndice() + ", con sumatorio: " + this.getEdgeWeight() + "]";
 		
 	}
+	
 }

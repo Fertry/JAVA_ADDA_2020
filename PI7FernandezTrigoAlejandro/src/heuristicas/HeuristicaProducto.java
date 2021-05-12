@@ -15,7 +15,7 @@ public class HeuristicaProducto {
 	/*
 	 * Método heurístico de de mejora que proporciona una dirección de mejora para la solución buscada. 
 	*/
-	public static Double heuristic(VerticeProducto v1, Predicate<VerticeProducto> goal, VerticeProducto v2) {
+	public static Double heuristica(VerticeProducto origen, Predicate<VerticeProducto> objetivo, VerticeProducto destino) {
 		
 		return 0.0;
 		

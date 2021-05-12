@@ -6,6 +6,7 @@
 
 package aristas;
 
+import ejercicio2.Ejercicio2;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import vertices.VerticeAbogado;
 
@@ -14,22 +15,32 @@ import vertices.VerticeAbogado;
 */
 public class AristaAbogado extends ActionSimpleEdge<VerticeAbogado, Integer> {
 
-	public static AristaAbogado of(VerticeAbogado v1, VerticeAbogado v2, Integer a) {
-		return new AristaAbogado(v1, v2, a);
+	// MÉTODOS DE LA CLASE
+	public static AristaAbogado of(VerticeAbogado origen, VerticeAbogado destino, Integer accion) {
+		
+		return new AristaAbogado(origen, destino, accion);
+		
 	}
 
-	public Integer a;
+	// ATRIBUTOS DE LA CLASE
+	private Integer accion;
 
-	private AristaAbogado(VerticeAbogado v1, VerticeAbogado v2, Integer a) {
-		super(v1, v2);
-		this.a = a;
-		super.weight = null;
+	// CONSTRUCTORES DE LA CLASE (heredado de la superclase)
+	private AristaAbogado(VerticeAbogado origen, VerticeAbogado destino, Integer accion) {
+		
+		super(origen, destino);
+		
+		this.accion = accion;
+		this.weight = (double) Ejercicio2.tiempoPorIndice(origen.getIndice(), accion);
+		
 	}
 
+	// TO_STRING DE LA CLASE (Sólo para debug; source/target pertenecen a la superclase)
 	@Override
 	public String toString() {
 		
-		return null;
+		return "[Abogado origen: " + this.source.getIndice() + ", Abogado destino: " + this.target.getIndice() + ", Caso: " + accion + ", con horas: " + this.getEdgeWeight() + "]";
 		
 	}
+	
 }

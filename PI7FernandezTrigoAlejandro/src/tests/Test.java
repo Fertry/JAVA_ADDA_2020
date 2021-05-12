@@ -11,10 +11,10 @@ import java.util.Locale;
 import ejercicio1.Ejercicio1A;
 import ejercicio2.Ejercicio2A;
 import ejercicio2.Ejercicio2PD;
-import ejercicio3.Ejercicio3A;
+
 import ejercicio3.Ejercicio3BTManual;
 import ejercicio3.Ejercicio3PD;
-import ejercicio4.Ejercicio4A;
+import ejercicio4.Ejercicio4;
 import ejercicio4.Ejercicio4PD;
 import ejercicio4.Ejercicio4PDManual;
 
@@ -39,7 +39,7 @@ public class Test {
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 2 ############################\n");
-			Ejercicio2A.ejercicio2A("");
+			Ejercicio2A.EjecutaEjercicio2A("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			Ejercicio2PD.ejercicio2PD("");
 		System.out.println("##################################################################");
@@ -47,7 +47,7 @@ public class Test {
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 3 ############################\n");
-			Ejercicio3A.ejercicio3A("");
+		//	Ejercicio3.ejercicio3A("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			Ejercicio3BTManual.ejercicio3BTManual("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
@@ -57,7 +57,7 @@ public class Test {
 		
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 4 ############################\n");
-			Ejercicio4A.ejercicio4A("");
+//			Ejercicio4.ejercicio4A("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			Ejercicio4PD.ejercicio4PD("");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

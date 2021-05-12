@@ -2,16 +2,19 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio2;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.jgrapht.GraphPath;
 
-import clases.Abogado;
-import us.lsi.flujossecuenciales.StreamsS;
+import aristas.AristaAbogado;
+import heuristicas.HeuristicaAbogado;
+import us.lsi.graphs.Graphs2;
+import us.lsi.graphs.alg.AStar;
+import us.lsi.graphs.alg.GraphAlg;
+import us.lsi.graphs.virtual.EGraph;
+import vertices.VerticeAbogado;
 
 /*
 	Un bufete de abogados cuenta con un equipo de n personas que deben analizar m
@@ -27,81 +30,30 @@ import us.lsi.flujossecuenciales.StreamsS;
 */
 
 public class Ejercicio2A {
-
-	/*
-	 * Variables de la clase necesarias para resolver el ejercicio. 
-	*/
-	private static List<String> nombres;
-	private static List<List<Integer>> horas;
 	
-	/*
-	 * Método inicial para la lectura de datos del fichero que se pasa como
-	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
-	*/
-	private static void iniDatos(String fichero) {
+	public static void EjecutaEjercicio2A(String entrada) {
 		
-		// Inicializar las variables de la clase Ejercicio2A:
-		nombres = new ArrayList<String>();
-		horas = new ArrayList<List<Integer>>();
+		// Inicializa las variables de la clase Ejercicio2:
+		Ejercicio2.iniDatos(entrada);
 		
-		int i = 0;
-        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		// Declarar vértices de inicio y de final para el grafo:
+		VerticeAbogado verticeFinal = VerticeAbogado.verticeFinal();
+		VerticeAbogado verticeInicial = VerticeAbogado.verticeInicial();
+		
+		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
+		EGraph<VerticeAbogado, AristaAbogado> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
 
-        while (i < lista.size()) {
-        	
-            String linea = lista.get(i);            
-            
-            // Creo un objeto de tipo Abogado del cual extraer sus propiedades:
-            Abogado abogado = Abogado.ofLinea(linea);
-            
-            nombres.add(abogado.getNombre());
-            
-            List<Integer> auxiliar = new ArrayList<Integer>();
-            for (Integer hora : abogado.getHoras()) {
-				
-            	auxiliar.add(hora);
-            	
-			}
-            
-            horas.add(auxiliar);
-            
-            i++;
-            
-        }
+		// Invocar el algoritmo de A*: 
+		/*
+		 * 2 vías: 
+		 *  · Expresando el vértice final de destino.
+		 *  · ????
+		 */
+		AStar<VerticeAbogado, AristaAbogado> algoritmoA = GraphAlg.aStarEnd(grafoVirtual, verticeFinal, HeuristicaAbogado::heuristica);
 
-	}
-	
-	/*
-	 * Métodos auxiliares para resolver el problema.
-	*/
-	
-	// Obtiene el nº de abogados:
-	private static Integer getNAbogados() {
+		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
+		GraphPath<VerticeAbogado, AristaAbogado> caminoA = algoritmoA.search().get();
 
-		return nombres.size();
-		
-	}
-	
-	// Obtiene el nº de horas:
-	private static Integer getNHoras() {
-		
-		return horas.get(0).size();
-		
-	}
-		
-	// Obtiene el tiempo de un abogado dado el abogado (i) para el caso (j):
-	private static Integer tiempoPorIndice(Integer i, Integer j) {
-		
-		return horas.get(i).get(j);
-		
-	}
-	
-	/*
-	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
-	 */
-	public static void ejercicio2A(String fichero) {
-
-		
 	}
 	
 }
