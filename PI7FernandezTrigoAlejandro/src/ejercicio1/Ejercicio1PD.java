@@ -6,12 +6,16 @@
 
 package ejercicio1;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
+import org.jgrapht.GraphPath;
 
-import clases.Alumno;
-import us.lsi.flujossecuenciales.StreamsS;
+import aristas.AristaAlumno;
+import heuristicas.HeuristicaAlumno;
+import us.lsi.graphs.Graphs2;
+import us.lsi.graphs.alg.DPR;
+import us.lsi.graphs.alg.DynamicProgrammingReduction;
+import us.lsi.graphs.alg.DynamicProgramming.PDType;
+import us.lsi.graphs.virtual.EGraph;
+import vertices.VerticeAlumno;
 
 /*
 	Una academia de inglés tiene n alumnos a ser repartidos en m grupos (n múltiplo
@@ -27,87 +31,34 @@ import us.lsi.flujossecuenciales.StreamsS;
 
 public class Ejercicio1PD {
 
-	/*
-	 * Variables de la clase necesarias para resolver el ejercicio. 
-	*/
-	private static List<String> nombres;
-	private static List<List<Integer>> afinidades;
-
-	/*
-	 * Método inicial para la lectura de datos del fichero que se pasa como
-	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
-	*/
-	private static void iniDatos(String fichero) {
+	public static void EjecutaEjercicio1PD(String entrada) {
 		
-		// Inicializar las variables de la clase Ejercicio1PD:
-		nombres = new ArrayList<String>();
-		afinidades = new ArrayList<List<Integer>>();
+		// Inicializa las variables de la clase Ejercicio1:
+		Ejercicio1.iniDatos(entrada);
 		
-		int i = 0;
-        List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-
-        while (i < lista.size()) {
-        	
-            String linea = lista.get(i);            
-            
-            // Creo un objeto de tipo Alumno del cual extraer sus propieades:
-            Alumno alumno = Alumno.ofLinea(linea);
-            
-            nombres.add(alumno.getNombre());
-            
-            List<Integer> auxiliar = new ArrayList<Integer>();
-            for (Integer afinidad : alumno.getAfinidades()) {
-            	
-            	auxiliar.add(afinidad);
-            	
-            }
-            
-            afinidades.add(auxiliar);
-            
-            i++;
-            
-        }
-
-	}
-	
-	/*
-	 * Métodos auxiliares para resolver el problema. 
-	*/	
-	
-	// Obtiene el nº de alumnos:
-	private static Integer getNAlumnos() { 
+		System.out.println(entrada);		
 		
-		return nombres.size();
+		// Declarar vértices de inicio y de final para el grafo:
+		VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
+		VerticeAlumno verticeInicial = VerticeAlumno.verticeInicial();
 		
-	}
-	
-	// Obtiene el nº de afinidades:
-	private static Integer getNAfinidades() { 
+		System.out.println(verticeFinal);
+		System.out.println(verticeInicial);
 		
-		return afinidades.get(0).size();
+		EGraph<VerticeAlumno, AristaAlumno> grafo = Graphs2.simpleVirtualGraph(verticeInicial,x->x.getEdgeWeight());	
+				
+		DynamicProgrammingReduction<VerticeAlumno, AristaAlumno> algoritmoPD = 
+				DPR.dynamicProgrammingReductionEnd(grafo,
+						verticeFinal,
+						HeuristicaAlumno::heuristica,
+						PDType.Max);
+				
+		System.out.println(algoritmoPD.search());
+		System.out.println(algoritmoPD.solutionsTree);
 		
-	}
-	
-	// Obtiene el tamaño del reparto: alumnos / afinidades (grupos) = tamaño grupos
-	private static Integer getNGrupos() {
-		
-		return getNAlumnos() / getNAfinidades();
+		GraphPath<VerticeAlumno, AristaAlumno> solucion = algoritmoPD.search().get();
+		System.out.println(solucion);
 		
 	}
 
-	// Obtiene la afinidad de un alumno dado el alumno (i) para el grupo (j):
-	private static Integer afinidadPorIndice(Integer i, Integer j) {
-
-		return afinidades.get(i).get(j);
-		
-	}
-	
-	/*
-	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
-	*/
-	public static void ejercicio1PD(String fichero) {
-
-		
-	}
-	
 }
