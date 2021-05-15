@@ -29,6 +29,9 @@ public class Ejercicio4 {
 	/*
 	 * Método inicial para la lectura de datos del fichero que se pasa como
 	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
+	 * 
+	 * Este método particular tiene cómo diferencia del resto un segundo parámetro para indicar 
+	 * qué línea de fichero se está leyendo ya que cada línea, representa un problema distinto. 
 	*/
 	public static void iniDatos(String fichero, Integer indice) {
 		

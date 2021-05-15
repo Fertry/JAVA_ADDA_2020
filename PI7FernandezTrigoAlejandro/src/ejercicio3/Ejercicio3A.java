@@ -6,18 +6,16 @@
 
 package ejercicio3;
 
+import java.util.List;
+
 import org.jgrapht.GraphPath;
 
-import aristas.AristaAbogado;
-import aristas.AristaProducto;
-import ejercicio2.Ejercicio2;
-import heuristicas.HeuristicaAbogado;
 import heuristicas.HeuristicaProducto;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
-import vertices.VerticeAbogado;
 import vertices.VerticeProducto;
 
 /*
@@ -34,26 +32,43 @@ public class Ejercicio3A {
 	
 	public static void EjecutaEjercicio3A(String entrada) {
 		
-		// Inicializa las variables de la clase Ejercicio2:
+		// Inicializa las variables de la clase Ejercicio3:
 		Ejercicio3.iniDatos(entrada);
 		
 		// Declarar vértices de inicio y de final para el grafo:
-		VerticeProducto verticeFinal = VerticeProducto.verticeFinal();
+		// VerticeProducto verticeFinal = VerticeProducto.verticeFinal();
 		VerticeProducto verticeInicial = VerticeProducto.verticeInicial();
 		
+		// Inicializar el grafo virtual:
+		/*
+		 * 2 vías:
+		 * 	· Con peso en el vértice.
+		 * 	· Con peso en las aristas. 
+		*/ 
+		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeProducto, AristaProducto> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
-
+		EGraph<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
+		
 		// Invocar el algoritmo de A*: 
 		/*
 		 * 2 vías: 
 		 *  · Expresando el vértice final de destino.
-		 *  · ????
-		 */
-		AStar<VerticeProducto, AristaProducto> algoritmoA = GraphAlg.aStarEnd(grafoVirtual, verticeFinal, HeuristicaProducto::heuristica);
+		 *  · Mediante un predicado objetivo.
+		*/
+		AStar<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> algoritmoA = GraphAlg.aStarGoal(
+				grafoVirtual,
+				VerticeProducto.objetivo(),
+				HeuristicaProducto::heuristica
+				);
 
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
-		GraphPath<VerticeProducto, AristaProducto> caminoA = algoritmoA.search().get();
+		GraphPath<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> caminoA = algoritmoA.search().get();
+		
+		// Solución: lista de vértices recorridos del grafo: 
+		List<VerticeProducto> vertices = caminoA.getVertexList();
+		
+		// DEBUG:
+		System.out.println(vertices);
 
 	}
 

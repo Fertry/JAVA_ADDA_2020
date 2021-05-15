@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import aristas.AristaAbogado;
 import ejercicio2.Ejercicio2;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -20,7 +20,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar la asignación de casos a abogados, desde indice hasta el final, que minimice
  * cargaMaxima, teniendo en cuenta las cargas ya acumuladas para los abogados.
 */
-public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAbogado, Integer> {
+public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionSimpleEdge<VerticeAbogado, Integer>, Integer> {
 
 	// MÉTODOS DE LA CLASE
 	public static VerticeAbogado of(Integer indice, List<Integer> plazasRestantes) {
@@ -40,10 +40,10 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	private static Integer abogados = Ejercicio2.getNAbogados();
 
 	// Variables derivadas (calculadas en la propia clase):
-	private static Integer cargaMaxima;
-	private static Integer cargaMinima;
-	private static Integer abogadoMaximo;
-	private static Integer abogadoMinimo;
+	private static Integer cargaMinima = cargaMinima();
+	private static Integer cargaMaxima = cargaMaxima();
+	private static Integer abogadoMinimo = abogadoMinimaCarga();
+	private static Integer abogadoMaximo = abogadoMaximaCarga();
 	
 	// CONSTRUCTORES DE LA CLASE
 	public VerticeAbogado(Integer indice, List<Integer> cargaAbogado) {
@@ -64,9 +64,117 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 		
 	}
 	
+	// MÉTODOS PARA SETEAR LAS VARIABLES DERIVADAS DE LA CLASE
+	
+	// Devuelve la menor carga de los abogados (caso menor duración):
+	private static Integer cargaMinima() {
+		
+		int i = 0;
+		int j = 0;
+		Integer minimo = Ejercicio2.tiempoPorIndice(0, 0);
+		
+		while (i < abogados) {
+			while (j < casos) {
+				
+				Integer horas = Ejercicio2.tiempoPorIndice(i, j);
+				if (horas < minimo) {
+				
+					minimo = horas;
+					
+				}
+				
+				j++;
+				
+			}
+			
+			i++;
+			
+		}
+
+		return minimo;
+		
+	}
+	
+	// Devuelve la mayor carga de los abogados (caso mayor duración):
+	private static Integer cargaMaxima() {
+		
+		int i = 0;
+		int j = 0;
+		Integer maximo = Ejercicio2.tiempoPorIndice(0, 0);
+		
+		while (i < abogados) {
+			while (j < casos) {
+				
+				Integer horas = Ejercicio2.tiempoPorIndice(i, j);
+				if (horas > maximo) {
+				
+					maximo = horas;
+					
+				}
+				
+				j++;
+				
+			}
+			
+			i++;
+			
+		}
+
+		return maximo;
+		
+	}
+
+	// Devuelve el abogado menos cargado (menor nº horas):
+	private static Integer abogadoMinimaCarga() {
+		
+		int i = 0;
+		Integer abogado = 0;
+		Integer suma = Ejercicio2.tiempoTotalPorIndice(0);
+		
+		while (i < abogados) {
+			
+			Integer horas = Ejercicio2.tiempoTotalPorIndice(i);
+			if (horas < suma) {
+				
+				abogado = i;
+				
+			}
+			
+			i++;
+
+		}
+		
+		return abogado;
+		
+	}
+
+	// Devuelve el abogado más cargado (mayor nº horas):
+	private static Integer abogadoMaximaCarga() {
+		
+		int i = 0;
+		Integer abogado = 0;
+		Integer suma = Ejercicio2.tiempoTotalPorIndice(0);
+		
+		while (i < abogados) {
+			
+			Integer horas = Ejercicio2.tiempoTotalPorIndice(i);
+			if (horas > suma) {
+				
+				abogado = i;
+				
+			}
+			
+			i++;
+
+		}
+		
+		return abogado;
+		
+	}
+	
 	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
 	
-	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de alumnos:
+	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de :
 	public static Predicate<VerticeAbogado> objetivo() {
 		
 		return (VerticeAbogado vertice) -> vertice.getIndice() == VerticeAbogado.abogados;
@@ -94,6 +202,9 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 
 	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
 	// esto es, sus capacidades son cero:
+	/*
+	 * NO SE USA EN EL CASO DE aStarGoal Y dynamicProgrammingReductionGoal!!!!!
+	 */
 	public static VerticeAbogado verticeFinal() {
 		
 		int i = 0;
@@ -110,26 +221,13 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 		return resultado;
 			
 	}
-	
-	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
-	public static VerticeAbogado copiar(VerticeAbogado vertice) {
 		
-		VerticeAbogado resultado = VerticeAbogado.of(vertice.indice, vertice.cargaAbogado);
-		
-		return resultado;
-		
-	}
-	
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
-	public AristaAbogado edge(Integer accion) {
+	public ActionSimpleEdge<VerticeAbogado, Integer> edge(Integer accion) {
 		
-		// 1º obtener el vértice "vecino" correspondiente a la acción:
-		VerticeAbogado vertice = this.neighbor(accion);
-		
-		// 2º obtener la arista que los conecta (el camino): origen, destino, accion
-		AristaAbogado resultado = AristaAbogado.of(this, vertice, accion);
+		ActionSimpleEdge<VerticeAbogado, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
 		
 		return resultado;
 		
@@ -252,11 +350,11 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 		
 	}
 		
-	// TO_STRING DE LA CLASE (Sólo para debug)
+	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 		
-		return "[Indice: " + this.indice + ", cuenta con una carga tal qué: " + this.cargaAbogado + "]";
+		return "Abogado: " + this.indice + ", " + this.cargaAbogado;
 		
 	}
 

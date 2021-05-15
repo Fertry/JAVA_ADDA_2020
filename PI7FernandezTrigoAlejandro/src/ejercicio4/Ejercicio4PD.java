@@ -2,16 +2,23 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio4;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import clases.Conjunto;
-import us.lsi.flujossecuenciales.StreamsS;
+import org.jgrapht.GraphPath;
+
+import heuristicas.HeuristicaConjunto;
+import us.lsi.common.Files2;
+import us.lsi.graphs.Graphs2;
+import us.lsi.graphs.alg.DPR;
+import us.lsi.graphs.alg.DynamicProgrammingReduction;
+import us.lsi.graphs.alg.DynamicProgramming.PDType;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
+import us.lsi.graphs.virtual.EGraph;
+import vertices.VerticeConjunto;
 
 /*
 	Dado un conjunto de enteros determinar si puede particionarse en tres
@@ -23,71 +30,70 @@ import us.lsi.flujossecuenciales.StreamsS;
 
 public class Ejercicio4PD {
 
-	/*
-	 * Variables de la clase necesarias para resolver el ejercicio. 
-	*/
-	private static List<Integer> elementos;
+	public static void EjecutaEjercicio4PD(String entrada) {
+		
+		/*
+		 * La entrada del ejercicio 4 NO representa un único problema sino varios problemas
+		 * cada uno en una línea de fichero. Para ejecutarlos todos de forma sistemática 
+		 * creo un bucle que ejecute el ejercicio tantas veces cómo líneas de fichero. 
+		*/
 	
-	/*
-	 * Método inicial para la lectura de datos del fichero que se pasa como
-	 * parámetro usando Collectors y el método StreamsS proporcionado por la librería.
-	*/
-	private static void iniDatos(String fichero, Integer indice) {
+		Integer linea = 0;
+		Integer lineas = Files2.linesFromFile(entrada).size();
 		
-		// Inicializar las variables de la clase Ejercicio4PD:
-		elementos = new ArrayList<Integer>();
-		
-		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
-        
-		// Creo un objeto de tipo Conjunto del cual extraer sus propiedades:
-		Conjunto conjunto = Conjunto.ofLinea(lista.get(indice));
-		
-		for (Integer elemento : conjunto.getElementos()) {
+		while (linea < lineas) {
 			
-			elementos.add(elemento);
+			EjecutaProblemaEjercicio4PD(entrada, linea);
+			linea++;
 			
 		}
-		
+	
 	}
 	
 	/*
-	 * Métodos auxiliares para resolver el problema.
+	 * Este método privado se encarga de ejecutar el algoritmo para UNA línea de fichero específica, es
+	 * decir, un problema específico extraido del fichero de entrada.
 	*/
+	private static void EjecutaProblemaEjercicio4PD(String entrada, Integer linea) {
+		
+		// Inicializa las variables de la clase Ejercicio4 para la línea de fichero proporcionado:
+		Ejercicio4.iniDatos(entrada, linea);
+		
+		// Declarar vértices de inicio y de final para el grafo:
+		// VerticeConjunto verticeFinal = VerticeConjunto.verticeFinal();
+		VerticeConjunto verticeInicial = VerticeConjunto.verticeInicial();
 	
-	// Obtiene el elemento dado un indice:
-	private static Integer elemento(Integer i) {
+		// Inicializar el grafo virtual:
+		/*
+		 * 2 vías:
+		 * 	· Con peso en el vértice.
+		 * 	· Con peso en las aristas. 
+		*/ 
 		
-		return elementos.get(i);
+		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
+		EGraph<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());	
 		
-	}
-
-	// Obtiene el nº de elementos del conjunto:
-	private static Integer getSizeConjunto() {
+		// Invocar el algoritmo de Programación Dinámica: 
+		/*
+		 * 2 vías: 
+		 *  · Expresando el vértice final de destino.
+		 *  · Mediante un predicado objetivo.
+		*/
+		DynamicProgrammingReduction<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
+						grafoVirtual,
+						VerticeConjunto.objetivo(),
+						HeuristicaConjunto::heuristica,
+						PDType.Max
+						);
 		
-		return elementos.size();
+		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
+		GraphPath<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> caminoPD = algoritmoPD.search().get();
 		
-	}
-
-	// Obtiene el sumatorio de los elementos de un conjunto partido de 3:
-	private static Integer getSumatorio() {
+		// Solución: lista de vértices recorridos del grafo: 
+		List<VerticeConjunto> vertices = caminoPD.getVertexList();
 		
-		Integer suma = 0;
-		
-		for (Integer elemento : elementos) {
-			
-			suma += elemento;;
-			
-		}
-		
-		return suma / 3;
-		
-	}
-	
-	/*
-	 * Método público para ejecutar todo el ejercicio desde el fichero de Test.java
-	*/
-	public static void ejercicio4PD(String fichero) {
-
+		// DEBUG:
+		System.out.println(vertices);
 	
 	}
 	

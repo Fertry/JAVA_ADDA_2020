@@ -9,11 +9,12 @@ package ejercicio1;
 import java.util.List;
 import org.jgrapht.GraphPath;
 
-import aristas.AristaAlumno;
 import heuristicas.HeuristicaAlumno;
+import soluciones.Solucion1;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAlumno;
 
@@ -37,34 +38,38 @@ public class Ejercicio1A {
 		Ejercicio1.iniDatos(entrada);
 		
 		// Declarar vértices de inicio y de final para el grafo:
-		VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
+		// VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
 		VerticeAlumno verticeInicial = VerticeAlumno.verticeInicial();
 		
+		// Inicializar el grafo virtual:
+		/*
+		 * 2 vías:
+		 * 	· Con peso en el vértice.
+		 * 	· Con peso en las aristas. 
+		*/ 
+		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeAlumno, AristaAlumno> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
-
+		EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
+		
 		// Invocar el algoritmo de A*: 
 		/*
 		 * 2 vías: 
 		 *  · Expresando el vértice final de destino.
-		 *  · ????
-		 */
-		AStar<VerticeAlumno, AristaAlumno> algoritmoA = GraphAlg.aStarEnd(grafoVirtual, verticeFinal, HeuristicaAlumno::heuristica);
+		 *  · Mediante un predicado objetivo.
+		*/
+		AStar<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> algoritmoA = GraphAlg.aStarGoal(
+				grafoVirtual,
+				VerticeAlumno.objetivo(),
+				HeuristicaAlumno::heuristica
+				);
 
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
-		GraphPath<VerticeAlumno, AristaAlumno> caminoA = algoritmoA.search().get();
+		GraphPath<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> caminoA = algoritmoA.search().get();
 		
-		// DEBUG!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-		List<AristaAlumno> aristas = caminoA.getEdgeList();
-		System.out.println(aristas);
-		System.out.println(verticeFinal);
-		System.out.println(verticeInicial);
-		System.out.println(grafoVirtual.vertexSet());
-		System.out.println(caminoA);
-		System.out.println("Grupos (nº afinidades): " + Ejercicio1.getNGrupos());
-		System.out.println("Alumnos: " + Ejercicio1.getNAlumnos());
-		System.out.println("Reparto: " + Ejercicio1.getNAlumnos() / Ejercicio1.getNGrupos());
-
+		// Solución: lista de vértices recorridos del grafo: 
+		List<VerticeAlumno> vertices = caminoA.getVertexList();
+		Solucion1.solucionA(vertices, entrada);
+		
 	}
 	
 }

@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import aristas.AristaProducto;
 import ejercicio3.Ejercicio3;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -21,7 +21,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar la elección adecuada de productos, desde indice hasta el final, que
  * minimicen el precio total y cubran todas las funcionalidades deseadas.
 */
-public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, AristaProducto, Integer> {
+public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>, Integer> {
 
 	// MÉTODOS DE LA CLASE
 	public static VerticeProducto of(Integer indice, List<Integer> plazasRestantes) {
@@ -118,13 +118,9 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
-	public AristaProducto edge(Integer accion) {
+	public ActionSimpleEdge<VerticeProducto, Integer> edge(Integer accion) {
 		
-		// 1º obtener el vértice "vecino" correspondiente a la acción:
-		VerticeProducto vertice = this.neighbor(accion);
-		
-		// 2º obtener la arista que los conecta (el camino): origen, destino, accion
-		AristaProducto resultado = AristaProducto.of(this, vertice, accion);
+		ActionSimpleEdge<VerticeProducto, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
 		
 		return resultado;
 		
@@ -214,11 +210,11 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y FUNCIONALIDADES POR CUBRIR
 	
 
-	// TO_STRING DE LA CLASE (Sólo para debug)
+	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 		
-		return "[Indice: " + this.indice + ", cuenta con las plazas: " + this.plazasRestantes + "]";
+		return "Productos: " + this.indice + ", " + this.plazasRestantes;
 		
 	}
 	

@@ -2,18 +2,20 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package ejercicio1;
 
+import java.util.List;
 import org.jgrapht.GraphPath;
 
-import aristas.AristaAlumno;
 import heuristicas.HeuristicaAlumno;
+import soluciones.Solucion1;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.DPR;
 import us.lsi.graphs.alg.DynamicProgrammingReduction;
 import us.lsi.graphs.alg.DynamicProgramming.PDType;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAlumno;
 
@@ -36,28 +38,39 @@ public class Ejercicio1PD {
 		// Inicializa las variables de la clase Ejercicio1:
 		Ejercicio1.iniDatos(entrada);
 		
-		System.out.println(entrada);		
-		
 		// Declarar vértices de inicio y de final para el grafo:
-		VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
+		// VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
 		VerticeAlumno verticeInicial = VerticeAlumno.verticeInicial();
+	
+		// Inicializar el grafo virtual:
+		/*
+		 * 2 vías:
+		 * 	· Con peso en el vértice.
+		 * 	· Con peso en las aristas. 
+		*/ 
 		
-		System.out.println(verticeFinal);
-		System.out.println(verticeInicial);
+		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
+		EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());	
 		
-		EGraph<VerticeAlumno, AristaAlumno> grafo = Graphs2.simpleVirtualGraph(verticeInicial,x->x.getEdgeWeight());	
-				
-		DynamicProgrammingReduction<VerticeAlumno, AristaAlumno> algoritmoPD = 
-				DPR.dynamicProgrammingReductionEnd(grafo,
-						verticeFinal,
+		// Invocar el algoritmo de Programación Dinámica: 
+		/*
+		 * 2 vías: 
+		 *  · Expresando el vértice final de destino.
+		 *  · Mediante un predicado objetivo.
+		*/
+		DynamicProgrammingReduction<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
+						grafoVirtual,
+						VerticeAlumno.objetivo(),
 						HeuristicaAlumno::heuristica,
-						PDType.Max);
-				
-		System.out.println(algoritmoPD.search());
-		System.out.println(algoritmoPD.solutionsTree);
+						PDType.Max
+						);
 		
-		GraphPath<VerticeAlumno, AristaAlumno> solucion = algoritmoPD.search().get();
-		System.out.println(solucion);
+		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
+		GraphPath<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> caminoPD = algoritmoPD.search().get();
+		
+		// Solución: lista de vértices recorridos del grafo: 
+		List<VerticeAlumno> vertices = caminoPD.getVertexList();
+		Solucion1.solucionPD(vertices, entrada);
 		
 	}
 

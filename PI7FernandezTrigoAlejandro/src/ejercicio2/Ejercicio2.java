@@ -86,6 +86,23 @@ public class Ejercicio2 {
 		return horas.get(0).size();
 		
 	}
+	
+	// Obtiene el nº total de horas dado un abogado (i):
+	public static Integer tiempoTotalPorIndice(Integer i) {
+		
+		int j = 0;
+		Integer suma = 0;
+		
+		while (j < getNCasos()) {
+			
+			suma += tiempoPorIndice(i, j);
+			j++;
+			
+		}
+		
+		return suma;
+		
+	}
 		
 	// Obtiene el tiempo de un abogado dado el abogado (i) para el caso (j):
 	public static Integer tiempoPorIndice(Integer i, Integer j) {

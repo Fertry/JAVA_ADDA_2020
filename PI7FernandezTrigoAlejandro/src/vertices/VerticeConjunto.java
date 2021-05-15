@@ -11,8 +11,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import aristas.AristaConjunto;
 import ejercicio4.Ejercicio4;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -21,7 +21,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar a qué subconjunto pertenece cada elemento, desde indice hasta el final,
  * que minimice el número de elementos de uno de los subconjuntos.
 */
-public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, AristaConjunto, Integer> {
+public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>, Integer> {
 	
 	// MÉTODOS DE LA CLASE
 	public static VerticeConjunto of(Integer indice, List<Integer> plazasRestantes) {
@@ -45,7 +45,7 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 			super();
 			
 			this.indice = indice;
-			this.conjunto = plazasRestantes;
+			this.conjunto = conjunto;
 		
 		}
 
@@ -64,7 +64,7 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 	// de alumnos:
 	public static Predicate<VerticeConjunto> objetivo() {
 
-		return (VerticeConjunto vertice) -> vertice.getIndice() == VerticeConjunto.alumnos;
+		return (VerticeConjunto vertice) -> vertice.getIndice() == VerticeConjunto.elementos;
 
 	}
 
@@ -106,27 +106,13 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 
 	}
 
-	// Método para copiar vértices: devuelve una copia del vértice dado cómo
-	// parámetro:
-	public static VerticeConjunto copiar(VerticeConjunto vertice) {
-
-		VerticeConjunto resultado = VerticeConjunto.of(vertice.indice, vertice.plazasRestantes);
-
-		return resultado;
-
-	}
-
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por
 	// donde se desplaza):
-	public AristaConjunto edge(Integer accion) {
+	public ActionSimpleEdge<VerticeConjunto, Integer> edge(Integer accion) {
 
-		// 1º obtener el vértice "vecino" correspondiente a la acción:
-		VerticeConjunto vertice = this.neighbor(accion);
-
-		// 2º obtener la arista que los conecta (el camino): origen, destino, accion
-		AristaConjunto resultado = AristaConjunto.of(this, vertice, accion);
+		ActionSimpleEdge<VerticeConjunto, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
 
 		return resultado;
 
@@ -217,11 +203,11 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y CONJUNTO
 
-	// TO_STRING DE LA CLASE (Sólo para debug)
+	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 
-		return "[Indice: " + this.indice + ", cuenta con las plazas: " + this.plazasRestantes + "]";
+		return "Elemento: " + this.indice + ", " + this.conjunto;
 
 	}
 		

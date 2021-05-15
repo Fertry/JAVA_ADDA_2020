@@ -9,8 +9,9 @@ package vertices;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import aristas.AristaAlumno;
 import ejercicio1.Ejercicio1;
+import us.lsi.common.Lists2;
+import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -19,7 +20,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar la asignación de estudiantes a grupos, desde indice hasta el final, que
  * optimicen la afinidad.
 */
-public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlumno, Integer> {
+public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>, Integer> {
 
 	// MÉTODOS DE LA CLASE
 	public static VerticeAlumno of(Integer indice, List<Integer> plazasRestantes) {
@@ -37,10 +38,10 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	// Variables compartidas (Extraidas de clase general donde se inicializan los datos):
 	private static Integer grupos = Ejercicio1.getNGrupos();
 	private static Integer alumnos = Ejercicio1.getNAlumnos();
-	
+		
 	// Variables derivadas (calculadas en la propia clase):
-	private static Integer reparto = alumnos / grupos;
-	
+	private static Integer reparto = getReparto();
+		
 	// CONSTRUCTORES DE LA CLASE
 	public VerticeAlumno(Integer indice, List<Integer> plazasRestantes) {
 		
@@ -57,6 +58,20 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	public Integer getIndice() {
 		
 		return indice;
+		
+	}
+	
+	// Devuelve la lista de plazas restantes:
+	public List<Integer> getPlazasRestantes() {
+		
+		return plazasRestantes;
+		
+	}
+	
+	// Devuelve el tamaño del reparto: alumnos / grupos:
+	public static Integer getReparto() {
+		
+		return alumnos / grupos;
 		
 	}
 	
@@ -90,6 +105,9 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 
 	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
 	// esto es, sus capacidades son cero:
+	/*
+	 * NO SE USA EN EL CASO DE aStarGoal Y dynamicProgrammingReductionGoal!!!!!
+	 */
 	public static VerticeAlumno verticeFinal() {
 		
 		int i = 0;
@@ -107,38 +125,26 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 			
 	}
 	
-	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
-	public static VerticeAlumno copiar(VerticeAlumno vertice) {
-		
-		VerticeAlumno resultado = VerticeAlumno.of(vertice.indice, vertice.plazasRestantes);
-		
-		return resultado;
-		
-	}
-	
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
-	public AristaAlumno edge(Integer accion) {
+	public ActionSimpleEdge<VerticeAlumno, Integer> edge(Integer accion) {
 		
-		// 1º obtener el vértice "vecino" correspondiente a la acción:
-		VerticeAlumno vertice = this.neighbor(accion);
-		
-		// 2º obtener la arista que los conecta (el camino): origen, destino, accion
-		AristaAlumno resultado = AristaAlumno.of(this, vertice, accion);
+		ActionSimpleEdge<VerticeAlumno, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
 		
 		return resultado;
 		
 	}
 	
 	@Override
-	// 
+	// Comprueba la validez de un vértice dado, esto es: se encuentra dentro del intervalo cerrado [0, n]
+	// y además, cuenta con plazas disponibles para i, donde i >= 0 y i < m:
 	public Boolean isValid() {
 		
-		int i = 0;
+		int i = 1;
 		Boolean valido = false;
 		
-		// Si NO es el vértice inicial NI el final:
+		// Si NO es el vértice inicial NI el final (Intervalo cerrado):
 		if (this.indice >= 0 && this.indice <= alumnos) {
 			
 			valido = true;
@@ -148,7 +154,7 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		// Si el grupo i NO está lleno (hay plazas):
 		while (i < grupos) {
 		
-			if (this.plazasRestantes.get(i) > 0) {
+			if (this.plazasRestantes.get(i) >= 0) {
 				
 				valido = true;
 				
@@ -164,6 +170,7 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	
 	@Override
 	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
+	// neigbor(a) = (i+1, pl') donde pl'[a] = pl[a]-1:
 	public VerticeAlumno neighbor(Integer accion) {
 		
 		// 1º obtener el siguiente indice:
@@ -184,14 +191,22 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 	}
 
 	@Override
-	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
+	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones. 
 	public List<Integer> actions() {
 		
 		int i = 0;
 		List<Integer> acciones = new ArrayList<Integer>();
 		
-		while (i < grupos) {
+		// De alcanzar el límite, no hay más acciones:
+		if (this.indice == alumnos) {
 			
+			return Lists2.of();
+			
+		} 
+		
+		// De no alcanzar el límite, comprobar si pl[a] > 0 && af(index,a) > 0:
+		while (i < grupos) {
+		
 			// Si hay plazas disponibles en el grupo:
 			if (this.plazasRestantes.get(i) > 0) {
 				
@@ -248,11 +263,11 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		
 	}
 
-	// TO_STRING DE LA CLASE (Sólo para debug)
+	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 		
-		return "[Indice: " + this.indice + ", cuenta con las plazas: " + this.plazasRestantes + "]";
+		return "Alumno: " + this.indice + " - " + this.plazasRestantes + "\n";
 		
 	}
 	
