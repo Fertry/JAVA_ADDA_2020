@@ -11,6 +11,7 @@ import java.util.List;
 import org.jgrapht.GraphPath;
 
 import heuristicas.HeuristicaAbogado;
+import soluciones.Solucion2;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
@@ -37,10 +38,6 @@ public class Ejercicio2A {
 		
 		// Inicializa las variables de la clase Ejercicio2:
 		Ejercicio2.iniDatos(entrada);
-		
-		// DEBUG:
-		System.out.println(Ejercicio2.getNAbogados());
-		System.out.println(Ejercicio2.getNCasos());
 		
 		// Declarar vértices de inicio y de final para el grafo:
 		// VerticeAbogado verticeFinal = VerticeAbogado.verticeFinal();
@@ -73,10 +70,8 @@ public class Ejercicio2A {
 		
 		// Solución: lista de vértices recorridos del grafo: 
 		List<VerticeAbogado> vertices = caminoA.getVertexList();
+		Solucion2.solucionA(vertices, entrada);
 		
-		// DEBUG:
-		System.out.println(vertices);
-
 	}
 	
 }

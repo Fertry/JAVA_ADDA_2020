@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 import ejercicio2.Ejercicio2;
+import us.lsi.common.Lists2;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
@@ -23,9 +24,9 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
 public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionSimpleEdge<VerticeAbogado, Integer>, Integer> {
 
 	// MÉTODOS DE LA CLASE
-	public static VerticeAbogado of(Integer indice, List<Integer> plazasRestantes) {
+	public static VerticeAbogado of(Integer indice, List<Integer> cargaAbogado) {
 		
-		return new VerticeAbogado(indice, plazasRestantes);
+		return new VerticeAbogado(indice, cargaAbogado);
 		
 	}
 	
@@ -61,6 +62,13 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	public Integer getIndice() {
 		
 		return indice;
+		
+	}
+	
+	// Devuelve la lista de cargas de abogados:
+	public List<Integer> getCargaAbogado() {
+		
+		return cargaAbogado;
 		
 	}
 	
@@ -174,21 +182,20 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	
 	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
 	
-	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de :
+	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de casos:
 	public static Predicate<VerticeAbogado> objetivo() {
 		
-		return (VerticeAbogado vertice) -> vertice.getIndice() == VerticeAbogado.abogados;
+		return (VerticeAbogado vertice) -> vertice.getIndice() == VerticeAbogado.casos;
 		
 	}
 	
-	// Definir un vértice de comienzo dónde todas sus plazas están "vacías",
-	// esto es, sus capacidades son máximas (alumnos / grupos):
+	// Definir un vértice de comienzo dónde todas sus cargas están vacías:
 	public static VerticeAbogado verticeInicial() {
 		
 		int i = 0;
 		List<Integer> auxiliar = new ArrayList<Integer>();
 		
-		while (i < casos) {
+		while (i < abogados) {
 			
 			auxiliar.add(0);
 			i++;
@@ -200,28 +207,6 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	
 	}
 
-	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
-	// esto es, sus capacidades son cero:
-	/*
-	 * NO SE USA EN EL CASO DE aStarGoal Y dynamicProgrammingReductionGoal!!!!!
-	 */
-	public static VerticeAbogado verticeFinal() {
-		
-		int i = 0;
-		List<Integer> auxiliar = new ArrayList<Integer>();
-		
-		while (i < casos) {
-			
-			auxiliar.add(0);
-			i++;
-			
-		}
-		
-		VerticeAbogado resultado = VerticeAbogado.of(abogados, auxiliar);
-		return resultado;
-			
-	}
-		
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
@@ -234,49 +219,36 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	}
 	
 	@Override
-	// 
+	// Comprueba la validez de un vértice dado, esto es: se encuentra dentro del intervalo cerrado [0, m]:
 	public Boolean isValid() {
-		
-		int i = 0;
+
 		Boolean valido = false;
 		
 		// Si NO es el vértice inicial NI el final:
-		if (this.indice >= 0 && this.indice <= abogados) {
+		if (this.indice >= 0 && this.indice <= casos) {
 			
 			valido = true;
 			
 		}
-
-		// Si el grupo i NO está lleno (hay plazas):
-		while (i < casos) {
-		
-			if (this.cargaAbogado.get(i) > 0) {
-				
-				valido = true;
-				
-			}
-			
-			i++;
-			
-		}
-				
+	
 		return valido;
 	
 	}
 	
 	@Override
-	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
+	// Devuelve el vértice "vecino" que corresponde a la acción tomada.
+	// neighbor(a) = (i+1, ca') donde ca'[a] = ca[a]+c(a,i):
 	public VerticeAbogado neighbor(Integer accion) {
 		
 		// 1º obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;
 		
-		// 2º copiar la lista de plazasRestantes actual:
+		// 2º copiar la lista de cargas actual:
 		List<Integer> auxiliar = new ArrayList<>(this.cargaAbogado);
 		
-		// 3º alterar el valor de la lista: esto es, para la posición del grupo indicada por la acción
-		// restarle uno indicando que hay una capacidad menos:
-		auxiliar.set(accion, (this.cargaAbogado.get(accion) - 1));
+		// 3º alterar el valor de la lista: esto es, para la posición de la lista de cargas 
+		// indicada por la acción sumarle la carga de tiempo dado la acción y el índice:
+		auxiliar.set(accion, (this.cargaAbogado.get(accion) + Ejercicio2.tiempoPorIndice(accion, this.indice)));
 		
 		// 4º devolver el vértice nuevo:
 		VerticeAbogado resultado = VerticeAbogado.of(siguiente, auxiliar);
@@ -292,24 +264,22 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 		int i = 0;
 		List<Integer> acciones = new ArrayList<Integer>();
 		
-		while (i < casos) {
+		// De alcanzar el límite, no hay más acciones:
+		if (this.indice == casos) {
+
+			return Lists2.of();
 			
-			// Si hay plazas disponibles en el grupo:
-			if (this.cargaAbogado.get(i) > 0) {
-				
-				// Y si la afinidad para el movimiento NO es cero:
-				if (Ejercicio2.tiempoPorIndice(this.indice, i) > 0) {
-					
-					// Entonces es una acción posible de mejora:
-					acciones.add(i);
-					
-				}
-			}
-			
-			i++;
-			
-		}
+		} 
 		
+		// De no alcanzar el límite, devolver el abogado menos cargado (abogadoMinimo):
+		while (i < abogados) {
+
+			// Entonces es una acción posible de mejora:
+			acciones.add(abogadoMinimo);
+			i++;
+
+		}
+			
 		return acciones;
 			
 	}
@@ -354,7 +324,7 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	@Override
 	public String toString() {
 		
-		return "Abogado: " + this.indice + ", " + this.cargaAbogado;
+		return "Caso: " + this.indice + " - " + this.cargaAbogado + "\n";
 		
 	}
 

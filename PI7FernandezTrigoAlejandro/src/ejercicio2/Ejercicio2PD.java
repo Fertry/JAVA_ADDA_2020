@@ -11,6 +11,7 @@ import java.util.List;
 import org.jgrapht.GraphPath;
 
 import heuristicas.HeuristicaAbogado;
+import soluciones.Solucion2;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.DPR;
 import us.lsi.graphs.alg.DynamicProgrammingReduction;
@@ -73,9 +74,7 @@ public class Ejercicio2PD {
 
 		// Solución: lista de vértices recorridos del grafo:
 		List<VerticeAbogado> vertices = caminoPD.getVertexList();
-
-		// DEBUG:
-		System.out.println(vertices);
+		Solucion2.solucionPD(vertices, entrada);
 
 	}
 

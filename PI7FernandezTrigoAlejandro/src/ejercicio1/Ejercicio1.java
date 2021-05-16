@@ -91,5 +91,5 @@ public class Ejercicio1 {
 		return afinidades.get(i).get(j);
 		
 	}
-	
+		
 }

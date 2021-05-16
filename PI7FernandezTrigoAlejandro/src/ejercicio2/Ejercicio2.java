@@ -38,7 +38,7 @@ public class Ejercicio2 {
 	*/
 	public static void iniDatos(String fichero) {
 		
-		// Inicializar las variables de la clase Ejercicio2A:
+		// Inicializar las variables de la clase Ejercicio2:
 		nombres = new ArrayList<String>();
 		horas = new ArrayList<List<Integer>>();
 		

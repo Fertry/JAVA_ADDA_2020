@@ -14,7 +14,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import ejercicio1.Ejercicio1;
 import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
 import vertices.VerticeAlumno;
@@ -162,7 +161,6 @@ public class Solucion1 {
 			System.out.println("	" + group + ": " + resultado.get(group));	
 						
 		}
-		System.out.println("Afinidad media del reparto: " + calculaAfinidadReparto(resultado));
 		
 	}
 	
@@ -249,8 +247,6 @@ public class Solucion1 {
 			System.out.println("	" + group + ": " + resultado.get(group));	
 			
 		}
-		System.out.println("Afinidad media del reparto: " );
-		System.out.println("\n");
 		
 	}
 	
@@ -287,38 +283,4 @@ public class Solucion1 {
 		
 	}
 	
-	/*
-	 * Método privado para calcular la afinidad media del reparto obtenido cómo sumatorio de afinidades de los
-	 * alumnos asociados al grupo entre nº de alumnos totales.
-	*/
-	private static Double calculaAfinidadReparto(Map<String, Set<String>> mapa) {
-		
-		int i = 0;
-		int j = 0;
-		Double resultado = 0.0;
-		Double sumatorio = 0.0;
-		Integer nAlumnos = Ejercicio1.getNAlumnos();
-		
-		System.out.println(mapa);
-		
-		for (String grupo : mapa.keySet()) {
-			for (String alumno : mapa.get(grupo)) {
-				
-				Integer grupoString = Integer.parseInt(grupo.replace("Grupo ", ""));
-				Integer alumnoString = Integer.parseInt(alumno.replace("Alumno_", ""));
-				
-				System.out.println(grupoString);
-				System.out.println(alumnoString);
-				
-				sumatorio += Ejercicio1.getAfinidadPorIndice(alumnoString, grupoString);
-				
-			}
-		}
-		
-		resultado = sumatorio / nAlumnos;
-		
-		return resultado;
-		
-	}
-
 }

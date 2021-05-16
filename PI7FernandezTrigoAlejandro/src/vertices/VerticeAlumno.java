@@ -68,6 +68,8 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimp
 		
 	}
 	
+	// MÉTODOS PARA SETEAR LAS VARIABLES DERIVADAS DE LA CLASE
+	
 	// Devuelve el tamaño del reparto: alumnos / grupos:
 	public static Integer getReparto() {
 		
@@ -103,28 +105,6 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimp
 	
 	}
 
-	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
-	// esto es, sus capacidades son cero:
-	/*
-	 * NO SE USA EN EL CASO DE aStarGoal Y dynamicProgrammingReductionGoal!!!!!
-	 */
-	public static VerticeAlumno verticeFinal() {
-		
-		int i = 0;
-		List<Integer> auxiliar = new ArrayList<Integer>();
-		
-		while (i < grupos) {
-			
-			auxiliar.add(0);
-			i++;
-			
-		}
-		
-		VerticeAlumno resultado = VerticeAlumno.of(alumnos, auxiliar);
-		return resultado;
-			
-	}
-	
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
@@ -169,8 +149,8 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimp
 	}
 	
 	@Override
-	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
-	// neigbor(a) = (i+1, pl') donde pl'[a] = pl[a]-1:
+	// Devuelve el vértice "vecino" que corresponde a la acción tomada.
+	// neighbor(a) = (i+1, pl') donde pl'[a] = pl[a]-1:
 	public VerticeAlumno neighbor(Integer accion) {
 		
 		// 1º obtener el siguiente indice:
@@ -191,7 +171,7 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimp
 	}
 
 	@Override
-	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones. 
+	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
 		int i = 0;
@@ -217,6 +197,7 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimp
 					acciones.add(i);
 					
 				}
+				
 			}
 			
 			i++;
