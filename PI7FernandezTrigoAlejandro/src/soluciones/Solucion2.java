@@ -138,17 +138,20 @@ public class Solucion2 {
 			*/
 			Set<String> setCasos = new HashSet<String>();
 			Integer abogado = cualHaCambiado(reparto, "Caso " + j);
+			System.out.println("abogado" + abogado);
 			if (reparto.containsKey("Abogado_" + abogado)) {
-				
+								
 				// Casos asignados al abogado:
 				setCasos = resultado.get("Abogado_" + abogado);
 				setCasos.add("Caso " + j);
+				System.out.println("1" + setCasos);
 				resultado.put("Abogado_" + abogado, setCasos);
 				
 			} else {
 				
 				// Casos asignados al abogado:
 				setCasos.add("Caso " + j);
+				System.out.println("2" + setCasos);
 				resultado.put("Abogado_" + abogado, setCasos);
 				
 			}
@@ -166,7 +169,9 @@ public class Solucion2 {
 		System.out.println("Reparto obtenido:");
 		for (String abogado : resultado.keySet()) {
 			
-			System.out.println("	" + abogado + ": " + resultado.get(abogado));	
+			System.out.println(abogado);
+			System.out.println("    ");
+			
 						
 		}
 		

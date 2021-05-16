@@ -35,6 +35,13 @@ public class Ejercicio3A {
 		// Inicializa las variables de la clase Ejercicio3:
 		Ejercicio3.iniDatos(entrada);
 		
+		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+		System.out.println(Ejercicio3.getNProductos());
+		System.out.println(Ejercicio3.getRequisitos());
+		System.out.println(Ejercicio3.getPrecio(1));
+		System.out.println(Ejercicio3.contiene(1, 1));
+		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
 		// Declarar vértices de inicio y de final para el grafo:
 		// VerticeProducto verticeFinal = VerticeProducto.verticeFinal();
 		VerticeProducto verticeInicial = VerticeProducto.verticeInicial();

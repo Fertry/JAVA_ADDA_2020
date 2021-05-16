@@ -24,7 +24,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
 public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>, Integer> {
 
 	// MÉTODOS DE LA CLASE
-	public static VerticeProducto of(Integer indice, List<Integer> plazasRestantes) {
+	public static VerticeProducto of(Integer indice, Set<Integer> plazasRestantes) {
 		
 		return new VerticeProducto(indice, plazasRestantes);
 		
@@ -38,15 +38,15 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	
 	// Variables compartidas (Extraidas de clase general donde se inicializan los datos):
 	private static Integer productos = Ejercicio3.getNProductos();
-	private static Set<Integer> funcionalidadesDeseadas = Ejercicio3.;
+	private static Set<Integer> funcionalidadesDeseadas = Ejercicio3.getRequisitos();
 	
 	// CONSTRUCTORES DE LA CLASE
-	public VerticeProducto(Integer indice, List<Integer> plazasRestantes) {
+	public VerticeProducto(Integer indice, Set<Integer> funcionalidadesPorCubrir) {
 		
 		super();
 		
 		this.indice = indice;
-		this.plazasRestantes = plazasRestantes;
+		this.funcionalidadesPorCubrir = funcionalidadesPorCubrir;
 	
 	}
 	
@@ -59,57 +59,36 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 		
 	}
 	
+	public Set<Integer> getFuncionalidadesPorCubrir() {
+		
+		return funcionalidadesPorCubrir;
+		
+	}
+	
 	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
 	
-	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de alumnos:
+	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de productos:
 	public static Predicate<VerticeProducto> objetivo() {
 		
-		return (VerticeProducto vertice) -> vertice.getIndice() == VerticeProducto.alumnos;
+		return (VerticeProducto vertice) -> vertice.getIndice() == VerticeProducto.productos;
 		
 	}
 	
 	// Definir un vértice de comienzo dónde todas sus plazas están "vacías",
 	// esto es, sus capacidades son máximas (alumnos / grupos):
 	public static VerticeProducto verticeInicial() {
+				
+		VerticeProducto resultado = VerticeProducto.of(0, funcionalidadesDeseadas);
 		
-		int i = 0;
-		List<Integer> auxiliar = new ArrayList<Integer>();
-		
-		while (i < grupos) {
-			
-			auxiliar.add(reparto);
-			i++;
-			
-		}
-		
-		VerticeProducto resultado = VerticeProducto.of(0, auxiliar);
 		return resultado;
 	
 	}
 
-	// Definir un vértice de destino dónde todas sus plazas están "llenas", 
-	// esto es, sus capacidades son cero:
-	public static VerticeProducto verticeFinal() {
-		
-		int i = 0;
-		List<Integer> auxiliar = new ArrayList<Integer>();
-		
-		while (i < grupos) {
-			
-			auxiliar.add(0);
-			i++;
-			
-		}
-		
-		VerticeProducto resultado = VerticeProducto.of(alumnos, auxiliar);
-		return resultado;
-			
-	}
-	
 	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
+	// Tan solo es usado en Backtracking.
 	public static VerticeProducto copiar(VerticeProducto vertice) {
 		
-		VerticeProducto resultado = VerticeProducto.of(vertice.indice, vertice.plazasRestantes);
+		VerticeProducto resultado = VerticeProducto.of(vertice.indice, vertice.funcionalidadesPorCubrir);
 		
 		return resultado;
 		
@@ -127,32 +106,24 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	}
 	
 	@Override
-	// 
+	// Comprueba la validez de un vértice dado, esto es: se encuentra dentro del intervalo cerrado [0, n]
+	// y además, cuenta con plazas disponibles para i, donde i >= 0 y i < m:
 	public Boolean isValid() {
 		
-		int i = 0;
 		Boolean valido = false;
 		
 		// Si NO es el vértice inicial NI el final:
-		if (this.indice >= 0 && this.indice <= alumnos) {
+		if (this.indice >= 0 && this.indice <= productos) {
 			
-			valido = true;
-			
-		}
-
-		// Si el grupo i NO está lleno (hay plazas):
-		while (i < grupos) {
-		
-			if (this.plazasRestantes.get(i) > 0) {
+			// Si el conjunto contiene las funcionalidades requeridas:
+			if (funcionalidadesPorCubrir.containsAll(funcionalidadesDeseadas)) {
 				
 				valido = true;
 				
 			}
 			
-			i++;
-			
 		}
-				
+	
 		return valido;
 	
 	}
@@ -163,16 +134,10 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 		
 		// 1º obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;
+
+		// TO-DO
 		
-		// 2º copiar la lista de plazasRestantes actual:
-		List<Integer> auxiliar = new ArrayList<>(this.plazasRestantes);
-		
-		// 3º alterar el valor de la lista: esto es, para la posición del grupo indicada por la acción
-		// restarle uno indicando que hay una capacidad menos:
-		auxiliar.set(accion, (this.plazasRestantes.get(accion) - 1));
-		
-		// 4º devolver el vértice nuevo:
-		VerticeProducto resultado = VerticeProducto.of(siguiente, auxiliar);
+		VerticeProducto resultado = VerticeProducto.of(siguiente, this.funcionalidadesPorCubrir);
 		
 		return resultado;
 		
@@ -182,39 +147,55 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
-		int i = 0;
 		List<Integer> acciones = new ArrayList<Integer>();
 		
-		while (i < grupos) {
-			
-			// Si hay plazas disponibles en el grupo:
-			if (this.plazasRestantes.get(i) > 0) {
-				
-				// Y si la afinidad para el movimiento NO es cero:
-				if (Ejercicio3.getAfinidadPorIndice(this.indice, i) > 0) {
-					
-					// Entonces es una acción posible de mejora:
-					acciones.add(i);
-					
-				}
-			}
-			
-			i++;
-			
-		}
+		// TO-DO
 		
 		return acciones;
 			
 	}
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y FUNCIONALIDADES POR CUBRIR
-	
+	@Override
+	public int hashCode() {
+		
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((funcionalidadesPorCubrir == null) ? 0 : funcionalidadesPorCubrir.hashCode());
+		result = prime * result + ((indice == null) ? 0 : indice.hashCode());
+		return result;
+		
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VerticeProducto other = (VerticeProducto) obj;
+		if (funcionalidadesPorCubrir == null) {
+			if (other.funcionalidadesPorCubrir != null)
+				return false;
+		} else if (!funcionalidadesPorCubrir.equals(other.funcionalidadesPorCubrir))
+			return false;
+		if (indice == null) {
+			if (other.indice != null)
+				return false;
+		} else if (!indice.equals(other.indice))
+			return false;
+		return true;
+		
+	}	
 
 	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {
 		
-		return "Productos: " + this.indice + ", " + this.plazasRestantes;
+		return this.funcionalidadesPorCubrir + "\n";
 		
 	}
 	

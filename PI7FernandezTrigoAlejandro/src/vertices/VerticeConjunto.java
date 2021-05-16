@@ -24,9 +24,9 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
 public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>, Integer> {
 	
 	// MÉTODOS DE LA CLASE
-	public static VerticeConjunto of(Integer indice, List<Integer> plazasRestantes) {
+	public static VerticeConjunto of(Integer indice, List<Integer> conjunto) {
 
-		return new VerticeConjunto(indice, plazasRestantes);
+		return new VerticeConjunto(indice, conjunto);
 
 	}
 
@@ -57,11 +57,18 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 		return indice;
 
 	}
+	
+	// Devuelve la lista de elementos (conjunto):
+	public List<Integer> getConjunto() {
+		
+		return conjunto;
+		
+	}
 
 	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
 
 	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº
-	// de alumnos:
+	// de :
 	public static Predicate<VerticeConjunto> objetivo() {
 
 		return (VerticeConjunto vertice) -> vertice.getIndice() == VerticeConjunto.elementos;
@@ -75,33 +82,14 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 		int i = 0;
 		List<Integer> auxiliar = new ArrayList<Integer>();
 
-		while (i < grupos) {
-
-			auxiliar.add(reparto);
-			i++;
-
-		}
-
-		VerticeConjunto resultado = VerticeConjunto.of(0, auxiliar);
-		return resultado;
-
-	}
-
-	// Definir un vértice de destino dónde todas sus plazas están "llenas",
-	// esto es, sus capacidades son cero:
-	public static VerticeConjunto verticeFinal() {
-
-		int i = 0;
-		List<Integer> auxiliar = new ArrayList<Integer>();
-
-		while (i < grupos) {
+		while (i < elementos) {
 
 			auxiliar.add(0);
 			i++;
 
 		}
 
-		VerticeConjunto resultado = VerticeConjunto.of(alumnos, auxiliar);
+		VerticeConjunto resultado = VerticeConjunto.of(0, auxiliar);
 		return resultado;
 
 	}
@@ -122,29 +110,15 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 	//
 	public Boolean isValid() {
 
-		int i = 0;
 		Boolean valido = false;
 
 		// Si NO es el vértice inicial NI el final:
-		if (this.indice >= 0 && this.indice <= alumnos) {
+		if (this.indice >= 0 && this.indice <= elementos) {
 
 			valido = true;
 
 		}
-
-		// Si el grupo i NO está lleno (hay plazas):
-		while (i < grupos) {
-
-			if (this.plazasRestantes.get(i) > 0) {
-
-				valido = true;
-
-			}
-
-			i++;
-
-		}
-
+		
 		return valido;
 
 	}
@@ -156,16 +130,7 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 		// 1º obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;
 
-		// 2º copiar la lista de plazasRestantes actual:
-		List<Integer> auxiliar = new ArrayList<>(this.plazasRestantes);
-
-		// 3º alterar el valor de la lista: esto es, para la posición del grupo indicada
-		// por la acción
-		// restarle uno indicando que hay una capacidad menos:
-		auxiliar.set(accion, (this.plazasRestantes.get(accion) - 1));
-
-		// 4º devolver el vértice nuevo:
-		VerticeConjunto resultado = VerticeConjunto.of(siguiente, auxiliar);
+		VerticeConjunto resultado = VerticeConjunto.of(siguiente, this.conjunto);
 
 		return resultado;
 
@@ -176,26 +141,7 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 	// las restricciones:
 	public List<Integer> actions() {
 
-		int i = 0;
 		List<Integer> acciones = new ArrayList<Integer>();
-
-		while (i < grupos) {
-
-			// Si hay plazas disponibles en el grupo:
-			if (this.plazasRestantes.get(i) > 0) {
-
-				// Y si la afinidad para el movimiento NO es cero:
-				if (Ejercicio4.getAfinidadPorIndice(this.indice, i) > 0) {
-
-					// Entonces es una acción posible de mejora:
-					acciones.add(i);
-
-				}
-			}
-
-			i++;
-
-		}
 
 		return acciones;
 
@@ -207,7 +153,7 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 	@Override
 	public String toString() {
 
-		return "Elemento: " + this.indice + ", " + this.conjunto;
+		return this.conjunto + "\n";
 
 	}
 		

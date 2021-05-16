@@ -2,49 +2,56 @@
  *  	Analisis y Diseño de Datos y Algoritmos - 2020
  *      Author: Alejandro Fernandez Trigo
  *      Practica Individual 7
- */
+*/
 
 package soluciones;
 
 public class Solucion3 {
 	
-	public static void solucion3A() {
+	/*
+	 * Método público para recibir la lista de vértices resultantes de la ejecución de A* y operar sobre dicha lista.
+	*/
+	public static void solucionA() {
 		
 		
 	}
 	
-	public static void solucion3BT() {
+	/*
+	 * Método público para recibir la lista de vértices resultantes de la ejecución de Programación Dinámica y operar sobre dicha lista.
+	*/
+	public static void solucionPD() {
 		
 		
 	}
 	
-	public static void solucion3BTManual() {
+	/*
+	 * Método público para recibir la lista de vértices resultantes de la ejecución de Backtracking manual y operar sobre dicha lista.
+	*/
+	public static void solucionBTManual() {
 		
 		
 	}
 	
-	public static void solucion3PD() {
+	/*
+	 * Método privado encargado de parsear todo el contenido de A* para adecuarlo al fichero de resultados.
+	*/
+	private static void formateoA() {
 		
 		
 	}
 	
-	
-	private static void formateo3A() {
+	/*
+	 * Método privado encargado de parsear todo el contenido de Programación Dinámica para adecuarlo al fichero de resultados.
+	*/
+	private static void formateoPD() {
 		
 		
 	}
-	
-	private static void formateo3BT() {
-		
-		
-	}
-	
-	private static void formateo3BTManual() {
-		
-		
-	}
-	
-	private static void formateo3PD() {
+
+	/*
+	 * Método privado encargado de parsear todo el contenido de Backtracking manual para adecuarlo al fichero de resultados.
+	*/
+	private static void formateoBTManual() {
 		
 		
 	}

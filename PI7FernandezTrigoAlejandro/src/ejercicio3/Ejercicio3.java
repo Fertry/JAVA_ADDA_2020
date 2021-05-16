@@ -7,7 +7,9 @@
 package ejercicio3;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import clases.Producto;
@@ -102,10 +104,18 @@ public class Ejercicio3 {
 		
 	}
 	
-	// Obtiene el nº de funcionalidades, que es el nº de requisitos
-	public static Integer getNFuncionalidades() {
+	// Obtiene un Set<> de los requisitos:
+	public static Set<Integer> getRequisitos() {
 		
-		return requisitos.size();
+		Set<Integer> resultado = new HashSet<Integer>();
+		
+		for (Integer requisito : requisitos) {
+			
+			resultado.add(requisito);
+			
+		}
+		
+		return resultado;
 		
 	}
 
