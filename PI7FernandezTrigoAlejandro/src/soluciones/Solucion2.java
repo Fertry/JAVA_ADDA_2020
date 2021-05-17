@@ -122,13 +122,10 @@ public class Solucion2 {
 					
 		}
 		
-		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-		System.out.println("Reparto: " + reparto);
-		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-		
 		// Con el mapa creado compruebo a que abogado se asigna cada caso gracias al método auxiliar 
 		// cualHaCambiado() y los índices:		
 		int j = 1;
+		Set<String> setCasos = new HashSet<String>();
 		Map<String, Set<String>> resultado = new HashMap<String, Set<String>>();
 		while (j < lista.size() - 1) {
 			
@@ -136,22 +133,18 @@ public class Solucion2 {
 			 * Esto me permite asignar los casos a abogados, cosa que hago con un nuevo mapa que constituirá la 
 			 * solución propiamente dicha:
 			*/
-			Set<String> setCasos = new HashSet<String>();
 			Integer abogado = cualHaCambiado(reparto, "Caso " + j);
-			System.out.println("abogado" + abogado);
 			if (reparto.containsKey("Abogado_" + abogado)) {
 								
 				// Casos asignados al abogado:
 				setCasos = resultado.get("Abogado_" + abogado);
 				setCasos.add("Caso " + j);
-				System.out.println("1" + setCasos);
 				resultado.put("Abogado_" + abogado, setCasos);
 				
 			} else {
 				
 				// Casos asignados al abogado:
 				setCasos.add("Caso " + j);
-				System.out.println("2" + setCasos);
 				resultado.put("Abogado_" + abogado, setCasos);
 				
 			}
@@ -160,20 +153,21 @@ public class Solucion2 {
 			
 		}
 		
-		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-		System.out.println("Resultado: " + resultado);
-		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
-		
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(rutaOrigen.replace("ficheros/", "") + ":" + "\n");	
 		System.out.println("Reparto obtenido:");
 		for (String abogado : resultado.keySet()) {
 			
-			System.out.println(abogado);
-			System.out.println("    ");
-			
+			// Sumo 1 para empezar a contar desde el índice 1 no desde el 0:
+			Integer abogadoInteger = Integer.parseInt(abogado.replace("Abogado_", "")) + 1;
+			String abogadoString = "Abogado_" + abogadoInteger;
+			System.out.println(abogadoString);
+			System.out.println("    " + "Casos estudiados: " + resultado.get(abogado));
 						
 		}
+		System.out.println("El estudio de todos los casos ha supuesto un total de X horas de trabajo para el\r\n"
+				+ "bufete, que al trabajar en paralelo se ha podido llevar a cabo en Y horas");
+		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · --");
 		
 	}
 
@@ -182,6 +176,91 @@ public class Solucion2 {
 	*/
 	private static void formateoPD(String fichero, String rutaOrigen) {
 		
+		int i = 0;
+		List<String> lista = StreamsS.file(fichero).collect(Collectors.toList());
+		Map<String, List<Integer>> reparto = new HashMap<String, List<Integer>>();
+
+		while (i < lista.size() - 1) {
+			
+			String linea = lista.get(i).trim();
+			String[] datos = linea.trim().split(" - ");
+			
+			// Obtener el caso:
+			String[] splitIzquierdo = datos[0].trim().split(":");
+			String caso = "Caso " + (Integer.parseInt(splitIzquierdo[1].trim()) + 1);
+			
+			// Obtener la lista asociada:
+			List<Integer> auxiliar = new ArrayList<Integer>();
+			String[] splitDerecho = datos[1].trim().replace("[", "").replace("]", "").split(",");
+			
+			for (String numero : splitDerecho) {
+				
+				auxiliar.add(Integer.parseInt(numero.trim()));
+				
+			}
+			
+			// Meter el caso con su lista en el mapa reparto: 
+			if (reparto.containsKey(caso)) {
+				
+				List<Integer> valor = reparto.get(caso);
+				reparto.put(caso, valor);
+				
+			} else {
+				
+				reparto.put(caso, auxiliar);
+				
+			}
+			
+			i++;
+					
+		}
+		
+		// Con el mapa creado compruebo a que abogado se asigna cada caso gracias al método auxiliar 
+		// cualHaCambiado() y los índices:		
+		int j = 1;
+		Set<String> setCasos = new HashSet<String>();
+		Map<String, Set<String>> resultado = new HashMap<String, Set<String>>();
+		while (j < lista.size() - 1) {
+			
+			/*
+			 * Esto me permite asignar los casos a abogados, cosa que hago con un nuevo mapa que constituirá la 
+			 * solución propiamente dicha:
+			*/
+			Integer abogado = cualHaCambiado(reparto, "Caso " + j);
+			if (reparto.containsKey("Abogado_" + abogado)) {
+								
+				// Casos asignados al abogado:
+				setCasos = resultado.get("Abogado_" + abogado);
+				setCasos.add("Caso " + j);
+				resultado.put("Abogado_" + abogado, setCasos);
+				
+			} else {
+				
+				// Casos asignados al abogado:
+				setCasos.add("Caso " + j);
+				resultado.put("Abogado_" + abogado, setCasos);
+				
+			}
+			
+			j++;
+			
+		}
+		
+		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
+		System.out.println(rutaOrigen.replace("ficheros/", "") + ":" + "\n");	
+		System.out.println("Reparto obtenido:");
+		for (String abogado : resultado.keySet()) {
+			
+			// Sumo 1 para empezar a contar desde el índice 1 no desde el 0:
+			Integer abogadoInteger = Integer.parseInt(abogado.replace("Abogado_", "")) + 1;
+			String abogadoString = "Abogado_" + abogadoInteger;
+			System.out.println(abogadoString);
+			System.out.println("    " + "Casos estudiados: " + resultado.get(abogado));
+						
+		}
+		System.out.println("El estudio de todos los casos ha supuesto un total de X horas de trabajo para el\r\n"
+				+ "bufete, que al trabajar en paralelo se ha podido llevar a cabo en Y horas");
+		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · --");
 		
 	}
 	

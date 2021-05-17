@@ -161,6 +161,7 @@ public class Solucion1 {
 			System.out.println("	" + group + ": " + resultado.get(group));	
 						
 		}
+		System.out.println("Afinidad media del reparto: X");
 		
 	}
 	
@@ -247,6 +248,7 @@ public class Solucion1 {
 			System.out.println("	" + group + ": " + resultado.get(group));	
 			
 		}
+		System.out.println("Afinidad media del reparto: X");
 		
 	}
 	

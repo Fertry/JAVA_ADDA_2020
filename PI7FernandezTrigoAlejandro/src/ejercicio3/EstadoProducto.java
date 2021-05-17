@@ -9,8 +9,6 @@ package ejercicio3;
 import java.util.ArrayList;
 import java.util.List;
 
-import us.lsi.alg.mochila.MochilaEdge;
-import us.lsi.alg.mochila.MochilaVertex;
 import us.lsi.common.Lists2;
 import vertices.VerticeProducto;
 
@@ -79,21 +77,21 @@ public class EstadoProducto {
 	public static void avanza(Integer accion) {
 		
 		VerticeProducto old = this.vertice;
-		this.vertex = this.vertex.neighbor(a);
-		this.alternativas.add(a);
-		this.valorAcumulado += MochilaEdge.of(old,this.vertex, a).weight.intValue();
+		this.vertice = this.vertice.neighbor(accion);
+		this.acciones.add(accion);
+		//this.valorAcumulado += MochilaEdge.of(old,this.vertex, a).weight.intValue();
 		
 	}
 	
 	// Método para retroceder en el grafo virtual:
 	public static void retrocede(Integer accion) {
 		
-		VerticeProducto old = this.vertex;
-		Integer index = this.vertex.index;
-		Integer capacidadRestante = this.vertex.capacidadRestante;
-		this.vertex = VerticeProducto.of(index, capacidadRestante);
-		Lists2.removeLast(this.alternativas);
-		this.valorAcumulado -= MochilaEdge.of(this.vertex,old, a).weight.intValue();
+		VerticeProducto old = this.vertice;
+		Integer index = this.vertice.getIndice();
+		//Integer capacidadRestante = this.vertex.capacidadRestante;
+		this.vertex = VerticeProducto.of(index, 0);
+		Lists2.removeLast(this.acciones);
+	//	this.valorAcumulado -= MochilaEdge.of(this.vertex,old, a).weight.intValue();
 		
 	}
 	

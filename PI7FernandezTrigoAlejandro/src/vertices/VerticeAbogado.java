@@ -261,26 +261,30 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
-		int i = 0;
-		List<Integer> acciones = new ArrayList<Integer>();
+//		int i = 0;
+//		List<Integer> acciones = new ArrayList<Integer>();
 		
 		// De alcanzar el límite, no hay más acciones:
 		if (this.indice == casos) {
 
 			return Lists2.of();
 			
-		} 
+		} else {
+			
+			return Lists2.of(abogadoMinimo);
+			
+		}
 		
 		// De no alcanzar el límite, devolver el abogado menos cargado (abogadoMinimo):
-		while (i < abogados) {
-
-			// Entonces es una acción posible de mejora:
-			acciones.add(abogadoMinimo);
-			i++;
-
-		}
+//		while (i < abogados) {
+//
+//			// Entonces es una acción posible de mejora:
+//			acciones.add(abogadoMinimo);
+//			i++;
+//
+//		}
 			
-		return acciones;
+		//return acciones;
 			
 	}
 
