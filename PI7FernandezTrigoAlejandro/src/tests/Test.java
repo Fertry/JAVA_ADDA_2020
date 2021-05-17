@@ -46,11 +46,9 @@ public class Test {
 		System.out.println("######################### EJERCICIO 2 ############################\n");
 			Ejercicio2A.EjecutaEjercicio2A("ficheros/PI7Ej2DatosEntrada1.txt");
 //			Ejercicio2A.EjecutaEjercicio2A("ficheros/PI7Ej2DatosEntrada2.txt");
-//			Ejercicio2A.EjecutaEjercicio2A("ficheros/PI7Ej2DatosEntrada3.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			Ejercicio2PD.EjecutaEjercicio2PD("ficheros/PI7Ej2DatosEntrada1.txt");
 //			Ejercicio2PD.EjecutaEjercicio2PD("ficheros/PI7Ej2DatosEntrada2.txt");
-//			Ejercicio2PD.EjecutaEjercicio2PD("ficheros/PI7Ej2DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		

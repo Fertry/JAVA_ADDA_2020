@@ -59,6 +59,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 		
 	}
 	
+	// Devuelve el Set<> de funcionalidades por cubrir:
 	public Set<Integer> getFuncionalidadesPorCubrir() {
 		
 		return funcionalidadesPorCubrir;
