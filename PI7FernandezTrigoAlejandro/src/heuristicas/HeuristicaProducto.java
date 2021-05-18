@@ -18,31 +18,32 @@ public class HeuristicaProducto {
 	*/
 	public static Double heuristica(VerticeProducto origen, Predicate<VerticeProducto> objetivo, VerticeProducto destino) {
 		
-		int i = 0;
-		Double minimo = Ejercicio3.getPrecio(0);
-		Double resultado = 0.0;
+		// Si fc=vacio -> 0, else, minimo(precio,index<=i<n):
+		return origen.getFuncionalidadesPorCubrir().isEmpty() ? 0.0 : minimo(origen);
 		
-		// Si el conjunto contiene TODOS los requisitos:
-		if (origen.getFuncionalidadesPorCubrir().containsAll(Ejercicio3.getRequisitos())) {
-			
-			resultado = 0.0;
-			
-		} else {
-			
-			// En caso contrario, mientras index<=i<n, obtener el minimo precio:
-			while (origen.getIndice() <= i && i < Ejercicio3.getNProductos()) {
-				
-				Double precio = Ejercicio3.getPrecio(i);
-				if (precio < minimo) {
-				
-					minimo = precio;
-					
-				}
-				
-				i++;
-				
+	}
+	
+	/*
+	 * Método privado que devuelve el mínimo precio tal que index<=i<n: 
+	*/
+	private static Double minimo(VerticeProducto vertice) {
+		
+		int i = 0;
+		Double resultado = 0.0;
+		Double minimo = Ejercicio3.getPrecio(0);
+		
+		// Mientras index<=i<n, obtener el minimo precio:
+		while (vertice.getIndice() <= i && i < Ejercicio3.getNProductos()) {
+
+			Double precio = Ejercicio3.getPrecio(i);
+			if (precio < minimo) {
+
+				minimo = precio;
+
 			}
-			
+
+			i++;
+
 		}
 		
 		return resultado;

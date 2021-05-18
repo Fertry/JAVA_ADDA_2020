@@ -17,8 +17,9 @@ public class HeuristicaConjunto {
 	*/
 	public static Double heuristica(VerticeConjunto origen, Predicate<VerticeConjunto> objetivo, VerticeConjunto destino) {
 		
-		return 0.0;
-		
+		// Si vr[0]==0 -> 0, else 1:
+		return (double) (origen.getConjunto().get(0) == 0 ? 0 : 1);
+				
 	}
 
 }

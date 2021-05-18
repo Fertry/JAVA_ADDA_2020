@@ -25,9 +25,9 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
 public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>, Integer> {
 
 	// MÉTODOS DE LA CLASE
-	public static VerticeProducto of(Integer indice, Set<Integer> plazasRestantes) {
+	public static VerticeProducto of(Integer indice, Set<Integer> funcionalidadesPorCubrir) {
 		
-		return new VerticeProducto(indice, plazasRestantes);
+		return new VerticeProducto(indice, funcionalidadesPorCubrir);
 		
 	}
 	
@@ -81,7 +81,6 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	public static VerticeProducto verticeInicial() {
 				
 		VerticeProducto resultado = VerticeProducto.of(0, funcionalidadesDeseadas);
-		System.out.println(funcionalidadesDeseadas);
 		
 		return resultado;
 	
@@ -120,7 +119,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 		if (this.indice >= 0 && this.indice <= productos) {
 			
 			// Si el conjunto contiene las funcionalidades requeridas:
-			if (funcionalidadesDeseadas.containsAll(funcionalidadesPorCubrir)) {
+			if (funcionalidadesDeseadas.contains(funcionalidadesPorCubrir)) {
 				
 				System.out.println("Se ha llamado a isValid() y ha devuelto true");
 				valido = true;

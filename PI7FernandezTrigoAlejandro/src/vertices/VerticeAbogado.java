@@ -144,7 +144,6 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 			Integer horas = Ejercicio2.tiempoTotalPorIndice(i);
 			if (horas < suma) {
 				
-				System.out.println("Abogado " + i + " tiene un total de " + horas + " asociadas.");
 				abogado = i;
 				
 			}
@@ -268,12 +267,10 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 		// De alcanzar el límite, no hay más acciones:
 		if (this.indice == casos) {
 
-			System.out.println("Lista vacía: " + Lists2.of());
 			return Lists2.of();
 			
 		}  else {
-			
-			System.out.println("Lista abogado minimo: " + Lists2.of(abogadoMinimo));
+
 			return Lists2.of(abogadoMinimo);
 			
 		}

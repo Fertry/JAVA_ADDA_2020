@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import ejercicio1.Ejercicio1;
 import us.lsi.common.Files2;
 import us.lsi.flujossecuenciales.StreamsS;
 import vertices.VerticeAlumno;
@@ -125,6 +126,7 @@ public class Solucion1 {
 		// Con el mapa creado compruebo a que grupo pertenece cada alumno gracias al método auxiliar 
 		// cualHaCambiado() y los índices:		
 		int j = 1;
+		Double valor = 0.0;
 		Map<String, Set<String>> resultado = new HashMap<String, Set<String>>();
 		while (j < lista.size() - 1) {
 			
@@ -149,9 +151,14 @@ public class Solucion1 {
 				
 			}
 			
+			valor += Ejercicio1.getAfinidadPorIndice(j-1, grupo);
+	
 			j++;
 			
 		}
+		
+		// Afinidad media:
+		Double afininidadMedia = valor / Ejercicio1.getNAlumnos();
 		
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
 		System.out.println(rutaOrigen.replace("ficheros/", "") + ":" + "\n");	
@@ -161,7 +168,7 @@ public class Solucion1 {
 			System.out.println("	" + group + ": " + resultado.get(group));	
 						
 		}
-		System.out.println("Afinidad media del reparto: X");
+		System.out.println("Afinidad media del reparto: " + Math.round(afininidadMedia));
 		
 	}
 	
@@ -212,6 +219,7 @@ public class Solucion1 {
 		// Con el mapa creado compruebo a que grupo pertenece cada alumno gracias al método auxiliar 
 		// cualHaCambiado() y los índices:
 		int j = 1;
+		Double valor = 0.0;
 		Map<String, Set<String>> resultado = new HashMap<String, Set<String>>();
 		while (j < lista.size() - 1) {
 			
@@ -236,19 +244,24 @@ public class Solucion1 {
 				
 			}
 			
+			valor += Ejercicio1.getAfinidadPorIndice(j-1, grupo);
+			
 			j++;
 			
 		}
+		
+		// Afinidad media:
+		Double afininidadMedia = valor / Ejercicio1.getNAlumnos();
 		
 		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
 		System.out.println(rutaOrigen.replace("ficheros/", "") + ":" + "\n");	
 		System.out.println("Reparto obtenido:");
 		for (String group : resultado.keySet()) {
 			
-			System.out.println("	" + group + ": " + resultado.get(group));	
+			System.out.println("	" + (group + 1) + ": " + resultado.get(group));	
 			
 		}
-		System.out.println("Afinidad media del reparto: X");
+		System.out.println("Afinidad media del reparto: " + Math.round(afininidadMedia));
 		
 	}
 	

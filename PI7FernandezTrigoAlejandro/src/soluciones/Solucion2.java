@@ -165,8 +165,8 @@ public class Solucion2 {
 			System.out.println("    " + "Casos estudiados: " + resultado.get(abogado));
 						
 		}
-		System.out.println("El estudio de todos los casos ha supuesto un total de X horas de trabajo para el\r\n"
-				+ "bufete, que al trabajar en paralelo se ha podido llevar a cabo en Y horas");
+		System.out.println("El estudio de todos los casos ha supuesto un total de " + "X" + " horas de trabajo para el\r\n"
+				+ "bufete al trabajar en paralelo.");
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · --");
 		
 	}
@@ -258,8 +258,8 @@ public class Solucion2 {
 			System.out.println("    " + "Casos estudiados: " + resultado.get(abogado));
 						
 		}
-		System.out.println("El estudio de todos los casos ha supuesto un total de X horas de trabajo para el\r\n"
-				+ "bufete, que al trabajar en paralelo se ha podido llevar a cabo en Y horas");
+		System.out.println("El estudio de todos los casos ha supuesto un total de " + "X" + " horas de trabajo para el\r\n"
+				+ "bufete al trabajar en paralelo.");
 		System.out.println("· -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · -- - -- · --");
 		
 	}
@@ -298,5 +298,5 @@ public class Solucion2 {
 		return resultado;
 
 	}
-
+	
 }

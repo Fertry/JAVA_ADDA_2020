@@ -34,6 +34,7 @@ public class Ejercicio4A {
 		
 		while (linea < lineas) {
 			
+			System.out.println("Linea: " + linea);
 			EjecutaProblemaEjercicio4A(entrada, linea);
 			linea++;
 			
@@ -49,6 +50,8 @@ public class Ejercicio4A {
 		
 		// Inicializa las variables de la clase Ejercicio4 para la línea de fichero proporcionado:
 		Ejercicio4.iniDatos(entrada, linea);
+		
+		System.out.println("Tamaño conjunto: " + Ejercicio4.getSizeConjunto());
 		
 		// Declarar vértices de inicio y de final para el grafo:
 		// VerticeConjunto verticeFinal = VerticeConjunto.verticeFinal();
