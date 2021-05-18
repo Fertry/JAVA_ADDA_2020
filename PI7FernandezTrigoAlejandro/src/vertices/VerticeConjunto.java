@@ -8,10 +8,11 @@ package vertices;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.function.Predicate;
 
+import ejercicio2.Ejercicio2;
 import ejercicio4.Ejercicio4;
+import us.lsi.common.Lists2;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
@@ -67,22 +68,20 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 
 	// MÉTODOS PARA TRABAJAR CON GRAFOS VIRTUALES
 
-	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº
-	// de :
+	// Método que verifica si alcanzamos el objetivo o no: el índice alcanze el nº de elementos:
 	public static Predicate<VerticeConjunto> objetivo() {
 
 		return (VerticeConjunto vertice) -> vertice.getIndice() == VerticeConjunto.elementos;
 
 	}
 
-	// Definir un vértice de comienzo dónde todas sus plazas están "vacías",
-	// esto es, sus capacidades son máximas (alumnos / grupos):
+	// Definir un vértice de comienzo dónde ...
 	public static VerticeConjunto verticeInicial() {
 
 		int i = 0;
 		List<Integer> auxiliar = new ArrayList<Integer>();
 
-		while (i < elementos) {
+		while (i < 3) {
 
 			auxiliar.add(0);
 			i++;
@@ -110,13 +109,25 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 	//
 	public Boolean isValid() {
 
+		int i = 0;
 		Boolean valido = false;
 
 		// Si NO es el vértice inicial NI el final:
 		if (this.indice >= 0 && this.indice <= elementos) {
 
-			valido = true;
-
+			// Mientras que vr[i] >= 0: 
+			while (i < 3) {
+			
+				if (this.conjunto.get(i) >= 0) {
+					
+					valido = true;
+					
+				}
+			
+				i++;
+				
+			}
+			
 		}
 		
 		return valido;
@@ -125,12 +136,19 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 
 	@Override
 	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
+	// i+1,vr' donde vr'[a]=vr[a]-ei
 	public VerticeConjunto neighbor(Integer accion) {
 
 		// 1º obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;
 
-		VerticeConjunto resultado = VerticeConjunto.of(siguiente, this.conjunto);
+		// 2º copiar el conjunto actual:
+		List<Integer> auxiliar = this.conjunto;
+		
+		// 3º modificar el valor de auxiliar para el índice dado:
+		auxiliar.set(accion, (this.conjunto.get(accion) - this.indice)); 
+
+		VerticeConjunto resultado = VerticeConjunto.of(siguiente, auxiliar);
 
 		return resultado;
 
@@ -143,6 +161,25 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 
 		List<Integer> acciones = new ArrayList<Integer>();
 
+		// Caso i = n-1:
+		if (this.indice == elementos - 1) {
+			
+			// Caso vr[i] = 0, i != a, 
+			if (this.conjunto.get(this.indice) == 0 && this.indice != accion) {
+				
+				
+				
+			} else {
+				
+				return Lists2.of();
+				
+			}
+			
+		} else {
+			
+			
+		}
+		
 		return acciones;
 
 	}
