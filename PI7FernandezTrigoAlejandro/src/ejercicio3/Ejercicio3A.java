@@ -46,6 +46,9 @@ public class Ejercicio3A {
 		// VerticeProducto verticeFinal = VerticeProducto.verticeFinal();
 		VerticeProducto verticeInicial = VerticeProducto.verticeInicial();
 		
+		System.out.println(verticeInicial);
+		System.out.println(verticeInicial.getIndice());
+		
 		// Inicializar el grafo virtual:
 		/*
 		 * 2 vías:
@@ -55,6 +58,8 @@ public class Ejercicio3A {
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
 		EGraph<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
+		
+		System.out.println(grafoVirtual);
 		
 		// Invocar el algoritmo de A*: 
 		/*

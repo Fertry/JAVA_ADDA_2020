@@ -6,12 +6,13 @@
 
 package vertices;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
 import ejercicio3.Ejercicio3;
+import us.lsi.common.Lists2;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
@@ -80,6 +81,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	public static VerticeProducto verticeInicial() {
 				
 		VerticeProducto resultado = VerticeProducto.of(0, funcionalidadesDeseadas);
+		System.out.println(funcionalidadesDeseadas);
 		
 		return resultado;
 	
@@ -101,6 +103,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	public ActionSimpleEdge<VerticeProducto, Integer> edge(Integer accion) {
 		
 		ActionSimpleEdge<VerticeProducto, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
+		System.out.println("Se ha llamado a edge con accion: " + accion);
 		
 		return resultado;
 		
@@ -117,8 +120,9 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 		if (this.indice >= 0 && this.indice <= productos) {
 			
 			// Si el conjunto contiene las funcionalidades requeridas:
-			if (funcionalidadesPorCubrir.containsAll(funcionalidadesDeseadas)) {
+			if (funcionalidadesDeseadas.containsAll(funcionalidadesPorCubrir)) {
 				
+				System.out.println("Se ha llamado a isValid() y ha devuelto true");
 				valido = true;
 				
 			}
@@ -133,26 +137,72 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
 	public VerticeProducto neighbor(Integer accion) {
 		
-		// 1º obtener el siguiente indice:
+		System.out.println("Se ha llamado a vecinos con accion: " + accion);
+		
+		// Obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;
 
-		// TO-DO
+		// Caso base fc = 0:
+		if (funcionalidadesPorCubrir.isEmpty()) {
+			
+			Set<Integer> setNulo = new HashSet<Integer>();
+			VerticeProducto verticeNulo = VerticeProducto.of(productos, setNulo);
+			return verticeNulo;
+			
+		}
 		
-		VerticeProducto resultado = VerticeProducto.of(siguiente, this.funcionalidadesPorCubrir);
-		
-		return resultado;
-		
+		// Caso general accion = 0:
+		if (accion == 0) {
+			
+			VerticeProducto verticeCaso1 = VerticeProducto.of(siguiente, funcionalidadesPorCubrir);
+			return verticeCaso1;
+			
+		} else {
+			
+			// Caso general accion = 1:
+			VerticeProducto verticeCaso2 = VerticeProducto.of(siguiente, funcionalidadesPorCubrir);
+			return verticeCaso2;
+			
+		}
+				
 	}
 
 	@Override
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
-		List<Integer> acciones = new ArrayList<Integer>();
+		System.out.println("Se ha llamado a actions()");
 		
-		// TO-DO
+		// Caso i = n:
+		if (this.indice == productos) {
+			
+			return Lists2.of();
+			
+		}
 		
-		return acciones;
+		// Caso conjunto nulo:
+		if (funcionalidadesPorCubrir.isEmpty()) {
+
+			return Lists2.of(0);
+			
+		}
+		
+		// Caso i = n-1 && fc-fn-1 = 0:
+		if (this.indice == productos - 1 && funcionalidadesPorCubrir.isEmpty()) {
+			
+			return Lists2.of(1);
+			
+		}
+		
+		// Caso i = n-1 && fc-fn-1 != 0:
+		if (this.indice == productos - 1 && !funcionalidadesPorCubrir.isEmpty()) {
+			
+			return Lists2.of();
+			
+		}
+		
+		// Otro caso:
+		return Lists2.of(0,1);
 			
 	}
 
