@@ -6,6 +6,7 @@
 
 package vertices;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -119,7 +120,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 		if (this.indice >= 0 && this.indice <= productos) {
 			
 			// Si el conjunto contiene las funcionalidades requeridas:
-			if (funcionalidadesDeseadas.contains(funcionalidadesPorCubrir)) {
+			if (funcionalidadesDeseadas.containsAll(funcionalidadesPorCubrir)) {
 				
 				System.out.println("Se ha llamado a isValid() y ha devuelto true");
 				valido = true;
@@ -200,7 +201,6 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 			
 		}
 		
-		// Otro caso:
 		return Lists2.of(0,1);
 			
 	}

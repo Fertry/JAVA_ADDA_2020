@@ -29,7 +29,6 @@ public class HeuristicaProducto {
 	private static Double minimo(VerticeProducto vertice) {
 		
 		int i = 0;
-		Double resultado = 0.0;
 		Double minimo = Ejercicio3.getPrecio(0);
 		
 		// Mientras index<=i<n, obtener el minimo precio:
@@ -46,7 +45,7 @@ public class HeuristicaProducto {
 
 		}
 		
-		return resultado;
+		return minimo;
 		
 	}
 

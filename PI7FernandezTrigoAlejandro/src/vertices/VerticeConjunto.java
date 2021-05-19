@@ -161,27 +161,31 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 	public List<Integer> actions() {
 
 		int a = 0;
-		List<Integer> acciones = new ArrayList<Integer>();
+		List<Integer> acciones = this.conjunto;
 
 		while (a < 3) {
-
+		
 			// Caso i = n-1:
 			if (this.indice == elementos - 1) {
-
+				
 				// Caso vr[i] = 0, i != a,
 				if (this.conjunto.get(this.indice) == 0 && this.indice != a) {
-
-					acciones = this.conjunto;
+	
 					acciones.set(a, (this.conjunto.get(a) - this.indice));
-
+					return acciones;
+	
 				} else {
-
+	
 					return Lists2.of();
-
+	
 				}
-
+				
+			} else {
+				
+				acciones.set(a, (this.conjunto.get(a) - this.indice));
+				
 			}
-
+		
 			a++;
 
 		}

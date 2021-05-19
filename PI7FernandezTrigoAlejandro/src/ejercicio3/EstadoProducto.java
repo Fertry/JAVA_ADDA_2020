@@ -20,30 +20,34 @@ import vertices.VerticeProducto;
 public class EstadoProducto {
 
 	// MÉTODOS DE LA CLASE
-	public static EstadoProducto inicial() {
+	public static EstadoProducto inicial(VerticeProducto vertice) {
 		
-		return new EstadoProducto(VerticeProducto.verticeInicial(), 0, new ArrayList<Integer>());
+		List<VerticeProducto> vertices = Lists2.of(vertice);
+		
+		return new EstadoProducto(vertice, 0.0, new ArrayList<Integer>(), vertices);
 		
 	}
 	
-	public static EstadoProducto of(VerticeProducto vertice, Integer valorAcumulado, List<Integer> acciones) {
+	public static EstadoProducto of(VerticeProducto vertice, Double valorAcumulado, List<Integer> acciones, List<VerticeProducto> vertices) {
 		
-		return new EstadoProducto(vertice, valorAcumulado, acciones);
+		return new EstadoProducto(vertice, valorAcumulado, acciones, vertices);
 		
 	}
 	
 	// ATRIBUTOS DE LA CLASE
-	public List<Integer> acciones;
-	public Integer valorAcumulado;
-	public VerticeProducto vertice;
+	private Double valorAcumulado;
+	private List<Integer> acciones;
+	private VerticeProducto vertice;
+	private List<VerticeProducto> vertices;
 	
 	// CONSTRUCTORES DE LA CLASE
-	private EstadoProducto(VerticeProducto vertice, Integer valorAcumulado, List<Integer> acciones) {
+	private EstadoProducto(VerticeProducto vertice, Double valorAcumulado, List<Integer> acciones, List<VerticeProducto> vertices) {
 		
 		super();
 		
 		this.vertice = vertice;
 		this.acciones = acciones;
+		this.vertices = vertices;
 		this.valorAcumulado = valorAcumulado;
 		
 	}
@@ -57,8 +61,15 @@ public class EstadoProducto {
 		
 	}
 	
+	// Devuelve la lista de vértices: 
+	public List<VerticeProducto> getVertices() {
+		
+		return vertices;
+		
+	}
+	
 	// Devuelve el valor acumulado:
-	public Integer getValorAcumulado() {
+	public Double getValorAcumulado() {
 		
 		return valorAcumulado;
 		
@@ -74,24 +85,71 @@ public class EstadoProducto {
 	// MÉTODOS PARA TRABAJAR CON BACKTRACKING
 	
 	// Método para avanzar en el grafo virtual:
-	public static void avanza(Integer accion) {
+	EstadoProducto avanza(Integer accion) {
 		
-		VerticeProducto old = this.vertice;
-		this.vertice = this.vertice.neighbor(accion);
-		this.acciones.add(accion);
-		//this.valorAcumulado += MochilaEdge.of(old,this.vertex, a).weight.intValue();
+		List<Integer> as = List2addLast(acciones, accion);
+		VerticeProducto vcn = vertice.neighbor(accion);
+		List<VerticeProducto> vt = List2addLast(vertices, vcn);
+		return EstadoProducto.of(vcn, valorAcumulado + (accion * Ejercicio3.getPrecio(vertice.getIndice())), as, vt);
 		
 	}
 	
 	// Método para retroceder en el grafo virtual:
-	public static void retrocede(Integer accion) {
+	EstadoProducto retrocede(Integer accion) {
 		
-		VerticeProducto old = this.vertice;
-		Integer index = this.vertice.getIndice();
-		//Integer capacidadRestante = this.vertex.capacidadRestante;
-		this.vertex = VerticeProducto.of(index, 0);
-		Lists2.removeLast(this.acciones);
-	//	this.valorAcumulado -= MochilaEdge.of(this.vertex,old, a).weight.intValue();
+		List<Integer> as = List2removeLast(acciones);
+		List<VerticeProducto> vt = List2removeLast(vertices);
+		VerticeProducto van = List2last(vt);
+		return EstadoProducto.of(van, this.getValorAcumulado() - (accion * Ejercicio3.getPrecio(van.getIndice())), as, vt);
+		
+	}
+	
+	// HASHCODE Y EQUALS EN BASE A TODAS LAS PROPIEDADES DE LA CLASE
+	
+	@Override
+	public int hashCode() {
+		
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((acciones == null) ? 0 : acciones.hashCode());
+		result = prime * result + ((valorAcumulado == null) ? 0 : valorAcumulado.hashCode());
+		result = prime * result + ((vertice == null) ? 0 : vertice.hashCode());
+		result = prime * result + ((vertices == null) ? 0 : vertices.hashCode());
+		return result;
+		
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		EstadoProducto other = (EstadoProducto) obj;
+		if (acciones == null) {
+			if (other.acciones != null)
+				return false;
+		} else if (!acciones.equals(other.acciones))
+			return false;
+		if (valorAcumulado == null) {
+			if (other.valorAcumulado != null)
+				return false;
+		} else if (!valorAcumulado.equals(other.valorAcumulado))
+			return false;
+		if (vertice == null) {
+			if (other.vertice != null)
+				return false;
+		} else if (!vertice.equals(other.vertice))
+			return false;
+		if (vertices == null) {
+			if (other.vertices != null)
+				return false;
+		} else if (!vertices.equals(other.vertices))
+			return false;
+		return true;
 		
 	}
 	
@@ -99,8 +157,43 @@ public class EstadoProducto {
 	@Override
 	public String toString() {
 		
-		return "[acciones=" + acciones + ", valorAcumulado=" + valorAcumulado + ", vertice=" + vertice + "]";
+		return "";
 		
 	}
+
+
+	// MÉTODOS AUXILIARES PARA TRABAJAR CON ALGORITMOS MANUALES 
+	public static <E> List<E> List2addLast(List<E> ls, E e){
+		List<E> cp = new ArrayList<>(ls);
+		cp.add(e);
+		return cp;
+	}
+	
+	/**
+	 * @param <E> tipo de los elementos de la lista
+	 * @param ls Una lista
+	 * @pre La lista no puede estar vacia
+	 * @return Una copia de la lista con el ultimo elemnto eliminado
+	 */
+	public static <E> List<E> List2removeLast(List<E> ls){
+		//Preconditions.checkNotNull(ls);
+		//Preconditions.checkArgument(!ls.isEmpty(), "La lista no puede estar vacia");
+		List<E> cp = new ArrayList<>(ls);
+		int last = cp.size()-1;
+		cp.remove(last);
+		return cp;
+	}
+	
+	/**
+	 * @pre La lista no esta vacia
+	 * @param <E> Tipo de los elementos
+	 * @param ls Una lista
+	 * @return Su ultimo elemento
+	 */
+	public static <E> E List2last(List<E> ls){
+		//Preconditions.checkArgument(!ls.isEmpty(), "La lista no puede estar vacia");
+		int n = ls.size();
+		return ls.get(n-1);
+	}	
 	
 }

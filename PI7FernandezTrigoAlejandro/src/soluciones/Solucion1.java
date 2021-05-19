@@ -258,7 +258,7 @@ public class Solucion1 {
 		System.out.println("Reparto obtenido:");
 		for (String group : resultado.keySet()) {
 			
-			System.out.println("	" + (group + 1) + ": " + resultado.get(group));	
+			System.out.println("	" + group + ": " + resultado.get(group));	
 			
 		}
 		System.out.println("Afinidad media del reparto: " + Math.round(afininidadMedia));
