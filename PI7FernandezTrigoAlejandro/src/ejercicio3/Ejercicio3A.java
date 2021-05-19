@@ -42,8 +42,7 @@ public class Ejercicio3A {
 		System.out.println(Ejercicio3.contiene(1, 1));
 		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeProducto verticeFinal = VerticeProducto.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeProducto verticeInicial = VerticeProducto.verticeInicial();
 		
 		System.out.println(verticeInicial);

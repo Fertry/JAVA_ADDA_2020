@@ -49,7 +49,9 @@ public class Ejercicio1A {
 		*/ 
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
+		// Arista extiende a ActionSimpleEdge
 		EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
+		//EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getPeso()); 
 		
 		// Invocar el algoritmo de A*: 
 		/*
