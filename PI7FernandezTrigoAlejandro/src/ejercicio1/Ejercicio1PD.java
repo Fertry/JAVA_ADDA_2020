@@ -67,9 +67,16 @@ public class Ejercicio1PD {
 		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
 		GraphPath<VerticeAlumno, AristaAlumno> caminoPD = algoritmoPD.search().get();
 		
-		// Solución: lista de vértices recorridos del grafo: 
-		List<VerticeAlumno> vertices = caminoPD.getVertexList();
-		Solucion1.solucionPD(vertices, entrada);
+		// Solución: lista de aristas recorridos del grafo: 
+		List<AristaAlumno> aristas = caminoPD.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
+		Solucion1.solucion(aristas, entrada);
+		
+		// DEBUG:
+		/*
+		 * List<VerticeAlumno> vertices = caminoA.getVertexList();
+		 * System.out.println(vertices);
+		*/
 		
 	}
 

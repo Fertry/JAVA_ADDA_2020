@@ -10,13 +10,13 @@ import java.util.List;
 
 import org.jgrapht.GraphPath;
 
+import aristas.AristaAbogado;
 import heuristicas.HeuristicaAbogado;
 import soluciones.Solucion2;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.DPR;
 import us.lsi.graphs.alg.DynamicProgrammingReduction;
 import us.lsi.graphs.alg.DynamicProgramming.PDType;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAbogado;
 
@@ -40,8 +40,7 @@ public class Ejercicio2PD {
 		// Inicializa las variables de la clase Ejercicio2:
 		Ejercicio2.iniDatos(entrada);
 
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeAbogado verticeFinal = VerticeAbogado.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeAbogado verticeInicial = VerticeAbogado.verticeInicial();
 
 		// Inicializar el grafo virtual:
@@ -51,10 +50,8 @@ public class Ejercicio2PD {
 		 * 	· Con peso en las aristas.
 		 */
 
-		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice
-		// inicial con peso:
-		EGraph<VerticeAbogado, ActionSimpleEdge<VerticeAbogado, Integer>> grafoVirtual = Graphs2
-				.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
+		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
+		EGraph<VerticeAbogado, AristaAbogado> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
 
 		// Invocar el algoritmo de Programación Dinámica:
 		/*
@@ -62,7 +59,7 @@ public class Ejercicio2PD {
 		 * 	· Expresando el vértice final de destino. 
 		 * 	· Mediante un predicado objetivo.
 		 */
-		DynamicProgrammingReduction<VerticeAbogado, ActionSimpleEdge<VerticeAbogado, Integer>> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
+		DynamicProgrammingReduction<VerticeAbogado, AristaAbogado> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
 						grafoVirtual,
 						VerticeAbogado.objetivo(),
 						HeuristicaAbogado::heuristica,
@@ -70,10 +67,11 @@ public class Ejercicio2PD {
 						);
 
 		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
-		GraphPath<VerticeAbogado, ActionSimpleEdge<VerticeAbogado, Integer>> caminoPD = algoritmoPD.search().get();
+		GraphPath<VerticeAbogado, AristaAbogado> caminoPD = algoritmoPD.search().get();
 
 		// Solución: lista de vértices recorridos del grafo:
 		List<VerticeAbogado> vertices = caminoPD.getVertexList();
+		System.out.println(vertices);
 		Solucion2.solucionPD(vertices, entrada);
 
 	}

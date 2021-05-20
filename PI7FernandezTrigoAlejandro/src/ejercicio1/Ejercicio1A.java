@@ -66,9 +66,15 @@ public class Ejercicio1A {
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
 		GraphPath<VerticeAlumno, AristaAlumno> caminoA = algoritmoA.search().get();
 		
-		// Solución: lista de vértices recorridos del grafo: 
-		List<VerticeAlumno> vertices = caminoA.getVertexList();
-		Solucion1.solucionA(vertices, entrada);
+		// Solución: lista de aristas recorridos del grafo: 
+		List<AristaAlumno> aristas = caminoA.getEdgeList();
+		Solucion1.solucion(aristas, entrada);
+		
+		// DEBUG:
+		/*
+		 * List<VerticeAlumno> vertices = caminoA.getVertexList();
+		 * System.out.println(vertices);
+		*/
 		
 	}
 	

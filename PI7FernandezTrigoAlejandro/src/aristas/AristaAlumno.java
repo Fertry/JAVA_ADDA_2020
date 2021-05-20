@@ -36,11 +36,11 @@ public class AristaAlumno extends ActionSimpleEdge<VerticeAlumno, Integer> {
 		
 	}
 
-	// TO_STRING DE LA CLASE (Sólo para debug; source/target pertenecen a la superclase)
+	// TO_STRING DE LA CLASE (source/target pertenecen a la superclase)
 	@Override
 	public String toString() {
 
-		return "[Alumno origen: " + this.source.getIndice() + ", Alumno destino: " + this.target.getIndice() + ", con afinidad: " + this.getEdgeWeight() + ", Acción: " + accion + "]";
+		return "(" + this.source.getIndice() + ", " + accion + ")";
 		
 	}
 	

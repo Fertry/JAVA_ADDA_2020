@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
+import aristas.AristaAbogado;
 import ejercicio2.Ejercicio2;
 import us.lsi.common.Lists2;
 import us.lsi.graphs.virtual.ActionSimpleEdge;
@@ -21,7 +22,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar la asignación de casos a abogados, desde indice hasta el final, que minimice
  * cargaMaxima, teniendo en cuenta las cargas ya acumuladas para los abogados.
 */
-public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionSimpleEdge<VerticeAbogado, Integer>, Integer> {
+public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAbogado, Integer> {
 
 	// MÉTODOS DE LA CLASE
 	public static VerticeAbogado of(Integer indice, List<Integer> cargaAbogado) {
@@ -210,9 +211,9 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
-	public ActionSimpleEdge<VerticeAbogado, Integer> edge(Integer accion) {
+	public AristaAbogado edge(Integer accion) {
 		
-		ActionSimpleEdge<VerticeAbogado, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
+		AristaAbogado resultado = AristaAbogado.of(this, neighbor(accion), accion);
 		
 		return resultado;
 		
@@ -247,8 +248,13 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 		List<Integer> auxiliar = new ArrayList<>(this.cargaAbogado);
 		
 		// 3º alterar el valor de la lista: esto es, para la posición de la lista de cargas 
-		// indicada por la acción sumarle la carga de tiempo dado la acción y el índice:
-		auxiliar.set(accion, (this.cargaAbogado.get(accion) + Ejercicio2.tiempoPorIndice(accion, this.indice)));
+		// indicada por la acción sumarle la carga de tiempo dado la acción y el índice mientras 
+		// que el índice no supere el nº de abogados:
+		if (this.indice < abogados) {
+			
+			auxiliar.set(accion, (this.cargaAbogado.get(accion) + Ejercicio2.tiempoPorIndice(accion, this.indice)));
+			
+		}
 		
 		// 4º devolver el vértice nuevo:
 		VerticeAbogado resultado = VerticeAbogado.of(siguiente, auxiliar);
@@ -261,31 +267,28 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado,  ActionS
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
-//		int i = 0;
-		//List<Integer> acciones = new ArrayList<Integer>();
+		int i = 0;
+		List<Integer> acciones = new ArrayList<Integer>();
 		
 		// De alcanzar el límite, no hay más acciones:
-		if (this.indice == casos) {
+		if (this.indice == casos - 1) {
 
-			return Lists2.of();
-			
-		}  else {
-
+			// Abogado menos cargado:
 			return Lists2.of(abogadoMinimo);
+		
+		} else {
+			
+			while (i < abogados) {
+				
+				acciones.add(i);
+				i++;
+				
+			}
 			
 		}
 		
-		// De no alcanzar el límite, devolver el abogado menos cargado (abogadoMinimo):
-//		while (i < abogados) {
-//
-//			// Entonces es una acción posible de mejora:
-//			acciones.add(abogadoMinimo);
-//			i++;
-//
-//		}
-			
-		//return Lists2.of();
-			
+		return acciones;
+
 	}
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y CARGA ABOGADO

@@ -10,12 +10,12 @@ import java.util.List;
 
 import org.jgrapht.GraphPath;
 
+import aristas.AristaAbogado;
 import heuristicas.HeuristicaAbogado;
 import soluciones.Solucion2;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAbogado;
 
@@ -39,8 +39,7 @@ public class Ejercicio2A {
 		// Inicializa las variables de la clase Ejercicio2:
 		Ejercicio2.iniDatos(entrada);
 		
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeAbogado verticeFinal = VerticeAbogado.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeAbogado verticeInicial = VerticeAbogado.verticeInicial();
 		
 		// Inicializar el grafo virtual:
@@ -51,7 +50,7 @@ public class Ejercicio2A {
 		*/
 				
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeAbogado, ActionSimpleEdge<VerticeAbogado, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
+		EGraph<VerticeAbogado, AristaAbogado> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
 
 		// Invocar el algoritmo de A*: 
 		/*
@@ -59,18 +58,25 @@ public class Ejercicio2A {
 		 *  · Expresando el vértice final de destino.
 		 *  · Mediante un predicado objetivo.
 		 */
-		AStar<VerticeAbogado, ActionSimpleEdge<VerticeAbogado, Integer>> algoritmoA = GraphAlg.aStarGoal(
+		AStar<VerticeAbogado, AristaAbogado> algoritmoA = GraphAlg.aStarGoal(
 				grafoVirtual,
 				VerticeAbogado.objetivo(),
 				HeuristicaAbogado::heuristica
 				);
 
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
-		GraphPath<VerticeAbogado, ActionSimpleEdge<VerticeAbogado, Integer>> caminoA = algoritmoA.search().get();
+		GraphPath<VerticeAbogado, AristaAbogado> caminoA = algoritmoA.search().get();
 		
-		// Solución: lista de vértices recorridos del grafo: 
-		List<VerticeAbogado> vertices = caminoA.getVertexList();
-		Solucion2.solucionA(vertices, entrada);
+		// Solución: lista de aristas recorridos del grafo: 
+		List<AristaAbogado> aristas = caminoA.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
+		Solucion2.solucionA(aristas, entrada);
+		
+		// DEBUG!
+		/*
+		 * List<VerticeAbogado> vertices = caminoA.getVertexList();
+		 * System.out.println(vertices);
+		*/
 		
 	}
 	
