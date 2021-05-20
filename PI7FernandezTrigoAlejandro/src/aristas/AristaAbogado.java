@@ -39,7 +39,7 @@ public class AristaAbogado extends ActionSimpleEdge<VerticeAbogado, Integer> {
 	@Override
 	public String toString() {
 		
-		return this.source.getIndice() + "#" + accion;
+		return "(" + this.source.getIndice() + ", " + accion + ")";
 		
 	}
 	

@@ -68,6 +68,7 @@ public class Ejercicio1A {
 		
 		// Solución: lista de aristas recorridos del grafo: 
 		List<AristaAlumno> aristas = caminoA.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
 		Solucion1.solucion(aristas, entrada);
 		
 		// DEBUG:

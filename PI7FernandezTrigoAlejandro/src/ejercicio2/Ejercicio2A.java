@@ -70,7 +70,7 @@ public class Ejercicio2A {
 		// Solución: lista de aristas recorridos del grafo: 
 		List<AristaAbogado> aristas = caminoA.getEdgeList();
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
-		Solucion2.solucionA(aristas, entrada);
+		Solucion2.solucion(aristas, entrada);
 		
 		// DEBUG!
 		/*
