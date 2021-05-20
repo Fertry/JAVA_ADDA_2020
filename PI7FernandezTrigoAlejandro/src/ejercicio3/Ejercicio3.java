@@ -97,6 +97,21 @@ public class Ejercicio3 {
 		
 	}
 	
+	// Obtiene un Set<> de funcionalidades de un producto i:
+	public static Set<Integer> getFuncionalidades(Integer i) {
+		
+		Set<Integer> resultado = new HashSet<Integer>();
+		
+		for (Integer funcionalidad : funcionalidades.get(i)) {
+			
+			resultado.add(funcionalidad);
+			
+		}
+		
+		return resultado;
+			
+	}
+	
 	// Obtiene el nº de productos: 
 	public static Integer getNProductos() {
 		
@@ -116,13 +131,6 @@ public class Ejercicio3 {
 		}
 		
 		return resultado;
-		
-	}
-
-	// Comprueba si un producto cubre una funcionalidad dada, siendo i el producto y j la funcionalidad:
-	public static Boolean contiene(Integer i, Integer j) {
-		
-		return funcionalidades.get(i).contains(requisitos.get(j));
 		
 	}
 	

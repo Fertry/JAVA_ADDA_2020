@@ -69,7 +69,8 @@ public class Ejercicio3PD {
 		// Solución: lista de aristas recorridos del grafo:
 		List<AristaProducto> aristas = caminoPD.getEdgeList();
 		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
-		Solucion3.solucion(aristas, entrada);
+		System.out.println(aristas);
+		//Solucion3.solucion(aristas, entrada);
 
 		// DEBUG:
 		/*

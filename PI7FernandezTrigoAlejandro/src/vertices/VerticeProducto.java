@@ -6,6 +6,7 @@
 
 package vertices;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -114,16 +115,11 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 		
 		Boolean valido = false;
 		
-		// Si NO es el vértice inicial NI el final:
-		if (this.indice >= 0 && this.indice <= productos) {
-			
-			// Si el conjunto contiene las funcionalidades requeridas:
-			if (funcionalidadesDeseadas.containsAll(funcionalidadesPorCubrir)) {
-				
-				valido = true;
-				
-			}
-			
+		// Si NO es el vértice inicial NI el final, y el conjunto contiene las funcionalidades requeridas:
+		if (this.indice >= 0 && this.indice <= productos && funcionalidadesDeseadas.containsAll(funcionalidadesPorCubrir)) {
+		
+			valido = true;
+	
 		}
 	
 		return valido;
@@ -138,65 +134,104 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 		Integer siguiente = this.indice + 1;
 
 		// Caso base fc = 0:
+		// neighbor = (n,O)
 		if (funcionalidadesPorCubrir.isEmpty()) {
 			
 			Set<Integer> setNulo = new HashSet<Integer>();
 			VerticeProducto verticeNulo = VerticeProducto.of(productos, setNulo);
 			return verticeNulo;
-			
-		}
 		
-		// Caso general accion = 0:
-		if (accion == 0) {
-			
-			VerticeProducto verticeCaso1 = VerticeProducto.of(siguiente, funcionalidadesPorCubrir);
-			return verticeCaso1;
-			
+		// Casos generales:
 		} else {
 			
-			// Caso general accion = 1:
-			VerticeProducto verticeCaso2 = VerticeProducto.of(siguiente, funcionalidadesPorCubrir);
-			return verticeCaso2;
-			
-		}
+			// Caso general accion = 0:
+			// neighbor(0) = (i+1, fc)
+			if (accion == 0) {
 				
+				VerticeProducto verticeCaso1 = VerticeProducto.of(siguiente, funcionalidadesPorCubrir);
+				return verticeCaso1;
+			
+			// Caso general accion = 1:
+			// neighbor(1) = (i+1, fc-findex)
+			} else {
+				
+				Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
+				funciones.removeAll(Ejercicio3.getFuncionalidades(this.indice));
+				VerticeProducto verticeCaso2 = VerticeProducto.of(siguiente, funciones);
+				return verticeCaso2;
+				
+			}
+
+		}
+		
+//		int i = this.indice + 1;
+//		Set<Integer> list = new HashSet<>(funcionalidadesPorCubrir);
+//		if (accion == 0) {
+//			return of(i, list);
+//		} else {
+//			list.removeAll(Ejercicio3.getFuncionalidades(this.indice));
+//			return of(i, list);
+//		}
+			
 	}
 
 	@Override
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
-		System.out.println("Se ha llamado a actions()");
+//		// Caso i = n:
+//		if (this.indice == productos) {
+//			
+//			return Lists2.of();
+//			
+//		}
+//		
+//		// Caso conjunto nulo:
+//		if (funcionalidadesPorCubrir.isEmpty()) {
+//
+//			return Lists2.of(0);
+//			
+//		}
+//		
+//		// Caso i = n-1 && fc-(fn-1) = 0:
+//		if (this.indice == productos - 1) {
+//			
+//			if (funcionalidadesPorCubrir.removeAll(Ejercicio3.getFuncionalidades(productos - 1))) {
+//				
+//				return Lists2.of(1);
+//				
+//			}
+//			
+//		}
+//		
+//		// Caso i = n-1 && fc-(fn-1) != 0:
+//		if (this.indice == productos - 1) {
+//			
+//			if (!funcionalidadesPorCubrir.removeAll(Ejercicio3.getFuncionalidades(productos - 1))) {
+//				
+//				return Lists2.of();
+//				
+//			}
+//		
+//		}
+//		
+//		// En otro caso: {0,1}
+//		return Lists2.of(0,1);
 		
-		// Caso i = n:
+		List<Integer> res = new ArrayList<Integer>();
 		if (this.indice == productos) {
-			
-			return Lists2.of();
-			
+			res.clear();
+		} else if (funcionalidadesPorCubrir.size() == 0) {
+			res.add(0);
+		} else if (this.indice == (productos - 1) && (funcionalidadesPorCubrir.size() - Ejercicio3.getFuncionalidades(productos - 1).size()) == 0) {
+			res.add(1);
+		} else if (this.indice == (productos - 1) && (funcionalidadesPorCubrir.size() - Ejercicio3.getFuncionalidades(productos - 1).size()) == 0) {
+			res.clear();
+		} else {
+			res.add(0);
+			res.add(1);
 		}
-		
-		// Caso conjunto nulo:
-		if (funcionalidadesPorCubrir.isEmpty()) {
-
-			return Lists2.of(0);
-			
-		}
-		
-		// Caso i = n-1 && fc-fn-1 = 0:
-		if (this.indice == productos - 1 && funcionalidadesPorCubrir.isEmpty()) {
-			
-			return Lists2.of(1);
-			
-		}
-		
-		// Caso i = n-1 && fc-fn-1 != 0:
-		if (this.indice == productos - 1 && !funcionalidadesPorCubrir.isEmpty()) {
-			
-			return Lists2.of();
-			
-		}
-		
-		return Lists2.of(0,1);
+		return res;
 			
 	}
 

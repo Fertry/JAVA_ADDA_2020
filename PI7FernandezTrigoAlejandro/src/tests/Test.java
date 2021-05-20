@@ -58,7 +58,7 @@ public class Test {
 //			Ejercicio3A.EjecutaEjercicio3A("ficheros/PI7Ej3DatosEntrada2.txt");
 //			Ejercicio3A.EjecutaEjercicio3A("ficheros/PI7Ej3DatosEntrada3.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//			Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada1.txt");	
+			Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada1.txt");	
 //			Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada2.txt");
 //			Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada3.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");

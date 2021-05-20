@@ -54,7 +54,7 @@ public class HeuristicaProducto {
 		Double minimo = Ejercicio3.getPrecio(0);
 		
 		// Mientras index<=i<n, obtener el minimo precio:
-		while (vertice.getIndice() <= i && i < Ejercicio3.getNProductos()) {
+		while (i < Ejercicio3.getNProductos()) {
 
 			Double precio = Ejercicio3.getPrecio(i);
 			if (precio < minimo) {

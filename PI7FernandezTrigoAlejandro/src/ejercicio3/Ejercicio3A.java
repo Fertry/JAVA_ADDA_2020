@@ -40,7 +40,6 @@ public class Ejercicio3A {
 		System.out.println(Ejercicio3.getNProductos());
 		System.out.println(Ejercicio3.getRequisitos());
 		System.out.println(Ejercicio3.getPrecio(1));
-		System.out.println(Ejercicio3.contiene(1, 1));
 		// &&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 
 		// Declarar vértice de inicio para el grafo:
@@ -74,7 +73,8 @@ public class Ejercicio3A {
 		// Solución: lista de aristas recorridos del grafo: 
 		List<AristaProducto> aristas = caminoA.getEdgeList();
 		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
-		Solucion3.solucion(aristas, entrada);
+		System.out.println(aristas);
+		//Solucion3.solucion(aristas, entrada);
 		
 		// DEBUG:
 		/*
