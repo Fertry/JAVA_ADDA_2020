@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import aristas.AristaProducto;
 import ejercicio3.Ejercicio3;
 import us.lsi.common.Lists2;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -22,7 +22,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar la elección adecuada de productos, desde indice hasta el final, que
  * minimicen el precio total y cubran todas las funcionalidades deseadas.
 */
-public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>, Integer> {
+public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, AristaProducto, Integer> {
 
 	// MÉTODOS DE LA CLASE
 	public static VerticeProducto of(Integer indice, Set<Integer> funcionalidadesPorCubrir) {
@@ -99,10 +99,9 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
-	public ActionSimpleEdge<VerticeProducto, Integer> edge(Integer accion) {
+	public AristaProducto edge(Integer accion) {
 		
-		ActionSimpleEdge<VerticeProducto, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
-		System.out.println("Se ha llamado a edge con accion: " + accion);
+		AristaProducto resultado = AristaProducto.of(this, neighbor(accion), accion);
 		
 		return resultado;
 		
@@ -121,7 +120,6 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 			// Si el conjunto contiene las funcionalidades requeridas:
 			if (funcionalidadesDeseadas.containsAll(funcionalidadesPorCubrir)) {
 				
-				System.out.println("Se ha llamado a isValid() y ha devuelto true");
 				valido = true;
 				
 			}
@@ -135,8 +133,6 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Actio
 	@Override
 	// Devuelve el vértice "vecino" que corresponde a la acción tomada:
 	public VerticeProducto neighbor(Integer accion) {
-		
-		System.out.println("Se ha llamado a vecinos con accion: " + accion);
 		
 		// Obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;

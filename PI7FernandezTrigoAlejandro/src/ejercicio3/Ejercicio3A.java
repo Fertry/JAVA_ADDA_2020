@@ -10,11 +10,12 @@ import java.util.List;
 
 import org.jgrapht.GraphPath;
 
+import aristas.AristaProducto;
 import heuristicas.HeuristicaProducto;
+import soluciones.Solucion3;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeProducto;
 
@@ -45,9 +46,6 @@ public class Ejercicio3A {
 		// Declarar vértice de inicio para el grafo:
 		VerticeProducto verticeInicial = VerticeProducto.verticeInicial();
 		
-		System.out.println(verticeInicial);
-		System.out.println(verticeInicial.getIndice());
-		
 		// Inicializar el grafo virtual:
 		/*
 		 * 2 vías:
@@ -56,7 +54,7 @@ public class Ejercicio3A {
 		*/ 
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
+		EGraph<VerticeProducto, AristaProducto> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
 		
 		// Invocar el algoritmo de A*: 
 		/*
@@ -64,20 +62,25 @@ public class Ejercicio3A {
 		 *  · Expresando el vértice final de destino.
 		 *  · Mediante un predicado objetivo.
 		*/
-		AStar<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> algoritmoA = GraphAlg.aStarGoal(
+		AStar<VerticeProducto, AristaProducto> algoritmoA = GraphAlg.aStarGoal(
 				grafoVirtual,
 				VerticeProducto.objetivo(),
 				HeuristicaProducto::heuristica
 				);
 
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
-		GraphPath<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> caminoA = algoritmoA.search().get();
+		GraphPath<VerticeProducto, AristaProducto> caminoA = algoritmoA.search().get();
 		
-		// Solución: lista de vértices recorridos del grafo: 
-		List<VerticeProducto> vertices = caminoA.getVertexList();
+		// Solución: lista de aristas recorridos del grafo: 
+		List<AristaProducto> aristas = caminoA.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
+		Solucion3.solucion(aristas, entrada);
 		
 		// DEBUG:
-		System.out.println(vertices);
+		/*
+		 * List<VerticeProducto> vertices = caminoA.getVertexList();
+		 * System.out.println(vertices);
+		*/
 
 	}
 

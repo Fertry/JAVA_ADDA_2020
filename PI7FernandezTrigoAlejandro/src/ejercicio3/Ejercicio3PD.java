@@ -10,12 +10,13 @@ import java.util.List;
 
 import org.jgrapht.GraphPath;
 
+import aristas.AristaProducto;
 import heuristicas.HeuristicaProducto;
+import soluciones.Solucion3;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.DPR;
 import us.lsi.graphs.alg.DynamicProgrammingReduction;
 import us.lsi.graphs.alg.DynamicProgramming.PDType;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeProducto;
 
@@ -36,8 +37,7 @@ public class Ejercicio3PD {
 		// Inicializa las variables de la clase Ejercicio3:
 		Ejercicio3.iniDatos(entrada);
 
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeProducto verticeFinal = VerticeProducto.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeProducto verticeInicial = VerticeProducto.verticeInicial();
 
 		// Inicializar el grafo virtual:
@@ -48,7 +48,7 @@ public class Ejercicio3PD {
 		 */
 
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
+		EGraph<VerticeProducto, AristaProducto> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());
 
 		// Invocar el algoritmo de Programación Dinámica:
 		/*
@@ -56,7 +56,7 @@ public class Ejercicio3PD {
 		 * 	· Expresando el vértice final de destino. 
 		 * 	· Mediante un predicado objetivo.
 		 */
-		DynamicProgrammingReduction<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
+		DynamicProgrammingReduction<VerticeProducto, AristaProducto> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
 						grafoVirtual,
 						VerticeProducto.objetivo(),
 						HeuristicaProducto::heuristica,
@@ -64,13 +64,18 @@ public class Ejercicio3PD {
 						);
 
 		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
-		GraphPath<VerticeProducto, ActionSimpleEdge<VerticeProducto, Integer>> caminoPD = algoritmoPD.search().get();
+		GraphPath<VerticeProducto, AristaProducto> caminoPD = algoritmoPD.search().get();
 
-		// Solución: lista de vértices recorridos del grafo:
-		List<VerticeProducto> vertices = caminoPD.getVertexList();
+		// Solución: lista de aristas recorridos del grafo:
+		List<AristaProducto> aristas = caminoPD.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
+		Solucion3.solucion(aristas, entrada);
 
 		// DEBUG:
-		System.out.println(vertices);
+		/*
+		 * List<VerticeProducto> vertices = caminoPD.getVertexList();
+		 * System.out.println(vertices);
+		*/
 
 	}
 
