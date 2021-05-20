@@ -32,12 +32,12 @@ public class Test {
 		*/
 		System.out.println("##################################################################");
 		System.out.println("######################### EJERCICIO 1 ############################\n");
-//			Ejercicio1A.EjecutaEjercicio1A("ficheros/PI7Ej1DatosEntrada1.txt");
-			Ejercicio1A.EjecutaEjercicio1A("ficheros/PI7Ej1DatosEntrada2.txt");
+			Ejercicio1A.EjecutaEjercicio1A("ficheros/PI7Ej1DatosEntrada1.txt");
+//			Ejercicio1A.EjecutaEjercicio1A("ficheros/PI7Ej1DatosEntrada2.txt");
 //			Ejercicio1A.EjecutaEjercicio1A("ficheros/PI7Ej1DatosEntrada3.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-//			Ejercicio1PD.EjecutaEjercicio1PD("ficheros/PI7Ej1DatosEntrada1.txt");
-			Ejercicio1PD.EjecutaEjercicio1PD("ficheros/PI7Ej1DatosEntrada2.txt");
+			Ejercicio1PD.EjecutaEjercicio1PD("ficheros/PI7Ej1DatosEntrada1.txt");
+//			Ejercicio1PD.EjecutaEjercicio1PD("ficheros/PI7Ej1DatosEntrada2.txt");
 //			Ejercicio1PD.EjecutaEjercicio1PD("ficheros/PI7Ej1DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");

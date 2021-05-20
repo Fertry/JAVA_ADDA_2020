@@ -9,13 +9,13 @@ package ejercicio1;
 import java.util.List;
 import org.jgrapht.GraphPath;
 
+import aristas.AristaAlumno;
 import heuristicas.HeuristicaAlumno;
 import soluciones.Solucion1;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.DPR;
 import us.lsi.graphs.alg.DynamicProgrammingReduction;
 import us.lsi.graphs.alg.DynamicProgramming.PDType;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAlumno;
 
@@ -38,8 +38,7 @@ public class Ejercicio1PD {
 		// Inicializa las variables de la clase Ejercicio1:
 		Ejercicio1.iniDatos(entrada);
 		
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeAlumno verticeInicial = VerticeAlumno.verticeInicial();
 	
 		// Inicializar el grafo virtual:
@@ -50,7 +49,7 @@ public class Ejercicio1PD {
 		*/ 
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());	
+		EGraph<VerticeAlumno, AristaAlumno> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());	
 		
 		// Invocar el algoritmo de Programación Dinámica: 
 		/*
@@ -58,7 +57,7 @@ public class Ejercicio1PD {
 		 *  · Expresando el vértice final de destino.
 		 *  · Mediante un predicado objetivo.
 		*/
-		DynamicProgrammingReduction<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
+		DynamicProgrammingReduction<VerticeAlumno, AristaAlumno> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
 						grafoVirtual,
 						VerticeAlumno.objetivo(),
 						HeuristicaAlumno::heuristica,
@@ -66,7 +65,7 @@ public class Ejercicio1PD {
 						);
 		
 		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
-		GraphPath<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> caminoPD = algoritmoPD.search().get();
+		GraphPath<VerticeAlumno, AristaAlumno> caminoPD = algoritmoPD.search().get();
 		
 		// Solución: lista de vértices recorridos del grafo: 
 		List<VerticeAlumno> vertices = caminoPD.getVertexList();

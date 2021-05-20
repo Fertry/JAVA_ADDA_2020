@@ -165,7 +165,10 @@ public class Solucion1 {
 		System.out.println("Reparto obtenido:");
 		for (String group : resultado.keySet()) {
 			
-			System.out.println("	" + group + ": " + resultado.get(group));	
+			// Sumo 1 para que comience a contar desde 1 y no 0:
+			Integer grupoInteger = Integer.parseInt(group.replace("Grupo ", "")) + 1;
+			String grupoString = "Grupo " + grupoInteger;
+			System.out.println("	" + grupoString + ": " + resultado.get(group));	
 						
 		}
 		System.out.println("Afinidad media del reparto: " + Math.round(afininidadMedia));
@@ -258,7 +261,10 @@ public class Solucion1 {
 		System.out.println("Reparto obtenido:");
 		for (String group : resultado.keySet()) {
 			
-			System.out.println("	" + group + ": " + resultado.get(group));	
+			// Sumo 1 para que comience a contar desde 1 y no 0:
+			Integer grupoInteger = Integer.parseInt(group.replace("Grupo ", "")) + 1;
+			String grupoString = "Grupo " + grupoInteger;
+			System.out.println("	" + grupoString + ": " + resultado.get(group));	
 			
 		}
 		System.out.println("Afinidad media del reparto: " + Math.round(afininidadMedia));

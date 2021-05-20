@@ -9,12 +9,12 @@ package ejercicio1;
 import java.util.List;
 import org.jgrapht.GraphPath;
 
+import aristas.AristaAlumno;
 import heuristicas.HeuristicaAlumno;
 import soluciones.Solucion1;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeAlumno;
 
@@ -37,8 +37,7 @@ public class Ejercicio1A {
 		// Inicializa las variables de la clase Ejercicio1:
 		Ejercicio1.iniDatos(entrada);
 		
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeAlumno verticeFinal = VerticeAlumno.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeAlumno verticeInicial = VerticeAlumno.verticeInicial();
 		
 		// Inicializar el grafo virtual:
@@ -49,9 +48,8 @@ public class Ejercicio1A {
 		*/ 
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		// Arista extiende a ActionSimpleEdge
-		EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
-		//EGraph<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getPeso()); 
+		// (Negando para maximizar dado que A* minimiza)
+		EGraph<VerticeAlumno, AristaAlumno> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> -x.getEdgeWeight());
 		
 		// Invocar el algoritmo de A*: 
 		/*
@@ -59,14 +57,14 @@ public class Ejercicio1A {
 		 *  · Expresando el vértice final de destino.
 		 *  · Mediante un predicado objetivo.
 		*/
-		AStar<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> algoritmoA = GraphAlg.aStarGoal(
+		AStar<VerticeAlumno, AristaAlumno> algoritmoA = GraphAlg.aStarGoal(
 				grafoVirtual,
 				VerticeAlumno.objetivo(),
 				HeuristicaAlumno::heuristica
 				);
 
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
-		GraphPath<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>> caminoA = algoritmoA.search().get();
+		GraphPath<VerticeAlumno, AristaAlumno> caminoA = algoritmoA.search().get();
 		
 		// Solución: lista de vértices recorridos del grafo: 
 		List<VerticeAlumno> vertices = caminoA.getVertexList();

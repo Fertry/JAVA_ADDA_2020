@@ -9,9 +9,10 @@ package vertices;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
+
+import aristas.AristaAlumno;
 import ejercicio1.Ejercicio1;
 import us.lsi.common.Lists2;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -20,7 +21,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar la asignación de estudiantes a grupos, desde indice hasta el final, que
  * optimicen la afinidad.
 */
-public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimpleEdge<VerticeAlumno, Integer>, Integer> {
+public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlumno, Integer> {
 
 	// MÉTODOS DE LA CLASE
 	public static VerticeAlumno of(Integer indice, List<Integer> plazasRestantes) {
@@ -104,13 +105,13 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, ActionSimp
 		return resultado;
 	
 	}
-
+	
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
-	public ActionSimpleEdge<VerticeAlumno, Integer> edge(Integer accion) {
+	public AristaAlumno edge(Integer accion) {
 		
-		ActionSimpleEdge<VerticeAlumno, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
+		AristaAlumno resultado = AristaAlumno.of(this, neighbor(accion), accion);
 		
 		return resultado;
 		
