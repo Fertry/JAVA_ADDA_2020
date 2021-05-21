@@ -22,10 +22,6 @@ public class Solucion3 {
 	*/
 	public static void solucion(List<AristaProducto> entrada, String ruta) {
 
-		// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-		System.out.println(entrada);
-		// $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-		
 		int i = 0;
 		Set<String> productosSeleccionados = new HashSet<String>();
 		Map<Integer, Integer> reparto = new HashMap<Integer, Integer>();

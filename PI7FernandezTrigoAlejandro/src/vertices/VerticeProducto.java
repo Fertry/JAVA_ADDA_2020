@@ -6,7 +6,6 @@
 
 package vertices;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -14,6 +13,7 @@ import java.util.function.Predicate;
 
 import aristas.AristaProducto;
 import ejercicio3.Ejercicio3;
+import us.lsi.common.Lists2;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -87,7 +87,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 	}
 
 	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
-	// Tan solo es usado en Backtracking.
+	// (Tan solo es usado en la implementación de Backtracking manual)
 	public static VerticeProducto copiar(VerticeProducto vertice) {
 		
 		VerticeProducto resultado = VerticeProducto.of(vertice.indice, vertice.funcionalidadesPorCubrir);
@@ -131,13 +131,14 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 		
 		// Obtener el siguiente indice:
 		Integer siguiente = this.indice + 1;
+		
+		Set<Integer> setNulo = new HashSet<Integer>();
+		VerticeProducto verticeNulo = VerticeProducto.of(productos, setNulo);
 
 		// Caso base fc = 0:
 		// neighbor = (n,O)
 		if (funcionalidadesPorCubrir.isEmpty()) {
 			
-			Set<Integer> setNulo = new HashSet<Integer>();
-			VerticeProducto verticeNulo = VerticeProducto.of(productos, setNulo);
 			return verticeNulo;
 		
 		// Casos generales:
@@ -152,8 +153,9 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 			
 			// Caso general accion = 1:
 			// neighbor(1) = (i+1, fc-findex)
-			} else {
+			} else if (accion == 1) {
 				
+				// Set<funcionalidades> - elementos Set<funcionalidades del indice dado>:
 				Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
 				funciones.removeAll(Ejercicio3.getFuncionalidades(this.indice));
 				VerticeProducto verticeCaso2 = VerticeProducto.of(siguiente, funciones);
@@ -162,6 +164,8 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 			}
 
 		}
+		
+		return verticeNulo;
 			
 	}
 
@@ -169,60 +173,51 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 		
-//		// Caso i = n:
-//		if (this.indice == productos) {
-//			
-//			return Lists2.of();
-//			
-//		}
-//		
-//		// Caso conjunto nulo:
-//		if (funcionalidadesPorCubrir.isEmpty()) {
-//
-//			return Lists2.of(0);
-//			
-//		}
-//		
-//		// Caso i = n-1 && fc-(fn-1) = 0:
-//		if (this.indice == productos - 1) {
-//			
-//			if (funcionalidadesPorCubrir.removeAll(Ejercicio3.getFuncionalidades(productos - 1))) {
-//				
-//				return Lists2.of(1);
-//				
-//			}
-//			
-//		}
-//		
-//		// Caso i = n-1 && fc-(fn-1) != 0:
-//		if (this.indice == productos - 1) {
-//			
-//			if (!funcionalidadesPorCubrir.removeAll(Ejercicio3.getFuncionalidades(productos - 1))) {
-//				
-//				return Lists2.of();
-//				
-//			}
-//		
-//		}
-//		
-//		// En otro caso: {0,1}
-//		return Lists2.of(0,1);
-		
-		List<Integer> res = new ArrayList<Integer>();
+		// Caso i = n:
 		if (this.indice == productos) {
-			res.clear();
-		} else if (funcionalidadesPorCubrir.size() == 0) {
-			res.add(0);
-		} else if (this.indice == (productos - 1) && (funcionalidadesPorCubrir.size() - Ejercicio3.getFuncionalidades(productos - 1).size()) == 0) {
-			res.add(1);
-		} else if (this.indice == (productos - 1) && (funcionalidadesPorCubrir.size() - Ejercicio3.getFuncionalidades(productos - 1).size()) == 0) {
-			res.clear();
-		} else {
-			res.add(0);
-			res.add(1);
-		}
-		return res;
+
+			return Lists2.of();
 			
+		}
+		
+		// Caso conjunto nulo:
+		if (funcionalidadesPorCubrir.isEmpty()) {
+
+			return Lists2.of(0);
+			
+		}
+		
+		// Caso i = n-1 && fc-(fn-1) = 0:
+		if (this.indice == productos - 1) {
+			
+			// Set<funcionalidades> - elementos Set<funcionalidades del indice dado>:
+			Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
+			funciones.removeAll(Ejercicio3.getFuncionalidades(productos - 1));
+			if (funciones.isEmpty()) {
+				
+				return Lists2.of(1);
+				
+			}
+			
+		}
+		
+		// Caso i = n-1 && fc-(fn-1) != 0:
+		if (this.indice == productos - 1) {
+			
+			// Set<funcionalidades> - elementos Set<funcionalidades del indice dado>:
+			Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
+			funciones.removeAll(Ejercicio3.getFuncionalidades(productos - 1));
+			if (!funciones.isEmpty()) {
+				
+				return Lists2.of();
+				
+			}
+		
+		}
+		
+		// En otro caso: {0,1}
+		return Lists2.of(0,1);
+		
 	}
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y FUNCIONALIDADES POR CUBRIR

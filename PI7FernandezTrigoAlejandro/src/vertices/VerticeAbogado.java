@@ -13,7 +13,6 @@ import java.util.function.Predicate;
 import aristas.AristaAbogado;
 import ejercicio2.Ejercicio2;
 import us.lsi.common.Lists2;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -42,11 +41,15 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	private static Integer abogados = Ejercicio2.getNAbogados();
 
 	// Variables derivadas (calculadas en la propia clase):
-	private static Integer cargaMinima = cargaMinima();
-	private static Integer cargaMaxima = cargaMaxima();
 	private static Integer abogadoMinimo = abogadoMinimaCarga();
-	private static Integer abogadoMaximo = abogadoMaximaCarga();
 	
+	/*
+	 *	Estos métodos se especifican en el modelo pero no se han llegado a usar:
+	 * 	private static Integer cargaMinima = cargaMinima();
+	 *  private static Integer cargaMaxima = cargaMaxima();
+	 *  private static Integer abogadoMaximo = abogadoMaximaCarga();
+	*/
+
 	// CONSTRUCTORES DE LA CLASE
 	public VerticeAbogado(Integer indice, List<Integer> cargaAbogado) {
 		
@@ -75,7 +78,14 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	
 	// MÉTODOS PARA SETEAR LAS VARIABLES DERIVADAS DE LA CLASE
 	
+	/*
+	 * Tres de los cuatro métodos auxiliares para el cálculo de las propiedades derivadas de la clase
+	 * NO son usados. Están desarrollados pero he decidido mantenerlos en la clase con un modificador 
+	 * @SuppressWarnings("unused") para evitar arrojar excepciones.  
+	*/
+	
 	// Devuelve la menor carga de los abogados (caso menor duración):
+	@SuppressWarnings("unused")
 	private static Integer cargaMinima() {
 		
 		int i = 0;
@@ -105,6 +115,7 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	}
 	
 	// Devuelve la mayor carga de los abogados (caso mayor duración):
+	@SuppressWarnings("unused")
 	private static Integer cargaMaxima() {
 		
 		int i = 0;
@@ -158,6 +169,7 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	}
 
 	// Devuelve el abogado más cargado (mayor nº horas):
+	@SuppressWarnings("unused")
 	private static Integer abogadoMaximaCarga() {
 		
 		int i = 0;
