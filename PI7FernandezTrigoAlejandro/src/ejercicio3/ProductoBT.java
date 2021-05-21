@@ -245,9 +245,11 @@ public class ProductoBT {
 
 	// MÉTODOS AUXILIARES PARA TRABAJAR CON ALGORITMOS MANUALES 
 	public static <E> List<E> List2addLast(List<E> ls, E e){
+		
 		List<E> cp = new ArrayList<>(ls);
 		cp.add(e);
 		return cp;
+		
 	}
 	
 	/**
@@ -257,12 +259,12 @@ public class ProductoBT {
 	 * @return Una copia de la lista con el ultimo elemnto eliminado
 	 */
 	public static <E> List<E> List2removeLast(List<E> ls){
-		//Preconditions.checkNotNull(ls);
-		//Preconditions.checkArgument(!ls.isEmpty(), "La lista no puede estar vacia");
+		
 		List<E> cp = new ArrayList<>(ls);
 		int last = cp.size()-1;
 		cp.remove(last);
 		return cp;
+		
 	}
 	
 	/**
@@ -272,9 +274,10 @@ public class ProductoBT {
 	 * @return Su ultimo elemento
 	 */
 	public static <E> E List2last(List<E> ls){
-		//Preconditions.checkArgument(!ls.isEmpty(), "La lista no puede estar vacia");
+		
 		int n = ls.size();
 		return ls.get(n-1);
+		
 	}	
 	
 }

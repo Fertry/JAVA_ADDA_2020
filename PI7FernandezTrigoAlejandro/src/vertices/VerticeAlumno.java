@@ -128,23 +128,21 @@ public class VerticeAlumno extends ActionVirtualVertex<VerticeAlumno, AristaAlum
 		// Si NO es el vértice inicial NI el final (Intervalo cerrado):
 		if (this.indice >= 0 && this.indice <= alumnos) {
 			
-			valido = true;
+			// Si el grupo i NO está lleno (hay plazas):
+			while (i < grupos) {
 			
-		}
-
-		// Si el grupo i NO está lleno (hay plazas):
-		while (i < grupos) {
-		
-			if (this.plazasRestantes.get(i) >= 0) {
+				if (this.plazasRestantes.get(i) >= 0) {
+					
+					valido = true;
+					
+				}
 				
-				valido = true;
+				i++;
 				
 			}
 			
-			i++;
-			
 		}
-				
+	
 		return valido;
 	
 	}

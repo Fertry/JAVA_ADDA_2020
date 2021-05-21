@@ -23,8 +23,8 @@ public class Ejercicio3BTManual {
 		// Inicializa las variables de la clase Ejercicio3:
 		Ejercicio3.iniDatos(entrada);
 		
-		// Invocar el algoritmo de Backtracking manual usando cómo parámetro el 
-		// Set<> de requisitos:
+		// Invocar el algoritmo de Backtracking manual usando cómo parámetro el Set<> de requisitos:
+		System.out.println("$$$$$$$$$$$$$$$$$ BACKTRACKING MANUAL $$$$$$$$$$$$$$$$$$");
 		ProductoBT.btm(Ejercicio3.getRequisitos());
 		
 		// DEBUG:

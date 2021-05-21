@@ -60,7 +60,7 @@ public class Ejercicio3PD {
 						grafoVirtual,
 						VerticeProducto.objetivo(),
 						HeuristicaProducto::heuristica,
-						PDType.Max
+						PDType.Min
 						);
 
 		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
@@ -69,8 +69,7 @@ public class Ejercicio3PD {
 		// Solución: lista de aristas recorridos del grafo:
 		List<AristaProducto> aristas = caminoPD.getEdgeList();
 		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
-		System.out.println(aristas);
-		//Solucion3.solucion(aristas, entrada);
+		Solucion3.solucion(aristas, entrada);
 
 		// DEBUG:
 		/*

@@ -10,13 +10,14 @@ import java.util.List;
 
 import org.jgrapht.GraphPath;
 
+import aristas.AristaConjunto;
 import heuristicas.HeuristicaConjunto;
+import soluciones.Solucion4;
 import us.lsi.common.Files2;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.DPR;
 import us.lsi.graphs.alg.DynamicProgrammingReduction;
 import us.lsi.graphs.alg.DynamicProgramming.PDType;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeConjunto;
 
@@ -43,6 +44,8 @@ public class Ejercicio4PD {
 		
 		while (linea < lineas) {
 			
+			System.out.println("Linea de fichero: " + linea);
+			System.out.println("Conjunto de entrada: " + Files2.linesFromFile(entrada).get(linea) + "\n");
 			EjecutaProblemaEjercicio4PD(entrada, linea);
 			linea++;
 			
@@ -59,8 +62,7 @@ public class Ejercicio4PD {
 		// Inicializa las variables de la clase Ejercicio4 para la línea de fichero proporcionado:
 		Ejercicio4.iniDatos(entrada, linea);
 		
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeConjunto verticeFinal = VerticeConjunto.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeConjunto verticeInicial = VerticeConjunto.verticeInicial();
 	
 		// Inicializar el grafo virtual:
@@ -71,7 +73,7 @@ public class Ejercicio4PD {
 		*/ 
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());	
+		EGraph<VerticeConjunto, AristaConjunto> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight());	
 		
 		// Invocar el algoritmo de Programación Dinámica: 
 		/*
@@ -79,21 +81,27 @@ public class Ejercicio4PD {
 		 *  · Expresando el vértice final de destino.
 		 *  · Mediante un predicado objetivo.
 		*/
-		DynamicProgrammingReduction<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
+		DynamicProgrammingReduction<VerticeConjunto, AristaConjunto> algoritmoPD = DPR.dynamicProgrammingReductionGoal(
 						grafoVirtual,
 						VerticeConjunto.objetivo(),
 						HeuristicaConjunto::heuristica,
-						PDType.Max
+						PDType.Min
 						);
 		
 		// Proporciona un camino devuelto por PD desde el vértice inicial al objetivo:
-		GraphPath<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> caminoPD = algoritmoPD.search().get();
+		GraphPath<VerticeConjunto, AristaConjunto> caminoPD = algoritmoPD.search().get();
 		
-		// Solución: lista de vértices recorridos del grafo: 
-		List<VerticeConjunto> vertices = caminoPD.getVertexList();
+		// Solución: lista de aristas recorridos del grafo: 
+		List<AristaConjunto> aristas = caminoPD.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$ PROGRAMACIÓN DINÁMICA $$$$$$$$$$$$$$$$$$");
+		System.out.println(aristas);
+		Solucion4.solucion(aristas);
 		
 		// DEBUG:
-		System.out.println(vertices);
+		/*
+		 * List<VerticeConjunto> vertices = caminoPD.getVertexList();
+		 * System.out.println(vertices);
+		*/
 	
 	}
 	

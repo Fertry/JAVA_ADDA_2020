@@ -10,10 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
-import ejercicio2.Ejercicio2;
+import aristas.AristaConjunto;
 import ejercicio4.Ejercicio4;
 import us.lsi.common.Lists2;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -22,7 +21,7 @@ import us.lsi.graphs.virtual.ActionVirtualVertex;
  * Interpretación: Encontrar a qué subconjunto pertenece cada elemento, desde indice hasta el final,
  * que minimice el número de elementos de uno de los subconjuntos.
 */
-public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>, Integer> {
+public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, AristaConjunto, Integer> {
 	
 	// MÉTODOS DE LA CLASE
 	public static VerticeConjunto of(Integer indice, List<Integer> conjunto) {
@@ -76,7 +75,7 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 
 	}
 
-	// Definir un vértice de comienzo dónde ...
+	// Definir un vértice de comienzo dónde el estado inicial sea (0, [N,N,N]):
 	public static VerticeConjunto verticeInicial() {
 
 		int i = 0;
@@ -96,18 +95,18 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
-	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por
-	// donde se desplaza):
-	public ActionSimpleEdge<VerticeConjunto, Integer> edge(Integer accion) {
+	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):
+	public AristaConjunto edge(Integer accion) {
 
-		ActionSimpleEdge<VerticeConjunto, Integer> resultado = ActionSimpleEdge.of(this, neighbor(accion), accion);
+		AristaConjunto resultado = AristaConjunto.of(this, neighbor(accion), accion);
 
 		return resultado;
 
 	}
 
 	@Override
-	//
+	// Comprueba la validez de un vértice dado, esto es: se encuentra dentro del intervalo cerrado [0, n]
+	// y además, cuenta con espacio disponible, vr[i]>0 para i, donde i [0..2]:
 	public Boolean isValid() {
 
 		int i = 0;
@@ -160,42 +159,81 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Actio
 	// las restricciones:
 	public List<Integer> actions() {
 
-		int a = 0;
 		List<Integer> acciones = this.conjunto;
-
-		while (a < 3) {
 		
-			// Caso i = n-1:
-			if (this.indice == elementos - 1) {
-				
+		// Caso i = n-1:
+		if (this.indice == elementos - 1) {
+			
+			int a = 0;
+			while (a < 3) {
+
 				// Caso vr[i] = 0, i != a,
 				if (this.conjunto.get(this.indice) == 0 && this.indice != a) {
-	
-					acciones.set(a, (this.conjunto.get(a) - this.indice));
-					return acciones;
-	
-				} else {
-	
-					return Lists2.of();
-	
-				}
-				
-			} else {
-				
-				acciones.set(a, (this.conjunto.get(a) - this.indice));
-				
-			}
-		
-			a++;
 
+					acciones = this.conjunto;
+					acciones.set(a, (this.conjunto.get(a) - this.indice));
+					a++;
+					return acciones;
+
+				// En otro caso:
+				} else {
+
+					a++;
+					return Lists2.of();
+
+				}
+
+			}
+
+		// Caso general:
+		} else {
+			
+			acciones = this.conjunto;
+			//acciones.set(a, (this.conjunto.get(a) - this.indice));
+			return acciones;
+	
 		}
 		
 		return acciones;
-
+		
 	}
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y CONJUNTO
+	@Override
+	public int hashCode() {
+		
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((conjunto == null) ? 0 : conjunto.hashCode());
+		result = prime * result + ((indice == null) ? 0 : indice.hashCode());
+		return result;
+		
+	}
 
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		VerticeConjunto other = (VerticeConjunto) obj;
+		if (conjunto == null) {
+			if (other.conjunto != null)
+				return false;
+		} else if (!conjunto.equals(other.conjunto))
+			return false;
+		if (indice == null) {
+			if (other.indice != null)
+				return false;
+		} else if (!indice.equals(other.indice))
+			return false;
+		return true;
+		
+	}	
+	
 	// TO_STRING DE LA CLASE
 	@Override
 	public String toString() {

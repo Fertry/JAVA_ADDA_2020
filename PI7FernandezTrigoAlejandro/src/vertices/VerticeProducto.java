@@ -14,7 +14,6 @@ import java.util.function.Predicate;
 
 import aristas.AristaProducto;
 import ejercicio3.Ejercicio3;
-import us.lsi.common.Lists2;
 import us.lsi.graphs.virtual.ActionVirtualVertex;
 
 /*
@@ -163,15 +162,6 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 			}
 
 		}
-		
-//		int i = this.indice + 1;
-//		Set<Integer> list = new HashSet<>(funcionalidadesPorCubrir);
-//		if (accion == 0) {
-//			return of(i, list);
-//		} else {
-//			list.removeAll(Ejercicio3.getFuncionalidades(this.indice));
-//			return of(i, list);
-//		}
 			
 	}
 

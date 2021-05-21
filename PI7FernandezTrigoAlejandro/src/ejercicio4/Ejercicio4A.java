@@ -10,12 +10,13 @@ import java.util.List;
 
 import org.jgrapht.GraphPath;
 
+import aristas.AristaConjunto;
 import heuristicas.HeuristicaConjunto;
+import soluciones.Solucion4;
 import us.lsi.common.Files2;
 import us.lsi.graphs.Graphs2;
 import us.lsi.graphs.alg.AStar;
 import us.lsi.graphs.alg.GraphAlg;
-import us.lsi.graphs.virtual.ActionSimpleEdge;
 import us.lsi.graphs.virtual.EGraph;
 import vertices.VerticeConjunto;
 
@@ -34,7 +35,8 @@ public class Ejercicio4A {
 		
 		while (linea < lineas) {
 			
-			System.out.println("Linea: " + linea);
+			System.out.println("Linea de fichero: " + linea);
+			System.out.println("Conjunto de entrada: " + Files2.linesFromFile(entrada).get(linea) + "\n");
 			EjecutaProblemaEjercicio4A(entrada, linea);
 			linea++;
 			
@@ -51,10 +53,7 @@ public class Ejercicio4A {
 		// Inicializa las variables de la clase Ejercicio4 para la línea de fichero proporcionado:
 		Ejercicio4.iniDatos(entrada, linea);
 		
-		System.out.println("Tamaño conjunto: " + Ejercicio4.getSizeConjunto());
-		
-		// Declarar vértices de inicio y de final para el grafo:
-		// VerticeConjunto verticeFinal = VerticeConjunto.verticeFinal();
+		// Declarar vértice de inicio para el grafo:
 		VerticeConjunto verticeInicial = VerticeConjunto.verticeInicial();
 		
 		// Inicializar el grafo virtual:
@@ -65,7 +64,7 @@ public class Ejercicio4A {
 		*/ 
 		
 		// Inicializa un grafo virtual de tipo simpleVirtualGraph a partir del vértice inicial con peso:
-		EGraph<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
+		EGraph<VerticeConjunto, AristaConjunto> grafoVirtual = Graphs2.simpleVirtualGraph(verticeInicial, x -> x.getEdgeWeight()); 
 		
 		// Invocar el algoritmo de A*: 
 		/*
@@ -73,20 +72,26 @@ public class Ejercicio4A {
 		 *  · Expresando el vértice final de destino.
 		 *  · Mediante un predicado objetivo.
 		*/
-		AStar<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> algoritmoA = GraphAlg.aStarGoal(
+		AStar<VerticeConjunto, AristaConjunto> algoritmoA = GraphAlg.aStarGoal(
 				grafoVirtual,
 				VerticeConjunto.objetivo(),
 				HeuristicaConjunto::heuristica
 				);
 
 		// Proporciona un camino devuelto por A* desde el vértice inicial al objetivo:
-		GraphPath<VerticeConjunto, ActionSimpleEdge<VerticeConjunto, Integer>> caminoA = algoritmoA.search().get();
+		GraphPath<VerticeConjunto, AristaConjunto> caminoA = algoritmoA.search().get();
 		
-		// Solución: lista de vértices recorridos del grafo: 
-		List<VerticeConjunto> vertices = caminoA.getVertexList();
+		// Solución: lista de aristas recorridos del grafo: 
+		List<AristaConjunto> aristas = caminoA.getEdgeList();
+		System.out.println("$$$$$$$$$$$$$$$$$$$$$$$ A ESTRELLA $$$$$$$$$$$$$$$$$$$$$$$");
+		System.out.println(aristas);
+		Solucion4.solucion(aristas);
 		
 		// DEBUG:
-		System.out.println(vertices);
+		/*
+		 * List<VerticeConjunto> vertices = caminoA.getVertexList();
+		 * System.out.println(vertices);
+		*/
 		
 	}
 
