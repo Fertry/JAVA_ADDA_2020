@@ -137,7 +137,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 
 		// Caso base fc = 0:
 		// neighbor = (n,O)
-		if (funcionalidadesPorCubrir.isEmpty()) {
+		if (this.funcionalidadesPorCubrir.isEmpty()) {
 			
 			return verticeNulo;
 		
@@ -148,7 +148,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 			// neighbor(0) = (i+1, fc)
 			if (accion == 0) {
 				
-				VerticeProducto verticeCaso1 = VerticeProducto.of(siguiente, funcionalidadesPorCubrir);
+				VerticeProducto verticeCaso1 = VerticeProducto.of(siguiente, this.funcionalidadesPorCubrir);
 				return verticeCaso1;
 			
 			// Caso general accion = 1:
@@ -156,7 +156,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 			} else if (accion == 1) {
 				
 				// Set<funcionalidades> - elementos Set<funcionalidades del indice dado>:
-				Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
+				Set<Integer> funciones = new HashSet<>(this.funcionalidadesPorCubrir);
 				funciones.removeAll(Ejercicio3.getFuncionalidades(this.indice));
 				VerticeProducto verticeCaso2 = VerticeProducto.of(siguiente, funciones);
 				return verticeCaso2;
@@ -181,7 +181,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 		}
 		
 		// Caso conjunto nulo:
-		if (funcionalidadesPorCubrir.isEmpty()) {
+		if (this.funcionalidadesPorCubrir.isEmpty()) {
 
 			return Lists2.of(0);
 			
@@ -191,7 +191,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 		if (this.indice == productos - 1) {
 			
 			// Set<funcionalidades> - elementos Set<funcionalidades del indice dado>:
-			Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
+			Set<Integer> funciones = new HashSet<>(this.funcionalidadesPorCubrir);
 			funciones.removeAll(Ejercicio3.getFuncionalidades(productos - 1));
 			if (funciones.isEmpty()) {
 				
@@ -205,7 +205,7 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 		if (this.indice == productos - 1) {
 			
 			// Set<funcionalidades> - elementos Set<funcionalidades del indice dado>:
-			Set<Integer> funciones = new HashSet<>(funcionalidadesPorCubrir);
+			Set<Integer> funciones = new HashSet<>(this.funcionalidadesPorCubrir);
 			funciones.removeAll(Ejercicio3.getFuncionalidades(productos - 1));
 			if (!funciones.isEmpty()) {
 				

@@ -143,10 +143,11 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 		Integer siguiente = this.indice + 1;
 
 		// 2º copiar el conjunto actual:
-		List<Integer> auxiliar = this.conjunto;
+		List<Integer> auxiliar = new ArrayList<Integer>(this.conjunto);
 		
 		// 3º modificar el valor de auxiliar para el índice dado:
-		auxiliar.set(accion, (this.conjunto.get(accion) - this.indice)); 
+		// vr'[a] = vr[a] - ei 
+		auxiliar.set(accion, (this.conjunto.get(accion) - Ejercicio4.elemento(this.indice))); 
 
 		VerticeConjunto resultado = VerticeConjunto.of(siguiente, auxiliar);
 
@@ -155,47 +156,61 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 	}
 
 	@Override
-	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a
-	// las restricciones:
+	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 
-		List<Integer> acciones = this.conjunto;
+		int i = 0;
+		int j = 0;
+		List<Integer> acciones = new ArrayList<Integer>();
 		
-		// Caso i = n-1:
+		// De alcanzar el límite, no hay más acciones:
+		if (this.indice == elementos) {
+			
+			return Lists2.of();
+		
+		}
+		
+		// Caso p.I = n-1
 		if (this.indice == elementos - 1) {
 			
-			int a = 0;
-			while (a < 3) {
-
-				// Caso vr[i] = 0, i != a,
-				if (this.conjunto.get(this.indice) == 0 && this.indice != a) {
-
-					acciones = this.conjunto;
-					acciones.set(a, (this.conjunto.get(a) - this.indice));
-					a++;
-					return acciones;
-
-				// En otro caso:
+			while (i < 3) {
+				
+				// Si vr[i]=0:
+				if (this.conjunto.get(i) == 0) {
+					
+					acciones.add(i);
+					i++;
+					
+				// Otro caso:
 				} else {
-
-					a++;
-					return Lists2.of();
-
+			
+					acciones = new ArrayList<Integer>();
+					i++;
+					
 				}
-
+				
 			}
 
-		// Caso general:
-		} else {
-			
-			acciones = this.conjunto;
-			//acciones.set(a, (this.conjunto.get(a) - this.indice));
 			return acciones;
-	
+
+		}
+		
+		// Caso general: a:0..2:
+		while (j < 3) {
+			
+			// Si vr[a] - ei >= 0:
+			if (this.conjunto.get(j) - Ejercicio4.elemento(this.indice) >= 0) {
+				
+				acciones.add(j);
+				
+			}
+			
+			j++;
+			
 		}
 		
 		return acciones;
-		
+			
 	}
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y CONJUNTO

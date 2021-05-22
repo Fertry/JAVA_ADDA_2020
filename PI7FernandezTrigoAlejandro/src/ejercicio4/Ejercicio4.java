@@ -69,7 +69,7 @@ public class Ejercicio4 {
 		
 	}
 
-	// Obtiene el sumatorio de los elementos de un conjunto partido de 3:
+	// Obtiene el sumatorio de los elementos de un conjunto:
 	public static Integer getSumatorio() {
 		
 		Integer suma = 0;
@@ -80,7 +80,7 @@ public class Ejercicio4 {
 			
 		}
 		
-		return suma / 3;
+		return suma;
 		
 	}
 	

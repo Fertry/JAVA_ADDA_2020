@@ -55,6 +55,7 @@ public class Ejercicio4A {
 		
 		// Declarar vértice de inicio para el grafo:
 		VerticeConjunto verticeInicial = VerticeConjunto.verticeInicial();
+		System.out.println(verticeInicial);
 		
 		// Inicializar el grafo virtual:
 		/*

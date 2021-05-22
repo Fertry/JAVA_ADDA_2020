@@ -44,7 +44,8 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	private static Integer abogadoMinimo = abogadoMinimaCarga();
 	
 	/*
-	 *	Estos métodos se especifican en el modelo pero no se han llegado a usar:
+	 *	Estos métodos se especifican en el modelo pero no se han llegado a usar.
+	 *  Están desarrollados más abajo. 
 	 * 	private static Integer cargaMinima = cargaMinima();
 	 *  private static Integer cargaMaxima = cargaMaxima();
 	 *  private static Integer abogadoMaximo = abogadoMaximaCarga();
@@ -215,6 +216,7 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 			
 		}
 		
+		// (0, [cargaAbogado_0(0), cargaAbogado_1(0), ... , cargaAbogado_n(0)])
 		VerticeAbogado resultado = VerticeAbogado.of(0, auxiliar);
 		return resultado;
 	
@@ -278,12 +280,17 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	@Override
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
-		
+			
 		int i = 0;
 		List<Integer> acciones = new ArrayList<Integer>();
 		
 		// De alcanzar el límite, no hay más acciones:
-		if (this.indice == casos - 1) {
+		if (this.indice == casos) {
+			
+			return Lists2.of();
+		
+		// De alcanzar el casos - 1, devolver el abogado de mínima carga:
+		} else if (this.indice == casos - 1) {
 
 			// Abogado menos cargado:
 			return Lists2.of(abogadoMinimo);

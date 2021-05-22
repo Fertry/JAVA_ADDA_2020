@@ -78,5 +78,5 @@ public class Ejercicio1A {
 		*/
 		
 	}
-	
+
 }
