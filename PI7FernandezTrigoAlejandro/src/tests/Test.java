@@ -13,11 +13,9 @@ import ejercicio1.Ejercicio1PD;
 import ejercicio2.Ejercicio2A;
 import ejercicio2.Ejercicio2PD;
 import ejercicio3.Ejercicio3A;
-import ejercicio3.Ejercicio3BTManual;
 import ejercicio3.Ejercicio3PD;
 import ejercicio4.Ejercicio4A;
 import ejercicio4.Ejercicio4PD;
-import ejercicio4.Ejercicio4PDManual;
 
 public class Test {
 
@@ -61,10 +59,6 @@ public class Test {
 			Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada1.txt");	
 			//Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada2.txt");
 			//Ejercicio3PD.EjecutaEjercicio3PD("ficheros/PI7Ej3DatosEntrada3.txt");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Ejercicio3BTManual.EjecutaEjercicio3BTManual("ficheros/PI7Ej3DatosEntrada1.txt");
-			//Ejercicio3BTManual.EjecutaEjercicio3BTManual("ficheros/PI7Ej3DatosEntrada2.txt");
-			//Ejercicio3BTManual.EjecutaEjercicio3BTManual("ficheros/PI7Ej3DatosEntrada3.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
@@ -73,8 +67,6 @@ public class Test {
 			Ejercicio4A.EjecutaEjercicio4A("ficheros/PI7Ej4DatosEntrada.txt");
 		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 			Ejercicio4PD.EjecutaEjercicio4PD("ficheros/PI7Ej4DatosEntrada.txt");
-		System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-			Ejercicio4PDManual.EjecutaEjercicio4PDManual("ficheros/PI7Ej4DatosEntrada.txt");
 		System.out.println("##################################################################");
 		System.out.println("##################################################################\n");
 		
