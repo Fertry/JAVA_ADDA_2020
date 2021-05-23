@@ -86,16 +86,6 @@ public class VerticeProducto extends ActionVirtualVertex <VerticeProducto, Arist
 	
 	}
 
-	// Método para copiar vértices: devuelve una copia del vértice dado cómo parámetro:
-	// (Tan solo es usado en la implementación de Backtracking manual)
-	public static VerticeProducto copiar(VerticeProducto vertice) {
-		
-		VerticeProducto resultado = VerticeProducto.of(vertice.indice, vertice.funcionalidadesPorCubrir);
-		
-		return resultado;
-		
-	}
-	
 	// MÉTODOS HEREDADOS DE LA SUPERCLASE
 	@Override
 	// Devuelve la arista correspondiente a la acción aplicada a un vértice (por donde se desplaza):

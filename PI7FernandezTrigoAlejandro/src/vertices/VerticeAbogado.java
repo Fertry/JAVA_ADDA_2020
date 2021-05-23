@@ -70,13 +70,6 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 		
 	}
 	
-	// Devuelve la lista de cargas de abogados:
-	public List<Integer> getCargaAbogado() {
-		
-		return cargaAbogado;
-		
-	}
-	
 	// MÉTODOS PARA SETEAR LAS VARIABLES DERIVADAS DE LA CLASE
 	
 	/*
@@ -262,14 +255,9 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 		List<Integer> auxiliar = new ArrayList<>(this.cargaAbogado);
 		
 		// 3º alterar el valor de la lista: esto es, para la posición de la lista de cargas 
-		// indicada por la acción sumarle la carga de tiempo dado la acción y el índice mientras 
-		// que el índice no supere el nº de abogados:
-		if (this.indice < abogados) {
+		// indicada por la acción sumarle la carga de tiempo dado la acción y el índice
+		auxiliar.set(accion, (this.cargaAbogado.get(accion) + Ejercicio2.tiempoPorIndice(accion, this.indice)));
 			
-			auxiliar.set(accion, (this.cargaAbogado.get(accion) + Ejercicio2.tiempoPorIndice(accion, this.indice)));
-			
-		}
-		
 		// 4º devolver el vértice nuevo:
 		VerticeAbogado resultado = VerticeAbogado.of(siguiente, auxiliar);
 		
@@ -281,33 +269,26 @@ public class VerticeAbogado extends ActionVirtualVertex<VerticeAbogado, AristaAb
 	// Devuelve la lista de acciones (movimientos en el grafo) posibles en base a las restricciones:
 	public List<Integer> actions() {
 			
-		int i = 0;
-		List<Integer> acciones = new ArrayList<Integer>();
-		
 		// De alcanzar el límite, no hay más acciones:
 		if (this.indice == casos) {
 			
 			return Lists2.of();
+			
+		}
 		
-		// De alcanzar el casos - 1, devolver el abogado de mínima carga:
-		} else if (this.indice == casos - 1) {
+		// Caso p.I = m - 1, devolver el abogado de mínima carga:
+		if (this.indice == casos - 1) {
 
 			// Abogado menos cargado:
 			return Lists2.of(abogadoMinimo);
 		
+		// Caso general: a:0..n-1:
 		} else {
-			
-			while (i < abogados) {
-				
-				acciones.add(i);
-				i++;
-				
-			}
+
+			return Lists2.rangeList(0, abogados - 1);
 			
 		}
 		
-		return acciones;
-
 	}
 
 	// HASHCODE Y EQUALS DE LA CLASE EN BASE A INDICE Y CARGA ABOGADO

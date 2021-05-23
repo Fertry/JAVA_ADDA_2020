@@ -74,12 +74,13 @@ public class Solucion3 {
 			System.out.println("	" + productoString + " (" + Ejercicio3.getPrecio(productoInteger) + " euros) => " + Ejercicio3.getFuncionalidades(productoInteger));	
 			
 			sumatorioPrecio += Ejercicio3.getPrecio(productoInteger);
-			sumatorioFuncionalidades.add(productoString);
+			sumatorioFuncionalidades.addAll(Ejercicio3.getFuncionalidadesString(productoInteger));
 			
 		}
+		// Obtengo el sumatorio de todas las funcionalidades como Strings y redondeo el precio a dos cifras decimales exactas:
 		System.out.println("Funcionalidades de lote seleccionado: " + sumatorioFuncionalidades);
-		System.out.println("Precio total del lote seleccionado: " + Math.round(sumatorioPrecio) + " euros.");
-		
+		System.out.println("Precio total del lote seleccionado: " + (Math.round(sumatorioPrecio * 100.0) / 100.0) + " euros.");
+
 	}
 	
 }

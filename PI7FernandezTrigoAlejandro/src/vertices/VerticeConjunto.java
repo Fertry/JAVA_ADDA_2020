@@ -179,33 +179,28 @@ public class VerticeConjunto extends ActionVirtualVertex <VerticeConjunto, Arist
 				if (this.conjunto.get(i) == 0) {
 					
 					acciones.add(i);
-					i++;
 					
-				// Otro caso:
-				} else {
+				}
+
+				i++;	
+				
+			}
+		
+		} else {
 			
-					acciones = new ArrayList<Integer>();
-					i++;
+			// Caso general: a:0..2:
+			while (j < 3) {
+				
+				// Si vr[a] - ei >= 0:
+				if (this.conjunto.get(j) - Ejercicio4.elemento(this.indice) >= 0) {
+					
+					acciones.add(this.conjunto.get(j));
 					
 				}
 				
-			}
-
-			return acciones;
-
-		}
-		
-		// Caso general: a:0..2:
-		while (j < 3) {
-			
-			// Si vr[a] - ei >= 0:
-			if (this.conjunto.get(j) - Ejercicio4.elemento(this.indice) >= 0) {
-				
-				acciones.add(j);
+				j++;
 				
 			}
-			
-			j++;
 			
 		}
 		

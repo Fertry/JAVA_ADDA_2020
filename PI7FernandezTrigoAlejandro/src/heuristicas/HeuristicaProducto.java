@@ -22,29 +22,7 @@ public class HeuristicaProducto {
 		return origen.getFuncionalidadesPorCubrir().isEmpty() ? 0.0 : minimo(origen);
 		
 	}
-	
-	public static Double heuristica(VerticeProducto vertice) {
 		
-		// Si fc=vacio -> 0, else, minimo(precio,index<=i<n):
-		return vertice.getFuncionalidadesPorCubrir().isEmpty() ? 0.0 : minimo(vertice);
-		
-	}
-	
-	/*
-	 * Método público para Backtracking manual (hace uso de la heurística de forma estática):
-	 * (Calcula primero el vecino del vertice de entrada en base a la acción)
-	*/
-	public static Double cota(VerticeProducto vertice, Integer accion) {
-		
-		Double resultado = 0.0;
-		VerticeProducto vecino = vertice.neighbor(accion);
-		
-		resultado = (accion * Ejercicio3.getPrecio(vertice.getIndice())) + heuristica(vecino); 
-		
-		return resultado;
-		
-	}
-	
 	/*
 	 * Método privado que devuelve el mínimo precio tal que index<=i<n: 
 	*/

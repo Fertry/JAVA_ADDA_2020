@@ -112,6 +112,21 @@ public class Ejercicio3 {
 			
 	}
 	
+	// Obtiene un Set<> de funcionalides de un producto i cómo String:
+	public static Set<String> getFuncionalidadesString(Integer i) {
+		
+		Set<String> resultado = new HashSet<String>();
+		
+		for (Integer funcionalidad : funcionalidades.get(i)) {
+			
+			resultado.add("P" + funcionalidad);
+			
+		}
+		
+		return resultado;
+		
+	}
+	
 	// Obtiene el nº de productos: 
 	public static Integer getNProductos() {
 		
