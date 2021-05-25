@@ -7,19 +7,19 @@ import java.util.stream.Collectors;
 import org.jgrapht.graph.GraphWalk;
 import org.jgrapht.graph.SimpleWeightedGraph;
 
-import us.lsi.alg.floyd.FloydVertex;
-import us.lsi.alg.floyd.TestFloyd;
+import tests.Test;
 import us.lsi.grafos.datos.Carretera;
 import us.lsi.grafos.datos.Ciudad;
 import us.lsi.graphs.SimpleEdge;
 import us.lsi.graphs.views.IntegerVertexGraphView;
+import vertice.FloydVertex;
 
 public class TestFloydPD {
 
 	public static void main(String[] args) {
 Locale.setDefault(new Locale("en", "US"));
 		
-		SimpleWeightedGraph<Ciudad, Carretera> graph = TestFloyd.leeDatos("./ficheros/andalucia.txt");
+		SimpleWeightedGraph<Ciudad, Carretera> graph = Test.leeDatos("./ficheros/andalucia.txt");
 		IntegerVertexGraphView<Ciudad, Carretera> graph2 = IntegerVertexGraphView.of(graph);
 		
 		System.out.println(graph);

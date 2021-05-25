@@ -3,14 +3,13 @@ package arista;
 import java.util.List;
 import java.util.function.Function;
 
-import us.lsi.alg.floyd.FloydVertex.ActionFloyd;
 import us.lsi.hypergraphs.SimpleHyperEdge;
 import vertice.FloydVertex;
+import vertice.FloydVertex.ActionFloyd;
 
 public class FloydEdge extends SimpleHyperEdge<FloydVertex,ActionFloyd>{
 	
-	public static FloydEdge of(FloydVertex source, List<FloydVertex> targets,
-			ActionFloyd action) {
+	public static FloydEdge of(FloydVertex source, List<FloydVertex> targets, ActionFloyd action) {
 		return new FloydEdge(source, targets, action, null);
 	}
 

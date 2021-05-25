@@ -8,12 +8,12 @@ import java.util.Map;
 
 import org.jgrapht.graph.GraphWalk;
 
-import us.lsi.alg.floyd.FloydEdge;
-import us.lsi.alg.floyd.FloydVertex;
-import us.lsi.alg.floyd.FloydVertex.ActionFloyd;
+import arista.FloydEdge;
 import us.lsi.graphs.SimpleEdge;
 import us.lsi.graphs.alg.Sp;
 import us.lsi.hypergraphs.GraphTree;
+import vertice.FloydVertex;
+import vertice.FloydVertex.ActionFloyd;
 
 
 public class FloydPD {
