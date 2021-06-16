@@ -37,7 +37,7 @@ public class JUNIO_19_20 {
 	// 2. Devuelve un subgrafo con todas las localizaciones con cierto atractivo, los atractivos para 
 	// el filtrado se pasan en forma de array por parámetro. El subgrafo también contendrá los 
 	// trayectos entre las localizaciones filtradas.
-	public static public Graph<Localizacion,Trayecto> getSubMapa(Integer ... atractivos) {
+	public static Graph<Localizacion,Trayecto> getSubMapa(Integer ... atractivos) {
 		
 		// Grafo ponderado
 		Graph<Localizacion,Trayecto> resultado = new SimpleWeightGraph<Localizacion,Trayecto>();
@@ -78,7 +78,7 @@ public class JUNIO_19_20 {
 	}
 	
 	// 3. 
-	public static public Set<Localizacion> getZonaDeInfluencia(String id, int limiteDeMinutosXDesplazamiento) {
+	public static Set<Localizacion> getZonaDeInfluencia(String id, int limiteDeMinutosXDesplazamiento) {
 		
 		Localizacion localizacion = getLocalizacionById(id);
 		Set<Localizacion> resultado = new HashSet<Localizacion>();
@@ -116,7 +116,7 @@ public class JUNIO_19_20 {
 	
 	// 4. Devuelve el recubrimiento mínimo de trayectos necesarios para acceder a todas las localizaciones
 	// del mapa minimizando las horas de viaje.
-	public static public Set<Trayecto> getRedDeRecubrimiento() {
+	public static Set<Trayecto> getRedDeRecubrimiento() {
 		
 		//SpanningTreeAlgorithm<Trayecto> kruskal = new KruskalMinimumSpanningTree<>(g);
 		SpanningTree<Trayecto> kruskal = new KruskalMinimumSpanningTree<>(g);
@@ -129,7 +129,7 @@ public class JUNIO_19_20 {
 	}
 	
 	// 5. Devuelve la duración en horas de una travesía turística.
-	public static public Double getDuracionDeTravesia(List<Localizacion> travesia) {
+	public static Double getDuracionDeTravesia(List<Localizacion> travesia) {
 	
 		int i = 0;
 		Double sumatorio = 0.0;
