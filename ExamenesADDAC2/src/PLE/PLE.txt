@@ -1,0 +1,17 @@
+head section
+
+....
+
+
+goal section
+
+max sum(a(i,j) x[i,j], i in 0 .. alumnos, j in 0 .. grupos)
+
+constrains section
+
+sum(x[i,j], j in 0 .. grupos) = 1, i in 0 .. alumnos
+sum(x[i,j], i in 0 .. alumnos | a(i,j) > 0) = alumEntreGrupos, j in 0 .. grupos
+
+bin
+
+x[i,j], i in 0 .. alumnos, j in 0 .. grupos 
