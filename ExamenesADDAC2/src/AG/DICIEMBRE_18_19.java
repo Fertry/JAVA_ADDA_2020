@@ -22,7 +22,7 @@ public class DICIEMBRE_18_19 {
 		// max y min
 		public static Integer getMax(Integer E) {
 			
-			return ProblemaListaReproduccion.presupuesto;
+			return 1;
 			
 		}
 		
