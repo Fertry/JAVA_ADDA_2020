@@ -102,3 +102,28 @@ sum(x[i] cantidad(i,j), i in 0 .. nProductos) < cantidadP(j), j in 0 .. nCompone
 int
 
 x[i], i in 0 .. nProductos
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+head section
+
+Integer nPedidos()
+Integer nTrabajadores()
+Integer duracion(Integer j)
+
+Integer nPedidos = nPedidos()
+Integer nTrabajadores = nTrabajadores()
+
+goal section
+
+min t[0]
+
+constraints section
+
+sum(x[i,j], i in 0 .. nTrabajadores) = 1, j in 0 .. nPedidos
+sum(x[i,j] duracion(j), j in 0 .. nPedidos) <= t[0], i in 0 .. nTrabajadores
+
+bin
+
+x[i,j], i in 0 .. nTrabajadores, j in 0 .. nPedidos
+
