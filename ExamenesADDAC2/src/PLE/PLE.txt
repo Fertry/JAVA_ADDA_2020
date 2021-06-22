@@ -77,3 +77,28 @@ sum(x[i,j] e(i), i in 0 .. n) = variable, j in 0 .. 3
 bin
 
 x[i,j], i in 0 .. n, j in 0 .. 3
+
+/////////////////////////////////////////////////////////////////////////////////////////
+
+head section
+
+Integer nProductos()
+Integer nComponente(Integer i)
+Double beneficio(Integer i, Integer j)
+Double cantidad(Integer i, Integer j)
+Integer cantidadP(Integer j)
+
+Integer nProductos = nProductos()
+
+
+goal section
+
+max sum(beneficio(i) x[i], i in 0 .. nProductos)
+
+constraints section
+
+sum(x[i] cantidad(i,j), i in 0 .. nProductos) < cantidadP(j), j in 0 .. nComponente(j)
+
+int
+
+x[i], i in 0 .. nProductos

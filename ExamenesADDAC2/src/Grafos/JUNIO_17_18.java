@@ -58,10 +58,10 @@ public class JUNIO_17_18 {
 	// 3. Devolver los grupos de cruces conectados entre sí por calles de tierra.
 	public List<Set<Cruce>> gruposRutasPorTierra(Graph<Cruce,Calle> pueblo, Set<Calle> callesAsfaltadas) {
 		
-		ConnectivityInspector<Cruce,Calle> kosaraju = new ConnectivityInspector<>(pueblo);
+		ConnectivityInspector<Cruce,Calle> connect = new ConnectivityInspector<>(pueblo);
 		
 		List<Set<Cruce>> aux = new ArrayList<>();
-		List<Set<Cruce>> listaSets = kosaraju.connectedSets();
+		List<Set<Cruce>> listaSets = connect.connectedSets();
 		
 		for (Set<Cruce> set : listaSets) {
 			

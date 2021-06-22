@@ -3,6 +3,9 @@ package AG;
 import java.util.ArrayList;
 import java.util.List;
 
+import us.lsi.common.Tuple;
+import us.lsi.common.Tuple2;
+
 public class JUNIO_16_17 {
 	
 	// 1. Tipo de cromosomas:
@@ -48,7 +51,7 @@ public class JUNIO_16_17 {
 		}
 		
 		public Double penalizacion(List<Integer> cromosomas) {
-			
+						
 			// No se puede pasar del presupuesto:
 			Double castigo = 0.0;
 			Double coste = 0.0;
@@ -68,7 +71,7 @@ public class JUNIO_16_17 {
 			}
 			
 			// No se pueden tener actividades incompatibles:
-			for(Par<Actividad,Actividad> par : ProblemaFiesta.restricciones) {
+			for(Par<Actividad,Actividad> par : ProblemaFiesta.getRestricciones()) {
 				
 				if (actividades.contains(par.p1) && actividades.contains(par.p2)) {
 					
@@ -103,5 +106,8 @@ public class JUNIO_16_17 {
 		}
 
 	}
+	
+	Tuple2<String,String> tupla = Tuple.create("hola", "hello");
+	String prueba = tupla.v1;
 	
 }
