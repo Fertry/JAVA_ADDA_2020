@@ -66,7 +66,8 @@ public class JUNIO_16_17 {
 			
 			if(coste > ProblemaFiesta.getPresupuestoTotal()) {
 				
-				castigo += 1.0;
+				castigo += coste;
+				// O la diferencia entre presupuesto - coste
 				
 			}
 			

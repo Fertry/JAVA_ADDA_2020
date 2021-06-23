@@ -35,8 +35,7 @@ public class DICIEMBRE_17_18 {
 			
 			// Cada objeto debe estar en un único brazo:
 			if(SolucionTransporte.objetosBrazoIzquierdo.containsAny(SolucionTransporte.objetosBrazoDerecho)) {
-				
-				//patata
+				castigo++;
 			}
 			
 			// NO tiene recompensa: en su lugar se devuelve la menor penalizacion posible!!!!
